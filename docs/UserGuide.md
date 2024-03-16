@@ -131,13 +131,13 @@ Examples:
 
 Sorts the list of persons based on specified attribute.
 
-Format: `sort [attribute]`
+Format: `sort [ATTRIBUTE]`
 
 * By default, sorting is done in ascending order.
 * The order of character priority would be letters (A-Z), numbers (0-9), special characters (!@#$%^&*).
 * The capitalisation of the letters do not affect their priority such that `Aaron` will have same priority as `aaron`.
 * For attribute with exact same values, the tie-breaker is determined by their added order.
-* `[attribute]` is to be noted by their prefix. e.g `name` will be `n/`.
+* `[ATTRIBUTE]` is to be noted by their prefix. e.g `name` will be `n/`.
 
 Examples:
 * `sort n/` returns person by ascending names `Alex`, `Bernice` followed by `Charlotte`
@@ -211,5 +211,6 @@ Action | Format, Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [v/VENUE] [m/MODULE] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Sort** | `sort [ATTRIBUTE]`<br> e.g., `sort p/`
 **List** | `list`
 **Help** | `help`
