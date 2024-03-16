@@ -127,6 +127,23 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+### Sorting persons by attribute: `sort`
+
+Sorts the list of persons based on specified attribute.
+
+Format: `sort [attribute]`
+
+* By default, sorting is done in ascending order.
+* The order of character priority would be letters (A-Z), numbers (0-9), special characters (!@#$%^&*).
+* The capitalisation of the letters do not affect their priority such that `Aaron` will have same priority as `aaron`.
+* For attribute with exact same values, the tie-breaker is determined by their added order.
+* `[attribute]` is to be noted by their prefix. e.g `name` will be `n/`
+
+Examples:
+* `sort p/` returns person with their names `Adam`, `Ben` followed by `Charile`
+* `sort m/` returns person with the phone number `10001000`, `20002000` followed by `30003000`<br>
+  ![result for 'find alex david'](images/findAlexDavidResult.png)
+
 ### Deleting a person : `delete`
 
 Deletes the specified person from the contacts.
