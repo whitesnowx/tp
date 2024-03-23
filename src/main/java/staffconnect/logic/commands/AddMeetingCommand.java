@@ -6,25 +6,15 @@ import static staffconnect.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static staffconnect.logic.parser.CliSyntax.PREFIX_STARTDATE;
 import static staffconnect.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import staffconnect.commons.core.index.Index;
 import staffconnect.commons.util.ToStringBuilder;
 import staffconnect.logic.Messages;
 import staffconnect.logic.commands.exceptions.CommandException;
 import staffconnect.model.Model;
-import staffconnect.model.availability.Availability;
 import staffconnect.model.meeting.Meeting;
-import staffconnect.model.person.Email;
-import staffconnect.model.person.Faculty;
-import staffconnect.model.person.Module;
-import staffconnect.model.person.Name;
 import staffconnect.model.person.Person;
-import staffconnect.model.person.Phone;
-import staffconnect.model.person.Venue;
-import staffconnect.model.tag.Tag;
 
 /**
  * Adds a meeting to the staff book.

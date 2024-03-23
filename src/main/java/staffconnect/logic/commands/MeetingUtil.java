@@ -37,10 +37,8 @@ public class MeetingUtil {
         Set<Tag> currentTags = personToEdit.getTags();
         Set<Availability> currentAvailability = personToEdit.getAvailabilities();
         Set<Meeting> currentMeetings = new HashSet<>(personToEdit.getMeetings()); //to reduce coupling with Person
-        Person editedPerson =
-                new Person(currentName, currentPhone, currentEmail, currentModule, currentFaculty, currentVenue,
-                        currentTags,
-                        currentAvailability);
+        Person editedPerson = new Person(currentName, currentPhone, currentEmail, currentModule,
+                currentFaculty, currentVenue, currentTags, currentAvailability);
         currentMeetings.add(meeting);
         editedPerson.setMeetings(currentMeetings);
         return editedPerson;

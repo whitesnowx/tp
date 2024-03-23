@@ -1,6 +1,8 @@
-package staffconnect.model.meeting;
+package staffconnect.model.meeting.comparator;
 
 import java.util.Comparator;
+
+import staffconnect.model.meeting.Meeting;
 
 /**
  * Represents a Comparator for a Meeting's Date in the staff book.
