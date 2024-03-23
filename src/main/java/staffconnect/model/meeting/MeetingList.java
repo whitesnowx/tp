@@ -52,14 +52,10 @@ public class MeetingList implements Iterable<Meeting> {
         }
     }
 
-    public void setMeetings(MeetingList replacement) {
-        requireNonNull(replacement);
-        internalList.setAll(replacement.internalList);
-    }
-
     /**
      * Replaces the contents of this list with {@code meeting}.
      * {@code meetings} must not contain duplicate meetings.
+     *
      */
     public void setMeetings(List<Meeting> meetings) {
         requireAllNonNull(meetings);

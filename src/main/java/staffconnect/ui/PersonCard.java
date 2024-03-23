@@ -81,9 +81,7 @@ public class PersonCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(availability -> availability.value))
                 .forEach(availability -> availabilities.getChildren().add(new Label(availability.value)));
 
-        ObservableList<Meeting> meetingsList = person.getMeetings().stream()
-                .sorted(Comparator.comparing(meeting -> meeting.getStartDate().getDateTime()))
-                .collect(Collectors.toCollection(FXCollections::observableArrayList));
+        ObservableList<Meeting> meetingsList = person.getMeetings();
 
         //This is probably only feasible workaround for now without messing or revamping UI.
         //To set the correct height

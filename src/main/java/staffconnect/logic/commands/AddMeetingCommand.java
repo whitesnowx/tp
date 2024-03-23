@@ -61,9 +61,10 @@ public class AddMeetingCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_MEETING);
         }
 
+        personToEdit.addMeetings(toAdd);
 
-        Person editedPerson = addMeetingToPerson(personToEdit, toAdd);
-        model.setPerson(personToEdit, editedPerson);
+        //setPerson to force update the ui with the new items
+        model.setPerson(personToEdit, personToEdit);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }

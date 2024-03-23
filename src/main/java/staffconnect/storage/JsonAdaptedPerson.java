@@ -167,11 +167,10 @@ class JsonAdaptedPerson {
         for (JsonAdaptedMeeting meeting : meetings) {
             personMeetings.add(meeting.toModelType());
         }
-        final Set<Meeting> modelMeetings = new HashSet<>(personMeetings);
 
         Person modelPerson = new Person(modelName, modelPhone, modelEmail, modelModule, modelFaculty, modelVenue,
                 modelTags, modelAvailabilities);
-        modelPerson.setMeetings(modelMeetings);
+        modelPerson.setMeetings(personMeetings);
 
         return modelPerson;
     }

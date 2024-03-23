@@ -4,12 +4,15 @@ import static staffconnect.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+import javafx.collections.ObservableList;
 import staffconnect.commons.util.ToStringBuilder;
 import staffconnect.model.availability.Availability;
 import staffconnect.model.meeting.Meeting;
+import staffconnect.model.meeting.MeetingManager;
 import staffconnect.model.tag.Tag;
 
 /**
@@ -29,7 +32,7 @@ public class Person {
     private final Venue venue;
     private final Set<Tag> tags = new HashSet<>();
     private final Set<Availability> availabilities = new HashSet<>();
-    private final Set<Meeting> meetings = new HashSet<>();
+    private final MeetingManager meetings = new MeetingManager();
 
     /**
      * Every field must be present and not null.
@@ -81,8 +84,8 @@ public class Person {
      * Returns an immutable meeting set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Meeting> getMeetings() {
-        return Collections.unmodifiableSet(meetings);
+    public ObservableList<Meeting> getMeetings() {
+        return meetings.getMeetingList();
     }
 
 
@@ -94,9 +97,12 @@ public class Person {
         return Collections.unmodifiableSet(availabilities);
     }
 
-    public void setMeetings(Set<Meeting> toAdd) {
-        meetings.clear(); //Remove all existing entries and assume the new set
-        meetings.addAll(toAdd);
+    public void setMeetings(List<Meeting> toAdd) {
+        meetings.setMeetingList(toAdd);
+    }
+
+    public void addMeetings(Meeting toAdd) {
+        meetings.addMeeting(toAdd);
     }
 
     /**
@@ -116,7 +122,7 @@ public class Person {
      * Returns true if the meeting to add is already tagged to the current person.
      */
     public boolean hasDuplicateMeeting(Meeting toAdd) {
-        return meetings.contains(toAdd);
+        return meetings.hasMeeting(toAdd);
     }
 
     /**
@@ -162,7 +168,7 @@ public class Person {
                 .add("venue", venue)
                 .add("tags", tags)
                 .add("availabilities", availabilities)
-                .add("meetings", meetings)
+                .add("meetings", meetings.getMeetingList().toString())
                 .toString();
     }
 

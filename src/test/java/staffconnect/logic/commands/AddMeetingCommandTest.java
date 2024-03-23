@@ -15,9 +15,6 @@ import static staffconnect.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static staffconnect.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static staffconnect.testutil.TypicalPersons.getTypicalStaffBook;
 
-import java.util.HashSet;
-import java.util.List;
-
 import org.junit.jupiter.api.Test;
 
 import staffconnect.commons.core.index.Index;
@@ -40,11 +37,9 @@ public class AddMeetingCommandTest {
 
     private Person buildValidPerson() {
         Person pickPerson = TEST_MODEL.getFilteredPersonList().get(0);
-        Person validPerson = new Person(pickPerson.getName(), pickPerson.getPhone(), pickPerson.getEmail(),
+        return new Person(pickPerson.getName(), pickPerson.getPhone(), pickPerson.getEmail(),
                 pickPerson.getModule(), pickPerson.getFaculty(), pickPerson.getVenue(),
                 pickPerson.getTags(), pickPerson.getAvailabilities());
-        validPerson.setMeetings(new HashSet<>(List.of(VALID_MEETING)));
-        return validPerson;
     }
 
     @Test

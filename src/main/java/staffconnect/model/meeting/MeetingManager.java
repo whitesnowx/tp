@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static staffconnect.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Comparator;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -36,18 +37,20 @@ public class MeetingManager {
         this(new MeetingList());
     }
 
-    //=========== MeetingList ================================================================================
-
     /**
      * Replaces all the current person's meeting data with the current.
      * @param meetingList a new meeting list to replace the current.
      */
-    public void setMeetingList(MeetingList meetingList) {
+
+    //=========== MeetingList ================================================================================
+
+
+    public void setMeetingList(List<Meeting> meetingList) {
         this.meetingList.setMeetings(meetingList);
     }
 
-    public MeetingList getMeetingList() {
-        return meetingList;
+    public ObservableList<Meeting> getMeetingList() {
+        return meetingList.asUnmodifiableObservableList();
     }
 
     /**
