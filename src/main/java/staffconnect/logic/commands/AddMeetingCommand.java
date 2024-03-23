@@ -1,6 +1,7 @@
 package staffconnect.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static staffconnect.logic.commands.MeetingUtil.addMeetingToPerson;
 import static staffconnect.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static staffconnect.logic.parser.CliSyntax.PREFIX_STARTDATE;
 import static staffconnect.model.Model.PREDICATE_SHOW_ALL_PERSONS;
@@ -77,29 +78,6 @@ public class AddMeetingCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 
-    /**
-     * Creates and returns a {@code Person} with details of {@code meeting}
-     */
-    private static Person addMeetingToPerson(Person personToEdit, Meeting meeting) {
-        assert personToEdit != null;
-
-        Name currentName = personToEdit.getName();
-        Phone currentPhone = personToEdit.getPhone();
-        Email currentEmail = personToEdit.getEmail();
-        Module currentModule = personToEdit.getModule();
-        Faculty currentFaculty = personToEdit.getFaculty();
-        Venue currentVenue = personToEdit.getVenue();
-        Set<Tag> currentTags = personToEdit.getTags();
-        Set<Availability> currentAvailability = personToEdit.getAvailabilities();
-        Set<Meeting> currentMeetings = new HashSet<>(personToEdit.getMeetings()); //to reduce coupling with Person
-        Person editedPerson =
-            new Person(currentName, currentPhone, currentEmail, currentModule, currentFaculty, currentVenue,
-                       currentTags,
-                       currentAvailability);
-        currentMeetings.add(meeting);
-        editedPerson.setMeetings(currentMeetings);
-        return editedPerson;
-    }
 
     @Override
     public boolean equals(Object other) {
