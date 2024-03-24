@@ -4,9 +4,10 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import staffconnect.commons.exceptions.IllegalValueException;
+import staffconnect.model.meeting.Meeting;
 import staffconnect.model.meeting.MeetingDateTime;
 import staffconnect.model.meeting.MeetingDescription;
-import staffconnect.model.meeting.Meeting;
+
 
 /**
  * Jackson-friendly version of {@link Meeting}.

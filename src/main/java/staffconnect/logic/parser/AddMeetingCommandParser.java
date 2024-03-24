@@ -10,9 +10,10 @@ import java.util.stream.Stream;
 import staffconnect.commons.core.index.Index;
 import staffconnect.logic.commands.AddMeetingCommand;
 import staffconnect.logic.parser.exceptions.ParseException;
-import staffconnect.model.meeting.MeetingDescription;
-import staffconnect.model.meeting.MeetingDateTime;
 import staffconnect.model.meeting.Meeting;
+import staffconnect.model.meeting.MeetingDateTime;
+import staffconnect.model.meeting.MeetingDescription;
+
 
 /**
  * Parses input arguments and creates a new AddMeetingCommand object

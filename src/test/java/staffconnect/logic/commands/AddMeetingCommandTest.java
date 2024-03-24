@@ -23,9 +23,9 @@ import staffconnect.model.Model;
 import staffconnect.model.ModelManager;
 import staffconnect.model.StaffBook;
 import staffconnect.model.UserPrefs;
+import staffconnect.model.meeting.Meeting;
 import staffconnect.model.meeting.MeetingDateTime;
 import staffconnect.model.meeting.MeetingDescription;
-import staffconnect.model.meeting.Meeting;
 import staffconnect.model.person.Person;
 
 /**
