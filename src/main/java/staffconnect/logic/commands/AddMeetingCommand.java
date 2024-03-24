@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static staffconnect.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static staffconnect.logic.parser.CliSyntax.PREFIX_STARTDATE;
 import static staffconnect.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-import static staffconnect.model.meeting.comparator.StartDateComparator.MEETING_DATE_COMPARATOR;
+import static staffconnect.model.meeting.comparator.MeetingDateComparator.MEETING_DATE_COMPARATOR;
 
 import java.util.List;
 

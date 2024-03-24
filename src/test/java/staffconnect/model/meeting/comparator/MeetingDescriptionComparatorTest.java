@@ -5,12 +5,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static staffconnect.logic.commands.CommandTestUtil.VALID_MEETING;
 import static staffconnect.logic.commands.CommandTestUtil.VALID_MEETING_APRIL;
 import static staffconnect.logic.commands.CommandTestUtil.VALID_MEETING_FINALS;
-import static staffconnect.model.meeting.comparator.DescriptionComparator.MEETING_DESCRIPTION_COMPARATOR;
-import static staffconnect.model.meeting.comparator.StartDateComparator.MEETING_DATE_COMPARATOR;
+import static staffconnect.model.meeting.comparator.MeetingDateComparator.MEETING_DATE_COMPARATOR;
+import static staffconnect.model.meeting.comparator.MeetingDescriptionComparator.MEETING_DESCRIPTION_COMPARATOR;
 
 import org.junit.jupiter.api.Test;
 
-public class DescriptionComparatorTest {
+public class MeetingDescriptionComparatorTest {
     @Test
     public void doesNotEquals() {
         assertNotEquals(MEETING_DESCRIPTION_COMPARATOR, MEETING_DATE_COMPARATOR);

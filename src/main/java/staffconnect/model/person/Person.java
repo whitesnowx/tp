@@ -82,24 +82,6 @@ public class Person {
     }
 
     /**
-     * Returns an immutable meeting set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-    public ObservableList<Meeting> getMeetings() {
-        return meetings.getMeetingList();
-    }
-
-    /** Returns an unmodifiable view of the filtered meeting list */
-    public ObservableList<Meeting> getFilteredMeetings() {
-        return meetings.getFilteredMeetingList();
-    }
-
-    public void updateSortedMeetingList(Comparator<Meeting> com) {
-        meetings.updateSortedMeetingList(com);
-    }
-
-
-    /*
      * Returns an immutable availability set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
@@ -107,6 +89,31 @@ public class Person {
         return Collections.unmodifiableSet(availabilities);
     }
 
+    /**
+     * Returns an immutable meeting set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public ObservableList<Meeting> getMeetings() {
+        return meetings.getMeetingList();
+    }
+
+    /** Returns an unmodifiable view of the filtered meeting list. */
+    public ObservableList<Meeting> getFilteredMeetings() {
+        return meetings.getFilteredMeetingList();
+    }
+
+    /**
+     * Updates the sort attribute of the sorted meeting list to sort by the given comparator.
+     * @param comparator to decide how to sort the meetings.
+     */
+    public void updateSortedMeetingList(Comparator<Meeting> comparator) {
+        meetings.updateSortedMeetingList(comparator);
+    }
+
+    /**
+     * Replaces all the current meeting data with the current list.
+     * @param toAdd the input meeting list to replace to.
+     */
     public void setMeetings(List<Meeting> toAdd) {
         meetings.setMeetingList(toAdd);
     }
@@ -115,7 +122,14 @@ public class Person {
         meetings.addMeeting(toAdd);
     }
 
+    /**
+     * Removes the specified meeting form the current meeting list.
+     * @param toRemove the meeting.
+     */
 
+    public void removeMeeting(Meeting toRemove) {
+        meetings.deleteMeeting(toRemove);
+    }
 
     /**
      * Returns true if both persons have the same name.

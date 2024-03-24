@@ -2,7 +2,7 @@ package staffconnect.model.meeting;
 
 import static java.util.Objects.requireNonNull;
 import static staffconnect.commons.util.CollectionUtil.requireAllNonNull;
-import static staffconnect.model.meeting.comparator.StartDateComparator.MEETING_DATE_COMPARATOR;
+import static staffconnect.model.meeting.comparator.MeetingDateComparator.MEETING_DATE_COMPARATOR;
 
 import java.util.Comparator;
 import java.util.List;
@@ -70,7 +70,7 @@ public class MeetingManager {
     /**
      * Checks if the current meeting contains the same meeting.
      * @param meeting the meeting to check.
-     * @return true if a person with the same identity as {@code meeting} exists in the meeting list.
+     * @return true if a meeting with the same identity as {@code meeting} exists in the meeting list.
      */
     public boolean hasMeeting(Meeting meeting) {
         requireNonNull(meeting);
@@ -104,7 +104,7 @@ public class MeetingManager {
     }
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered meeting list to filter by the given {@code predicate}.
      * @param predicate to filter the list to.
      */
     public void updateFilteredMeetingList(Predicate<Meeting> predicate) {
@@ -114,7 +114,7 @@ public class MeetingManager {
     }
 
     /**
-     * Updates the sort attribute of the sorted person list to sort by the given comparator.
+     * Updates the sort attribute of the sorted meeting list to sort by the given comparator.
      * @param comparator to decide how to sort the meetings.
      */
     public void updateSortedMeetingList(Comparator<Meeting> comparator) {

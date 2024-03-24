@@ -5,13 +5,12 @@ import java.util.Comparator;
 
 import staffconnect.model.meeting.Meeting;
 
-
 /**
- * Represents a Comparator for a Meeting's MeetingDescription in the staff book.
+ * Represents a Comparator for a Meeting's Date in the staff book.
  */
-public class DescriptionComparator implements Comparator<Meeting> {
+public class MeetingDateComparator implements Comparator<Meeting> {
 
-    public static final DescriptionComparator MEETING_DESCRIPTION_COMPARATOR = new DescriptionComparator();
+    public static final MeetingDateComparator MEETING_DATE_COMPARATOR = new MeetingDateComparator();
 
     @Override
     public int compare(Meeting meet, Meeting otherMeet) {
@@ -21,8 +20,8 @@ public class DescriptionComparator implements Comparator<Meeting> {
         LocalDateTime firstDateTime = meet.getStartDate().getDateTime();
         LocalDateTime secondDateTime = otherMeet.getStartDate().getDateTime();
 
-        //Compares by time if equal
-        return firstDescription.equals(secondDescription)
-                ? firstDateTime.compareTo(secondDateTime) : firstDescription.compareTo(secondDescription);
+        //Compares by description if equal
+        return firstDateTime.equals(secondDateTime)
+                ? firstDescription.compareTo(secondDescription) : firstDateTime.compareTo(secondDateTime);
     }
 }
