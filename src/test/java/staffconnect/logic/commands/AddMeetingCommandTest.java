@@ -59,13 +59,14 @@ public class AddMeetingCommandTest {
     @Test
     public void execute_duplicateMeeting_failure() {
         Person firstPerson = buildValidPerson();
+        firstPerson.addMeetings(VALID_MEETING);
 
         AddMeetingCommand addMeetingCommand = new AddMeetingCommand(INDEX_FIRST_PERSON, VALID_MEETING);
 
-        Model duplicateModel = new ModelManager(new StaffBook(TEST_MODEL.getStaffBook()), new UserPrefs());
-        duplicateModel.setPerson(TEST_MODEL.getFilteredPersonList().get(0), firstPerson);
+        Model stubModel = new ModelManager(new StaffBook(TEST_MODEL.getStaffBook()), new UserPrefs());
+        stubModel.setPerson(TEST_MODEL.getFilteredPersonList().get(0), firstPerson);
 
-        assertCommandFailure(addMeetingCommand, duplicateModel, AddMeetingCommand.MESSAGE_DUPLICATE_MEETING);
+        assertCommandFailure(addMeetingCommand, stubModel, AddMeetingCommand.MESSAGE_DUPLICATE_MEETING);
     }
 
     @Test
