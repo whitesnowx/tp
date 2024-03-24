@@ -51,7 +51,7 @@ class MeetDateTimeTest {
     @Test
     public void equals() {
         MeetDateTime date = new MeetDateTime("20/01/2023 12:00");
-        Description testDescription = new Description("Valid Description");
+        MeetingDescription testDescription = new MeetingDescription("Valid MeetingDescription");
 
         // same values -> returns true
         assertEquals(date, new MeetDateTime("20/01/2023 12:00"));

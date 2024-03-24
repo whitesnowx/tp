@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 import staffconnect.commons.core.index.Index;
 import staffconnect.logic.commands.AddMeetingCommand;
 import staffconnect.logic.parser.exceptions.ParseException;
-import staffconnect.model.meeting.Description;
+import staffconnect.model.meeting.MeetingDescription;
 import staffconnect.model.meeting.MeetDateTime;
 import staffconnect.model.meeting.Meeting;
 
@@ -44,7 +44,7 @@ public class AddMeetingCommandParser implements Parser<AddMeetingCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddMeetingCommand.MESSAGE_USAGE));
         }
 
-        Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
+        MeetingDescription description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
         MeetDateTime startDate = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_STARTDATE).get());
 
         Meeting meeting = new Meeting(description, startDate);

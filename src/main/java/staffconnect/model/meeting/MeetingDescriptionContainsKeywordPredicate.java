@@ -7,7 +7,7 @@ import staffconnect.commons.util.StringUtil;
 import staffconnect.commons.util.ToStringBuilder;
 
 /**
- * Tests that a {@code Meeting}'s {@code Description} matches any of the keywords given.
+ * Tests that a {@code Meeting}'s {@code MeetingDescription} matches any of the keywords given.
  */
 public class MeetingDescriptionContainsKeywordPredicate implements Predicate<Meeting> {
     private final List<String> keywords;

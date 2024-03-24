@@ -7,9 +7,9 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import org.junit.jupiter.api.Test;
 
 class MeetingTest {
-    private static final Description TEST_DESCRIPTION = new Description("Valid description");
+    private static final MeetingDescription TEST_DESCRIPTION = new MeetingDescription("Valid description");
     private static final MeetDateTime TEST_DATE = new MeetDateTime("12/04/2023 12:00");
-    private static final Description TEST_OTHERDESCRIPTION = new Description("Another valid description");
+    private static final MeetingDescription TEST_OTHERDESCRIPTION = new MeetingDescription("Another valid description");
     private static final MeetDateTime TEST_OTHERDATE = new MeetDateTime("13/04/2023 13:00");
 
     @Test
@@ -22,7 +22,7 @@ class MeetingTest {
 
 
         // same values -> returns true
-        assertEquals(testMeeting, new Meeting(new Description("Valid description"),
+        assertEquals(testMeeting, new Meeting(new MeetingDescription("Valid description"),
                                               new MeetDateTime("12/04/2023 12:00")));
 
         // same object -> returns true
@@ -46,8 +46,8 @@ class MeetingTest {
 
     @Test
     public void asSymmetricHashcode() {
-        Meeting first = new Meeting(new Description("test"), new MeetDateTime("12/04/2023 12:00"));
-        Meeting second = new Meeting(new Description("test"), new MeetDateTime("12/04/2023 12:00"));
+        Meeting first = new Meeting(new MeetingDescription("test"), new MeetDateTime("12/04/2023 12:00"));
+        Meeting second = new Meeting(new MeetingDescription("test"), new MeetDateTime("12/04/2023 12:00"));
         assertEquals(first.hashCode(), second.hashCode());
     }
 

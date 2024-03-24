@@ -23,7 +23,7 @@ import org.junit.jupiter.api.Test;
 import staffconnect.commons.core.index.Index;
 import staffconnect.logic.Messages;
 import staffconnect.logic.commands.AddMeetingCommand;
-import staffconnect.model.meeting.Description;
+import staffconnect.model.meeting.MeetingDescription;
 import staffconnect.model.meeting.MeetDateTime;
 
 public class AddMeetingCommandParserTest {
@@ -87,11 +87,11 @@ public class AddMeetingCommandParserTest {
 
         //both invalid values for description and date, first value reported
         assertParseFailure(parser, "1" + INVALID_DESCRIPTION + INVALID_STARTDATE,
-                Description.MESSAGE_CONSTRAINTS);
+                MeetingDescription.MESSAGE_CONSTRAINTS);
 
         // invalid description followed by valid date
         assertParseFailure(parser, "1" + INVALID_DESCRIPTION + DATE_STARTDATE,
-                Description.MESSAGE_CONSTRAINTS);
+                MeetingDescription.MESSAGE_CONSTRAINTS);
         // valid description followed by invalid date
         assertParseFailure(parser, "1" + DESCRIPTION_MIDTERM + INVALID_STARTDATE, MeetDateTime.MESSAGE_CONSTRAINTS);
     }

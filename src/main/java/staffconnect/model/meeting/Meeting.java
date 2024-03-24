@@ -11,7 +11,7 @@ import java.util.Objects;
  */
 public class Meeting {
 
-    private final Description description;
+    private final MeetingDescription description;
     private final MeetDateTime startDate;
 
     /**
@@ -21,13 +21,13 @@ public class Meeting {
      * @param startDate   A valid time and date for the meeting.
      */
 
-    public Meeting(Description description, MeetDateTime startDate) {
+    public Meeting(MeetingDescription description, MeetDateTime startDate) {
         requireAllNonNull(description, startDate);
         this.description = description;
         this.startDate = startDate;
     }
 
-    public Description getDescription() {
+    public MeetingDescription getDescription() {
         return description;
     }
 

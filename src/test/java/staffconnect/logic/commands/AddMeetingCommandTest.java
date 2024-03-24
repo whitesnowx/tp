@@ -23,7 +23,7 @@ import staffconnect.model.Model;
 import staffconnect.model.ModelManager;
 import staffconnect.model.StaffBook;
 import staffconnect.model.UserPrefs;
-import staffconnect.model.meeting.Description;
+import staffconnect.model.meeting.MeetingDescription;
 import staffconnect.model.meeting.MeetDateTime;
 import staffconnect.model.meeting.Meeting;
 import staffconnect.model.person.Person;
@@ -95,7 +95,7 @@ public class AddMeetingCommandTest {
         final AddMeetingCommand standardCommand = new AddMeetingCommand(INDEX_FIRST_PERSON, VALID_MEETING);
         // same values -> returns true
         final Meeting copyMeeting =
-            new Meeting(new Description(VALID_DESCRIPTION_MIDTERMS), new MeetDateTime(VALID_DATE_MARCH));
+            new Meeting(new MeetingDescription(VALID_DESCRIPTION_MIDTERMS), new MeetDateTime(VALID_DATE_MARCH));
         AddMeetingCommand commandWithSameValues = new AddMeetingCommand(INDEX_FIRST_PERSON, copyMeeting);
         assertEquals(standardCommand, commandWithSameValues);
 

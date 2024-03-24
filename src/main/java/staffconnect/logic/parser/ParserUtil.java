@@ -10,7 +10,7 @@ import staffconnect.commons.core.index.Index;
 import staffconnect.commons.util.StringUtil;
 import staffconnect.logic.parser.exceptions.ParseException;
 import staffconnect.model.availability.Availability;
-import staffconnect.model.meeting.Description;
+import staffconnect.model.meeting.MeetingDescription;
 import staffconnect.model.meeting.MeetDateTime;
 import staffconnect.model.person.Email;
 import staffconnect.model.person.Faculty;
@@ -159,18 +159,18 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String description} into a {@code Description}.
+     * Parses a {@code String description} into a {@code MeetingDescription}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code description} is invalid.
      */
-    public static Description parseDescription(String description) throws ParseException {
+    public static MeetingDescription parseDescription(String description) throws ParseException {
         requireNonNull(description);
         String trimmedDescription = description.trim();
-        if (!Description.isValidDescription(trimmedDescription)) {
-            throw new ParseException(Description.MESSAGE_CONSTRAINTS);
+        if (!MeetingDescription.isValidDescription(trimmedDescription)) {
+            throw new ParseException(MeetingDescription.MESSAGE_CONSTRAINTS);
         }
-        return new Description(trimmedDescription);
+        return new MeetingDescription(trimmedDescription);
     }
 
     /**

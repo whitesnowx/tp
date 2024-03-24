@@ -5,7 +5,7 @@ import java.util.Comparator;
 import staffconnect.model.meeting.Meeting;
 
 /**
- * Represents a Comparator for a Meeting's Description in the staff book.
+ * Represents a Comparator for a Meeting's MeetingDescription in the staff book.
  */
 public class DescriptionComparator implements Comparator<Meeting> {
 

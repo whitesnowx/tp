@@ -14,41 +14,41 @@ class DescriptionTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new Description(null));
+        assertThrows(NullPointerException.class, () -> new MeetingDescription(null));
     }
 
     @Test
     public void constructor_invalidDescription_throwsIllegalArgumentException() {
         String invalidDescription = "";
-        assertThrows(IllegalArgumentException.class, () -> new Description(invalidDescription));
+        assertThrows(IllegalArgumentException.class, () -> new MeetingDescription(invalidDescription));
     }
 
     @Test
     public void isValidDescription() {
-        // null Description
-        assertThrows(NullPointerException.class, () -> Description.isValidDescription(null));
+        // null MeetingDescription
+        assertThrows(NullPointerException.class, () -> MeetingDescription.isValidDescription(null));
 
-        // invalid Description
-        assertFalse(Description.isValidDescription("")); // empty string
-        assertFalse(Description.isValidDescription("   ")); // spaces only
-        assertFalse(Description.isValidDescription("^")); // only non-alphanumeric characters
-        assertFalse(Description.isValidDescription("peter meeting*")); // contains non-alphanumeric characters
+        // invalid MeetingDescription
+        assertFalse(MeetingDescription.isValidDescription("")); // empty string
+        assertFalse(MeetingDescription.isValidDescription("   ")); // spaces only
+        assertFalse(MeetingDescription.isValidDescription("^")); // only non-alphanumeric characters
+        assertFalse(MeetingDescription.isValidDescription("peter meeting*")); // contains non-alphanumeric characters
 
-        // valid Description
-        assertTrue(Description.isValidDescription("meeting")); // alphabets only
-        assertTrue(Description.isValidDescription("12345")); // numbers only
-        assertTrue(Description.isValidDescription("meeting at for 2nd finals")); // alphanumeric characters
-        assertTrue(Description.isValidDescription("Crush the exam")); // with capital letters
-        assertTrue(Description.isValidDescription("Super hard midterm with finals and project combined 2nd"));
+        // valid MeetingDescription
+        assertTrue(MeetingDescription.isValidDescription("meeting")); // alphabets only
+        assertTrue(MeetingDescription.isValidDescription("12345")); // numbers only
+        assertTrue(MeetingDescription.isValidDescription("meeting at for 2nd finals")); // alphanumeric characters
+        assertTrue(MeetingDescription.isValidDescription("Crush the exam")); // with capital letters
+        assertTrue(MeetingDescription.isValidDescription("Super hard midterm with finals and project combined 2nd"));
     }
 
     @Test
     public void equals() {
-        Description description = new Description("Valid Description");
+        MeetingDescription description = new MeetingDescription("Valid MeetingDescription");
         MeetDateTime testDate = new MeetDateTime("12/04/2023 12:00");
 
         // same values -> returns true
-        assertEquals(description, new Description("Valid Description"));
+        assertEquals(description, new MeetingDescription("Valid MeetingDescription"));
 
         // same object -> returns true
         assertEquals(description, description);
@@ -63,12 +63,12 @@ class DescriptionTest {
         assertFalse(description.equals(testDate));
 
         // different values -> returns false
-        assertNotEquals(description, new Description("Other valid description"));
+        assertNotEquals(description, new MeetingDescription("Other valid description"));
     }
     @Test
     public void asSymmetricHashcode() {
-        Description first = new Description("Valid Description");
-        Description second = new Description("Valid Description");
+        MeetingDescription first = new MeetingDescription("Valid MeetingDescription");
+        MeetingDescription second = new MeetingDescription("Valid MeetingDescription");
         assertEquals(first.hashCode(), second.hashCode());
     }
 }
