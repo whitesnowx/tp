@@ -52,6 +52,14 @@ public class MeetingManager {
     }
 
     /**
+     * Returns the meeting list as a MeetingList.
+     * @return a MeetingList of the unique meetings.
+     */
+    public MeetingList getMeetings() {
+        return meetingList;
+    }
+
+    /**
      * Gets an unmodifiable list of meetings.
      * @return an ObservableList of meetings.
      */
