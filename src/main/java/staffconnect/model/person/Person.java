@@ -3,6 +3,7 @@ package staffconnect.model.person;
 import static staffconnect.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -88,6 +89,15 @@ public class Person {
         return meetings.getMeetingList();
     }
 
+    /** Returns an unmodifiable view of the filtered meeting list */
+    public ObservableList<Meeting> getFilteredMeetings() {
+        return meetings.getFilteredMeetingList();
+    }
+
+    public void updateSortedMeetingList(Comparator<Meeting> com) {
+        meetings.updateSortedMeetingList(com);
+    }
+
 
     /*
      * Returns an immutable availability set, which throws {@code UnsupportedOperationException}
@@ -104,6 +114,8 @@ public class Person {
     public void addMeetings(Meeting toAdd) {
         meetings.addMeeting(toAdd);
     }
+
+
 
     /**
      * Returns true if both persons have the same name.

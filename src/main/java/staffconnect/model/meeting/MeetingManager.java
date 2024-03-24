@@ -2,6 +2,7 @@ package staffconnect.model.meeting;
 
 import static java.util.Objects.requireNonNull;
 import static staffconnect.commons.util.CollectionUtil.requireAllNonNull;
+import static staffconnect.model.meeting.comparator.StartDateComparator.MEETING_DATE_COMPARATOR;
 
 import java.util.Comparator;
 import java.util.List;
@@ -23,7 +24,7 @@ public class MeetingManager {
     private final SortedList<Meeting> sortedFilteredMeetings;
 
     /**
-     * Initializes a ModelManager with the given staffBook and userPrefs.
+     * Initializes a MeetingList with the given meeting list.
      */
     public MeetingManager(MeetingList meetingList) {
 
@@ -31,31 +32,36 @@ public class MeetingManager {
         this.meetingList = meetingList;
         filteredMeetings = new FilteredList<>(this.meetingList.asUnmodifiableObservableList());
         sortedFilteredMeetings = new SortedList<>(filteredMeetings);
+        updateSortedMeetingList(MEETING_DATE_COMPARATOR); //sets the default view to be sorted by date.
     }
 
     public MeetingManager() {
         this(new MeetingList());
     }
 
-    /**
-     * Replaces all the current person's meeting data with the current.
-     * @param meetingList a new meeting list to replace the current.
-     */
+
 
     //=========== MeetingList ================================================================================
 
-
+    /**
+     * Replaces all the current meeting data with the current list.
+     * @param meetingList the input meeting list to replace to.
+     */
     public void setMeetingList(List<Meeting> meetingList) {
         this.meetingList.setMeetings(meetingList);
     }
 
+    /**
+     * Gets an unmodifiable list of meetings.
+     * @return an ObservableList of meetings.
+     */
     public ObservableList<Meeting> getMeetingList() {
         return meetingList.asUnmodifiableObservableList();
     }
 
     /**
      * Checks if the current meeting contains the same meeting.
-     * @param meeting the meeting o check.
+     * @param meeting the meeting to check.
      * @return true if a person with the same identity as {@code meeting} exists in the meeting list.
      */
     public boolean hasMeeting(Meeting meeting) {
@@ -72,8 +78,8 @@ public class MeetingManager {
     }
 
     /**
-     * Adds a meeting to the current list
-     * @param meeting to add to the current meeting list
+     * Adds a meeting to the current list.
+     * @param meeting to add to the current meeting list.
      */
     public void addMeeting(Meeting meeting) {
         meetingList.add(meeting);
@@ -94,7 +100,6 @@ public class MeetingManager {
      * @param predicate to filter the list to.
      */
     public void updateFilteredMeetingList(Predicate<Meeting> predicate) {
-
         requireNonNull(predicate);
         filteredMeetings.setPredicate(predicate);
         sortedFilteredMeetings.setComparator(null);
@@ -108,7 +113,6 @@ public class MeetingManager {
         requireNonNull(comparator);
         filteredMeetings.setPredicate(null);
         sortedFilteredMeetings.setComparator(comparator);
-
     }
 
     @Override

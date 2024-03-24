@@ -1,10 +1,10 @@
 package staffconnect.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static staffconnect.logic.commands.MeetingUtil.addMeetingToPerson;
 import static staffconnect.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static staffconnect.logic.parser.CliSyntax.PREFIX_STARTDATE;
 import static staffconnect.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static staffconnect.model.meeting.comparator.StartDateComparator.MEETING_DATE_COMPARATOR;
 
 import java.util.List;
 
@@ -62,6 +62,7 @@ public class AddMeetingCommand extends Command {
         }
 
         personToEdit.addMeetings(toAdd);
+        personToEdit.updateSortedMeetingList(MEETING_DATE_COMPARATOR);
 
         //setPerson to force update the ui with the new items
         model.setPerson(personToEdit, personToEdit);
