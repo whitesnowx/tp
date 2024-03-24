@@ -23,7 +23,7 @@ import staffconnect.logic.commands.exceptions.CommandException;
 import staffconnect.model.Model;
 import staffconnect.model.StaffBook;
 import staffconnect.model.meeting.MeetingDescription;
-import staffconnect.model.meeting.MeetDateTime;
+import staffconnect.model.meeting.MeetingDateTime;
 import staffconnect.model.meeting.Meeting;
 import staffconnect.model.person.NameContainsKeywordsPredicate;
 import staffconnect.model.person.Person;
@@ -101,11 +101,11 @@ public class CommandTestUtil {
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
     public static final Meeting VALID_MEETING =
-        new Meeting(new MeetingDescription(VALID_DESCRIPTION_MIDTERMS), new MeetDateTime(VALID_DATE_MARCH));
+        new Meeting(new MeetingDescription(VALID_DESCRIPTION_MIDTERMS), new MeetingDateTime(VALID_DATE_MARCH));
     public static final Meeting VALID_MEETING_FINALS =
-        new Meeting(new MeetingDescription(VALID_DESCRIPTION_FINALS), new MeetDateTime(VALID_DATE_MARCH));
+        new Meeting(new MeetingDescription(VALID_DESCRIPTION_FINALS), new MeetingDateTime(VALID_DATE_MARCH));
     public static final Meeting VALID_MEETING_APRIL =
-        new Meeting(new MeetingDescription(VALID_DESCRIPTION_MIDTERMS), new MeetDateTime(VALID_DATE_APRIL));
+        new Meeting(new MeetingDescription(VALID_DESCRIPTION_MIDTERMS), new MeetingDateTime(VALID_DATE_APRIL));
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)

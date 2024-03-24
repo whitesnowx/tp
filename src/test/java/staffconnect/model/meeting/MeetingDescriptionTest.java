@@ -9,7 +9,7 @@ import static staffconnect.testutil.Assert.assertThrows;
 import org.junit.jupiter.api.Test;
 
 
-class DescriptionTest {
+class MeetingDescriptionTest {
 
 
     @Test
@@ -45,7 +45,7 @@ class DescriptionTest {
     @Test
     public void equals() {
         MeetingDescription description = new MeetingDescription("Valid MeetingDescription");
-        MeetDateTime testDate = new MeetDateTime("12/04/2023 12:00");
+        MeetingDateTime testDate = new MeetingDateTime("12/04/2023 12:00");
 
         // same values -> returns true
         assertEquals(description, new MeetingDescription("Valid MeetingDescription"));

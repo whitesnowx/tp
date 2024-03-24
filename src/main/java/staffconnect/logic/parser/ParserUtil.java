@@ -11,7 +11,7 @@ import staffconnect.commons.util.StringUtil;
 import staffconnect.logic.parser.exceptions.ParseException;
 import staffconnect.model.availability.Availability;
 import staffconnect.model.meeting.MeetingDescription;
-import staffconnect.model.meeting.MeetDateTime;
+import staffconnect.model.meeting.MeetingDateTime;
 import staffconnect.model.person.Email;
 import staffconnect.model.person.Faculty;
 import staffconnect.model.person.Module;
@@ -174,18 +174,18 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String dateTime} into a {@code MeetDateTime}.
+     * Parses a {@code String dateTime} into a {@code MeetingDateTime}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code dateTime} is invalid.
      */
-    public static MeetDateTime parseDateTime(String dateTime) throws ParseException {
+    public static MeetingDateTime parseDateTime(String dateTime) throws ParseException {
         requireNonNull(dateTime);
         String trimmedDateTime = dateTime.trim();
-        if (!MeetDateTime.isValidMeetDateTime(trimmedDateTime)) {
-            throw new ParseException(MeetDateTime.MESSAGE_CONSTRAINTS);
+        if (!MeetingDateTime.isValidMeetDateTime(trimmedDateTime)) {
+            throw new ParseException(MeetingDateTime.MESSAGE_CONSTRAINTS);
         }
-        return new MeetDateTime(trimmedDateTime);
+        return new MeetingDateTime(trimmedDateTime);
     }
 
     /**

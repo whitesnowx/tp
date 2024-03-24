@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import staffconnect.commons.exceptions.IllegalValueException;
+import staffconnect.model.meeting.MeetingDateTime;
 import staffconnect.model.meeting.MeetingDescription;
-import staffconnect.model.meeting.MeetDateTime;
 import staffconnect.model.meeting.Meeting;
 
 /**
@@ -44,10 +44,10 @@ class JsonAdaptedMeeting {
         if (!MeetingDescription.isValidDescription(description)) {
             throw new IllegalValueException(MeetingDescription.MESSAGE_CONSTRAINTS);
         }
-        if (!MeetDateTime.isValidMeetDateTime(date)) {
-            throw new IllegalValueException(MeetDateTime.MESSAGE_CONSTRAINTS);
+        if (!MeetingDateTime.isValidMeetDateTime(date)) {
+            throw new IllegalValueException(MeetingDateTime.MESSAGE_CONSTRAINTS);
         }
-        return new Meeting(new MeetingDescription(description), new MeetDateTime(date));
+        return new Meeting(new MeetingDescription(description), new MeetingDateTime(date));
     }
 
 }

@@ -12,7 +12,7 @@ import java.util.Objects;
 public class Meeting {
 
     private final MeetingDescription description;
-    private final MeetDateTime startDate;
+    private final MeetingDateTime startDate;
 
     /**
      * Constructs a {@code Meeting}.
@@ -21,7 +21,7 @@ public class Meeting {
      * @param startDate   A valid time and date for the meeting.
      */
 
-    public Meeting(MeetingDescription description, MeetDateTime startDate) {
+    public Meeting(MeetingDescription description, MeetingDateTime startDate) {
         requireAllNonNull(description, startDate);
         this.description = description;
         this.startDate = startDate;
@@ -31,7 +31,7 @@ public class Meeting {
         return description;
     }
 
-    public MeetDateTime getStartDate() {
+    public MeetingDateTime getStartDate() {
         return startDate;
     }
 

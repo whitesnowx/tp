@@ -11,7 +11,7 @@ import staffconnect.commons.core.index.Index;
 import staffconnect.logic.commands.AddMeetingCommand;
 import staffconnect.logic.parser.exceptions.ParseException;
 import staffconnect.model.meeting.MeetingDescription;
-import staffconnect.model.meeting.MeetDateTime;
+import staffconnect.model.meeting.MeetingDateTime;
 import staffconnect.model.meeting.Meeting;
 
 /**
@@ -45,7 +45,7 @@ public class AddMeetingCommandParser implements Parser<AddMeetingCommand> {
         }
 
         MeetingDescription description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
-        MeetDateTime startDate = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_STARTDATE).get());
+        MeetingDateTime startDate = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_STARTDATE).get());
 
         Meeting meeting = new Meeting(description, startDate);
         return new AddMeetingCommand(index, meeting);
