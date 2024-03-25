@@ -13,6 +13,7 @@ import staffconnect.logic.commands.AddMeetingCommand;
 import staffconnect.logic.commands.ClearCommand;
 import staffconnect.logic.commands.Command;
 import staffconnect.logic.commands.DeleteCommand;
+import staffconnect.logic.commands.DeleteMeetingCommand;
 import staffconnect.logic.commands.EditCommand;
 import staffconnect.logic.commands.ExitCommand;
 import staffconnect.logic.commands.FilterCommand;
@@ -88,6 +89,10 @@ public class StaffConnectParser {
 
         case AddMeetingCommand.COMMAND_WORD:
             return new AddMeetingCommandParser().parse(arguments);
+
+        case DeleteMeetingCommand.COMMAND_WORD:
+            return new DeleteMeetingCommandParser().parse(arguments);
+
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
