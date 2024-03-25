@@ -18,6 +18,7 @@ import staffconnect.model.availability.Availability;
 import staffconnect.model.meeting.Meeting;
 import staffconnect.model.person.Email;
 import staffconnect.model.person.Faculty;
+import staffconnect.model.person.Favourite;
 import staffconnect.model.person.Module;
 import staffconnect.model.person.Name;
 import staffconnect.model.person.Person;
@@ -92,10 +93,11 @@ public class AddMeetingCommand extends Command {
         Set<Tag> currentTags = personToEdit.getTags();
         Set<Availability> currentAvailability = personToEdit.getAvailabilities();
         Set<Meeting> currentMeetings = new HashSet<>(personToEdit.getMeetings()); //to reduce coupling with Person
+        Favourite currentFavourite = personToEdit.getFavourite();
+
         Person editedPerson =
-            new Person(currentName, currentPhone, currentEmail, currentModule, currentFaculty, currentVenue,
-                       currentTags,
-                       currentAvailability);
+            new Person(currentName, currentPhone, currentEmail, currentModule, currentFaculty,
+                    currentVenue, currentTags, currentAvailability, currentFavourite);
         currentMeetings.add(meeting);
         editedPerson.setMeetings(currentMeetings);
         return editedPerson;

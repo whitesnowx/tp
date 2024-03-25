@@ -8,7 +8,8 @@
     "faculty": "Computing",
     "venue" : "123, Jurong West Ave 6, #08-111",
     "tags" : [ "friends" ],
-    "availabilities" : [ "MONDAY 12:00 14:00" ]
+    "availabilities" : [ "MONDAY 12:00 14:00" ],
+    "favourite" : "Not favourite"
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
@@ -17,7 +18,8 @@
     "faculty": "Computing",
     "venue" : "311, Clementi Ave 2, #02-25",
     "tags" : [ "owesMoney", "friends" ],
-    "availabilities" : [ "TUESDAY 12:00 14:00", "WEDNESDAY 12:00 14:00" ]
+    "availabilities" : [ "TUESDAY 12:00 14:00", "WEDNESDAY 12:00 14:00" ],
+    "favourite" : "Not favourite"
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
@@ -26,7 +28,8 @@
     "faculty": "Computing",
     "venue" : "wall street",
     "tags" : [ ],
-    "availabilities" : [ ]
+    "availabilities" : [ ],
+    "favourite" : "Favourite"
   }, {
     "name" : "Clara Svarog",
     "phone" : "9681384",
@@ -35,7 +38,8 @@
     "faculty" : "Computing",
     "venue" : "belobog avenue",
     "tags" : [ "classmate" ],
-    "availabilities" : [ ]
+    "availabilities" : [ ],
+    "favourite" : "Favourite"
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
@@ -44,7 +48,8 @@
     "faculty": "Computing",
     "venue" : "10th street",
     "tags" : [ "friends" ],
-    "availabilities" : [ "THURSDAY 12:00 14:00", "FRIDAY 12:00 14:00" ]
+    "availabilities" : [ "THURSDAY 12:00 14:00", "FRIDAY 12:00 14:00" ],
+    "favourite" : "Not favourite"
   }, {
     "name" : "Elle Meyer",
     "phone" : "9482224",
@@ -53,7 +58,8 @@
     "faculty": "Computing",
     "venue" : "michegan ave",
     "tags" : [ ],
-    "availabilities" : [ ]
+    "availabilities" : [ ],
+    "favourite" : "Not favourite"
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",
@@ -62,7 +68,8 @@
     "faculty": "Computing",
     "venue" : "little tokyo",
     "tags" : [ ],
-    "availabilities" : [ ]
+    "availabilities" : [ ],
+    "favourite" : "Not favourite"
   }, {
     "name" : "George Best",
     "phone" : "9482442",
@@ -71,7 +78,8 @@
     "faculty": "Computing",
     "venue" : "4th street",
     "tags" : [ ],
-    "availabilities" : [ ]
+    "availabilities" : [ ],
+    "favourite" : "Not favourite"
   }, {
     "name" : "Kafka Apache",
     "phone" : "9452413",
@@ -80,7 +88,8 @@
     "faculty" : "Business",
     "venue" : "pteruges avenue",
     "tags" : [ "classmate" ],
-    "availabilities" : [ "FRIDAY 12:00 14:00" ]
+    "availabilities" : [ "FRIDAY 12:00 14:00" ],
+    "favourite" : "Not favourite"
   }, {
     "name" : "Leonardo DiCaprio",
     "phone" : "88472234",
@@ -89,7 +98,8 @@
     "faculty": "Arts and Social Sciences",
     "venue" : "LT13",
     "tags" : [ ],
-    "availabilities" : [ ]
+    "availabilities" : [ ],
+    "favourite" : "Not favourite"
   }, {
     "name" : "Michael Jackson",
     "phone" : "92347123",
@@ -98,7 +108,8 @@
     "faculty": "Music",
     "venue" : "YSTCM-SR9",
     "tags" : [ ],
-    "availabilities" : [ ]
+    "availabilities" : [ ],
+    "favourite" : "Not favourite"
   }, {
     "name" : "Natasha Harrower",
     "phone" : "8019394",
@@ -107,6 +118,7 @@
     "faculty" : "Computing",
     "venue" : "underworld avenue",
     "tags" : [ "classmate" ],
-    "availabilities" : [ "FRIDAY 12:00 14:00" ]
+    "availabilities" : [ "FRIDAY 12:00 14:00" ],
+    "favourite" : "Not favourite"
   } ]
 }
