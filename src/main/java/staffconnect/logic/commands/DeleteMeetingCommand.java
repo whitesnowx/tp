@@ -24,7 +24,7 @@ public class DeleteMeetingCommand extends Command {
             + "meeting list. \n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_MEETING_INDEX + "INDEX (must be a positive integer) \n"
-            + "Example: " + COMMAND_WORD + " 1" + PREFIX_MEETING_INDEX + "2";
+            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_MEETING_INDEX + "2";
 
     public static final String MESSAGE_DELETE_MEETING_SUCCESS = "Deleted Meeting: %1$s";
 
