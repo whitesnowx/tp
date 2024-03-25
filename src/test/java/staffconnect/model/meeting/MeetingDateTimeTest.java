@@ -41,11 +41,15 @@ class MeetingDateTimeTest {
         assertFalse(MeetingDateTime.isValidMeetDateTime("1/04/2023 12:00")); // wrong number digits for day
         assertFalse(MeetingDateTime.isValidMeetDateTime("99/04/2023 12:00")); // wrong date values
         assertFalse(MeetingDateTime.isValidMeetDateTime("01/04/2023 99:00")); // wrong time values
+        // date does not exist, but error not caught by a normal parse operation. Only strict would catch this.
+        assertFalse(MeetingDateTime.isValidMeetDateTime("30/02/2024 12:00"));
+        assertFalse(MeetingDateTime.isValidMeetDateTime("29/02/2023 12:00")); //2023 is not a leap year
 
 
         // valid meeting Date
         assertTrue(MeetingDateTime.isValidMeetDateTime("12/04/2023 12:00")); // dd/MM/yyyy HH:mm
         assertTrue(MeetingDateTime.isValidMeetDateTime("15/02/2024 12:00")); // dd/MM/yyyy HH:mm
+        assertTrue(MeetingDateTime.isValidMeetDateTime("29/02/2024 12:00")); //valid date on a leap year
     }
 
     @Test
