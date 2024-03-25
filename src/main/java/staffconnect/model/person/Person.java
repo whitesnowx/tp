@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import staffconnect.commons.util.ToStringBuilder;
@@ -100,6 +101,14 @@ public class Person {
     /** Returns an unmodifiable view of the filtered meeting list. */
     public ObservableList<Meeting> getFilteredMeetings() {
         return meetings.getFilteredMeetingList();
+    }
+
+    /**
+     * Updates the filter of the filtered meeting list to filter by the given {@code predicate}.
+     * @param predicate to filter the list to.
+     */
+    public void updateFilteredMeetingList(Predicate<Meeting> predicate) {
+        meetings.updateFilteredMeetingList(predicate);
     }
 
     /**

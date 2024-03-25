@@ -25,6 +25,7 @@ import staffconnect.model.StaffBook;
 import staffconnect.model.meeting.Meeting;
 import staffconnect.model.meeting.MeetingDateTime;
 import staffconnect.model.meeting.MeetingDescription;
+import staffconnect.model.meeting.MeetingDescriptionContainsKeywordPredicate;
 import staffconnect.model.person.NameContainsKeywordsPredicate;
 import staffconnect.model.person.Person;
 import staffconnect.testutil.EditPersonDescriptorBuilder;
@@ -55,6 +56,7 @@ public class CommandTestUtil {
 
     public static final String VALID_DESCRIPTION_MIDTERMS = "Meet for midterms";
     public static final String VALID_DESCRIPTION_FINALS = "Meet for finals";
+    public static final String VALID_DESCRIPTION_STUDY = "Study super hard";
     public static final String VALID_DATE_MARCH = "12/03/2023 18:00";
     public static final String VALID_DATE_APRIL = "15/04/2024 15:00";
     public static final String VALID_KEYWORD_FINALS = "finals";
@@ -106,6 +108,8 @@ public class CommandTestUtil {
         new Meeting(new MeetingDescription(VALID_DESCRIPTION_FINALS), new MeetingDateTime(VALID_DATE_MARCH));
     public static final Meeting VALID_MEETING_APRIL =
         new Meeting(new MeetingDescription(VALID_DESCRIPTION_MIDTERMS), new MeetingDateTime(VALID_DATE_APRIL));
+    public static final Meeting VALID_MEETING_STUDY =
+            new Meeting(new MeetingDescription(VALID_DESCRIPTION_STUDY), new MeetingDateTime(VALID_DATE_MARCH));
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -174,6 +178,21 @@ public class CommandTestUtil {
         model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredPersonList().size());
+    }
+
+    /**
+     * Updates {@code person}'s filtered list to show only the meeting at the given {@code targetIndex} in the
+     * {@code person}'s meeting list.
+     */
+    public static void showMeetingAtIndex(Person person, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < person.getFilteredMeetings().size());
+
+        Meeting meeting = person.getFilteredMeetings().get(targetIndex.getZeroBased());
+        final String[] splitDescription = meeting.getDescription().toString().split("\\s+");
+        person.updateFilteredMeetingList(new MeetingDescriptionContainsKeywordPredicate(
+                Arrays.asList(splitDescription[0])));
+
+        assertEquals(1, person.getFilteredMeetings().size());
     }
 
 }

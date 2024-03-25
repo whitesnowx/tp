@@ -56,7 +56,7 @@ public class Meeting {
     }
 
     /**
-     * Format state as text for viewing.
+     * Formats state as text for viewing.
      */
     public String toString() {
         return startDate + ":" + description;

@@ -24,11 +24,11 @@ public class AddMeetingCommand extends Command {
     public static final String COMMAND_WORD = "meeting";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a meeting to the person identified "
-        + "by the index number used in the displayed person list. "
-        + "Existing values will be overwritten by the input values.\n"
-        + "Parameters: INDEX (must be a positive integer) " + PREFIX_DESCRIPTION + "DESCRIPTION " + PREFIX_STARTDATE
-        + "DATETIME[dd/MM/yyyy HH:mm]" + "Example: " + COMMAND_WORD + " 1 " + PREFIX_DESCRIPTION + "Meet for finals "
-        + PREFIX_STARTDATE + "12/04/2023 18:00";
+            + "by the index number used in the displayed person list. \n"
+            + "Parameters: INDEX (must be a positive integer) " + PREFIX_DESCRIPTION + "DESCRIPTION "
+            + PREFIX_STARTDATE + "DATETIME[dd/MM/yyyy HH:mm] \n"
+            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_DESCRIPTION
+            + "Meet for finals " + PREFIX_STARTDATE + "12/04/2023 18:00";
 
     public static final String MESSAGE_SUCCESS = "New meeting added: %1$s";
     public static final String MESSAGE_DUPLICATE_MEETING = "This meeting is already planned for this person!";
@@ -37,7 +37,7 @@ public class AddMeetingCommand extends Command {
     private final Index index;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddMeetingCommand to add the specified {@code Person}
      */
     public AddMeetingCommand(Index index, Meeting meeting) {
         requireNonNull(index);
