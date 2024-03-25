@@ -84,7 +84,7 @@ A person can have any number of tags and availabilities (including 0)
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com f/Computing v/John street, block 123, #01-01 m/CS2103`
-* `add n/Betsy Crowe t/friend m/CS2103T e/betsycrowe@example.com f/Computing v/Newgate Prison p/1234567 t/criminal a/monday a/wednesday`
+* `add n/Betsy Crowe t/friend m/CS2103T e/betsycrowe@example.com f/Computing v/Newgate Prison p/1234567 t/criminal a/monday 11:00 12:00 a/wednesday 14:00 16:00`
 
 ### Listing all persons : `list`
 
@@ -158,7 +158,7 @@ Sorts the list of persons based on specified attribute.
 
 Format: `sort [ATTRIBUTE]`
 
-* By default, sorting is done in ascending order.
+* By default, sorting is done in alphanumeric order.
 * The order of character priority would be letters (A-Z), numbers (0-9), special characters (!@#$%^&*).
 * The capitalisation of the letters do not affect their priority such that `Aaron` will have same priority as `aaron`.
 * For attribute with exact same values, the tie-breaker is determined by their added order.
@@ -168,6 +168,23 @@ Examples:
 * `sort n/` returns person by ascending names `Alex`, `Bernice` followed by `Charlotte`
 * `sort p/` returns person by ascending phone numbers `87438807`, `91031282` followed by `92492021`<br>
   ![result for 'sort p/'](images/sortByPhoneNumberResult.png)
+
+### Adding a meeting to a person: `meeting`
+
+Add a meeting to a person based on specified description and date.
+
+Format: `meeting INDEX [d/DESCRIPTION] [s/DATETIME]`
+
+* Adds a meeting to the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3,…​ and tally within range index of the displayed list.
+* Both of the fields must be provided and valid values.
+* A valid `DESCRIPTION` of the meeting can only contain latin alphanumeric characters.
+* A valid `DATETIME` of the meeting can only contain valid date and 24 hour time values with a single space to separate the date and time in the format of `dd/MM/yyyy HH:mm`.
+* Duplicate meetings with the same `DESCRIPTION` and `DATETIME` in the same person is not allowed.
+
+Examples:
+* `meeting 1 d/ Meet for finals preparation s/ 12/04/2024 18:00` adds a meeting to the first person with the description of `Meet for finals preparation` and the date and time of `12/04/2024 18:00` 
+* `meeting 2 d/ Meet for practical exam s/ 20/04/2024 15:00` adds a meeting to the second person with the description of `Meet for practical exam` and the date and time of `20/04/2024 15:00`
+  ![result for 'meeting 1 d/ Meet for finals preparation s/ 12/04/2024 18:00'](images/addMeetingResult.png)
 
 ### Deleting a person : `delete`
 
@@ -244,12 +261,13 @@ Furthermore, certain edits can cause the StaffConnect to behave in unexpected wa
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL m/MODULE f/FACULTY v/VENUE [t/TAG]…​ [a/AVAILABILITY]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com m/CS2103 f/Computing v/123, Clementi Rd, 1234665 t/friend t/colleague a/monday`
+**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL m/MODULE f/FACULTY v/VENUE [t/TAG]…​ [a/AVAILABILITY]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com m/CS2103 f/Computing v/123, Clementi Rd, 1234665 t/friend t/colleague a/monday 14:00 16:00`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [m/MODULE] [f/FACULTY] [v/VENUE] [t/TAG]…​ [a/AVAILABILITY]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Filter** | `filter [m/MODULE] [f/FACULTY] [t/TAG]…`<br> e.g., `filter m/CS2100 t/friends`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Sort** | `sort [ATTRIBUTE]`<br> e.g., `sort p/`
+**Add Meeting** | `meeting INDEX [d/DESCRIPTION] [s/DATETIME]`<br> e.g., `meeting 1 d/ Meet for finals preparation s/ 12/04/2024 18:00`
 **List** | `list`
 **Help** | `help`
