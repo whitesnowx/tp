@@ -39,7 +39,7 @@ public class JsonAdaptedPersonTest {
     private static final String VALID_EMAIL = BENSON.getEmail().toString();
     private static final String VALID_MODULE = BENSON.getModule().toString();
     private static final String VALID_MEETING_DESCRIPTION = "Meet for midterms";
-    private static final String VALID_MEETING_DATE = "12-04-2023 18:00";
+    private static final String VALID_MEETING_DATE = "12/04/2023 18:00";
     private static final List<JsonAdaptedTag> VALID_TAGS =
         BENSON.getTags().stream().map(JsonAdaptedTag::new).collect(Collectors.toList());
     private static final String VALID_FACULTY = BENSON.getFaculty().toString();
