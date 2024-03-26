@@ -3,6 +3,7 @@ package staffconnect.model.meeting;
 import static java.util.Objects.requireNonNull;
 import static staffconnect.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 
@@ -107,13 +108,6 @@ public class MeetingList implements Iterable<Meeting> {
      * Returns true if {@code meetings} contains only unique Meeting.
      */
     private boolean meetingsAreUnique(List<Meeting> meetings) {
-        for (int i = 0; i < meetings.size() - 1; i++) {
-            for (int j = i + 1; j < meetings.size(); j++) {
-                if (meetings.get(i).equals(meetings.get(j))) {
-                    return false;
-                }
-            }
-        }
-        return true;
+        return meetings.stream().allMatch(new HashSet<>()::add);
     }
 }
