@@ -14,7 +14,7 @@ import staffconnect.model.meeting.Meeting;
 import staffconnect.model.person.Person;
 
 /**
- * Deletes a meeting identified using it's displayed index from the person's meeting list.
+ * Deletes a meeting identified using its displayed index from the person's meeting list.
  */
 public class DeleteMeetingCommand extends Command {
 
@@ -33,7 +33,7 @@ public class DeleteMeetingCommand extends Command {
     private final Index targetMeetingIndex;
 
     /**
-     * Constructs a command to indicate which meeting to delete from the person's meeting list.
+     * Constructs a DeleteMeetingCommand to indicate which meeting to delete from the person's meeting list.
      * @param targetPersonIndex to select the person's meeting list.
      * @param targetMeetingIndex to select the meeting to delete.
      */

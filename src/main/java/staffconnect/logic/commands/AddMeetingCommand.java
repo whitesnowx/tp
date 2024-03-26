@@ -1,8 +1,8 @@
 package staffconnect.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static staffconnect.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static staffconnect.logic.parser.CliSyntax.PREFIX_STARTDATE;
+import static staffconnect.logic.parser.CliSyntax.PREFIX_MEETING_DESCRIPTION;
+import static staffconnect.logic.parser.CliSyntax.PREFIX_MEETING_STARTDATE;
 import static staffconnect.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static staffconnect.model.meeting.comparator.MeetingDateComparator.MEETING_DATE_COMPARATOR;
 
@@ -25,10 +25,10 @@ public class AddMeetingCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a meeting to the person identified "
             + "by the index number used in the displayed person list. \n"
-            + "Parameters: INDEX (must be a positive integer) " + PREFIX_DESCRIPTION + "DESCRIPTION "
-            + PREFIX_STARTDATE + "DATETIME[dd/MM/yyyy HH:mm] \n"
-            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_DESCRIPTION
-            + "Meet for finals " + PREFIX_STARTDATE + "12/04/2023 18:00";
+            + "Parameters: INDEX (must be a positive integer) " + PREFIX_MEETING_DESCRIPTION + "DESCRIPTION "
+            + PREFIX_MEETING_STARTDATE + "DATETIME[dd/MM/yyyy HH:mm] \n"
+            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_MEETING_DESCRIPTION
+            + "Meet for finals " + PREFIX_MEETING_STARTDATE + "12/04/2023 18:00";
 
     public static final String MESSAGE_SUCCESS = "New meeting added: %1$s";
     public static final String MESSAGE_DUPLICATE_MEETING = "This meeting is already planned for this person!";
@@ -37,7 +37,7 @@ public class AddMeetingCommand extends Command {
     private final Index index;
 
     /**
-     * Creates an AddMeetingCommand to add the specified {@code Person}
+     * Creates an AddMeetingCommand to add the specified {@code Meeting}
      */
     public AddMeetingCommand(Index index, Meeting meeting) {
         requireNonNull(index);

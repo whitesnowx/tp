@@ -64,7 +64,7 @@ class MeetingManagerTest {
         // different types -> returns false
         assertNotEquals(5, meetingManager);
 
-        // different staffBook -> returns false
+        // different MeetingList in MeetingManager -> returns false
         assertNotEquals(meetingManager, new MeetingManager(differentMeetingList));
 
         // different filteredList -> returns false

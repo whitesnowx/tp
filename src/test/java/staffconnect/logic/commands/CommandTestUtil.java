@@ -3,13 +3,13 @@ package staffconnect.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static staffconnect.logic.parser.CliSyntax.PREFIX_AVAILABILITY;
-import static staffconnect.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static staffconnect.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static staffconnect.logic.parser.CliSyntax.PREFIX_FACULTY;
+import static staffconnect.logic.parser.CliSyntax.PREFIX_MEETING_DESCRIPTION;
+import static staffconnect.logic.parser.CliSyntax.PREFIX_MEETING_STARTDATE;
 import static staffconnect.logic.parser.CliSyntax.PREFIX_MODULE;
 import static staffconnect.logic.parser.CliSyntax.PREFIX_NAME;
 import static staffconnect.logic.parser.CliSyntax.PREFIX_PHONE;
-import static staffconnect.logic.parser.CliSyntax.PREFIX_STARTDATE;
 import static staffconnect.logic.parser.CliSyntax.PREFIX_TAG;
 import static staffconnect.logic.parser.CliSyntax.PREFIX_VENUE;
 import static staffconnect.testutil.Assert.assertThrows;
@@ -79,9 +79,9 @@ public class CommandTestUtil {
     public static final String AVAILABILITY_DESC_MON = " " + PREFIX_AVAILABILITY + VALID_AVAILABILITY_MON;
     public static final String AVAILABILITY_DESC_THUR = " " + PREFIX_AVAILABILITY + VALID_AVAILABILITY_THUR;
 
-    public static final String DESCRIPTION_MIDTERM = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_MIDTERMS;
+    public static final String DESCRIPTION_MIDTERM = " " + PREFIX_MEETING_DESCRIPTION + VALID_DESCRIPTION_MIDTERMS;
 
-    public static final String DATE_STARTDATE = " " + PREFIX_STARTDATE + VALID_DATE_MARCH;
+    public static final String DATE_STARTDATE = " " + PREFIX_MEETING_STARTDATE + VALID_DATE_MARCH;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -93,9 +93,10 @@ public class CommandTestUtil {
     public static final String INVALID_AVAILABILITY_DESC =
             " " + PREFIX_AVAILABILITY + "mon*"; // '*' not allowed in availabilities
 
-    public static final String INVALID_DESCRIPTION = " " + PREFIX_DESCRIPTION + "&@#&*@*&@*"; //special characters
+    public static final String INVALID_DESCRIPTION =
+            " " + PREFIX_MEETING_DESCRIPTION + "&@#&*@*&@*"; //special characters
 
-    public static final String INVALID_STARTDATE = " " + PREFIX_STARTDATE + "12-04-2023 1800";
+    public static final String INVALID_STARTDATE = " " + PREFIX_MEETING_STARTDATE + "12-04-2023 1800";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

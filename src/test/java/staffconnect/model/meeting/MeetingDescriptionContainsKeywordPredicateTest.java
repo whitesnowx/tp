@@ -39,7 +39,7 @@ class MeetingDescriptionContainsKeywordPredicateTest {
         // null -> returns false
         assertNotEquals(null, firstPredicate);
 
-        // different person -> returns false
+        // different meeting description -> returns false
         assertNotEquals(firstPredicate, secondPredicate);
     }
 

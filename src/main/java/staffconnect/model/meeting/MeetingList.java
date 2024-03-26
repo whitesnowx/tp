@@ -53,7 +53,7 @@ public class MeetingList implements Iterable<Meeting> {
     }
 
     /**
-     * Replaces the contents of this list with {@code meeting}.
+     * Replaces the contents of this list with {@code meetings}.
      * {@code meetings} must not contain duplicate meetings.
      *
      */

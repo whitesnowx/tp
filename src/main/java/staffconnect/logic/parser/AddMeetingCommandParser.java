@@ -2,8 +2,8 @@ package staffconnect.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static staffconnect.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static staffconnect.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static staffconnect.logic.parser.CliSyntax.PREFIX_STARTDATE;
+import static staffconnect.logic.parser.CliSyntax.PREFIX_MEETING_DESCRIPTION;
+import static staffconnect.logic.parser.CliSyntax.PREFIX_MEETING_STARTDATE;
 
 import java.util.stream.Stream;
 
@@ -29,7 +29,7 @@ public class AddMeetingCommandParser implements Parser<AddMeetingCommand> {
     public AddMeetingCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-            ArgumentTokenizer.tokenize(args, PREFIX_DESCRIPTION, PREFIX_STARTDATE);
+            ArgumentTokenizer.tokenize(args, PREFIX_MEETING_DESCRIPTION, PREFIX_MEETING_STARTDATE);
 
         Index index;
 
@@ -40,13 +40,14 @@ public class AddMeetingCommandParser implements Parser<AddMeetingCommand> {
                     AddMeetingCommand.MESSAGE_USAGE), pe);
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_DESCRIPTION, PREFIX_STARTDATE);
-        if (!arePrefixesPresent(argMultimap, PREFIX_DESCRIPTION, PREFIX_STARTDATE)) {
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_MEETING_DESCRIPTION, PREFIX_MEETING_STARTDATE);
+        if (!arePrefixesPresent(argMultimap, PREFIX_MEETING_DESCRIPTION, PREFIX_MEETING_STARTDATE)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddMeetingCommand.MESSAGE_USAGE));
         }
 
-        MeetingDescription description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
-        MeetingDateTime startDate = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_STARTDATE).get());
+        MeetingDescription description = ParserUtil.parseDescription(argMultimap.getValue(
+                PREFIX_MEETING_DESCRIPTION).get());
+        MeetingDateTime startDate = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_MEETING_STARTDATE).get());
 
         Meeting meeting = new Meeting(description, startDate);
         return new AddMeetingCommand(index, meeting);
