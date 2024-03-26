@@ -69,7 +69,7 @@ class MeetingDateTimeTest {
         // different types -> returns false
         assertNotEquals(1234, date);
 
-        //Different object type -> returns false
+        // different object type -> returns false
         assertFalse(date.equals(testDescription));
 
         // different values -> returns false

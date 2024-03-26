@@ -11,7 +11,6 @@ import static staffconnect.logic.commands.CommandTestUtil.showMeetingAtIndex;
 import static staffconnect.testutil.TypicalIndexes.INDEX_FIRST_MEETING;
 import static staffconnect.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static staffconnect.testutil.TypicalIndexes.INDEX_SECOND_MEETING;
-import static staffconnect.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static staffconnect.testutil.TypicalPersons.getTypicalStaffBook;
 
 import org.junit.jupiter.api.Test;
@@ -136,7 +135,7 @@ public class DeleteMeetingCommandTest {
     @Test
     public void equals() {
         DeleteMeetingCommand deleteFirstCommand = new DeleteMeetingCommand(INDEX_FIRST_PERSON, INDEX_FIRST_MEETING);
-        DeleteMeetingCommand deleteSecondCommand = new DeleteMeetingCommand(INDEX_FIRST_PERSON, INDEX_SECOND_PERSON);
+        DeleteMeetingCommand deleteSecondCommand = new DeleteMeetingCommand(INDEX_FIRST_PERSON, INDEX_SECOND_MEETING);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
@@ -151,7 +150,7 @@ public class DeleteMeetingCommandTest {
         // null -> returns false
         assertFalse(deleteFirstCommand.equals(null));
 
-        // different person -> returns false
+        // different meeting index -> returns false
         assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
     }
 

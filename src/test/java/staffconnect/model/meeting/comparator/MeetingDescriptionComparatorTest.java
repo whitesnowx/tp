@@ -25,7 +25,9 @@ public class MeetingDescriptionComparatorTest {
         assertTrue(MEETING_DESCRIPTION_COMPARATOR.compare(VALID_MEETING_FINALS, VALID_MEETING) <= -1);
 
         //Same description but different time
-        assertTrue(MEETING_DATE_COMPARATOR.compare(VALID_MEETING, VALID_MEETING_APRIL) <= -1); // march < april
-        assertTrue(MEETING_DATE_COMPARATOR.compare(VALID_MEETING_APRIL, VALID_MEETING) > -1); // april > march
+        // march < april
+        assertTrue(MEETING_DESCRIPTION_COMPARATOR.compare(VALID_MEETING, VALID_MEETING_APRIL) <= -1);
+        // april > march
+        assertTrue(MEETING_DESCRIPTION_COMPARATOR.compare(VALID_MEETING_APRIL, VALID_MEETING) > -1);
     }
 }
