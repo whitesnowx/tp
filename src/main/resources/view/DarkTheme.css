@@ -376,15 +376,16 @@
     -fx-effect: dropshadow(gaussian, rgba(62,84,158,0.8), 13, 0, 0, 0);
  }
 
- #meetingListView {
+#meetingListView {
     -fx-background-color: transparent;
     -fx-padding: 7 0 0 0;
- }
+}
 
- #meetingListCell {
-     -fx-background-color: transparent;
-     -fx-padding: 5 0 0 0;
- }
+#meetingListCell {
+    -fx-background-color: transparent;
+    -fx-padding: 5 0 0 0;
+}
 
-
-
+#favourite_label {
+    -fx-text-fill: #FFDF00;
+}
