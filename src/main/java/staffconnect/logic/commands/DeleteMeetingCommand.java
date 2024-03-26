@@ -2,6 +2,7 @@ package staffconnect.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static staffconnect.logic.parser.CliSyntax.PREFIX_MEETING_INDEX;
+import static staffconnect.model.meeting.comparator.MeetingDateComparator.MEETING_DATE_COMPARATOR;
 
 import java.util.List;
 
@@ -12,6 +13,7 @@ import staffconnect.logic.commands.exceptions.CommandException;
 import staffconnect.model.Model;
 import staffconnect.model.meeting.Meeting;
 import staffconnect.model.person.Person;
+import staffconnect.model.person.PersonUtil;
 
 /**
  * Deletes a meeting identified using its displayed index from the person's meeting list.
@@ -53,6 +55,7 @@ public class DeleteMeetingCommand extends Command {
         }
 
         Person personToSelect = lastShownList.get(targetPersonIndex.getZeroBased());
+        Person editedPerson = PersonUtil.copyPersonWithMeetings(personToSelect);
         List<Meeting> meetingShownList = personToSelect.getFilteredMeetings();
 
         // can't group guard clauses together, as this guard clause has to be here
@@ -61,10 +64,11 @@ public class DeleteMeetingCommand extends Command {
         }
 
         Meeting meetingToSelect = meetingShownList.get(targetMeetingIndex.getZeroBased());
-        personToSelect.removeMeeting(meetingToSelect);
+        editedPerson.removeMeeting(meetingToSelect);
+        editedPerson.updateSortedMeetingList(MEETING_DATE_COMPARATOR);
 
         //force update the ui
-        model.setPerson(personToSelect, personToSelect);
+        model.setPerson(personToSelect, editedPerson);
         return new CommandResult(String.format(MESSAGE_DELETE_MEETING_SUCCESS, Messages.format(meetingToSelect)));
     }
 

@@ -15,6 +15,7 @@ import staffconnect.logic.commands.exceptions.CommandException;
 import staffconnect.model.Model;
 import staffconnect.model.meeting.Meeting;
 import staffconnect.model.person.Person;
+import staffconnect.model.person.PersonUtil;
 
 /**
  * Adds a meeting to the staff book.
@@ -56,16 +57,17 @@ public class AddMeetingCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
         Person personToEdit = lastShownList.get(index.getZeroBased());
+        Person editedPerson = PersonUtil.copyPersonWithMeetings(personToEdit);
 
         if (personToEdit.hasDuplicateMeeting(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_MEETING);
         }
 
-        personToEdit.addMeetings(toAdd);
-        personToEdit.updateSortedMeetingList(MEETING_DATE_COMPARATOR);
+        editedPerson.addMeetings(toAdd);
+        editedPerson.updateSortedMeetingList(MEETING_DATE_COMPARATOR);
 
         //setPerson to force update the ui with the new items
-        model.setPerson(personToEdit, personToEdit);
+        model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
