@@ -5,14 +5,14 @@ title: User Guide
 
 StaffConnect (SC) is a **desktop app for managing contacts of Professors and Tutors, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, SC can get your contact management tasks done faster than traditional GUI apps.
 
-* Table of Contents 
+* Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
 
-1. Ensure you have Java `11` or above installed in your Computer. 
+1. Ensure you have Java `11` or above installed in your Computer.
 
 2. Download the latest `StaffConnect.jar` from [here](https://github.com/AY2324S2-CS2103-F08-3/tp/).
 
@@ -182,7 +182,7 @@ Format: `meeting INDEX [d/DESCRIPTION] [s/DATETIME]`
 * Duplicate meetings with the same `DESCRIPTION` and `DATETIME` in the same person is not allowed.
 
 Examples:
-* `meeting 1 d/ Meet for finals preparation s/ 12/04/2024 18:00` adds a meeting to the first person with the description of `Meet for finals preparation` and the date and time of `12/04/2024 18:00` 
+* `meeting 1 d/ Meet for finals preparation s/ 12/04/2024 18:00` adds a meeting to the first person with the description of `Meet for finals preparation` and the date and time of `12/04/2024 18:00`
 * `meeting 2 d/ Meet for practical exam s/ 20/04/2024 15:00` adds a meeting to the second person with the description of `Meet for practical exam` and the date and time of `20/04/2024 15:00`
   ![result for 'meeting 1 d/ Meet for finals preparation s/ 12/04/2024 18:00'](images/addMeetingResult.png)
 

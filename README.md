@@ -17,7 +17,7 @@ details, supported by a quick and easy filter system. While it has a GUI, most o
 # Getting Started
  * Ensure that at least **Java 11 with JavaFx runtime is installed**
  * Run the the application with ```java -jar StaffConnect.jar```
-        
+
 # Credits
 StaffConnect is an ongoing software project for a desktop application used for managing contact details.
 * For the detailed documentation of this project, see the **[StaffConnect Product Website](https://ay2324s2-cs2103-f08-3.github.io/tp/)**.
