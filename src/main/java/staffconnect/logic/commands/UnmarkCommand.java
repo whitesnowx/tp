@@ -74,18 +74,18 @@ public class UnmarkCommand extends Command {
     private static Person createUnmarkedPerson(Person personToUnmark) {
         assert personToUnmark != null;
 
-        Name updatedName = personToUnmark.getName();
-        Phone updatedPhone = personToUnmark.getPhone();
-        Email updatedEmail = personToUnmark.getEmail();
-        Module updatedModule = personToUnmark.getModule();
-        Faculty updatedFaculty = personToUnmark.getFaculty();
-        Venue updatedVenue = personToUnmark.getVenue();
-        Set<Tag> updatedTags = personToUnmark.getTags();
-        Set<Availability> updatedAvailabilities = personToUnmark.getAvailabilities();
+        Name name = personToUnmark.getName();
+        Phone phone = personToUnmark.getPhone();
+        Email email = personToUnmark.getEmail();
+        Module module = personToUnmark.getModule();
+        Faculty faculty = personToUnmark.getFaculty();
+        Venue venue = personToUnmark.getVenue();
+        Set<Tag> tags = personToUnmark.getTags();
+        Set<Availability> availabilities = personToUnmark.getAvailabilities();
         Favourite updatedFavourite = new Favourite(false);
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedModule,
-            updatedFaculty, updatedVenue, updatedTags, updatedAvailabilities, updatedFavourite);
+        return new Person(name, phone, email, module,
+                faculty, venue, tags, availabilities, updatedFavourite);
     }
 
     @Override
