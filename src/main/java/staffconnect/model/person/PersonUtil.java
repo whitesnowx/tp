@@ -1,7 +1,7 @@
 package staffconnect.model.person;
 
-import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import staffconnect.model.availability.Availability;
 import staffconnect.model.meeting.Meeting;
@@ -16,15 +16,15 @@ public class PersonUtil {
     /**
      * Copies and returns a new Person with the data of {@code personToCopy}.
      */
-    public static Person copyPersonWithMeetings(Person personToCopy) {
+    public static Person copyPerson(Person personToCopy) {
         Name name = personToCopy.getName();
         Phone phone = personToCopy.getPhone();
         Email email = personToCopy.getEmail();
         Module module = personToCopy.getModule();
         Faculty faculty = personToCopy.getFaculty();
         Venue venue = personToCopy.getVenue();
-        HashSet<Tag> tags = new HashSet<>(personToCopy.getTags());
-        HashSet<Availability> availabilities = new HashSet<>(personToCopy.getAvailabilities());
+        Set<Tag> tags = personToCopy.getTags();
+        Set<Availability> availabilities = personToCopy.getAvailabilities();
         List<Meeting> meetings = personToCopy.getMeetings();
 
         Person personToCreate = new Person(name, phone, email, module, faculty, venue, tags, availabilities);

@@ -57,7 +57,7 @@ public class AddMeetingCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = PersonUtil.copyPersonWithMeetings(personToEdit);
+        Person editedPerson = PersonUtil.copyPerson(personToEdit);
 
         if (personToEdit.hasDuplicateMeeting(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_MEETING);

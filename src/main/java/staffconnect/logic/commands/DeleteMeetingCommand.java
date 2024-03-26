@@ -55,7 +55,7 @@ public class DeleteMeetingCommand extends Command {
         }
 
         Person personToSelect = lastShownList.get(targetPersonIndex.getZeroBased());
-        Person editedPerson = PersonUtil.copyPersonWithMeetings(personToSelect);
+        Person editedPerson = PersonUtil.copyPerson(personToSelect);
         List<Meeting> meetingShownList = personToSelect.getFilteredMeetings();
 
         // can't group guard clauses together, as this guard clause has to be here
