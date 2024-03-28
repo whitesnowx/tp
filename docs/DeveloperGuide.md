@@ -238,7 +238,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 **Aspect: Number of Attribute:**
 
 * **Current Design:** Only 1 attribute per sort.
-    * Pros: Easy to implement, controlled and less likely to be used incorrectly. This increase ease of use for users).
+    * Pros: Easy to implement, controlled and less likely to be used incorrectly. This increase ease of use for users.
     * Cons: Limited sorting and lesser functionality.
 
 * **Alternative 1:** 1 or more attribute per sort.
