@@ -1,0 +1,75 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":StaffConnectParser" as StaffConnectParser LOGIC_COLOR
+participant ":EditCommandParser" as EditCommandParser LOGIC_COLOR
+participant "f:EditCommand" as EditCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("edit 1 p/ 12345678")
+activate LogicManager
+
+LogicManager -> StaffConnectParser : parseCommand("edit 1 p/ 12345678")
+activate StaffConnectParser
+
+create EditCommandParser
+StaffConnectParser -> EditCommandParser
+activate EditCommandParser
+
+EditCommandParser --> StaffConnectParser
+deactivate EditCommandParser
+
+StaffConnectParser -> EditCommandParser : parse("1 p/ 12345678")
+activate EditCommandParser
+
+create EditCommand
+EditCommandParser -> EditCommand
+activate EditCommand
+EditCommand -> EditCommand : createEditedPerson()
+activate EditCommand
+
+EditCommand --> EditCommand
+deactivate EditCommand
+
+EditCommand --> EditCommandParser :
+deactivate EditCommand
+
+EditCommandParser --> StaffConnectParser : f
+deactivate EditCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+EditCommandParser -[hidden]-> StaffConnectParser
+destroy EditCommandParser
+
+StaffConnectParser --> LogicManager : f
+deactivate StaffConnectParser
+
+LogicManager -> EditCommand : execute(m)
+activate EditCommand
+
+EditCommand -> Model : updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS)
+activate Model
+
+Model --> EditCommand
+deactivate Model
+
+create CommandResult
+EditCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> EditCommand
+deactivate CommandResult
+
+EditCommand --> LogicManager : r
+deactivate EditCommand
+
+[<-- LogicManager
+deactivate LogicManager
+@enduml

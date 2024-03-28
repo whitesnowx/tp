@@ -1,0 +1,76 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+skinparam ParticipantPadding 0
+
+Participant ":EditCommandParser" as EditCommandParser LOGIC_COLOR
+Participant ":EditCommand" as EditCommand LOGIC_COLOR
+Participant "ep:EditPersonDescriptor" as ep LOGIC_COLOR
+
+[-> EditCommandParser : parse("1 p/ 12345678")
+create EditCommandParser
+activate EditCommandParser
+
+create ep
+EditCommandParser --> ep
+activate ep
+ep --> EditCommandParser
+deactivate ep
+
+EditCommandParser --> ep
+activate ep
+ep --> ep: setName()
+ep --> EditCommandParser
+deactivate ep
+
+EditCommandParser --> ep
+activate ep
+ep --> ep: setPhone()
+ep --> EditCommandParser
+deactivate ep
+
+EditCommandParser --> ep
+activate ep
+ep --> ep: setEmail()
+ep --> EditCommandParser
+deactivate ep
+
+EditCommandParser --> ep
+activate ep
+ep --> ep: setModule()
+ep --> EditCommandParser
+deactivate ep
+
+EditCommandParser --> ep
+activate ep
+ep --> ep: setFaculty()
+ep --> EditCommandParser
+deactivate ep
+
+EditCommandParser --> ep
+activate ep
+ep --> ep: setVenue()
+ep --> EditCommandParser
+deactivate ep
+
+EditCommandParser --> ep
+activate ep
+ep --> ep: setTags()
+ep --> EditCommandParser
+deactivate ep
+
+EditCommandParser --> ep
+activate ep
+ep --> ep: setAvailabilities()
+ep --> EditCommandParser
+deactivate ep
+
+create EditCommand
+EditCommandParser --> EditCommand: new(ep)
+activate EditCommand
+EditCommand --> EditCommandParser
+deactivate EditCommand
+
+[<-- EditCommandParser
+deactivate EditCommandParser
+@enduml
