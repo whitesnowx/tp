@@ -7,7 +7,8 @@ box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":StaffConnectParser" as StaffConnectParser LOGIC_COLOR
 participant ":SortCommandParser" as SortCommandParser LOGIC_COLOR
-participant "c:NameComparator" as NameComparator LOGIC_COLOR
+participant "<<Class>>\nNameComparator" as NameComparator LOGIC_COLOR
+participant "c\n:NameComparator" as NAME_COMPARATOR LOGIC_COLOR
 participant "s:SortCommand" as SortCommand LOGIC_COLOR
 participant "r:CommandResult" as CommandResult LOGIC_COLOR
 end box
@@ -35,7 +36,14 @@ create NameComparator
 SortCommandParser -> NameComparator
 activate NameComparator
 
-NameComparator --> SortCommandParser
+create NAME_COMPARATOR
+NameComparator -> NAME_COMPARATOR
+activate NAME_COMPARATOR
+
+NAME_COMPARATOR --> NameComparator : c
+deactivate NAME_COMPARATOR
+
+NameComparator --> SortCommandParser : c
 deactivate NameComparator
 
 create SortCommand
@@ -72,6 +80,7 @@ deactivate CommandResult
 
 SortCommand --> LogicManager : r
 deactivate SortCommand
+
 SortCommand -[hidden]-> LogicManager : result
 destroy SortCommand
 
