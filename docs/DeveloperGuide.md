@@ -195,6 +195,48 @@ This is to make sure at least one field is modified, or the command will not hav
 Call `model.updateFilteredPersonList())` with a `Predicate` that always evaluates to true:
 This is to refresh the list of `Person` in `Model`.
 
+### Filter feature
+
+#### How the filter is implemented
+
+The sequence diagram below shows how the filter command `filter f/Computing` goes through the `Logic` component.
+
+![Interactions Inside the Logic Component for the `filter f/Computing` Command](images/FilterSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FilterCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+</div>
+
+1. When the user issues the command `filter f/Computing`, `Logic` is called upon to execute the command, it is passed to the `StaffConnectParser` object which creates a `FilterCommandParser` to parse the arguments for the filter command.
+2. This results in a `FilterCommand` object, which then creates a `Predicate` object.
+3. The command communicates with the `Model` when it is executed. More specifically, it calls the `updateFilteredPersonList()` method using the `Predicate` object created earlier as the argument. Note that although it is shown as a single step in the diagram (for simplicity), in the code it takes several 
+4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`, to show in the `UI` component the number of persons listed with the `Faculty` value of "Computing".
+
+The below sequence diagram goes into more detail on how the command is parsed in `FilterCommandParser`.
+
+![Interactions Inside FilterCommandParser for the `parse("f/Computing")` Command](images/FilterSequenceDiagram-Parser.png)
+
+Within `FilterCommandParser`, the filtering criteria is parsed into `PersonHasModulePredicate`, `PersonHasFacultyPredicate`, `PersonHasTagsPredicate`, `PersonHasAvailabilitiesPredicate` objects, which extend from `Predicate`.
+These `Predicate` objects are then used to construct a `FilterCommand` object, where `FilterCommand` creates its own `Predicate` object by self-calling the `setPersonPredicate()` method, where the `Predicate` produced is to be used as the argument for the `updateFilteredPersonList()` method.
+
+The below activity diagram illustrates the process when a user executes a filter command.
+
+<img src="images/FilterActivityDiagram.png" width="250" />
+
+#### Why filter is implemented this way
+
+The main operation for the filter feature is the `updateFilteredPersonList(Predicate<Person> predicate)` method in the `Model` component.
+The following are some explanations for decisions made in the implementation of the filter feature.
+
+Need for multiple `Predicate` objects:
+This is to keep in view for when other commands or enhancements may need the separate attribute predicates.
+
+`FilterCommmandParser` parsing the `Predicate` objects:
+This is to prevent `FilterCommand` from taking on more responsibilities (Separation of Concerns).
+
+`FilterCommand` having `setPersonPredicate()` method:
+This is so that `FilterCommand` has the required argument of type `Predicate<Person>` to be used in the `updateFilteredPersonList()` method. Since the `Predicate<Person>` object is created by chaining the multiple predicates, no parsing is involved to create this `Predicate`.
+
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -282,6 +324,30 @@ _{more aspects and alternatives to be added}_
 ### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
+
+### Meeting
+
+Meeting is feature that allows the user to keep track of any events they may have with the particular contact. It contains the description of the meeting event with the date and time it would occur.
+
+#### Implementation
+
+Meeting contains two attributes ```MeetingDescription``` and ```MeetingDateTime``` class. ```MeetingDescription``` 
+is used to handle any valid description of the meeting with only alphanumeric values, while the ```MeetingDateTime```
+is used to handle any valid date time values. Each of this meeting are stored in a list data class ```MeetingList``` that
+contains each of the meetings related to each other stored in an ```ObservableList```. The ``` MeetingManager ``` is 
+used to manage any operations that require viewing or sorting of meetings from the ```MeetingList``` class.
+
+#### Design considerations:
+
+**Aspect: How the meetings are stored :**
+
+* **Alternative 1 (current choice):** Store meetings in an ObservableList.
+    * Pros: Better segregation of the OOP functionalities, and good integration with the UI ListView.
+    * Cons: Larger code complexity.
+
+* **Alternative 2:** Store meetings in a Set.
+    * Pros: Easier implementation.
+    * Cons: There is an efficiency gap as each element has to be placed into a list before it can be shown to the UI ListView.
 
 
 --------------------------------------------------------------------------------------------------------------------
