@@ -138,8 +138,16 @@
 
 .pane-with-border {
      -fx-background-color: derive(#1d1d1d, 20%);
-     -fx-border-color: derive(#1d1d1d, 10%);
-     -fx-border-top-width: 1px;
+     /*-fx-border-color: derive(#1d1d1d, 10%);
+     -fx-border-top-width: 1px; */
+}
+.pane-result {
+     -fx-background-color: derive(#1d1d1d, 20%);
+     -fx-padding: 0 15 0 15;
+}
+.pane-command {
+     -fx-background-color: derive(#1d1d1d, 20%);
+     -fx-padding: 0 15 5 15;
 }
 
 .status-bar {
@@ -149,7 +157,7 @@
 .result-display {
     -fx-background-color: transparent;
     -fx-font-family: "Segoe UI Light";
-    -fx-font-size: 13pt;
+    -fx-font-size: 12pt;
     -fx-text-fill: white;
 }
 
@@ -186,6 +194,8 @@
 
 .context-menu {
     -fx-background-color: derive(#1d1d1d, 50%);
+    -fx-padding: 0 1 0 1;
+
 }
 
 .context-menu .label {
@@ -195,6 +205,11 @@
 .menu-bar {
    /*-fx-background-color: derive(#1d1d1d, 20%);*/
    -fx-background-color: derive(#1d1d1d, 30%);
+   -fx-spacing: 1;
+
+}
+.menu {
+    -fx-padding: 0 5 0 5;
 }
 
 .menu-bar .label {
@@ -206,6 +221,10 @@
 
 .menu .left-container {
     -fx-background-color: black;
+}
+
+.menu-item{
+    -fx-padding: 0 5 0 5;
 }
 
 /*
