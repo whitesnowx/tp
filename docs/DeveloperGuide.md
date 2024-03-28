@@ -196,6 +196,19 @@ This is to prevent `FilterCommand` from taking on more responsibilities (Separat
 `FilterCommand` having `setPersonPredicate()` method:
 This is so that `FilterCommand` has the required argument of type `Predicate<Person>` to be used in the `updateFilteredPersonList()` method. Since the `Predicate<Person>` object is created by chaining the multiple predicates, no parsing is involved to create this `Predicate`.
 
+### Find feature
+
+#### How the feature is implemented
+
+The sequence diagram below explains how the find command `find Alex` goes through the `Logic` component.
+
+![Interactions Inside the Logic Component for the `find Alex` Command](images/FindSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FindCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+</div>
+
+
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
