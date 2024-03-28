@@ -207,15 +207,13 @@ The sort mechanism is facilitated by JavaFX's `SortedList` within ModelManager, 
 
 Given below is an example usage scenario and how the sort mechanism behaves at each step.
 
-Step 1. Initially, the `SortedList` is initialized with a null comparator when the model loads.
+Step 1. The user enters **“sort n/”** to sort the list by their name.
 
-Step 2. The user enter **“sort n/”** to sort the list by their name.
+Step 2. The `LogicManager` takes this command text and calls `StaffBookParser.parseCommand("sort n/")` and identifies the sort command. It then creates a new instance of `SortCommandParser` to `parse(“n/”)` on the attribute.
 
-Step 3. The Logic manager takes this command text and calls `StaffBookParser.parseCommand("sort n/")` and identifies the sort command. It then creates a new instance of `SortCommandParser` to `parse(“n/”)` on the attribute.
+Step 3. `SortCommandParser.parse(“n/”)` then constructs a SortCommand with the appropriate attribute comparator, `NameComparator`.
 
-Step 4. `SortCommandParser.parse(“n/”)` then constructs a SortCommand with the appropriate attribute comparator, `NAME_COMPARATOR`.
-
-Step 5. The SortCommand is returned to Logic manager which calls on its `execute()` to return a `CommandResult()`. During its execution, `ModelManager.updateSortedList(NameComparator)` is invoked which updates the model to show the list of persons being sorted by name.
+Step 4. The `SortCommand` is returned to Logic manager which calls on its `execute()` to return a `CommandResult()`. During its execution, `ModelManager.updateSortedPersonList(NameComparator)` is invoked which updates the model to show the list of persons being sorted by name.
 
 The sequence diagram for executing a **"sort n/"** is shown below:
 
