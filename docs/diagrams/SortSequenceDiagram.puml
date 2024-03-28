@@ -7,11 +7,13 @@ box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":StaffConnectParser" as StaffConnectParser LOGIC_COLOR
 participant ":SortCommandParser" as SortCommandParser LOGIC_COLOR
+participant "c:NameComparator" as NameComparator LOGIC_COLOR
 participant "s:SortCommand" as SortCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
-participant ":Model" as Model MODEL_COLOR
+participant "m:Model" as Model MODEL_COLOR
 end box
 [-> LogicManager : execute("sort n/")
 activate LogicManager
@@ -29,8 +31,15 @@ deactivate SortCommandParser
 StaffConnectParser -> SortCommandParser : parse("n/")
 activate SortCommandParser
 
+create NameComparator
+SortCommandParser -> NameComparator
+activate NameComparator
+
+NameComparator --> SortCommandParser
+deactivate NameComparator
+
 create SortCommand
-SortCommandParser -> SortCommand :
+SortCommandParser -> SortCommand : SortCommand(c)
 activate SortCommand
 
 SortCommand --> SortCommandParser
@@ -42,16 +51,23 @@ deactivate SortCommandParser
 StaffConnectParser --> LogicManager : s
 deactivate StaffConnectParser
 
-LogicManager -> SortCommand : execute()
+LogicManager -> SortCommand : execute(m)
 activate SortCommand
 
-SortCommand -> Model : updateSortedPersonList(NAME_COMPARATOR)
+SortCommand -> Model : updateSortedPersonList(c)
 activate Model
 
 Model --> SortCommand
 deactivate Model
 
-SortCommand --> LogicManager : commandResult
+create CommandResult
+SortCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> SortCommand
+deactivate CommandResult
+
+SortCommand --> LogicManager : r
 deactivate SortCommand
 SortCommand -[hidden]-> LogicManager : result
 destroy SortCommand
