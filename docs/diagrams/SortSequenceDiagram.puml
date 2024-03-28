@@ -53,25 +53,3 @@ destroy SortCommand
 [<--LogicManager
 deactivate LogicManager
 @enduml
-
-
-'@startuml
-'title Sorting List Sequence Diagram
-'
-'participant User
-'participant LogicManager
-'participant StaffBookParser
-'participant SortCommandParser
-'participant SortCommand
-'participant ModelManager
-'participant SortedList
-'
-'User -> LogicManager: User enters a sort command
-'LogicManager -> StaffBookParser: parseCommand(command)
-'StaffBookParser -> SortCommandParser: parse(attribute)
-'SortCommandParser -> SortCommand: parse(attribute)
-'SortCommand -> ModelManager: updateSortedList(attribute comparator)
-'ModelManager -> SortedList: Update comparator
-'SortCommand --> LogicManager: Return SortCommand
-'LogicManager --> User: Return commandResult
-'@enduml
