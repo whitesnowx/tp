@@ -48,6 +48,9 @@ deactivate SortCommand
 SortCommandParser --> StaffConnectParser  : s
 deactivate SortCommandParser
 
+SortCommandParser -[hidden]-> SortCommandParser
+destroy SortCommandParser
+
 StaffConnectParser --> LogicManager : s
 deactivate StaffConnectParser
 
@@ -71,6 +74,7 @@ SortCommand --> LogicManager : r
 deactivate SortCommand
 SortCommand -[hidden]-> LogicManager : result
 destroy SortCommand
+
 
 [<--LogicManager
 deactivate LogicManager
