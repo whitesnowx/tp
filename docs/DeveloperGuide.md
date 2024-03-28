@@ -180,7 +180,7 @@ These `Predicate` objects are then used to construct a `FilterCommand` object, w
 
 The below activity diagram illustrates the process when a user executes a filter command.
 
-<img src="images/FilterActivityDiagram.png" width="250" />
+<img src="images/FilterActivityDiagram.png" width="450" />
 
 #### Why filter is implemented this way
 
