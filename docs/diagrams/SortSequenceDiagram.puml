@@ -32,8 +32,6 @@ deactivate SortCommandParser
 StaffConnectParser -> SortCommandParser : parse("n/")
 activate SortCommandParser
 
-SortCommandParser -> SortCommandParser : parseComparatorForKeywords()
-activate SortCommandParser
 
 create NameComparator
 SortCommandParser -> NameComparator
@@ -48,8 +46,6 @@ deactivate NAME_COMPARATOR
 
 NameComparator --> SortCommandParser : c
 deactivate NameComparator
-SortCommandParser --> SortCommandParser : c
-deactivate SortCommandParser
 
 create SortCommand
 SortCommandParser -> SortCommand : SortCommand(c)
