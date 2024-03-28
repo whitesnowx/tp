@@ -50,7 +50,7 @@ create SortCommand
 SortCommandParser -> SortCommand : SortCommand(c)
 activate SortCommand
 
-SortCommand --> SortCommandParser
+SortCommand --> SortCommandParser : s
 deactivate SortCommand
 
 SortCommandParser --> StaffConnectParser  : s
