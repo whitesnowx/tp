@@ -206,7 +206,7 @@ public class StaffConnectParserTest {
     }
 
     @Test
-    void parseCommand_UpperCaseCommands_succuess() throws Exception {
+    void parseCommand_upperCaseCommands_succuess() throws Exception {
         String addCommand = PersonUtil.getAddCommand(new PersonBuilder().build());
         String clearCommand = "cLear";
         String deleteCommand = "Delete 1 ";
