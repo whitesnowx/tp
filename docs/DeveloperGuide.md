@@ -196,6 +196,56 @@ This is to prevent `FilterCommand` from taking on more responsibilities (Separat
 `FilterCommand` having `setPersonPredicate()` method:
 This is so that `FilterCommand` has the required argument of type `Predicate<Person>` to be used in the `updateFilteredPersonList()` method. Since the `Predicate<Person>` object is created by chaining the multiple predicates, no parsing is involved to create this `Predicate`.
 
+### Sort Feature
+
+##### Implementation
+
+The sort mechanism is facilitated by JavaFX's `SortedList` within ModelManager, `SortCommand` and `SortCommandParser`. `SortCommandParser` extends the types of command parsers in StaffBookParser, and returns a `SortCommand` to be executed by the LogicManager. This execution also updates the `SortedList` in  Model via ModelManager. Additionally, it implements the following operations:
+
+* `SortCommandParser#parse()`  — Parses user input to identify the attribute to be sorted
+* `ModelManager#updateSortedPersonList()’ — Update the comparator used by SortedList resulting in the data being sorted accordingly
+
+Given below is an example usage scenario and how the sort mechanism behaves at each step.
+
+Step 1. Initially, the SortedList is initialized with a null comparator when the model loads.
+
+Step 2. The user enter “sort n/” to sort the list by their name.
+
+Step 3. The Logic manager takes this command text and calls StaffBookParser.parseCommand(commandtext) and identifies the sort command. It then creates a new instance of SortCommandParser to parse(“n/”) on the attribute.
+
+Step 4. SortCommandParser.parse(“n/”) then constructs a SortCommand with the appropriate attribute comparator, NameComparator.
+
+Step 5. The SortCommand is returned to Logic manager which calls on its execute() to return a CommandResult(). During its execution, ModelManager.updateSortedList(NameComparator) is invoked which updates the model to show the list of persons being sorted by name.
+
+<img src="images/SortSequenceDiagram.png" width="850" />
+
+
+The following activity diagram summarizes what happens when a user executes a new sort command:
+
+<img src="images/SortActivityDiagram.png" width="450" />
+
+#### Design considerations:
+**Aspect: Determining order of sorting of an attribute:**
+
+* **Alternative 1 (current choice):** Use a configured comparator for each attribute in ascending order.
+    * Pros: Controlled and more simple for user.
+    * Cons: Less flexibility and unable to do more advance sorting such as multiple attributes. We must implement a comparator for each attribute used for sorting.
+
+* **Alternative 2:** Get order of sorting from user, prompting for an input in the form of toCompare.
+    * Pros: More functionality and more suited to the user's needs.
+    * Cons: Harder to implement and guide user to use, may have more leeway for error. User unlikely to use this advancement.
+
+**Aspect: Number of Attribute:**
+
+* **Alternative 1 (current choice):** Only 1 attribute per sort.
+    * Pros: Easy to implement, controlled and less likely to be used incorrectly. This increase ease of use for users).
+    * Cons: Limited sorting and lesser functionality.
+
+* **Alternative 2:** 1 or more attribute per sort.
+    * Pros: More functionality, more advanced view of contacts.
+    * Cons: Harder to implement, order of prefix affects priority of attribute and have to specify to user.
+
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -283,6 +333,7 @@ _{more aspects and alternatives to be added}_
 ### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
+
 
 ### Meeting
 
