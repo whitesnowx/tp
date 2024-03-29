@@ -433,6 +433,28 @@ used to manage any operations that require viewing or sorting of meetings from t
     * Pros: Easier implementation.
     * Cons: There is an efficiency gap as each element has to be placed into a list before it can be shown to the UI ListView.
 
+### Mark/unmark feature
+
+The feature enables us to mark/unmark a particular contact using an index as favourite.
+
+#### Implementation
+
+The Mark/Unmark feature is implemented via the `MarkCommand` and `UnmarkCommand`, which is supported by the `MarkCommandParser` and `UnmarkCommandParser` respectively.
+The `MarkCommandParser` and `UnmarkCommandParser` implements the `Parser` interface.
+
+1. `LogicManager` receives the user input which is parsed by the `StaffConnectParser`.
+2. After splitting the user input into `commandWord` and `arguments` based on the regex pattern of the user input, the `StaffConnectParser` invokes the `MarkCommandParser`/`UnmarkCommandParser` based on the `commandWord`, calling the method `parse` with `arguments` as the method arguments
+3. `MarkCommandParser`/`UnmarkCommandParser` takes in the `args` string and parse it into with the static `ParserUtil#parseIndex(args)` function. If the `INDEX` format is invalid, a `ParseException` will be thrown.
+4. `MarkCommandParser`/`UnmarkCommandParser` then creates the `MarkCommand`/`UnmarkCommand` and returns it. 
+5. The `LogicManager` executes the `MarkCommand`/`UnmarkCommand`, which creates a `Person` with the `Favourite` attribute set as `true`/`false` respectively and updates the model with this new `Person`.
+
+The following sequence diagram shows how the `mark` command works:
+
+![Mark Command Sequence Diagram](images/MarkSequenceDiagram.png)
+
+Similarly, how the `unmark` command works is shown below:
+
+![Unmark Command Sequence Diagram](images/UnmarkSequenceDiagram.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
