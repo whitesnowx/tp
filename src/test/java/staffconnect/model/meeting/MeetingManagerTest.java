@@ -13,14 +13,14 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
-import staffconnect.testutil.MeetingListBuilder;
+import staffconnect.testutil.MeetingBookBuilder;
 
 class MeetingManagerTest {
     private MeetingManager meetingManager = new MeetingManager();
 
     @Test
     public void constructor() {
-        assertEquals(new MeetingList(), meetingManager.getMeetings());
+        assertEquals(new MeetingBook(), meetingManager.getMeetingBook());
     }
 
     @Test
@@ -46,13 +46,14 @@ class MeetingManagerTest {
 
     @Test
     public void equals() {
-        MeetingList meetingList =
-                new MeetingListBuilder().withMeeting(VALID_MEETING).withMeeting(VALID_MEETING_FINALS).build();
-        MeetingList differentMeetingList = new MeetingList();
+        MeetingBook meetingBook =
+                new MeetingBookBuilder().withMeeting(VALID_MEETING).withMeeting(VALID_MEETING_FINALS).build();
+        MeetingBook differentMeetingBook = new MeetingBook();
+
 
         // same values -> returns true
-        meetingManager = new MeetingManager(meetingList);
-        MeetingManager meetingManagerCopy = new MeetingManager(meetingList);
+        meetingManager = new MeetingManager(meetingBook);
+        MeetingManager meetingManagerCopy = new MeetingManager(meetingBook);
         assertEquals(meetingManager, meetingManagerCopy);
 
         // same object -> returns true
@@ -64,14 +65,14 @@ class MeetingManagerTest {
         // different types -> returns false
         assertNotEquals(5, meetingManager);
 
-        // different MeetingList in MeetingManager -> returns false
-        assertNotEquals(meetingManager, new MeetingManager(differentMeetingList));
+        // different UniqueMeetingList in MeetingManager -> returns false
+        assertNotEquals(meetingManager, new MeetingManager(differentMeetingBook));
 
         // different filteredList -> returns false
         String[] keywords = new String[]{VALID_KEYWORD_FINALS};
         meetingManager.updateFilteredMeetingList(
                 new MeetingDescriptionContainsKeywordPredicate(Arrays.asList(keywords)));
-        assertNotEquals(meetingManager, new MeetingManager(meetingList));
+        assertNotEquals(meetingManager, new MeetingManager(meetingBook));
 
     }
 }

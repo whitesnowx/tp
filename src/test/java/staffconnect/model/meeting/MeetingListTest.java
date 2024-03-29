@@ -18,7 +18,7 @@ import staffconnect.model.meeting.exception.MeetingNotFoundException;
 
 class MeetingListTest {
 
-    private final MeetingList meetingList = new MeetingList();
+    private final UniqueMeetingList meetingList = new UniqueMeetingList();
 
     @Test
     public void contains_nullMeeting_throwsNullPointerException() {
@@ -61,7 +61,7 @@ class MeetingListTest {
     public void remove_existingMeeting_removesMeeting() {
         meetingList.add(VALID_MEETING);
         meetingList.remove(VALID_MEETING);
-        MeetingList expectedMeetingList = new MeetingList();
+        UniqueMeetingList expectedMeetingList = new UniqueMeetingList();
         assertEquals(expectedMeetingList, meetingList);
     }
     @Test
@@ -74,7 +74,7 @@ class MeetingListTest {
         meetingList.add(VALID_MEETING);
         List<Meeting> anotherMeetingList = Collections.singletonList(VALID_MEETING);
         meetingList.setMeetings(anotherMeetingList);
-        MeetingList expectedMeetingList = new MeetingList();
+        UniqueMeetingList expectedMeetingList = new UniqueMeetingList();
         expectedMeetingList.add(VALID_MEETING);
         assertEquals(expectedMeetingList, meetingList);
     }

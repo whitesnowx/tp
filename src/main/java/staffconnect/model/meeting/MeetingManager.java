@@ -19,92 +19,93 @@ public class MeetingManager {
 
     public static final Predicate<Meeting> PREDICATE_SHOW_ALL_MEETINGS = unused -> true;
 
-    private final MeetingList meetingList;
+    private final MeetingBook meetingBook;
     private final FilteredList<Meeting> filteredMeetings;
     private final SortedList<Meeting> sortedFilteredMeetings;
 
-    /**
-     * Initializes a MeetingList with the given meeting list.
-     */
-    public MeetingManager(MeetingList meetingList) {
+    public MeetingManager() {
+        this(new MeetingBook());
+    }
 
-        requireAllNonNull(meetingList);
-        this.meetingList = meetingList;
-        filteredMeetings = new FilteredList<>(this.meetingList.asUnmodifiableObservableList());
+    /**
+     * Initializes a MeetingBook with the given {@code meetingBook}.
+     */
+    public MeetingManager(ReadOnlyMeetingBook meetingBook) {
+
+        requireAllNonNull(meetingBook);
+        this.meetingBook = new MeetingBook(meetingBook);
+        filteredMeetings = new FilteredList<>(this.meetingBook.getMeetingList());
         sortedFilteredMeetings = new SortedList<>(filteredMeetings);
         updateSortedMeetingList(MEETING_DATE_THEN_DESCRIPTION_COMPARATOR); //sets the default view to be sorted by date.
     }
 
-    public MeetingManager() {
-        this(new MeetingList());
-    }
 
-
-
-    //=========== MeetingList ================================================================================
+    //=========== UniqueMeetingList ================================================================================
 
     /**
-     * Replaces all the current meeting data with the current list.
-     * @param meetingList the input meeting list to replace to.
+     * Updates the sort attribute of the sorted meeting list of MeetingBook to sort by the given comparator.
+     *
+     * @param comparator to decide how to sort the meetings.
      */
-    public void setMeetingList(List<Meeting> meetingList) {
-        this.meetingList.setMeetings(meetingList);
+    public void updateSortedMeetingList(Comparator<Meeting> comparator) {
+        requireNonNull(comparator);
+        filteredMeetings.setPredicate(null);
+        sortedFilteredMeetings.setComparator(comparator);
     }
 
     /**
-     * Returns the meeting list as a MeetingList.
-     * @return a MeetingList of the unique meetings.
+     * Returns the MeetingBook.
+     *
      */
-    public MeetingList getMeetings() {
-        return meetingList;
+    public ReadOnlyMeetingBook getMeetingBook() {
+        return meetingBook;
     }
 
     /**
-     * Gets an unmodifiable list of meetings.
-     * @return an ObservableList of meetings.
+     * Replaces all the current meeting data in MeetingBook with the current list.
+     *
+     * @param meetingBook the input meeting list to replace to.
      */
-    public ObservableList<Meeting> getMeetingList() {
-        return meetingList.asUnmodifiableObservableList();
+    public void setMeetingBook(List<Meeting> meetingBook) {
+        this.meetingBook.setMeetings(meetingBook);
     }
 
     /**
-     * Checks if the current meeting contains the same meeting.
+     * Checks if the current MeetingBook contains the same meeting.
+     *
      * @param meeting the meeting to check.
      * @return true if a meeting with the same identity as {@code meeting} exists in the meeting list.
      */
     public boolean hasMeeting(Meeting meeting) {
         requireNonNull(meeting);
-        return meetingList.contains(meeting);
+        return meetingBook.hasMeeting(meeting);
     }
 
     /**
-     * Removes the specified meeting form the current meeting list.
+     * Removes the specified meeting from the MeetingBook.
+     *
      * @param target meeting to remove .
      */
     public void deleteMeeting(Meeting target) {
-        meetingList.remove(target);
+        meetingBook.removeMeeting(target);
     }
 
     /**
-     * Adds a meeting to the current list.
-     * @param meeting to add to the current meeting list.
+     * Adds a meeting to the current list within MeetingBook.
+     *
+     * @param meeting to add to the MeetingBook.
      */
     public void addMeeting(Meeting meeting) {
-        meetingList.add(meeting);
+        meetingBook.addMeeting(meeting);
         updateFilteredMeetingList(PREDICATE_SHOW_ALL_MEETINGS);
     }
+
 
     //=========== Filtered Meeting List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code meeting}.
-     */
-    public ObservableList<Meeting> getFilteredMeetingList() {
-        return sortedFilteredMeetings;
-    }
-
-    /**
-     * Updates the filter of the filtered meeting list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered meeting list of MeetingBook to filter by the given {@code predicate}.
+     *
      * @param predicate to filter the list to.
      */
     public void updateFilteredMeetingList(Predicate<Meeting> predicate) {
@@ -114,13 +115,19 @@ public class MeetingManager {
     }
 
     /**
-     * Updates the sort attribute of the sorted meeting list to sort by the given comparator.
-     * @param comparator to decide how to sort the meetings.
+     * Gets an unmodifiable list of meetings.
+     *
+     * @return an ObservableList of meetings.
      */
-    public void updateSortedMeetingList(Comparator<Meeting> comparator) {
-        requireNonNull(comparator);
-        filteredMeetings.setPredicate(null);
-        sortedFilteredMeetings.setComparator(comparator);
+    public ObservableList<Meeting> getMeetingList() {
+        return meetingBook.getMeetingList();
+    }
+
+    /**
+     * Returns an unmodifiable view of the list of {@code meeting}.
+     */
+    public ObservableList<Meeting> getFilteredMeetingList() {
+        return sortedFilteredMeetings;
     }
 
     @Override
@@ -135,7 +142,7 @@ public class MeetingManager {
         }
 
         MeetingManager otherModelManager = (MeetingManager) other;
-        return meetingList.equals(otherModelManager.meetingList)
+        return meetingBook.equals(otherModelManager.meetingBook)
                 && filteredMeetings.equals(otherModelManager.filteredMeetings);
     }
 

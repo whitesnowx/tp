@@ -124,7 +124,7 @@ public class Person {
      * @param toAdd the input meeting list to replace to.
      */
     public void setMeetings(List<Meeting> toAdd) {
-        meetings.setMeetingList(toAdd);
+        meetings.setMeetingBook(toAdd);
     }
 
     public void addMeetings(Meeting toAdd) {
@@ -203,7 +203,7 @@ public class Person {
                 .add("venue", venue)
                 .add("tags", tags)
                 .add("availabilities", availabilities)
-                .add("meetings", meetings.getMeetingList().toString())
+                .add("meetings", meetings.getMeetingList())
                 .toString();
     }
 
