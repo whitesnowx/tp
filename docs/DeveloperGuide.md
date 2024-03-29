@@ -155,6 +155,46 @@ Classes used by multiple components are in the `staffconnect.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Edit feature
+
+#### How the feature is implemented
+
+The sequence diagram below shows how the edit command `edit 1 p/ 12345678` goes through the `Logic` component.
+
+![Interactions Inside the Logic Component for the `edit 1 p/ 12345678` Command](images/EditSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `EditCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+</div>
+
+1. When the user issues the command `edit 1 p/ 12345678`, `Logic` is called upon to execute the command, it is passed to the `StaffConnectParser` object which creates a `EditCommandParser` to parse the arguments for the edit command.
+2. The parsing of `EditCommandParser` results in a new `EditCommand` initialized by an index `int` and a `EditPersonDescriptor`. The datails will be explained later.
+3. When the `EditCommand` is executed, it creates a new `Person` object according to the `EditPersonDescriptor` passed to it, and replaces the old `Person` object with the new one.
+4. The command communicates with the `Model` when it is executed. More specifically, it calls the `updateFilteredPersonList()` method using a `Predicate` object which simply evaluates to true for all `Person`. The intension is that no `Person` will be filtered out in an edit command.
+5.  The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`, to show in the `UI` component the success message that the `Person` at the given index is updated with the new information.
+
+The below sequence diagram goes into more detail on how the command is parsed in `EditCommandParser`.
+
+![Interactions Inside EditCommandParser for the `parse("1 p/ 12345678")` Command](images/EditSequenceDiagram-Parser.png)
+
+1. The string is checked to see if if contains tags. If it does, call the corresponding setter method in `EditPersonDescriptor` object. For tags and availabiliies, all values will be updated.
+2. If no field is updated, throw a `ParseException` to indicate that no field is updated.
+3. The `EditPersonDescriptor` is used to construct an `EditCommand` object, where `EditCommand` object calls `createEditedPerson()` method using the `EditPersonDescriptor` as an argument.
+
+The below activity diagram illustrates the process when a user executes a edit command.
+
+<img src="images/EditActivityDiagram.png" width="250" />
+
+#### Why edit is implemented this way
+
+The command calls `SetPerson()` method in `Model` and then refresh the list of `Person` objects.
+Below are some explanations for some implementation details.
+
+Check if `editPersonDescriptor.isAnyFieldEdited()`:
+This is to make sure at least one field is modified, or the command will not have any impact on the `Model`.
+
+Call `model.updateFilteredPersonList())` with a `Predicate` that always evaluates to true:
+This is to refresh the list of `Person` in `Model`.
+
 ### Filter feature
 
 #### How the filter is implemented
@@ -168,7 +208,7 @@ The sequence diagram below shows how the filter command `filter f/Computing` goe
 
 1. When the user issues the command `filter f/Computing`, `Logic` is called upon to execute the command, it is passed to the `StaffConnectParser` object which creates a `FilterCommandParser` to parse the arguments for the filter command.
 2. This results in a `FilterCommand` object, which then creates a `Predicate` object.
-3. The command communicates with the `Model` when it is executed. More specifically, it calls the `updateFilteredPersonList()` method using the `Predicate` object created earlier as the argument. Note that although it is shown as a single step in the diagram (for simplicity), in the code it takes several 
+3. The command communicates with the `Model` when it is executed. More specifically, it calls the `updateFilteredPersonList()` method using the `Predicate` object created earlier as the argument. Note that although it is shown as a single step in the diagram (for simplicity), in the code it takes several.
 4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`, to show in the `UI` component the number of persons listed with the `Faculty` value of "Computing".
 
 The below sequence diagram goes into more detail on how the command is parsed in `FilterCommandParser`.
@@ -375,10 +415,10 @@ Meeting is feature that allows the user to keep track of any events they may hav
 
 #### Implementation
 
-Meeting contains two attributes ```MeetingDescription``` and ```MeetingDateTime``` class. ```MeetingDescription``` 
+Meeting contains two attributes ```MeetingDescription``` and ```MeetingDateTime``` class. ```MeetingDescription```
 is used to handle any valid description of the meeting with only alphanumeric values, while the ```MeetingDateTime```
 is used to handle any valid date time values. Each of this meeting are stored in a list data class ```MeetingList``` that
-contains each of the meetings related to each other stored in an ```ObservableList```. The ``` MeetingManager ``` is 
+contains each of the meetings related to each other stored in an ```ObservableList```. The ``` MeetingManager ``` is
 used to manage any operations that require viewing or sorting of meetings from the ```MeetingList``` class.
 
 #### Design considerations:
