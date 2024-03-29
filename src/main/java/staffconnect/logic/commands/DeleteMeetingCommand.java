@@ -2,7 +2,7 @@ package staffconnect.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static staffconnect.logic.parser.CliSyntax.PREFIX_MEETING_INDEX;
-import static staffconnect.model.meeting.comparator.MeetingDateComparator.MEETING_DATE_COMPARATOR;
+import static staffconnect.model.meeting.comparator.MeetingDateThenDescriptionComparator.MEETING_DATE_THEN_DESCRIPTION_COMPARATOR;
 
 import java.util.List;
 
@@ -65,7 +65,7 @@ public class DeleteMeetingCommand extends Command {
 
         Meeting meetingToSelect = meetingShownList.get(targetMeetingIndex.getZeroBased());
         editedPerson.removeMeeting(meetingToSelect);
-        editedPerson.updateSortedMeetingList(MEETING_DATE_COMPARATOR);
+        editedPerson.updateSortedMeetingList(MEETING_DATE_THEN_DESCRIPTION_COMPARATOR);
 
         //force update the ui
         model.setPerson(personToSelect, editedPerson);

@@ -1,6 +1,5 @@
 package staffconnect.model.meeting.comparator;
 
-import java.time.LocalDateTime;
 import java.util.Comparator;
 
 import staffconnect.model.meeting.Meeting;
@@ -15,13 +14,7 @@ public class MeetingDateComparator implements Comparator<Meeting> {
     @Override
     public int compare(Meeting meet, Meeting otherMeet) {
 
-        String firstDescription = meet.getDescription().toString();
-        String secondDescription = otherMeet.getDescription().toString();
-        LocalDateTime firstDateTime = meet.getStartDate().getDateTime();
-        LocalDateTime secondDateTime = otherMeet.getStartDate().getDateTime();
+        return meet.getStartDate().getDateTime().compareTo(otherMeet.getStartDate().getDateTime());
 
-        //Compares by description if equal
-        return firstDateTime.equals(secondDateTime)
-                ? firstDescription.compareTo(secondDescription) : firstDateTime.compareTo(secondDateTime);
     }
 }

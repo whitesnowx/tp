@@ -2,7 +2,7 @@ package staffconnect.model.meeting;
 
 import static java.util.Objects.requireNonNull;
 import static staffconnect.commons.util.CollectionUtil.requireAllNonNull;
-import static staffconnect.model.meeting.comparator.MeetingDateComparator.MEETING_DATE_COMPARATOR;
+import static staffconnect.model.meeting.comparator.MeetingDateThenDescriptionComparator.MEETING_DATE_THEN_DESCRIPTION_COMPARATOR;
 
 import java.util.Comparator;
 import java.util.List;
@@ -32,7 +32,7 @@ public class MeetingManager {
         this.meetingList = meetingList;
         filteredMeetings = new FilteredList<>(this.meetingList.asUnmodifiableObservableList());
         sortedFilteredMeetings = new SortedList<>(filteredMeetings);
-        updateSortedMeetingList(MEETING_DATE_COMPARATOR); //sets the default view to be sorted by date.
+        updateSortedMeetingList(MEETING_DATE_THEN_DESCRIPTION_COMPARATOR); //sets the default view to be sorted by date.
     }
 
     public MeetingManager() {
