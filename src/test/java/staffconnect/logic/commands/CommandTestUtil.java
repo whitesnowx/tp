@@ -189,7 +189,7 @@ public class CommandTestUtil {
         assertTrue(targetIndex.getZeroBased() < person.getFilteredMeetings().size());
 
         Meeting meeting = person.getFilteredMeetings().get(targetIndex.getZeroBased());
-        final String[] splitDescription = meeting.getDescription().toString().split("\\s+");
+        final String[] splitDescription = meeting.getDescription().description.split("\\s+");
         person.updateFilteredMeetingList(new MeetingDescriptionContainsKeywordPredicate(
                 Arrays.asList(splitDescription[0])));
 

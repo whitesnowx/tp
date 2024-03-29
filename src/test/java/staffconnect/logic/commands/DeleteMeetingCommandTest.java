@@ -29,14 +29,8 @@ import staffconnect.model.person.Person;
  */
 public class DeleteMeetingCommandTest {
 
+
     private static final Model TEST_MODEL = new ModelManager(getTypicalStaffBook(), new UserPrefs());
-
-    private Person copyPersonWithNewMeetingManager(Person pickPerson) {
-        return new Person(pickPerson.getName(), pickPerson.getPhone(), pickPerson.getEmail(),
-                pickPerson.getModule(), pickPerson.getFaculty(), pickPerson.getVenue(),
-                pickPerson.getTags(), pickPerson.getAvailabilities());
-
-    }
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -56,6 +50,13 @@ public class DeleteMeetingCommandTest {
         ModelManager expectedModel = new ModelManager(getTypicalStaffBook(), new UserPrefs());
 
         assertCommandSuccess(deleteMeetingCommand, TEST_MODEL, expectedMessage, expectedModel);
+    }
+
+    private Person copyPersonWithNewMeetingManager(Person pickPerson) {
+        return new Person(pickPerson.getName(), pickPerson.getPhone(), pickPerson.getEmail(),
+                pickPerson.getModule(), pickPerson.getFaculty(), pickPerson.getVenue(),
+                pickPerson.getTags(), pickPerson.getAvailabilities());
+
     }
 
     @Test

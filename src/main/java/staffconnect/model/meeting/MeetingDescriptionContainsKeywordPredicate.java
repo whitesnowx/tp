@@ -19,7 +19,7 @@ public class MeetingDescriptionContainsKeywordPredicate implements Predicate<Mee
     @Override
     public boolean test(Meeting meeting) {
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(meeting.getDescription().toString(), keyword));
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(meeting.getDescription().description, keyword));
     }
 
     @Override

@@ -22,7 +22,7 @@ import staffconnect.model.person.PersonUtil;
  */
 public class AddMeetingCommand extends Command {
 
-    public static final String COMMAND_WORD = "meeting";
+    public static final String COMMAND_WORD = "meeting-add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a meeting to the person identified "
             + "by the index number used in the displayed person list. \n"
