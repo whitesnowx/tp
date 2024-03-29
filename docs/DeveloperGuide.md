@@ -155,6 +155,46 @@ Classes used by multiple components are in the `staffconnect.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Edit feature
+
+#### How the feature is implemented
+
+The sequence diagram below shows how the edit command `edit 1 p/ 12345678` goes through the `Logic` component.
+
+![Interactions Inside the Logic Component for the `edit 1 p/ 12345678` Command](images/EditSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `EditCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+</div>
+
+1. When the user issues the command `edit 1 p/ 12345678`, `Logic` is called upon to execute the command, it is passed to the `StaffConnectParser` object which creates a `EditCommandParser` to parse the arguments for the edit command.
+2. The parsing of `EditCommandParser` results in a new `EditCommand` initialized by an index `int` and a `EditPersonDescriptor`. The datails will be explained later.
+3. When the `EditCommand` is executed, it creates a new `Person` object according to the `EditPersonDescriptor` passed to it, and replaces the old `Person` object with the new one.
+4. The command communicates with the `Model` when it is executed. More specifically, it calls the `updateFilteredPersonList()` method using a `Predicate` object which simply evaluates to true for all `Person`. The intension is that no `Person` will be filtered out in an edit command.
+5.  The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`, to show in the `UI` component the success message that the `Person` at the given index is updated with the new information.
+
+The below sequence diagram goes into more detail on how the command is parsed in `EditCommandParser`.
+
+![Interactions Inside EditCommandParser for the `parse("1 p/ 12345678")` Command](images/EditSequenceDiagram-Parser.png)
+
+1. The string is checked to see if if contains tags. If it does, call the corresponding setter method in `EditPersonDescriptor` object. For tags and availabiliies, all values will be updated.
+2. If no field is updated, throw a `ParseException` to indicate that no field is updated.
+3. The `EditPersonDescriptor` is used to construct an `EditCommand` object, where `EditCommand` object calls `createEditedPerson()` method using the `EditPersonDescriptor` as an argument.
+
+The below activity diagram illustrates the process when a user executes a edit command.
+
+<img src="images/EditActivityDiagram.png" width="250" />
+
+#### Why edit is implemented this way
+
+The command calls `SetPerson()` method in `Model` and then refresh the list of `Person` objects.
+Below are some explanations for some implementation details.
+
+Check if `editPersonDescriptor.isAnyFieldEdited()`:
+This is to make sure at least one field is modified, or the command will not have any impact on the `Model`.
+
+Call `model.updateFilteredPersonList())` with a `Predicate` that always evaluates to true:
+This is to refresh the list of `Person` in `Model`.
+
 ### Filter feature
 
 #### How the filter is implemented
@@ -168,7 +208,7 @@ The sequence diagram below shows how the filter command `filter f/Computing` goe
 
 1. When the user issues the command `filter f/Computing`, `Logic` is called upon to execute the command, it is passed to the `StaffConnectParser` object which creates a `FilterCommandParser` to parse the arguments for the filter command.
 2. This results in a `FilterCommand` object, which then creates a `Predicate` object.
-3. The command communicates with the `Model` when it is executed. More specifically, it calls the `updateFilteredPersonList()` method using the `Predicate` object created earlier as the argument. Note that although it is shown as a single step in the diagram (for simplicity), in the code it takes several 
+3. The command communicates with the `Model` when it is executed. More specifically, it calls the `updateFilteredPersonList()` method using the `Predicate` object created earlier as the argument. Note that although it is shown as a single step in the diagram (for simplicity), in the code it takes several.
 4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`, to show in the `UI` component the number of persons listed with the `Faculty` value of "Computing".
 
 The below sequence diagram goes into more detail on how the command is parsed in `FilterCommandParser`.
@@ -180,7 +220,7 @@ These `Predicate` objects are then used to construct a `FilterCommand` object, w
 
 The below activity diagram illustrates the process when a user executes a filter command.
 
-<img src="images/FilterActivityDiagram.png" width="250" />
+<img src="images/FilterActivityDiagram.png" width="450" />
 
 #### Why filter is implemented this way
 
@@ -195,6 +235,90 @@ This is to prevent `FilterCommand` from taking on more responsibilities (Separat
 
 `FilterCommand` having `setPersonPredicate()` method:
 This is so that `FilterCommand` has the required argument of type `Predicate<Person>` to be used in the `updateFilteredPersonList()` method. Since the `Predicate<Person>` object is created by chaining the multiple predicates, no parsing is involved to create this `Predicate`.
+
+### Sort Feature
+
+##### Implementation
+
+The sort mechanism is facilitated by JavaFX's `SortedList` within ModelManager, `SortCommand` and `SortCommandParser`. `SortCommandParser` extends the types of command parsers in StaffBookParser, and returns a `SortCommand` to be executed by the LogicManager. This execution also updates the `SortedList` in  Model via ModelManager. Additionally, it implements the following operations:
+
+* `SortCommandParser#parse()`  — Parses user input to identify the attribute to be sorted
+* `ModelManager#updateSortedPersonList()` — Update the comparator used by SortedList resulting in the data being sorted accordingly
+
+Given below is an example usage scenario and how the sort mechanism behaves at each step.
+
+Step 1. The user enters **“sort n/”** to sort the list by their name.
+
+Step 2. The `LogicManager` takes this command text and calls `StaffBookParser.parseCommand("sort n/")` and identifies the sort command. It then creates a new instance of `SortCommandParser` to `parse(“n/”)` on the attribute.
+
+Step 3. `SortCommandParser.parse(“n/”)` then constructs a SortCommand with the appropriate attribute comparator, `NameComparator`.
+
+Step 4. The `SortCommand` is returned to Logic manager which calls on its `execute()` to return a `CommandResult()`. During its execution, `ModelManager.updateSortedPersonList(NameComparator)` is invoked which updates the model to show the list of persons being sorted by name.
+
+The sequence diagram for executing a **"sort n/"** is shown below:
+
+<img src="images/SortSequenceDiagram.png" width="850" />
+
+
+The following activity diagram summarizes what happens when a user executes a new sort command:
+
+<img src="images/SortActivityDiagram.png" width="450" />
+
+#### Design considerations:
+**Aspect: Determining order of sorting of an attribute:**
+
+* **Current Design:** Use a configured comparator for each attribute in ascending order.
+    * Pros: Controlled and more simple for user.
+    * Cons: Less flexibility and unable to do more advance sorting such as multiple attributes. We must implement a comparator for each attribute used for sorting.
+
+* **Alternative 1:** Get order of sorting from user, prompting for an input in the form of toCompare.
+    * Pros: More functionality and more suited to the user's needs.
+    * Cons: Harder to implement and guide user to use, may have more leeway for error. User unlikely to use this advancement.
+
+**Aspect: Number of Attribute:**
+
+* **Current Design:** Only 1 attribute per sort.
+    * Pros: Easy to implement, controlled and less likely to be used incorrectly. This increase ease of use for users.
+    * Cons: Limited sorting and lesser functionality.
+
+* **Alternative 1:** 1 or more attribute per sort.
+    * Pros: More functionality, more advanced view of contacts.
+    * Cons: Harder to implement, order of prefix affects priority of attribute and have to specify to user.
+
+### Find feature
+
+#### How the feature is implemented
+
+The sequence diagram below explains how the find command `find Alex` goes through the `Logic` component.
+
+![Interactions Inside the Logic Component for the `find Alex` Command](images/FindSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FindCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+</div>
+
+1. When user types in `find Alex`, it is passed to `StaffConnectParser`.
+2. `StaffconnectParser` then creates a `FindCommandParser` that will parse `Alex` to create a `FindCommand` which utilizes a predicate judge whether `Alex` is contained in the person's name. 
+3. In `FindCommand`, `Model` executes `updateFilteredPersonList()` method using the predicate mentioned above.
+4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`, to show in the `UI` component the number of persons listed with `Alex` in the name.
+
+The below sequence diagram goes into more detail on how the command is parsed in `EditCommandParser`.
+
+![Interactions Inside FindCommandParser for the `parse("f/Computing")` Command](images/FindSequenceDiagram-Parser.png)
+
+1. Within `FindCommandParser`, the command string is first trimmed and checked whether it is empty, then splitted into an string array by space characters.
+2. `FindCommandParser` then constructs a predicate to test whether the names of `Person` contain any one of the strings in the array mentioned above. This predicate is passed as an argument for the constructor of `FindCommand`.
+
+The below activity diagram illustrates the process when a user executes a find command.
+
+<img src="images/FindActivityDiagram.png" width="250" />
+
+#### Why find is implemented this way
+
+The main operation for the find feature is the `updateFilteredPersonList(Predicate<Person> predicate)` method in the `Model` component.
+Below are some explanations for the special considerations in the implementation.
+
+`FindCommmandParser` parsing the `Predicate` objects:
+This is to prevent `FindCommand` from taking on more responsibilities (Separation of Concerns).
 
 ### \[Proposed\] Undo/redo feature
 
@@ -284,16 +408,17 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+
 ### Meeting
 
 Meeting is feature that allows the user to keep track of any events they may have with the particular contact. It contains the description of the meeting event with the date and time it would occur.
 
 #### Implementation
 
-Meeting contains two attributes ```MeetingDescription``` and ```MeetingDateTime``` class. ```MeetingDescription``` 
+Meeting contains two attributes ```MeetingDescription``` and ```MeetingDateTime``` class. ```MeetingDescription```
 is used to handle any valid description of the meeting with only alphanumeric values, while the ```MeetingDateTime```
 is used to handle any valid date time values. Each of this meeting are stored in a list data class ```MeetingList``` that
-contains each of the meetings related to each other stored in an ```ObservableList```. The ``` MeetingManager ``` is 
+contains each of the meetings related to each other stored in an ```ObservableList```. The ``` MeetingManager ``` is
 used to manage any operations that require viewing or sorting of meetings from the ```MeetingList``` class.
 
 #### Design considerations:
@@ -308,6 +433,28 @@ used to manage any operations that require viewing or sorting of meetings from t
     * Pros: Easier implementation.
     * Cons: There is an efficiency gap as each element has to be placed into a list before it can be shown to the UI ListView.
 
+### Mark/unmark feature
+
+The feature enables us to mark/unmark a particular contact using an index as favourite.
+
+#### Implementation
+
+The Mark/Unmark feature is implemented via the `MarkCommand` and `UnmarkCommand`, which is supported by the `MarkCommandParser` and `UnmarkCommandParser` respectively.
+The `MarkCommandParser` and `UnmarkCommandParser` implements the `Parser` interface.
+
+1. `LogicManager` receives the user input which is parsed by the `StaffConnectParser`.
+2. After splitting the user input into `commandWord` and `arguments` based on the regex pattern of the user input, the `StaffConnectParser` invokes the `MarkCommandParser`/`UnmarkCommandParser` based on the `commandWord`, calling the method `parse` with `arguments` as the method arguments
+3. `MarkCommandParser`/`UnmarkCommandParser` takes in the `args` string and parse it into with the static `ParserUtil#parseIndex(args)` function. If the `INDEX` format is invalid, a `ParseException` will be thrown.
+4. `MarkCommandParser`/`UnmarkCommandParser` then creates the `MarkCommand`/`UnmarkCommand` and returns it. 
+5. The `LogicManager` executes the `MarkCommand`/`UnmarkCommand`, which creates a `Person` with the `Favourite` attribute set as `true`/`false` respectively and updates the model with this new `Person`.
+
+The following sequence diagram shows how the `mark` command works:
+
+![Mark Command Sequence Diagram](images/MarkSequenceDiagram.png)
+
+Similarly, how the `unmark` command works is shown below:
+
+![Unmark Command Sequence Diagram](images/UnmarkSequenceDiagram.png)
 
 --------------------------------------------------------------------------------------------------------------------
 

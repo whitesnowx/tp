@@ -1,0 +1,23 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User executes edit command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([index is valid])
+    if () then ([any field is changed])
+        :Construct a new Person object;
+        :Replace the original Person with the new one;
+        :Refresh the list of Person;
+    else ([else])
+        :Throw ParseException that no field is changed;
+    endif
+else ([else])
+    :Throw CommandException that index is is invalid;
+endif
+stop
+@enduml
