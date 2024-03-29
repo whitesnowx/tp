@@ -30,7 +30,7 @@ public class SortCommand extends Command {
             + "[" + PREFIX_MODULE + "] "
             + "[" + PREFIX_FACULTY + "] "
             + "[" + PREFIX_VENUE + "] "
-            + "Example: " + COMMAND_WORD + " n";
+            + "Example: " + COMMAND_WORD + " " + PREFIX_NAME;
 
     private final Comparator<Person> comparator;
 

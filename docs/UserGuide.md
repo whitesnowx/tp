@@ -103,7 +103,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [m/MODULE] [f/FACULTY] [v/VENUE
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+  specifying any tags after it.
 * When editing availabilities, the existing availabilites of the person will be removed i.e adding of availabilities is not cumulative.
 * You can remove all the person’s availabilities by typing `a/` without
   specifying any availabilities after it.
@@ -114,18 +114,19 @@ Examples:
 
 ### Filtering persons by attribute: `filter`
 
-Filters persons whose module, faculty or tags match the given filtering criteria.
+Filters persons whose module, faculty, tags or availabilities match the given filtering criteria.
 
-format: `filter [m/MODULE] [f/FACULTY] [t/TAG]…`
+format: `filter [m/MODULE] [f/FACULTY] [t/TAG]… [a/AVAILABILITY]…`
 
 * At least one of the optional fields must be provided.
-* Only module, faculty and tags can be filtered.
-* The filter is case-sensitive for modules. e.g `hsi1000` is an invalid module value
+* Only module, faculty, tags and availabilities can be filtered.
 * The filter only accepts a single module to filter from.
-* The filter only accepts valid values for faculty. e.g `school of business` is an invalid faculty value.
 * The filter only accepts a single faculty to filter from.
-* The filter is case-insensitive for tags. e.g `tUTOR` will match `tutor`
+* The filter only accepts valid values for faculty. e.g `faculty of business` is an invalid faculty value.
 * The filter accepts single or multiple tags to filter from.
+* The filter accepts single or multiple availabilities to filter from.
+* The filter only accepts whole values for the available filtering criteria. e.g `mon` does not match `mon 12:00 13:00`, `cs` does not match `CS2030S`
+* The filter is case-insensitive for the available filtering criteria. e.g `tUTOR` will match `tutor`, `cs2100` will match `CS2100`
 * Persons matching all fields will be returned (i.e. `AND` search).
   e.g. `filter m/CS2030S f/Computing` will return `Charlotte Oliveiro`
 
@@ -200,6 +201,34 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the contacts.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Marking a person as favourite: `mark`
+
+Marks the specified person from the contacts as favourite.
+
+Format: `mark INDEX`
+
+* Marks the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `mark 2` marks the 2nd person in the contacts.
+* `find Betsy` followed by `mark 1` marks the 1st person in the results of the `find` command.
+
+### Unmarking a person as favourite: `unmark`
+
+Unmarks the specified person from the contacts as favourite.
+
+Format: `unmark INDEX`
+
+* Unmarks the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `unmark 2` unmarks the 2nd person in the contacts.
+* `find Betsy` followed by `unmark 1` unmarks the 1st person in the results of the `find` command.
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the contacts.
@@ -265,9 +294,11 @@ Action | Format, Examples
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [m/MODULE] [f/FACULTY] [v/VENUE] [t/TAG]…​ [a/AVAILABILITY]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Filter** | `filter [m/MODULE] [f/FACULTY] [t/TAG]…`<br> e.g., `filter m/CS2100 t/friends`
+**Filter** | `filter [m/MODULE] [f/FACULTY] [t/TAG]… [a/AVAILABILITY]…`<br> e.g., `filter m/CS2100 t/friends`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Sort** | `sort [ATTRIBUTE]`<br> e.g., `sort p/`
 **Add Meeting** | `meeting INDEX [d/DESCRIPTION] [s/DATETIME]`<br> e.g., `meeting 1 d/ Meet for finals preparation s/ 12/04/2024 18:00`
+**Mark** | `mark INDEX`<br> e.g., `mark 3`
+**Unmark** | `unmark INDEX`<br> e.g., `unmark 3`
 **List** | `list`
 **Help** | `help`
