@@ -41,9 +41,9 @@ public class AddCommand extends Command {
             + PREFIX_FACULTY + "Computing "
             + PREFIX_VENUE + "311, Clementi Ave 2, #02-25 "
             + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney"
-            + PREFIX_AVAILABILITY + "mon"
-            + PREFIX_AVAILABILITY + "thur";
+            + PREFIX_TAG + "owesMoney "
+            + PREFIX_AVAILABILITY + "mon 12:00 14:00 "
+            + PREFIX_AVAILABILITY + "thur 12:00 14:00";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the staff book";
