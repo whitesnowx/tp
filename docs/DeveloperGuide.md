@@ -220,7 +220,7 @@ These `Predicate` objects are then used to construct a `FilterCommand` object, w
 
 The below activity diagram illustrates the process when a user executes a filter command.
 
-<img src="images/FilterActivityDiagram.png" width="250" />
+<img src="images/FilterActivityDiagram.png" width="450" />
 
 #### Why filter is implemented this way
 
@@ -236,6 +236,89 @@ This is to prevent `FilterCommand` from taking on more responsibilities (Separat
 `FilterCommand` having `setPersonPredicate()` method:
 This is so that `FilterCommand` has the required argument of type `Predicate<Person>` to be used in the `updateFilteredPersonList()` method. Since the `Predicate<Person>` object is created by chaining the multiple predicates, no parsing is involved to create this `Predicate`.
 
+### Sort Feature
+
+##### Implementation
+
+The sort mechanism is facilitated by JavaFX's `SortedList` within ModelManager, `SortCommand` and `SortCommandParser`. `SortCommandParser` extends the types of command parsers in StaffBookParser, and returns a `SortCommand` to be executed by the LogicManager. This execution also updates the `SortedList` in  Model via ModelManager. Additionally, it implements the following operations:
+
+* `SortCommandParser#parse()`  — Parses user input to identify the attribute to be sorted
+* `ModelManager#updateSortedPersonList()` — Update the comparator used by SortedList resulting in the data being sorted accordingly
+
+Given below is an example usage scenario and how the sort mechanism behaves at each step.
+
+Step 1. The user enters **“sort n/”** to sort the list by their name.
+
+Step 2. The `LogicManager` takes this command text and calls `StaffBookParser.parseCommand("sort n/")` and identifies the sort command. It then creates a new instance of `SortCommandParser` to `parse(“n/”)` on the attribute.
+
+Step 3. `SortCommandParser.parse(“n/”)` then constructs a SortCommand with the appropriate attribute comparator, `NameComparator`.
+
+Step 4. The `SortCommand` is returned to Logic manager which calls on its `execute()` to return a `CommandResult()`. During its execution, `ModelManager.updateSortedPersonList(NameComparator)` is invoked which updates the model to show the list of persons being sorted by name.
+
+The sequence diagram for executing a **"sort n/"** is shown below:
+
+<img src="images/SortSequenceDiagram.png" width="850" />
+
+
+The following activity diagram summarizes what happens when a user executes a new sort command:
+
+<img src="images/SortActivityDiagram.png" width="450" />
+
+#### Design considerations:
+**Aspect: Determining order of sorting of an attribute:**
+
+* **Current Design:** Use a configured comparator for each attribute in ascending order.
+    * Pros: Controlled and more simple for user.
+    * Cons: Less flexibility and unable to do more advance sorting such as multiple attributes. We must implement a comparator for each attribute used for sorting.
+
+* **Alternative 1:** Get order of sorting from user, prompting for an input in the form of toCompare.
+    * Pros: More functionality and more suited to the user's needs.
+    * Cons: Harder to implement and guide user to use, may have more leeway for error. User unlikely to use this advancement.
+
+**Aspect: Number of Attribute:**
+
+* **Current Design:** Only 1 attribute per sort.
+    * Pros: Easy to implement, controlled and less likely to be used incorrectly. This increase ease of use for users.
+    * Cons: Limited sorting and lesser functionality.
+
+* **Alternative 1:** 1 or more attribute per sort.
+    * Pros: More functionality, more advanced view of contacts.
+    * Cons: Harder to implement, order of prefix affects priority of attribute and have to specify to user.
+
+### Find feature
+
+#### How the feature is implemented
+
+The sequence diagram below explains how the find command `find Alex` goes through the `Logic` component.
+
+![Interactions Inside the Logic Component for the `find Alex` Command](images/FindSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FindCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+</div>
+
+1. When user types in `find Alex`, it is passed to `StaffConnectParser`.
+2. `StaffconnectParser` then creates a `FindCommandParser` that will parse `Alex` to create a `FindCommand` which utilizes a predicate judge whether `Alex` is contained in the person's name. 
+3. In `FindCommand`, `Model` executes `updateFilteredPersonList()` method using the predicate mentioned above.
+4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`, to show in the `UI` component the number of persons listed with `Alex` in the name.
+
+The below sequence diagram goes into more detail on how the command is parsed in `EditCommandParser`.
+
+![Interactions Inside FindCommandParser for the `parse("f/Computing")` Command](images/FindSequenceDiagram-Parser.png)
+
+1. Within `FindCommandParser`, the command string is first trimmed and checked whether it is empty, then splitted into an string array by space characters.
+2. `FindCommandParser` then constructs a predicate to test whether the names of `Person` contain any one of the strings in the array mentioned above. This predicate is passed as an argument for the constructor of `FindCommand`.
+
+The below activity diagram illustrates the process when a user executes a find command.
+
+<img src="images/FindActivityDiagram.png" width="250" />
+
+#### Why find is implemented this way
+
+The main operation for the find feature is the `updateFilteredPersonList(Predicate<Person> predicate)` method in the `Model` component.
+Below are some explanations for the special considerations in the implementation.
+
+`FindCommmandParser` parsing the `Predicate` objects:
+This is to prevent `FindCommand` from taking on more responsibilities (Separation of Concerns).
 
 ### \[Proposed\] Undo/redo feature
 
@@ -324,6 +407,7 @@ _{more aspects and alternatives to be added}_
 ### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
+
 
 ### Meeting
 
