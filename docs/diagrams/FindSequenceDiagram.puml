@@ -27,7 +27,7 @@ activate FindCommandParser
 FindCommandParser --> StaffConnectParser
 deactivate FindCommandParser
 
-StaffConnectParser -> FindCommandParser : parse("f/Computing")
+StaffConnectParser -> FindCommandParser : parse("Alex")
 activate FindCommandParser
 
 create FindCommand
