@@ -57,9 +57,27 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private ListView<Meeting> meetingListView;
 
+    /**
+     * Creates a {@code PersonCard} with an empty card that displays nothing.
+     */
+    public PersonCard() {
+        super(FXML);
+        this.person = null;
+        //set empty text
+        id.setText("");
+        name.setText("");
+        phone.setText("");
+        faculty.setText("");
+        venue.setText("");
+        module.setText("");
+        email.setText("");
+
+        meetingListView.setCellFactory(listView -> new MeetingsListViewCell());
+
+    }
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code PersonCard} with the given {@code Person} and index to display.
      */
     public PersonCard(Person person, int displayedIndex) {
         super(FXML);

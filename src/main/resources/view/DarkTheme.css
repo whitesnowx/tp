@@ -396,6 +396,21 @@
     -fx-effect: dropshadow(gaussian, rgba(62,84,158,0.8), 13, 0, 0, 0);
  }
 
+ #nameCard{
+     -fx-border-radius: 20 20 20 20;
+     -fx-background-radius: 20 20 20 20;
+     -fx-background-color: transparent;
+     -fx-border-width: 0;
+     -fx-background-insets: 0 0 0 0;
+     -fx-background-padding: 50 100 0 0;
+
+  }
+  #nameCard .label {
+      -fx-text-fill: white;
+      -fx-font-size: 20px;
+  }
+
+
  #meetingListView {
     -fx-background-color: transparent;
     -fx-padding: 7 0 0 0;

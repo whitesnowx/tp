@@ -3,6 +3,7 @@ package staffconnect.logic;
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -69,6 +70,13 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         return model.getFilteredPersonList();
+    }
+
+    @Override
+    public Optional<Person> getFirstPersonIfExist() {
+
+        return model.getFilteredPersonList().isEmpty()
+                ? Optional.empty() : Optional.of(model.getFilteredPersonList().get(0));
     }
 
     @Override
