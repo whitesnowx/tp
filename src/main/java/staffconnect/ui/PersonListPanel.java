@@ -23,10 +23,27 @@ public class PersonListPanel extends UiPart<Region> {
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
-    public PersonListPanel(ObservableList<Person> personList) {
+    public PersonListPanel(ObservableList<Person> personList, PersonDisplay personDisplay) {
         super(FXML);
+
         personListView.setItems(personList);
         personListView.setCellFactory(listView -> new NameListViewCell());
+
+        personListView.setOnMouseClicked(event -> {
+            personDisplay.changePersonCard(new PersonCard(personListView.getSelectionModel().getSelectedItem()));
+        });
+    }
+
+    /**
+     * Represents a function that can change PersonCard.
+     */
+    @FunctionalInterface
+    public interface PersonDisplay {
+
+        /**
+         * Executes the changes to the person
+         */
+        void changePersonCard(PersonCard toChange);
     }
 
     /**
@@ -45,5 +62,6 @@ public class PersonListPanel extends UiPart<Region> {
             }
         }
     }
+
 
 }

@@ -5,6 +5,9 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import staffconnect.model.person.Person;
 
+/**
+ * A UI component that displays the name only of a {@code Person}.
+ */
 public class NameCard extends UiPart<Region> {
 
     private static final String FXML = "NameCard.fxml";

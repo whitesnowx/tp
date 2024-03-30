@@ -27,25 +27,11 @@ public class StatusBarFooter extends UiPart<Region> {
     @FXML
     private Label saveLocationStatus;
 
-    @FXML
-    private void handleExit() {
-        parentController.handleExit();
-    }
-
-    @FXML
-    private void handleHelp() {
-        parentController.handleHelp();
-    }
-
-
-    private void setAccelerators() {
-        setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
-    }
-
     /**
      * Creates a {@code StatusBarFooter} with the given {@code Path}.
      */
     public StatusBarFooter(Path saveLocation) {
+
         super(FXML);
         saveLocationStatus.setText(Paths.get(".").resolve(saveLocation).toString());
 
@@ -80,6 +66,20 @@ public class StatusBarFooter extends UiPart<Region> {
                 event.consume();
             }
         });
+    }
+    private void setAccelerators() {
+        setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
+    }
+
+
+    @FXML
+    private void handleExit() {
+        parentController.handleExit();
+    }
+
+    @FXML
+    private void handleHelp() {
+        parentController.handleHelp();
     }
 
     //Inspired from: https://stackoverflow.com/questions/44807580/javafx-access-parent-controller-class-from-fxml-child

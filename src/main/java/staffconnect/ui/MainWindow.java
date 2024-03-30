@@ -2,12 +2,7 @@ package staffconnect.ui;
 
 import java.util.logging.Logger;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextInputControl;
-import javafx.scene.input.KeyCombination;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import staffconnect.commons.core.GuiSettings;
@@ -16,7 +11,6 @@ import staffconnect.logic.Logic;
 import staffconnect.logic.commands.CommandResult;
 import staffconnect.logic.commands.exceptions.CommandException;
 import staffconnect.logic.parser.exceptions.ParseException;
-import staffconnect.model.person.Person;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -67,7 +61,7 @@ public class MainWindow extends UiPart<Stage> {
         setWindowDefaultSize(logic.getGuiSettings());
 
         personOnDisplay = logic.getFirstPersonIfExist()
-                .map(person -> new PersonCard(person,1)).orElse(new PersonCard());
+                .map(PersonCard::new).orElse(new PersonCard());
 
         helpWindow = new HelpWindow();
     }
@@ -93,7 +87,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
 
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), this::changePersonCard);
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -111,13 +105,10 @@ public class MainWindow extends UiPart<Stage> {
 
     }
 
-    private void refreshPersonCardWithRoot() {
+    private void changePersonCard(PersonCard personToUpdate) {
 
-        personOnDisplay = logic.getFirstPersonIfExist()
-                .map(person -> new PersonCard(person,1)).orElse(new PersonCard());
-
+        personOnDisplay = personToUpdate;
         personCardPanelPlaceholder.getChildren().clear();
-
         personCardPanelPlaceholder.getChildren().add(personOnDisplay.getRoot());
 
     }
@@ -133,7 +124,7 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
-            refreshPersonCardWithRoot();
+            reloadPersonCardWithRoot();
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
@@ -149,6 +140,16 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
+    }
+
+    private void reloadPersonCardWithRoot() {
+
+        personOnDisplay = logic.getFirstPersonIfExist().map(PersonCard::new).orElse(new PersonCard());
+
+        personCardPanelPlaceholder.getChildren().clear();
+
+        personCardPanelPlaceholder.getChildren().add(personOnDisplay.getRoot());
+
     }
 
     /**
@@ -177,9 +178,5 @@ public class MainWindow extends UiPart<Stage> {
 
     void show() {
         primaryStage.show();
-    }
-
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
     }
 }
