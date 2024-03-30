@@ -96,8 +96,8 @@ public class MainWindow extends UiPart<Stage> {
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getStaffConnectFilePath());
-        statusBarFooter.setParentController(this);
+        StatusBarFooter statusBarFooter =
+                new StatusBarFooter(logic.getStaffConnectFilePath(), this::handleExit, this::handleHelp);
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         personCardPanelPlaceholder.getChildren().add(personOnDisplay.getRoot());
@@ -142,28 +142,6 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
-    private void reloadPersonCardWithRoot() {
-
-        personOnDisplay = logic.getFirstPersonIfExist().map(PersonCard::new).orElse(new PersonCard());
-
-        personCardPanelPlaceholder.getChildren().clear();
-
-        personCardPanelPlaceholder.getChildren().add(personOnDisplay.getRoot());
-
-    }
-
-    /**
-     * Opens the help window or focuses on it if it's already opened.
-     */
-    @FXML
-    public void handleHelp() {
-        if (!helpWindow.isShowing()) {
-            helpWindow.show();
-        } else {
-            helpWindow.focus();
-        }
-    }
-
     /**
      * Closes the application.
      */
@@ -174,6 +152,27 @@ public class MainWindow extends UiPart<Stage> {
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();
+    }
+
+    /**
+     * Opens the help window or focuses on it if it's already opened.
+     */
+    public void handleHelp() {
+        if (!helpWindow.isShowing()) {
+            helpWindow.show();
+        } else {
+            helpWindow.focus();
+        }
+    }
+
+    private void reloadPersonCardWithRoot() {
+
+        personOnDisplay = logic.getFirstPersonIfExist().map(PersonCard::new).orElse(new PersonCard());
+
+        personCardPanelPlaceholder.getChildren().clear();
+
+        personCardPanelPlaceholder.getChildren().add(personOnDisplay.getRoot());
+
     }
 
     void show() {

@@ -19,7 +19,10 @@ public class StatusBarFooter extends UiPart<Region> {
 
     private static final String FXML = "StatusBarFooter.fxml";
 
-    private MainWindow parentController;
+
+    private ExitExecutor exitExecutor;
+
+    private HelpExecutor helpExecutor;
 
     @FXML
     private MenuItem helpMenuItem;
@@ -30,16 +33,25 @@ public class StatusBarFooter extends UiPart<Region> {
     /**
      * Creates a {@code StatusBarFooter} with the given {@code Path}.
      */
-    public StatusBarFooter(Path saveLocation) {
+    public StatusBarFooter(Path saveLocation, ExitExecutor exitExecutor, HelpExecutor helpExecutor) {
 
         super(FXML);
+
+        this.exitExecutor = exitExecutor;
+        this.helpExecutor = helpExecutor;
+
         saveLocationStatus.setText(Paths.get(".").resolve(saveLocation).toString());
 
         setAccelerators();
     }
 
+    private void setAccelerators() {
+        setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
+    }
+
     /**
      * Sets the accelerator of a MenuItem.
+     *
      * @param keyCombination the KeyCombination value of the accelerator
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
@@ -67,24 +79,39 @@ public class StatusBarFooter extends UiPart<Region> {
             }
         });
     }
-    private void setAccelerators() {
-        setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
-    }
-
 
     @FXML
     private void handleExit() {
-        parentController.handleExit();
+        exitExecutor.handleExit();
     }
 
     @FXML
     private void handleHelp() {
-        parentController.handleHelp();
+        helpExecutor.handleHelp();
     }
 
-    //Inspired from: https://stackoverflow.com/questions/44807580/javafx-access-parent-controller-class-from-fxml-child
-    public void setParentController(MainWindow parentController) {
-        this.parentController = parentController;
+    /**
+     * Represents a function that closes the application.
+     */
+    @FunctionalInterface
+    public interface ExitExecutor {
+
+        /**
+         * Exits the application.
+         */
+        void handleExit();
+    }
+
+    /**
+     * Represents a function that shows the help window.
+     */
+    @FunctionalInterface
+    public interface HelpExecutor {
+
+        /**
+         * Shows the help window.
+         */
+        void handleHelp();
     }
 
 }
