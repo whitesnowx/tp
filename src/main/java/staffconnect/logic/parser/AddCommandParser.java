@@ -18,6 +18,7 @@ import staffconnect.logic.parser.exceptions.ParseException;
 import staffconnect.model.availability.Availability;
 import staffconnect.model.person.Email;
 import staffconnect.model.person.Faculty;
+import staffconnect.model.person.Favourite;
 import staffconnect.model.person.Module;
 import staffconnect.model.person.Name;
 import staffconnect.model.person.Person;
@@ -55,8 +56,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Set<Availability> availabilityList =
                 ParserUtil.parseAvailabilities(argMultimap.getAllValues(PREFIX_AVAILABILITY));
+        Favourite favourite = new Favourite(false);
 
-        Person person = new Person(name, phone, email, module, faculty, venue, tagList, availabilityList);
+        Person person = new Person(name, phone, email, module, faculty, venue, tagList, availabilityList, favourite);
 
         return new AddCommand(person);
     }

@@ -27,6 +27,7 @@ import staffconnect.model.Model;
 import staffconnect.model.availability.Availability;
 import staffconnect.model.person.Email;
 import staffconnect.model.person.Faculty;
+import staffconnect.model.person.Favourite;
 import staffconnect.model.person.Module;
 import staffconnect.model.person.Name;
 import staffconnect.model.person.Person;
@@ -113,9 +114,10 @@ public class EditCommand extends Command {
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Set<Availability> updatedAvailabilities = editPersonDescriptor.getAvailabilities()
                 .orElse(personToEdit.getAvailabilities());
+        Favourite favourite = personToEdit.getFavourite();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedModule,
-                updatedFaculty, updatedVenue, updatedTags, updatedAvailabilities);
+                updatedFaculty, updatedVenue, updatedTags, updatedAvailabilities, favourite);
     }
 
     @Override

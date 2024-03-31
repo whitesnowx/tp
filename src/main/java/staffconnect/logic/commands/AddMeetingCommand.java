@@ -18,6 +18,7 @@ import staffconnect.model.availability.Availability;
 import staffconnect.model.meeting.Meeting;
 import staffconnect.model.person.Email;
 import staffconnect.model.person.Faculty;
+import staffconnect.model.person.Favourite;
 import staffconnect.model.person.Module;
 import staffconnect.model.person.Name;
 import staffconnect.model.person.Person;
@@ -33,11 +34,14 @@ public class AddMeetingCommand extends Command {
     public static final String COMMAND_WORD = "meeting";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a meeting to the person identified "
-        + "by the index number used in the displayed person list. "
-        + "Existing values will be overwritten by the input values.\n"
-        + "Parameters: INDEX (must be a positive integer) " + PREFIX_DESCRIPTION + "DESCRIPTION " + PREFIX_STARTDATE
-        + "DATETIME[dd/MM/yyyy HH:mm]" + "Example: " + COMMAND_WORD + " 1 " + PREFIX_DESCRIPTION + "Meet for finals "
-        + PREFIX_STARTDATE + "12/04/2023 18:00";
+            + "by the index number used in the displayed person list. "
+            + "Existing values will be overwritten by the input values.\n"
+            + "Parameters: INDEX (must be a positive integer) "
+            + PREFIX_DESCRIPTION + "DESCRIPTION "
+            + PREFIX_STARTDATE + "DATETIME[dd/MM/yyyy HH:mm]"
+            + "Example: " + COMMAND_WORD + " 1 "
+            + PREFIX_DESCRIPTION + "Meet for finals "
+            + PREFIX_STARTDATE + "12/04/2023 18:00";
 
     public static final String MESSAGE_SUCCESS = "New meeting added: %1$s";
     public static final String MESSAGE_DUPLICATE_MEETING = "This meeting is already planned for this person!";
@@ -53,7 +57,6 @@ public class AddMeetingCommand extends Command {
         requireNonNull(meeting);
         this.index = index;
         toAdd = meeting;
-
     }
 
     @Override
@@ -69,7 +72,6 @@ public class AddMeetingCommand extends Command {
         if (personToEdit.hasDuplicateMeeting(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_MEETING);
         }
-
 
         Person editedPerson = addMeetingToPerson(personToEdit, toAdd);
         model.setPerson(personToEdit, editedPerson);
@@ -92,10 +94,10 @@ public class AddMeetingCommand extends Command {
         Set<Tag> currentTags = personToEdit.getTags();
         Set<Availability> currentAvailability = personToEdit.getAvailabilities();
         Set<Meeting> currentMeetings = new HashSet<>(personToEdit.getMeetings()); //to reduce coupling with Person
-        Person editedPerson =
-            new Person(currentName, currentPhone, currentEmail, currentModule, currentFaculty, currentVenue,
-                       currentTags,
-                       currentAvailability);
+        Favourite currentFavourite = personToEdit.getFavourite();
+
+        Person editedPerson = new Person(currentName, currentPhone, currentEmail, currentModule,
+                currentFaculty, currentVenue, currentTags, currentAvailability, currentFavourite);
         currentMeetings.add(meeting);
         editedPerson.setMeetings(currentMeetings);
         return editedPerson;
