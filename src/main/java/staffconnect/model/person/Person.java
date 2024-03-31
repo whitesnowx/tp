@@ -30,13 +30,14 @@ public class Person {
     private final Set<Tag> tags = new HashSet<>();
     private final Set<Availability> availabilities = new HashSet<>();
     private final Set<Meeting> meetings = new HashSet<>();
+    private final Favourite favourite;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Module module, Faculty faculty, Venue venue,
-            Set<Tag> tags, Set<Availability> availabilities) {
-        requireAllNonNull(name, phone, email, module, faculty, venue, tags, availabilities);
+            Set<Tag> tags, Set<Availability> availabilities, Favourite favourite) {
+        requireAllNonNull(name, phone, email, module, faculty, venue, tags, availabilities, favourite);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -45,6 +46,7 @@ public class Person {
         this.venue = venue;
         this.tags.addAll(tags);
         this.availabilities.addAll(availabilities);
+        this.favourite = favourite;
     }
     public Name getName() {
         return name;
@@ -78,6 +80,14 @@ public class Person {
     }
 
     /**
+     * Returns an immutable availability set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Availability> getAvailabilities() {
+        return Collections.unmodifiableSet(availabilities);
+    }
+
+    /**
      * Returns an immutable meeting set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
@@ -85,13 +95,8 @@ public class Person {
         return Collections.unmodifiableSet(meetings);
     }
 
-
-    /*
-     * Returns an immutable availability set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-    public Set<Availability> getAvailabilities() {
-        return Collections.unmodifiableSet(availabilities);
+    public Favourite getFavourite() {
+        return favourite;
     }
 
     public void setMeetings(Set<Meeting> toAdd) {
@@ -142,13 +147,14 @@ public class Person {
                 && faculty.equals(otherPerson.faculty)
                 && venue.equals(otherPerson.venue)
                 && tags.equals(otherPerson.tags)
-                && availabilities.equals(otherPerson.availabilities);
+                && availabilities.equals(otherPerson.availabilities)
+                && favourite.equals(otherPerson.favourite);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, module, faculty, venue, tags, availabilities);
+        return Objects.hash(name, phone, email, module, faculty, venue, tags, availabilities, favourite);
     }
 
     @Override
@@ -163,6 +169,7 @@ public class Person {
                 .add("tags", tags)
                 .add("availabilities", availabilities)
                 .add("meetings", meetings)
+                .add("favourite", favourite)
                 .toString();
     }
 

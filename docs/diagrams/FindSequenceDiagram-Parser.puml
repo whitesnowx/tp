@@ -1,0 +1,30 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+skinparam ParticipantPadding 0
+
+Participant ":FindCommandParser" as FindCommandParser LOGIC_COLOR
+Participant ":FindCommand" as FindCommand LOGIC_COLOR
+Participant "p:NameContainsKeywordsPredicate" as p LOGIC_COLOR
+
+
+[-> FindCommandParser : parse("Alex")
+create FindCommandParser
+activate FindCommandParser
+
+create p
+FindCommandParser -> p: new("Alex")
+activate p
+p --> FindCommandParser
+deactivate p
+
+create FindCommand
+FindCommandParser -> FindCommand: new(p)
+activate FindCommand
+
+FindCommand --> FindCommandParser
+deactivate FindCommand
+
+[<-- FindCommandParser
+deactivate FindCommandParser
+@enduml

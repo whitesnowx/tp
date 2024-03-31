@@ -3,7 +3,6 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
 <?import javafx.scene.text.Text?>
 
 <SplitPane orientation="VERTICAL" dividerPositions="0.4" fx:id="splitDisplay" xmlns="http://javafx.com/javafx/17.0.2-ea"
@@ -27,4 +26,3 @@
         <ListView id="meetingListView" fx:id="meetingListView" VBox.vgrow="ALWAYS"/>
     </StackPane>
 </SplitPane>
-

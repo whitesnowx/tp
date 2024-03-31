@@ -56,10 +56,8 @@ public class PersonCard extends UiPart<Region> {
     private FlowPane tags;
     @FXML
     private FlowPane availabilities;
-
     @FXML
     private ListView<Meeting> meetingListView;
-
     @FXML
     private ScrollPane scrollPane;
 
@@ -102,6 +100,7 @@ public class PersonCard extends UiPart<Region> {
         venue.setText("Venue:  " + person.getVenue().value);
         module.setText("Module:  " + person.getModule().value);
         email.setText("Email:  " + person.getEmail().value);
+
 
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))

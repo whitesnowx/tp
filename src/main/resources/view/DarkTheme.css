@@ -463,7 +463,6 @@
 
   }
 
-
  #meetingListView {
     -fx-background-color: transparent;
     -fx-padding: 7 0 0 0;
@@ -513,6 +512,3 @@
  .scroll-pane {
     -fx-background-color: transparent;
  }
-
-
-

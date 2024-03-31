@@ -16,6 +16,9 @@ public class NameCard extends UiPart<Region> {
     @FXML
     private Label name;
 
+    @FXML
+    private Label favourite;
+
     /**
      * Creates a {@code NameCard} with the given {@code Person} and index to display.
      */
@@ -23,6 +26,7 @@ public class NameCard extends UiPart<Region> {
         super(FXML);
         id.setText(index + ".  ");
         name.setText(person.getName().fullName);
+        favourite.setText(person.getFavourite().toDisplayString() + " ");
     }
 
 }
