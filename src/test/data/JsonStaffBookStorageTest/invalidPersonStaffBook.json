@@ -5,6 +5,7 @@
     "email": "hans@example.com",
     "module": "CS1101S",
     "faculty": "Computing",
-    "venue": "4th street"
+    "venue": "4th street",
+    "favourite" : "Not favourite"
   } ]
 }

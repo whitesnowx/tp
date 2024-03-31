@@ -19,7 +19,9 @@ import staffconnect.logic.commands.FilterCommand;
 import staffconnect.logic.commands.FindCommand;
 import staffconnect.logic.commands.HelpCommand;
 import staffconnect.logic.commands.ListCommand;
+import staffconnect.logic.commands.MarkCommand;
 import staffconnect.logic.commands.SortCommand;
+import staffconnect.logic.commands.UnmarkCommand;
 import staffconnect.logic.parser.exceptions.ParseException;
 
 /**
@@ -54,7 +56,7 @@ public class StaffConnectParser {
         // Lower level log messages are used sparingly to minimize noise in the code.
         logger.fine("Command word: " + commandWord + "; Arguments: " + arguments);
 
-        switch (commandWord) {
+        switch (commandWord.toLowerCase()) {
 
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
@@ -88,6 +90,12 @@ public class StaffConnectParser {
 
         case AddMeetingCommand.COMMAND_WORD:
             return new AddMeetingCommandParser().parse(arguments);
+
+        case MarkCommand.COMMAND_WORD:
+            return new MarkCommandParser().parse(arguments);
+
+        case UnmarkCommand.COMMAND_WORD:
+            return new UnmarkCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

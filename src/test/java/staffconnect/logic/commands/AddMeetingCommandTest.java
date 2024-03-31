@@ -42,7 +42,7 @@ public class AddMeetingCommandTest {
         Person pickPerson = TEST_MODEL.getFilteredPersonList().get(0);
         Person validPerson = new Person(pickPerson.getName(), pickPerson.getPhone(), pickPerson.getEmail(),
                 pickPerson.getModule(), pickPerson.getFaculty(), pickPerson.getVenue(),
-                pickPerson.getTags(), pickPerson.getAvailabilities());
+                pickPerson.getTags(), pickPerson.getAvailabilities(), pickPerson.getFavourite());
         validPerson.setMeetings(new HashSet<>(List.of(VALID_MEETING)));
         return validPerson;
     }
