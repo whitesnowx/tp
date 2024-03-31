@@ -7,6 +7,7 @@ import static staffconnect.logic.commands.CommandTestUtil.assertCommandFailure;
 import static staffconnect.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static staffconnect.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static staffconnect.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static staffconnect.testutil.TypicalIndexes.INDEX_FOURTH_PERSON;
 import static staffconnect.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static staffconnect.testutil.TypicalPersons.getTypicalStaffBook;
 
@@ -30,22 +31,22 @@ public class MarkCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Person personToMark = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person personToMark = model.getSortedFilteredPersonList().get(INDEX_FOURTH_PERSON.getZeroBased());
         Person markedPerson = new PersonBuilder(personToMark).withFavourite(true).build();
-        MarkCommand markCommand = new MarkCommand(INDEX_FIRST_PERSON);
+        MarkCommand markCommand = new MarkCommand(INDEX_FOURTH_PERSON);
 
         String expectedMessage = String.format(MarkCommand.MESSAGE_MARK_PERSON_SUCCESS,
                 Messages.format(markedPerson));
 
         ModelManager expectedModel = new ModelManager(model.getStaffBook(), new UserPrefs());
-        expectedModel.setPerson(model.getFilteredPersonList().get(0), markedPerson);
+        expectedModel.setPerson(model.getSortedFilteredPersonList().get(3), markedPerson);
 
         assertCommandSuccess(markCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(model.getSortedFilteredPersonList().size() + 1);
         MarkCommand markCommand = new MarkCommand(outOfBoundIndex);
 
         assertCommandFailure(markCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -53,9 +54,9 @@ public class MarkCommandTest {
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showPersonAtIndex(model, INDEX_FOURTH_PERSON);
 
-        Person personToMark = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person personToMark = model.getSortedFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person markedPerson = new PersonBuilder(personToMark).withFavourite(true).build();
         MarkCommand markCommand = new MarkCommand(INDEX_FIRST_PERSON);
 
@@ -63,7 +64,7 @@ public class MarkCommandTest {
                 Messages.format(markedPerson));
 
         Model expectedModel = new ModelManager(new StaffBook(model.getStaffBook()), new UserPrefs());
-        expectedModel.setPerson(model.getFilteredPersonList().get(0), markedPerson);
+        expectedModel.setPerson(model.getSortedFilteredPersonList().get(0), markedPerson);
 
         assertCommandSuccess(markCommand, model, expectedMessage, expectedModel);
     }
@@ -83,7 +84,7 @@ public class MarkCommandTest {
 
     @Test
     public void execute_markMarkedPerson_throwsCommandException() {
-        MarkCommand markCommand = new MarkCommand(INDEX_SECOND_PERSON);
+        MarkCommand markCommand = new MarkCommand(INDEX_FIRST_PERSON);
 
         assertCommandFailure(markCommand, model, MarkCommand.MESSAGE_DUPLICATE_MARK);
     }
