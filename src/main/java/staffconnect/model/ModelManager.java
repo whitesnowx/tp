@@ -129,7 +129,7 @@ public class ModelManager implements Model {
      * {@code versionedStaffBook}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
+    public ObservableList<Person> getSortedFilteredPersonList() {
         return sortedFilteredPersons;
     }
 
