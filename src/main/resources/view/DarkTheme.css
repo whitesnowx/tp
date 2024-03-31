@@ -322,7 +322,7 @@
 }
 
 .scroll-bar {
-    -fx-background-color: panel-background-blue;
+    -fx-background-color: transparent;
     -fx-background-padding: 0 0 0 0;
 }
 
@@ -351,6 +351,10 @@
 
 .scroll-pane > .corner {
     -fx-background-color: background-blue;
+}
+
+.virtual-flow > .corner {
+    -fx-background-color: transparent;
 }
 
 #cardPane {
@@ -433,8 +437,11 @@
 
   }
   #nameCard .label {
+
+      -fx-font-family: "Segoe UI Semibold";
+      -fx-font-size: 23px;
       -fx-text-fill: accent-yellow;
-      -fx-font-size: 20px;
+
   }
 
 
@@ -448,12 +455,17 @@
      -fx-padding: 5 0 0 0;
  }
 
-
  .cell_meeting_label {
      -fx-font-family: "Segoe UI";
      -fx-font-size: 20px;
      -fx-text-fill: accent-blue;
  }
+
+ .cell_title_label {
+        -fx-font-family: "Segoe UI Semibold";
+        -fx-font-size: 20px;
+        -fx-text-fill: accent-blue;
+    }
 
  #personListView {
     -fx-border-color: transparent accent-yellow transparent transparent;

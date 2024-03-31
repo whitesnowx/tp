@@ -15,8 +15,8 @@
         <padding>
             <Insets top="5" right="5" bottom="5" left="15"/>
         </padding>
-        <Label fx:id="id" styleClass="cell_small_label" text="\$id"/>
-        <Label fx:id="name" styleClass="cell_small_label" text="\$name"/>
+        <Label fx:id="id" styleClass="cell_meeting_label" text="\$id"/>
+        <Label fx:id="name" styleClass="cell_name_label" text="\$name"/>
     </HBox>
 </GridPane>
 
