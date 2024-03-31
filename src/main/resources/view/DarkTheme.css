@@ -89,12 +89,12 @@
 
 .split-pane:horizontal .split-pane-divider {
     -fx-background-color: transparent;
-    -fx-border-color: transparent white transparent white;
+    -fx-border-color: transparent transparent transparent transparent;
     -fx-padding 0 0 0 0;
 }
 
 .split-pane {
-    /*-fx-border-radius: 1;*/
+    fx-border-radius: 10;
     /*-fx-border-width: 1;*/
     -fx-background-color: background-blue;
 }
@@ -103,16 +103,13 @@
     -fx-background-insets: 0;
     -fx-padding: 0;
     -fx-background-color: panel-background-blue;
+    -fx-background-radius: 10 5 5 10;
 }
 
 .list-cell {
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
     -fx-padding: 0 0 0 0;
-}
-
-.list-cell:empty {
-    -fx-background-color: transparent;
 }
 
 .list-cell:filled:even {
@@ -125,6 +122,7 @@
 
 .list-cell:filled:selected {
     -fx-background-color: accent-blue;
+    -fx-background-radius: 20 20 20 20;
 }
 
 .list-cell:filled:selected #cardPane {
@@ -352,9 +350,14 @@
     -fx-padding: 8 1 8 1;
 }
 
+.scroll-pane > .corner {
+    -fx-background-color: transparent;
+}
+
 #cardPane {
     -fx-background-color: panel-background-blue;
     -fx-border-width: 0;
+    -fx-background-radius: 5 10 10 5;
 }
 
 #commandTypeLabel {

@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Region;
 import staffconnect.commons.core.LogsCenter;
 import staffconnect.model.person.Person;
@@ -28,7 +29,11 @@ public class PersonListPanel extends UiPart<Region> {
 
         personListView.setItems(personList);
         personListView.setCellFactory(listView -> new NameListViewCell());
-
+        personListView.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                personDisplay.changePersonCard(new PersonCard(personListView.getSelectionModel().getSelectedItem()));
+            }
+        });
         personListView.setOnMouseClicked(event -> {
             personDisplay.changePersonCard(new PersonCard(personListView.getSelectionModel().getSelectedItem()));
         });

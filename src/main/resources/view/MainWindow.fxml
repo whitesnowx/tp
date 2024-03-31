@@ -28,11 +28,15 @@
                     <VBox fx:id="personList" styleClass="pane-with-border" minWidth="340" prefWidth="340"
                           VBox.vgrow="ALWAYS">
                         <padding>
-                            <Insets top="10" right="10" bottom="10" left="10"/>
+                            <Insets top="10" left="10"/>
                         </padding>
                         <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
                     </VBox>
-                    <StackPane fx:id="personCardPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+                    <StackPane fx:id="personCardPanelPlaceholder" VBox.vgrow="ALWAYS">
+                        <padding>
+                            <Insets top="10" right="10"/>
+                        </padding>
+                    </StackPane>
                 </SplitPane>
 
                 <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="pane-result"
