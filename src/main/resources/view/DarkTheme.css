@@ -354,7 +354,7 @@
 }
 
 .scroll-pane > .corner {
-    -fx-background-color: background-blue;
+    -fx-background-color: transparent;
 }
 
 .virtual-flow > .corner {
@@ -490,6 +490,13 @@
  }
  .text-field {
      -fx-accent: accent-blue ;
+ }
+
+ .scroll-pane > .viewport {
+    -fx-background-color: transparent;
+ }
+ .scroll-pane {
+    -fx-background-color: transparent;
  }
 
 

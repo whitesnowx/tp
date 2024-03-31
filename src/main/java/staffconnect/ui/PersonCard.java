@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.OverrunStyle;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -59,6 +60,9 @@ public class PersonCard extends UiPart<Region> {
 
     @FXML
     private ListView<Meeting> meetingListView;
+
+    @FXML
+    private ScrollPane scrollPane;
 
     /**
      * Creates a {@code PersonCard} with an empty card that displays nothing.
@@ -109,6 +113,9 @@ public class PersonCard extends UiPart<Region> {
         meetingListView.setFocusTraversable(false);
         meetingListView.setItems(meetingsList);
         meetingListView.setCellFactory(listView -> new MeetingsListViewCell());
+
+        scrollPane.setFitToHeight(true);
+        scrollPane.setFitToWidth(true);
 
     }
 
