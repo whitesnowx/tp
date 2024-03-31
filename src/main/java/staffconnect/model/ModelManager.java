@@ -115,6 +115,13 @@ public class ModelManager implements Model {
         staffBook.setPerson(target, editedPerson);
     }
 
+    @Override
+    public int indexOf(Person person) {
+        requireNonNull(person);
+        assert hasPerson(person);
+        return staffBook.indexOf(person);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
