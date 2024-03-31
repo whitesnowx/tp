@@ -355,7 +355,10 @@
 
 .scroll-bar:horizontal .increment-arrow, .scroll-bar:horizontal .decrement-arrow {
     -fx-padding: 8 1 8 1;
+}
+.scroll-bar:horizontal .thumb {
 
+    -fx-background-insets: 3 3 0 3;
 }
 
 .scroll-pane > .corner {
@@ -456,12 +459,12 @@
 
  #meetingListView {
     -fx-background-color: transparent;
-    -fx-padding: 7 15 0 15;
+    -fx-padding: 7 0 0 0;
  }
 
  #meetingListCell {
     -fx-background-color: transparent;
-    -fx-padding: 5 0 0 0;
+    -fx-padding: 5 15 0 15;
  }
 
  .cell_meeting_label {

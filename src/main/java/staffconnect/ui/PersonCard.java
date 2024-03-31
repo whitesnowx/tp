@@ -130,10 +130,6 @@ public class PersonCard extends UiPart<Region> {
      */
     private static class MeetingsListViewCell extends ListCell<Meeting> {
 
-
-        {
-            setStyle("-fx-padding: 5 0 5 0");
-        }
         @Override
         protected void updateItem(Meeting meeting, boolean empty) {
             super.updateItem(meeting, empty);

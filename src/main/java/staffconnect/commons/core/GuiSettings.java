@@ -12,8 +12,8 @@ import staffconnect.commons.util.ToStringBuilder;
  */
 public class GuiSettings implements Serializable {
 
-    private static final double DEFAULT_HEIGHT = 600;
-    private static final double DEFAULT_WIDTH = 740;
+    private static final double DEFAULT_HEIGHT = 650;
+    private static final double DEFAULT_WIDTH = 840;
 
     private final double windowWidth;
     private final double windowHeight;
