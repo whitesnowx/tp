@@ -3,14 +3,12 @@
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Scene?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.layout.HBox?>
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
          title="StaffConnect App" minWidth="450" minHeight="600" onCloseRequest="#handleExit">
     <icons>
@@ -24,20 +22,20 @@
             </stylesheets>
 
             <VBox>
-                <SplitPane VBox.vgrow="ALWAYS" dividerPositions="0.7">
-                    <VBox fx:id="personList" styleClass="pane-with-border" minWidth="340" prefWidth="340"
+                <HBox VBox.vgrow="ALWAYS">
+                    <VBox fx:id="personList" styleClass="pane-with-border" minWidth="250" prefWidth="300" maxWidth="450"
                           VBox.vgrow="ALWAYS">
                         <padding>
                             <Insets top="10" left="10"/>
                         </padding>
                         <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
                     </VBox>
-                    <StackPane fx:id="personCardPanelPlaceholder" VBox.vgrow="ALWAYS">
+                    <StackPane fx:id="personCardPanelPlaceholder" VBox.vgrow="ALWAYS" minWidth="300" prefWidth="700" HBox.hgrow="ALWAYS">
                         <padding>
                             <Insets top="10" right="10"/>
                         </padding>
                     </StackPane>
-                </SplitPane>
+                </HBox>
 
                 <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="pane-result"
                            minHeight="65" prefHeight="65" maxHeight="65">

@@ -90,7 +90,7 @@
 .split-pane:horizontal .split-pane-divider {
     -fx-background-color: transparent;
     -fx-border-color: transparent transparent transparent transparent;
-    -fx-padding 0 0 0 0;
+    -fx-padding: 0 0 0 0;
 }
 
 .split-pane {
@@ -351,7 +351,7 @@
 }
 
 .scroll-pane > .corner {
-    -fx-background-color: transparent;
+    -fx-background-color: background-blue;
 }
 
 #cardPane {

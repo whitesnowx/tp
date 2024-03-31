@@ -26,7 +26,6 @@ public class PersonListPanel extends UiPart<Region> {
      */
     public PersonListPanel(ObservableList<Person> personList, PersonDisplay personDisplay) {
         super(FXML);
-
         personListView.setItems(personList);
         personListView.setCellFactory(listView -> new NameListViewCell());
         personListView.setOnKeyPressed(event -> {
