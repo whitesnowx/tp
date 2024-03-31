@@ -93,9 +93,14 @@
     -fx-padding: 0 0 0 0;
 }
 
+.split-pane:vertical .split-pane-divider {
+    -fx-background-color: accent-yellow;
+    -fx-border-color: accent-yellow;
+}
+
 .split-pane {
     fx-border-radius: 10;
-    -fx-background-color: background-blue;
+    -fx-background-color: panel-background-blue;
 }
 
 .list-view {
@@ -451,7 +456,7 @@
 
  #meetingListView {
     -fx-background-color: transparent;
-    -fx-padding: 7 0 0 0;
+    -fx-padding: 7 15 0 15;
  }
 
  #meetingListCell {

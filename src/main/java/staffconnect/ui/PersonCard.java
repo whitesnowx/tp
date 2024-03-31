@@ -6,15 +6,15 @@ import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Control;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.control.OverrunStyle;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.SplitPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import staffconnect.model.meeting.Meeting;
@@ -26,6 +26,7 @@ import staffconnect.model.person.Person;
 public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
+
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -63,6 +64,12 @@ public class PersonCard extends UiPart<Region> {
 
     @FXML
     private ScrollPane scrollPane;
+
+    @FXML
+    private StackPane displayMeetings;
+
+    @FXML
+    private SplitPane splitDisplay;
 
     /**
      * Creates a {@code PersonCard} with an empty card that displays nothing.
@@ -113,9 +120,6 @@ public class PersonCard extends UiPart<Region> {
         meetingListView.setFocusTraversable(false);
         meetingListView.setItems(meetingsList);
         meetingListView.setCellFactory(listView -> new MeetingsListViewCell());
-        meetingListView.setPrefHeight(700);
-        meetingListView.setPrefWidth(50);
-
         scrollPane.setFitToHeight(true);
         scrollPane.setFitToWidth(true);
 
