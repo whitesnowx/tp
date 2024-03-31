@@ -7,6 +7,10 @@
     accent-orange: #F18D1D;
     accent-light-blue:#CCDFEF;
     panel-background-blue: derive(#8489B6,-5%);
+    blue-dropshadow: rgba(64,75,115,0.8);
+    yellow-dropshadow: rgba(249,234,210,0.4);
+    lightblue-dropshadow: rgba(205,223,239,0.4);
+    orange-dropshadow: rgba(241,142,29,0.4);
 }
 
 .background {
@@ -127,6 +131,7 @@
 .list-cell:filled:selected {
     -fx-background-color: accent-blue;
     -fx-background-radius: 20 20 20 20;
+    -fx-effect: dropshadow(gaussian, blue-dropshadow, 13, 0, 0, 0);
 }
 
 .list-cell:filled:selected #cardPane {
@@ -412,6 +417,7 @@
     -fx-border-radius: 2;
     -fx-background-radius: 2;
     -fx-font-size: 20;
+    -fx-effect: dropshadow(gaussian, orange-dropshadow, 13, 0, 0, 0);
 }
 
 #availabilities {
@@ -427,6 +433,7 @@
     -fx-background-radius: 2;
     -fx-font-size: 15;
     -fx-font-weight: 300;
+    -fx-effect: dropshadow(gaussian, lightblue-dropshadow, 13, 0, 0, 0);
 }
 
 #meetingPane{
@@ -436,7 +443,7 @@
     -fx-border-width: 0;
     -fx-background-insets: 0 0 0 0;
     -fx-background-padding: 50 100 0 0;
-    -fx-effect: dropshadow(gaussian, derive(accent-blue,70%), 13, 0, 0, 0);
+    -fx-effect: dropshadow(gaussian, yellow-dropshadow, 13, 0, 0, 0);
  }
 
  #nameCard{
@@ -464,7 +471,7 @@
 
  #meetingListCell {
     -fx-background-color: transparent;
-    -fx-padding: 5 15 0 15;
+    -fx-padding: 20 15 0 15;
  }
 
  .cell_meeting_label {
