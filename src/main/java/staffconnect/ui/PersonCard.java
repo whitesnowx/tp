@@ -113,6 +113,8 @@ public class PersonCard extends UiPart<Region> {
         meetingListView.setFocusTraversable(false);
         meetingListView.setItems(meetingsList);
         meetingListView.setCellFactory(listView -> new MeetingsListViewCell());
+        meetingListView.setPrefHeight(700);
+        meetingListView.setPrefWidth(50);
 
         scrollPane.setFitToHeight(true);
         scrollPane.setFitToWidth(true);
@@ -124,6 +126,10 @@ public class PersonCard extends UiPart<Region> {
      */
     private static class MeetingsListViewCell extends ListCell<Meeting> {
 
+
+        {
+            setStyle("-fx-padding: 5 0 5 0");
+        }
         @Override
         protected void updateItem(Meeting meeting, boolean empty) {
             super.updateItem(meeting, empty);
