@@ -6,12 +6,16 @@ import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Control;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.OverrunStyle;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import staffconnect.model.meeting.Meeting;
 import staffconnect.model.person.Person;
 
@@ -21,7 +25,6 @@ import staffconnect.model.person.Person;
 public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
-    //private static final int ROW_HEIGHT = 33; //row height of each meeting
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -36,9 +39,9 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
-    private Label name;
-    @FXML
-    private Label id;
+    private Text name;
+    //@FXML
+    //private Label id;
     @FXML
     private Label phone;
     @FXML
@@ -63,8 +66,7 @@ public class PersonCard extends UiPart<Region> {
     public PersonCard() {
         super(FXML);
         this.person = null;
-        //set empty text
-        id.setText("");
+
         name.setText("");
         phone.setText("");
         faculty.setText("");
@@ -83,9 +85,9 @@ public class PersonCard extends UiPart<Region> {
         super(FXML);
         this.person = person;
 
-        id.setText("");
-        //id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
+        name.setTextAlignment(TextAlignment.JUSTIFY);
+        name.setWrappingWidth(1000);
         phone.setText(person.getPhone().value);
         faculty.setText(person.getFaculty().toString());
         venue.setText(person.getVenue().value);
@@ -104,11 +106,7 @@ public class PersonCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(meeting -> meeting.getStartDate().getDateTime()))
                 .collect(Collectors.toCollection(FXCollections::observableArrayList));
 
-        //This is probably only feasible workaround for now without messing or revamping UI.
-        //To set the correct height
-        //meetingListView.setPrefHeight((meetingsList.size() * ROW_HEIGHT) + 10);
         meetingListView.setFocusTraversable(false);
-
         meetingListView.setItems(meetingsList);
         meetingListView.setCellFactory(listView -> new MeetingsListViewCell());
 
@@ -118,6 +116,7 @@ public class PersonCard extends UiPart<Region> {
      * Custom {@code ListCell} that displays the graphics of a {@code Meetings} using a {@code MeetingsCard}.
      */
     private static class MeetingsListViewCell extends ListCell<Meeting> {
+
         @Override
         protected void updateItem(Meeting meeting, boolean empty) {
             super.updateItem(meeting, empty);
