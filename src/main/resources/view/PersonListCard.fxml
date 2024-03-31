@@ -29,7 +29,7 @@
       <Label fx:id="venue" styleClass="cell_small_label" text="\$venue" />
       <Label fx:id="module" styleClass="cell_small_label" text="\$module" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
-      <ListView id = "meetingListView" fx:id="meetingListView"/>
+      <ListView id = "meetingListView" fx:id="meetingListView" VBox.vgrow="ALWAYS"/>
     </VBox>
       <rowConstraints>
          <RowConstraints />
