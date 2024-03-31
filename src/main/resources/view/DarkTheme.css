@@ -95,7 +95,6 @@
 
 .split-pane {
     fx-border-radius: 10;
-    /*-fx-border-width: 1;*/
     -fx-background-color: background-blue;
 }
 
@@ -103,7 +102,7 @@
     -fx-background-insets: 0;
     -fx-padding: 0;
     -fx-background-color: panel-background-blue;
-    -fx-background-radius: 10 5 5 10;
+    -fx-background-radius: 10 0 0 10;
 }
 
 .list-cell {
@@ -146,10 +145,8 @@
      -fx-background-color: background-blue;
 }
 
-.pane-with-border {
+.pane-without-border {
      -fx-background-color: background-blue;
-     /*-fx-border-color: derive(#1d1d1d, 10%);
-     -fx-border-top-width: 1px; */
 }
 .pane-result {
      -fx-background-color: background-blue;
@@ -325,12 +322,13 @@
 }
 
 .scroll-bar {
-    -fx-background-color: background-blue;
+    -fx-background-color: panel-background-blue;
+    -fx-background-padding: 0 0 0 0;
 }
 
 .scroll-bar .thumb {
     -fx-background-color: accent-yellow;
-    -fx-background-insets: 3;
+    -fx-background-insets: 3 0 3 3;
 }
 
 .scroll-bar .increment-button, .scroll-bar .decrement-button {
@@ -348,6 +346,7 @@
 
 .scroll-bar:horizontal .increment-arrow, .scroll-bar:horizontal .decrement-arrow {
     -fx-padding: 8 1 8 1;
+
 }
 
 .scroll-pane > .corner {
@@ -357,7 +356,7 @@
 #cardPane {
     -fx-background-color: panel-background-blue;
     -fx-border-width: 0;
-    -fx-background-radius: 5 10 10 5;
+    -fx-background-radius: 0 10 10 0;
 }
 
 #commandTypeLabel {
@@ -454,6 +453,11 @@
      -fx-font-family: "Segoe UI";
      -fx-font-size: 20px;
      -fx-text-fill: accent-blue;
+ }
+
+ #personListView {
+    -fx-border-color: transparent accent-yellow transparent transparent;
+    -fx-border-width: 2;
  }
 
 

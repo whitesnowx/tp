@@ -22,8 +22,8 @@
             </stylesheets>
 
             <VBox>
-                <HBox VBox.vgrow="ALWAYS">
-                    <VBox fx:id="personList" styleClass="pane-with-border" minWidth="250" prefWidth="300" maxWidth="450"
+                <HBox VBox.vgrow="ALWAYS" styleClass="pane-without-border">
+                    <VBox fx:id="personList" styleClass="pane-without-border" minWidth="250" prefWidth="300" maxWidth="450"
                           VBox.vgrow="ALWAYS">
                         <padding>
                             <Insets top="10" left="10"/>
