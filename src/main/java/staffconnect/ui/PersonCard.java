@@ -98,10 +98,10 @@ public class PersonCard extends UiPart<Region> {
         name.setTextAlignment(TextAlignment.JUSTIFY);
         name.setWrappingWidth(1000);
         phone.setText(person.getPhone().value);
-        faculty.setText(person.getFaculty().toString());
-        venue.setText(person.getVenue().value);
-        module.setText(person.getModule().value);
-        email.setText(person.getEmail().value);
+        faculty.setText("Faculty:  " + person.getFaculty().toString());
+        venue.setText("Venue:  " + person.getVenue().value);
+        module.setText("Module:  " + person.getModule().value);
+        email.setText("Email:  " + person.getEmail().value);
 
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
