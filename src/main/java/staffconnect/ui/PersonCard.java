@@ -42,8 +42,6 @@ public class PersonCard extends UiPart<Region> {
     private HBox cardPane;
     @FXML
     private Text name;
-    //@FXML
-    //private Label id;
     @FXML
     private Label phone;
     @FXML
@@ -120,6 +118,7 @@ public class PersonCard extends UiPart<Region> {
         meetingListView.setFocusTraversable(false);
         meetingListView.setItems(meetingsList);
         meetingListView.setCellFactory(listView -> new MeetingsListViewCell());
+
         scrollPane.setFitToHeight(true);
         scrollPane.setFitToWidth(true);
 
