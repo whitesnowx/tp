@@ -22,7 +22,7 @@
             <Label fx:id="email" styleClass="cell_details_label" text="\$email"/>
         </VBox>
     </VBox>
-    <StackPane fx:id="displayMeetings" minWidth="30" prefWidth="300">
-        <ListView id="meetingListView" fx:id="meetingListView" VBox.vgrow="ALWAYS"/>
-    </StackPane>
+    <VBox fx:id="displayMeetings">
+        <ListView id="meetingListView" fx:id="meetingListView"/>
+    </VBox>
 </SplitPane>

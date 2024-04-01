@@ -6,7 +6,7 @@
 
 
 <HBox id="meetingPane" alignment="CENTER_LEFT" minHeight="-Infinity" xmlns="http://javafx.com/javafx/17"
-      xmlns:fx="http://javafx.com/fxml/1" spacing="35">
+      xmlns:fx="http://javafx.com/fxml/1" spacing="35" >
     <padding>
         <Insets top="5" right="5" bottom="5" left="15"/>
     </padding>
