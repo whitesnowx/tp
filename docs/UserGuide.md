@@ -166,6 +166,7 @@ Format: `sort [ATTRIBUTE]`
 * `[ATTRIBUTE]` is to be noted by their prefix. e.g `name` will be `n/`.
 
 Examples:
+* `sort m/ p/` returns person by ascending module codes followed by ascending phone numbers `CS2000 80000000`, `CS2000 90000000`, `CS3000 80000000`followed by `CS3000 90000000`
 * `sort n/` returns person by ascending names `Alex`, `Bernice` followed by `Charlotte`
 * `sort p/` returns person by ascending phone numbers `87438807`, `91031282` followed by `92492021`<br>
   ![result for 'sort p/'](images/sortByPhoneNumberResult.png)
@@ -296,7 +297,7 @@ Action | Format, Examples
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [m/MODULE] [f/FACULTY] [v/VENUE] [t/TAG]…​ [a/AVAILABILITY]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Filter** | `filter [m/MODULE] [f/FACULTY] [t/TAG]… [a/AVAILABILITY]…`<br> e.g., `filter m/CS2100 t/friends`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Sort** | `sort [ATTRIBUTE]`<br> e.g., `sort n/` `sort p/` `sort m/` `sort f/` `sort v/` `sort s/`
+**Sort** | `sort [n/NAME] [p/PHONE_NUMBER] [m/MODULE] [f/FACULTY] [v/VENUE] [s/MEETING_STARTDATE]...`<br> e.g., `sort n/ p/ m/`
 **Add Meeting** | `meeting INDEX [d/DESCRIPTION] [s/DATETIME]`<br> e.g., `meeting 1 d/ Meet for finals preparation s/ 12/04/2024 18:00`
 **Mark** | `mark INDEX`<br> e.g., `mark 3`
 **Unmark** | `unmark INDEX`<br> e.g., `unmark 3`
