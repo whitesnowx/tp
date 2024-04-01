@@ -1,8 +1,8 @@
 package staffconnect.model.person.comparators;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 
 import staffconnect.model.person.Person;
 
@@ -38,6 +38,18 @@ public class MultiComparator implements Comparator<Person> {
             }
         }
         return sortStringBuilder.toString();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        MultiComparator other = (MultiComparator) obj;
+        return Objects.equals(comparators, other.comparators);
     }
 
 }
