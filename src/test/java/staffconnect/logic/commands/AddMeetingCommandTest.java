@@ -15,9 +15,6 @@ import static staffconnect.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static staffconnect.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static staffconnect.testutil.TypicalPersons.getTypicalStaffBook;
 
-import java.util.HashSet;
-import java.util.List;
-
 import org.junit.jupiter.api.Test;
 
 import staffconnect.commons.core.index.Index;
@@ -26,9 +23,9 @@ import staffconnect.model.Model;
 import staffconnect.model.ModelManager;
 import staffconnect.model.StaffBook;
 import staffconnect.model.UserPrefs;
-import staffconnect.model.meeting.Description;
-import staffconnect.model.meeting.MeetDateTime;
 import staffconnect.model.meeting.Meeting;
+import staffconnect.model.meeting.MeetingDateTime;
+import staffconnect.model.meeting.MeetingDescription;
 import staffconnect.model.person.Person;
 
 /**
@@ -39,12 +36,12 @@ public class AddMeetingCommandTest {
     private static final Model TEST_MODEL = new ModelManager(getTypicalStaffBook(), new UserPrefs());
 
     private Person buildValidPerson() {
+
         Person pickPerson = TEST_MODEL.getFilteredPersonList().get(0);
-        Person validPerson = new Person(pickPerson.getName(), pickPerson.getPhone(), pickPerson.getEmail(),
+        return new Person(pickPerson.getName(), pickPerson.getPhone(), pickPerson.getEmail(),
                 pickPerson.getModule(), pickPerson.getFaculty(), pickPerson.getVenue(),
                 pickPerson.getTags(), pickPerson.getAvailabilities(), pickPerson.getFavourite());
-        validPerson.setMeetings(new HashSet<>(List.of(VALID_MEETING)));
-        return validPerson;
+
     }
 
     @Test
@@ -64,13 +61,14 @@ public class AddMeetingCommandTest {
     @Test
     public void execute_duplicateMeeting_failure() {
         Person firstPerson = buildValidPerson();
+        firstPerson.addMeetings(VALID_MEETING);
 
         AddMeetingCommand addMeetingCommand = new AddMeetingCommand(INDEX_FIRST_PERSON, VALID_MEETING);
 
-        Model duplicateModel = new ModelManager(new StaffBook(TEST_MODEL.getStaffBook()), new UserPrefs());
-        duplicateModel.setPerson(TEST_MODEL.getFilteredPersonList().get(0), firstPerson);
+        Model stubModel = new ModelManager(new StaffBook(TEST_MODEL.getStaffBook()), new UserPrefs());
+        stubModel.setPerson(TEST_MODEL.getFilteredPersonList().get(0), firstPerson);
 
-        assertCommandFailure(addMeetingCommand, duplicateModel, AddMeetingCommand.MESSAGE_DUPLICATE_MEETING);
+        assertCommandFailure(addMeetingCommand, stubModel, AddMeetingCommand.MESSAGE_DUPLICATE_MEETING);
     }
 
     @Test
@@ -99,7 +97,7 @@ public class AddMeetingCommandTest {
         final AddMeetingCommand standardCommand = new AddMeetingCommand(INDEX_FIRST_PERSON, VALID_MEETING);
         // same values -> returns true
         final Meeting copyMeeting =
-            new Meeting(new Description(VALID_DESCRIPTION_MIDTERMS), new MeetDateTime(VALID_DATE_MARCH));
+            new Meeting(new MeetingDescription(VALID_DESCRIPTION_MIDTERMS), new MeetingDateTime(VALID_DATE_MARCH));
         AddMeetingCommand commandWithSameValues = new AddMeetingCommand(INDEX_FIRST_PERSON, copyMeeting);
         assertEquals(standardCommand, commandWithSameValues);
 
