@@ -25,12 +25,12 @@ public class MeetingDateTime {
     /**
      * Constructs a {@code MeetingDateTime}.
      *
-     * @param date A valid date.
+     * @param dateTime A valid dateTime.
      */
-    public MeetingDateTime(String date) {
-        requireNonNull(date);
-        checkArgument(isValidMeetDateTime(date), MESSAGE_CONSTRAINTS);
-        value = java.time.LocalDateTime.parse(date, PROCESS_FORMAT);
+    public MeetingDateTime(String dateTime) {
+        requireNonNull(dateTime);
+        checkArgument(isValidMeetDateTime(dateTime), MESSAGE_CONSTRAINTS);
+        value = java.time.LocalDateTime.parse(dateTime, PROCESS_FORMAT);
     }
 
     /**

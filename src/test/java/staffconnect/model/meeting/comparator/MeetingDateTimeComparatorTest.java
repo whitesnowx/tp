@@ -4,13 +4,13 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static staffconnect.logic.commands.CommandTestUtil.VALID_MEETING;
 import static staffconnect.logic.commands.CommandTestUtil.VALID_MEETING_APRIL;
-import static staffconnect.model.meeting.comparator.MeetingDateComparator.MEETING_DATE_COMPARATOR;
+import static staffconnect.model.meeting.comparator.MeetingDateTimeComparator.MEETING_DATE_COMPARATOR;
 import static staffconnect.model.meeting.comparator.MeetingDescriptionComparator.MEETING_DESCRIPTION_COMPARATOR;
 
 import org.junit.jupiter.api.Test;
 
 
-public class MeetingDateComparatorTest {
+public class MeetingDateTimeComparatorTest {
     @Test
     public void doesNotEquals() {
         assertNotEquals(MEETING_DATE_COMPARATOR, MEETING_DESCRIPTION_COMPARATOR);
