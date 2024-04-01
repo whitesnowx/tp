@@ -36,10 +36,12 @@ public class AddMeetingCommandTest {
     private static final Model TEST_MODEL = new ModelManager(getTypicalStaffBook(), new UserPrefs());
 
     private Person buildValidPerson() {
+
         Person pickPerson = TEST_MODEL.getFilteredPersonList().get(0);
         return new Person(pickPerson.getName(), pickPerson.getPhone(), pickPerson.getEmail(),
                 pickPerson.getModule(), pickPerson.getFaculty(), pickPerson.getVenue(),
-                pickPerson.getTags(), pickPerson.getAvailabilities());
+                pickPerson.getTags(), pickPerson.getAvailabilities(), pickPerson.getFavourite());
+
     }
 
     @Test

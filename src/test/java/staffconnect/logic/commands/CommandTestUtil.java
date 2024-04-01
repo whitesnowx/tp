@@ -51,9 +51,6 @@ public class CommandTestUtil {
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_AVAILABILITY_MON = "mon 12:00 14:00";
     public static final String VALID_AVAILABILITY_THUR = "thurs 12:00 14:00";
-
-
-
     public static final String VALID_DESCRIPTION_MIDTERMS = "Meet for midterms";
     public static final String VALID_DESCRIPTION_FINALS = "Meet for finals";
     public static final String VALID_DESCRIPTION_STUDY = "Study super hard";

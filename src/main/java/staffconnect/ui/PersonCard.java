@@ -51,9 +51,10 @@ public class PersonCard extends UiPart<Region> {
     private FlowPane tags;
     @FXML
     private FlowPane availabilities;
-
     @FXML
     private ListView<Meeting> meetingListView;
+    @FXML
+    private Label favourite;
 
 
     /**
@@ -88,6 +89,7 @@ public class PersonCard extends UiPart<Region> {
         meetingListView.setItems(meetingsList);
         meetingListView.setCellFactory(listView -> new MeetingsListViewCell());
 
+        favourite.setText(person.getFavourite().toDisplayString());
     }
 
     /**

@@ -5,6 +5,7 @@
     "email": "invalid@email!3e",
     "module": "CS2030S",
     "faculty": "Computing",
-    "venue": "4th street"
+    "venue": "4th street",
+    "favourite" : "Not favourite"
   } ]
 }

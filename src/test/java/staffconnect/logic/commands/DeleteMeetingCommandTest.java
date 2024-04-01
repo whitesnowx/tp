@@ -55,7 +55,7 @@ public class DeleteMeetingCommandTest {
     private Person copyPersonWithNewMeetingManager(Person pickPerson) {
         return new Person(pickPerson.getName(), pickPerson.getPhone(), pickPerson.getEmail(),
                 pickPerson.getModule(), pickPerson.getFaculty(), pickPerson.getVenue(),
-                pickPerson.getTags(), pickPerson.getAvailabilities());
+                pickPerson.getTags(), pickPerson.getAvailabilities(), pickPerson.getFavourite());
 
     }
 

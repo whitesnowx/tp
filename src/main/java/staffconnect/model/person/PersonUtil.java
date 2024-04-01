@@ -26,8 +26,9 @@ public class PersonUtil {
         Set<Tag> tags = personToCopy.getTags();
         Set<Availability> availabilities = personToCopy.getAvailabilities();
         List<Meeting> meetings = personToCopy.getMeetings();
+        Favourite favourite = personToCopy.getFavourite();
 
-        Person personToCreate = new Person(name, phone, email, module, faculty, venue, tags, availabilities);
+        Person personToCreate = new Person(name, phone, email, module, faculty, venue, tags, availabilities, favourite);
         personToCreate.setMeetings(meetings);
         return personToCreate;
     }

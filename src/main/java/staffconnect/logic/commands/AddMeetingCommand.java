@@ -31,6 +31,7 @@ public class AddMeetingCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 " + PREFIX_MEETING_DESCRIPTION
             + "Meet for finals " + PREFIX_MEETING_STARTDATE + "12/04/2023 18:00";
 
+
     public static final String MESSAGE_SUCCESS = "New meeting added: %1$s";
     public static final String MESSAGE_DUPLICATE_MEETING = "This meeting is already planned for this person!";
 
@@ -45,7 +46,6 @@ public class AddMeetingCommand extends Command {
         requireNonNull(meeting);
         this.index = index;
         toAdd = meeting;
-
     }
 
     @Override
