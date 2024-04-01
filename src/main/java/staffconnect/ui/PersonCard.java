@@ -2,7 +2,6 @@ package staffconnect.ui;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
@@ -22,7 +21,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
-import staffconnect.commons.core.LogsCenter;
 import staffconnect.model.meeting.Meeting;
 import staffconnect.model.person.Person;
 
@@ -45,7 +43,6 @@ public class PersonCard extends UiPart<Region> {
      */
 
     public final Person person;
-    private final Logger logger = LogsCenter.getLogger(getClass());
     @FXML
     private HBox cardPane;
     @FXML
@@ -125,18 +122,8 @@ public class PersonCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(meeting -> meeting.getStartDate().getDateTime()))
                 .collect(Collectors.toCollection(FXCollections::observableArrayList));
 
-        double sizeWidth = getLongestWidth(meetingsList);
 
-        logger.info("Results for the size width : " + sizeWidth);
-
-        meetingListView.setFocusTraversable(false);
-        meetingListView.setItems(meetingsList);
-        meetingListView.setCellFactory(listView -> new MeetingsListViewCell());
-        //Work around to keep the pref height there
-        meetingListView.setPrefHeight((meetingsList.size() * ROW_HEIGHT) + 100);
-        meetingListView.setPrefWidth(sizeWidth);
-        meetingListView.setFocusTraversable(false);
-        meetingListView.setMouseTransparent(true);
+        setUpMeetingListView(meetingsList);
 
         setUpScrollPane(displayPane, detailsCard, false, false, new Region());
 
@@ -144,9 +131,22 @@ public class PersonCard extends UiPart<Region> {
 
     }
 
+    private void setUpMeetingListView(ObservableList<Meeting> meetingsList) {
+
+        meetingListView.setFocusTraversable(false);
+        meetingListView.setItems(meetingsList);
+        meetingListView.setCellFactory(listView -> new MeetingsListViewCell());
+        //Work around to set the the correct height and width of the nested list view.
+        meetingListView.setPrefHeight((meetingsList.size() * ROW_HEIGHT) + 100);
+        meetingListView.setPrefWidth(getLongestWidth(meetingsList));
+        meetingListView.setFocusTraversable(false);
+        meetingListView.setMouseTransparent(true);
+    }
+
     private double getLongestWidth(List<Meeting> meetingList) {
         double maxWidth = 0;
         for (Meeting meet : meetingList) {
+
             //200 is to account for the default spacing within the items
             double currentWidth = (meet.getDescription().description.length() + meet.getStartDate().toString().length())
                     * LABEL_MEETING_WIDTH + 200;
@@ -158,7 +158,7 @@ public class PersonCard extends UiPart<Region> {
         return maxWidth;
     }
 
-    private void setUpScrollPane(VBox display, Region content, boolean enableHBAR, boolean swap, Region swapRegion) {
+    private void setUpScrollPane(VBox display, Region content, boolean enableHbar, boolean swap, Region swapRegion) {
         ScrollPane scrollPane = new ScrollPane();
         scrollPane.setContent(content);
         //Custom vertical scroll bar on the left
@@ -183,7 +183,7 @@ public class PersonCard extends UiPart<Region> {
 
         VBox.setVgrow(hBox, Priority.ALWAYS);
 
-        if (enableHBAR) {
+        if (enableHbar) {
             ScrollBar hScrollBar = new ScrollBar();
             hScrollBar.setOrientation(Orientation.HORIZONTAL);
             hScrollBar.minProperty().bind(scrollPane.hminProperty());

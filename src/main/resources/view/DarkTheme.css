@@ -98,8 +98,8 @@
 }
 
 .split-pane:vertical .split-pane-divider {
-    -fx-background-color: accent-yellow;
-    -fx-border-color: accent-yellow;
+    -fx-background-color: background-blue;
+    -fx-border-color: background-blue;
 }
 
 .split-pane {
@@ -243,7 +243,7 @@
 }
 
 .menu-bar .label {
-    -fx-font-size: 10pt;
+    -fx-font-size: 12pt;
     -fx-font-family: "Segoe UI Light";
     -fx-text-fill: white;
     -fx-opacity: 0.9;
@@ -273,7 +273,7 @@
     -fx-background-radius: 0;
     -fx-background-color: accent-blue;
     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
-    -fx-font-size: 11pt;
+    -fx-font-size: 10pt;
     -fx-text-fill: accent-yellow;
     -fx-background-insets: 0 0 0 0, 0, 1, 2;
 }
@@ -353,8 +353,6 @@
 #displayMeetings .scroll-bar:vertical > .thumb {
     -fx-background-color: accent-yellow;
     -fx-background-insets: 0 7 0 0;
-    -fx-pref-width: 5;
-    -fx-padding:0.2em;
 }
 #displayMeetings .scroll-bar:vertical > .track {
      -fx-background-color : transparent;
@@ -389,7 +387,7 @@
 }
 .scroll-bar:horizontal .thumb {
 
-    -fx-background-insets: 3 3 0 3;
+    -fx-background-insets: 7 3 0 3;
 }
 
 .scroll-pane > .corner {

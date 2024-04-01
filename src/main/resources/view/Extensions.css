@@ -1,6 +1,6 @@
 
 .error {
-    -fx-text-fill: accent-orange !important; /* The error class should always override the default text-fill style */
+    -fx-text-fill: #EB6137 !important; /* The error class should always override the default text-fill style */
 }
 
 .list-cell:empty {
