@@ -84,8 +84,10 @@ public class UnmarkCommand extends Command {
         Set<Availability> availabilities = personToUnmark.getAvailabilities();
         Favourite updatedFavourite = new Favourite(false);
 
-        return new Person(name, phone, email, module,
-                faculty, venue, tags, availabilities, updatedFavourite);
+        Person unmarkedPerson =
+                new Person(name, phone, email, module, faculty, venue, tags, availabilities, updatedFavourite);
+        unmarkedPerson.setMeetings(personToUnmark.getMeetings());
+        return unmarkedPerson;
     }
 
     @Override

@@ -3,13 +3,18 @@ package staffconnect.model.person;
 import static staffconnect.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.function.Predicate;
 
+import javafx.collections.ObservableList;
 import staffconnect.commons.util.ToStringBuilder;
 import staffconnect.model.availability.Availability;
 import staffconnect.model.meeting.Meeting;
+import staffconnect.model.meeting.MeetingManager;
 import staffconnect.model.tag.Tag;
 
 /**
@@ -29,8 +34,10 @@ public class Person {
     private final Venue venue;
     private final Set<Tag> tags = new HashSet<>();
     private final Set<Availability> availabilities = new HashSet<>();
-    private final Set<Meeting> meetings = new HashSet<>();
+    private final MeetingManager meetings = new MeetingManager();
+
     private final Favourite favourite;
+
 
     /**
      * Every field must be present and not null.
@@ -85,23 +92,62 @@ public class Person {
      */
     public Set<Availability> getAvailabilities() {
         return Collections.unmodifiableSet(availabilities);
+
+    }
+
+
+    public Favourite getFavourite() {
+        return favourite;
     }
 
     /**
      * Returns an immutable meeting set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Meeting> getMeetings() {
-        return Collections.unmodifiableSet(meetings);
+    public ObservableList<Meeting> getMeetings() {
+        return meetings.getMeetingList();
     }
 
-    public Favourite getFavourite() {
-        return favourite;
+    /** Returns an unmodifiable view of the filtered meeting list. */
+    public ObservableList<Meeting> getFilteredMeetings() {
+        return meetings.getFilteredMeetingList();
     }
 
-    public void setMeetings(Set<Meeting> toAdd) {
-        meetings.clear(); //Remove all existing entries and assume the new set
-        meetings.addAll(toAdd);
+    /**
+     * Updates the filter of the filtered meeting list to filter by the given {@code predicate}.
+     * @param predicate to filter the list to.
+     */
+    public void updateFilteredMeetingList(Predicate<Meeting> predicate) {
+        meetings.updateFilteredMeetingList(predicate);
+    }
+
+    /**
+     * Updates the sort attribute of the sorted meeting list to sort by the given comparator.
+     * @param comparator to decide how to sort the meetings.
+     */
+    public void updateSortedMeetingList(Comparator<Meeting> comparator) {
+        meetings.updateSortedMeetingList(comparator);
+    }
+
+    /**
+     * Replaces all the current meeting data with the current list.
+     * @param toAdd the input meeting list to replace to.
+     */
+    public void setMeetings(List<Meeting> toAdd) {
+        meetings.setMeetingBook(toAdd);
+    }
+
+    public void addMeetings(Meeting toAdd) {
+        meetings.addMeeting(toAdd);
+    }
+
+    /**
+     * Removes the specified meeting form the current meeting list.
+     * @param toRemove the meeting.
+     */
+
+    public void removeMeeting(Meeting toRemove) {
+        meetings.deleteMeeting(toRemove);
     }
 
     /**
@@ -121,7 +167,7 @@ public class Person {
      * Returns true if the meeting to add is already tagged to the current person.
      */
     public boolean hasDuplicateMeeting(Meeting toAdd) {
-        return meetings.contains(toAdd);
+        return meetings.hasMeeting(toAdd);
     }
 
     /**
@@ -168,7 +214,7 @@ public class Person {
                 .add("venue", venue)
                 .add("tags", tags)
                 .add("availabilities", availabilities)
-                .add("meetings", meetings)
+                .add("meetings", meetings.getMeetingList())
                 .add("favourite", favourite)
                 .toString();
     }

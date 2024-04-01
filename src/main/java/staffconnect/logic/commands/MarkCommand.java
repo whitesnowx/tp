@@ -86,8 +86,10 @@ public class MarkCommand extends Command {
         Set<Availability> availabilities = personToMark.getAvailabilities();
         Favourite updatedFavourite = new Favourite(true);
 
-        return new Person(name, phone, email, module, faculty, venue, tags, availabilities,
-                updatedFavourite);
+        Person markedPerson =
+                new Person(name, phone, email, module, faculty, venue, tags, availabilities, updatedFavourite);
+        markedPerson.setMeetings(personToMark.getMeetings());
+        return markedPerson;
     }
 
     @Override
