@@ -1,6 +1,8 @@
 package staffconnect.ui;
 
 import java.util.Comparator;
+import java.util.List;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
@@ -8,6 +10,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -22,6 +25,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+import staffconnect.commons.core.LogsCenter;
 import staffconnect.model.meeting.Meeting;
 import staffconnect.model.person.Person;
 
@@ -34,7 +38,7 @@ public class PersonCard extends UiPart<Region> {
 
     private static final int ROW_HEIGHT = 60; //row height of each meeting
 
-
+    private static final int LABEL_MEETING_WIDTH = 10; //the width of the meeting label
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
      * As a consequence, UI elements' variable names cannot be set to such keywords
@@ -44,7 +48,7 @@ public class PersonCard extends UiPart<Region> {
      */
 
     public final Person person;
-
+    private final Logger logger = LogsCenter.getLogger(getClass());
     @FXML
     private HBox cardPane;
     @FXML
@@ -125,73 +129,80 @@ public class PersonCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(meeting -> meeting.getStartDate().getDateTime()))
                 .collect(Collectors.toCollection(FXCollections::observableArrayList));
 
+        double sizeWidth = getLongestWidth(meetingsList);
+
+        logger.info("Results for the size width : " + sizeWidth);
+
         meetingListView.setFocusTraversable(false);
         meetingListView.setItems(meetingsList);
         meetingListView.setCellFactory(listView -> new MeetingsListViewCell());
         //Work around to keep the pref height there
-        meetingListView.setPrefHeight((meetingsList.size() * ROW_HEIGHT) + 10);
-        meetingListView.setPrefWidth(1000);
+        meetingListView.setPrefHeight((meetingsList.size() * ROW_HEIGHT) + 100);
+        meetingListView.setPrefWidth(sizeWidth);
         meetingListView.setFocusTraversable(false);
         meetingListView.setMouseTransparent(true);
 
+        setUpScrollPane(displayPane, detailsCard, false, false, new Region());
+
+        setUpScrollPane(displayMeetings, meetingListView, true, true, displayMeetings);
+
+    }
+
+    private double getLongestWidth(List<Meeting> meetingList) {
+        double maxWidth = 0;
+        for (Meeting meet : meetingList) {
+            //100 is to account for the default spacing within the items
+            double currentWidth = (meet.getDescription().description.length() + meet.getStartDate().toString().length())
+                    * LABEL_MEETING_WIDTH + 200;
+
+            if (currentWidth > maxWidth) {
+                maxWidth = currentWidth;
+            }
+        }
+        return maxWidth;
+    }
+
+    private void setUpScrollPane(VBox display, Region content, boolean enableHBAR, boolean swap, Region swapRegion) {
         ScrollPane scrollPane = new ScrollPane();
-        scrollPane.setContent(detailsCard);
-        //Custom vertical scroll baron the left
+        scrollPane.setContent(content);
+        //Custom vertical scroll bar on the left
         //Inspired from:
         // https://stackoverflow.com/questions/35134155/move-the-vertical-scroll-bar-of-a-scroll-panel-to-the-left-side
         ScrollBar vScrollBar = new ScrollBar();
         vScrollBar.setOrientation(Orientation.VERTICAL);
         vScrollBar.minProperty().bind(scrollPane.vminProperty());
         vScrollBar.maxProperty().bind(scrollPane.vmaxProperty());
-        vScrollBar.visibleAmountProperty().bind(scrollPane.heightProperty().divide(detailsCard.heightProperty()));
+        if (swap) {
+            vScrollBar.visibleAmountProperty().bind(scrollPane.heightProperty().divide(swapRegion.heightProperty()));
+        } else {
+            vScrollBar.visibleAmountProperty().bind(scrollPane.heightProperty().divide(content.heightProperty()));
+        }
         scrollPane.vvalueProperty().bindBidirectional(vScrollBar.valueProperty());
 
-        // hide scrollpane scrollbars
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-
         HBox hBox = new HBox();
         HBox.setHgrow(scrollPane, Priority.ALWAYS);
         hBox.getChildren().addAll(vScrollBar, scrollPane);
 
         VBox.setVgrow(hBox, Priority.ALWAYS);
-        displayPane.getChildren().add(hBox);
 
-        //This is for the bottom splitpane
-        ScrollPane bottomPane = new ScrollPane();
+        if (enableHBAR) {
+            ScrollBar hScrollBar = new ScrollBar();
+            hScrollBar.setOrientation(Orientation.HORIZONTAL);
+            hScrollBar.minProperty().bind(scrollPane.hminProperty());
+            hScrollBar.maxProperty().bind(scrollPane.hmaxProperty());
+            if (swap) {
+                hScrollBar.visibleAmountProperty().bind(scrollPane.widthProperty().divide(swapRegion.widthProperty()));
+            } else {
+                hScrollBar.visibleAmountProperty().bind(scrollPane.widthProperty().divide(content.widthProperty()));
+            }
+            scrollPane.hvalueProperty().bindBidirectional(hScrollBar.valueProperty());
 
-        bottomPane.prefWidthProperty().bind(meetingListView.widthProperty());
-        bottomPane.prefHeightProperty().bind(meetingListView.heightProperty());
-
-        bottomPane.setContent(meetingListView);
-
-        ScrollBar vBottomBar = new ScrollBar();
-        vBottomBar.setOrientation(Orientation.VERTICAL);
-        vBottomBar.minProperty().bind(bottomPane.vminProperty());
-        vBottomBar.maxProperty().bind(bottomPane.vmaxProperty());
-        vBottomBar.visibleAmountProperty().bind(bottomPane.heightProperty().divide(meetingListView.heightProperty()));
-        bottomPane.vvalueProperty().bindBidirectional(vBottomBar.valueProperty());
-
-        ScrollBar hBottomBar = new ScrollBar();
-        hBottomBar.setOrientation(Orientation.HORIZONTAL);
-        hBottomBar.minProperty().bind(bottomPane.hminProperty());
-        hBottomBar.maxProperty().bind(bottomPane.hmaxProperty());
-        hBottomBar.visibleAmountProperty().bind(bottomPane.widthProperty().divide(meetingListView.widthProperty()));
-        bottomPane.hvalueProperty().bindBidirectional(hBottomBar.valueProperty());
-
-        // hide bottomPane scrollbars
-        bottomPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        bottomPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-//      bottomPane.setPadding(Insets.EMPTY);
-
-        HBox hBottom = new HBox();
-        HBox.setHgrow(bottomPane, Priority.ALWAYS);
-        hBottom.getChildren().addAll(vBottomBar, bottomPane);
-
-        VBox.setVgrow(hBottom, Priority.ALWAYS);
-        displayMeetings.getChildren().addAll(hBottomBar, hBottom);
-
-
-
+            scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+            display.getChildren().addAll(hScrollBar, hBox);
+        } else {
+            display.getChildren().add(hBox);
+        }
     }
 
     /**
