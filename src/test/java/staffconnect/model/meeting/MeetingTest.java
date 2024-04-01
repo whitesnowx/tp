@@ -7,10 +7,10 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import org.junit.jupiter.api.Test;
 
 class MeetingTest {
-    private static final Description TEST_DESCRIPTION = new Description("Valid description");
-    private static final MeetDateTime TEST_DATE = new MeetDateTime("12/04/2023 12:00");
-    private static final Description TEST_OTHERDESCRIPTION = new Description("Another valid description");
-    private static final MeetDateTime TEST_OTHERDATE = new MeetDateTime("13/04/2023 13:00");
+    private static final MeetingDescription TEST_DESCRIPTION = new MeetingDescription("Valid description");
+    private static final MeetingDateTime TEST_DATE = new MeetingDateTime("12/04/2023 12:00");
+    private static final MeetingDescription TEST_OTHERDESCRIPTION = new MeetingDescription("Another valid description");
+    private static final MeetingDateTime TEST_OTHERDATE = new MeetingDateTime("13/04/2023 13:00");
 
     @Test
     public void equals() {
@@ -18,12 +18,12 @@ class MeetingTest {
         Meeting testMeeting = new Meeting(TEST_DESCRIPTION, TEST_DATE);
         Meeting diffMeetingDescription = new Meeting(TEST_OTHERDESCRIPTION, TEST_DATE);
         Meeting diffMeetingTime = new Meeting(TEST_DESCRIPTION, TEST_OTHERDATE);
-        MeetDateTime testDate = new MeetDateTime("12/04/2023 12:00");
+        MeetingDateTime testDate = new MeetingDateTime("12/04/2023 12:00");
 
 
         // same values -> returns true
-        assertEquals(testMeeting, new Meeting(new Description("Valid description"),
-                                              new MeetDateTime("12/04/2023 12:00")));
+        assertEquals(testMeeting, new Meeting(new MeetingDescription("Valid description"),
+                                              new MeetingDateTime("12/04/2023 12:00")));
 
         // same object -> returns true
         assertEquals(testMeeting, testMeeting);
@@ -46,8 +46,8 @@ class MeetingTest {
 
     @Test
     public void asSymmetricHashcode() {
-        Meeting first = new Meeting(new Description("test"), new MeetDateTime("12/04/2023 12:00"));
-        Meeting second = new Meeting(new Description("test"), new MeetDateTime("12/04/2023 12:00"));
+        Meeting first = new Meeting(new MeetingDescription("test"), new MeetingDateTime("12/04/2023 12:00"));
+        Meeting second = new Meeting(new MeetingDescription("test"), new MeetingDateTime("12/04/2023 12:00"));
         assertEquals(first.hashCode(), second.hashCode());
     }
 

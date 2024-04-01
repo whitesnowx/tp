@@ -11,8 +11,8 @@ import java.util.Objects;
  */
 public class Meeting {
 
-    private final Description description;
-    private final MeetDateTime startDate;
+    private final MeetingDescription description;
+    private final MeetingDateTime startDate;
 
     /**
      * Constructs a {@code Meeting}.
@@ -21,17 +21,17 @@ public class Meeting {
      * @param startDate   A valid time and date for the meeting.
      */
 
-    public Meeting(Description description, MeetDateTime startDate) {
+    public Meeting(MeetingDescription description, MeetingDateTime startDate) {
         requireAllNonNull(description, startDate);
         this.description = description;
         this.startDate = startDate;
     }
 
-    public Description getDescription() {
+    public MeetingDescription getDescription() {
         return description;
     }
 
-    public MeetDateTime getStartDate() {
+    public MeetingDateTime getStartDate() {
         return startDate;
     }
 
@@ -56,7 +56,7 @@ public class Meeting {
     }
 
     /**
-     * Format state as text for viewing.
+     * Formats state as text for viewing.
      */
     public String toString() {
         return startDate + ":" + description;

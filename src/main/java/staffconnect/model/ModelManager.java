@@ -14,6 +14,8 @@ import javafx.collections.transformation.SortedList;
 import staffconnect.commons.core.GuiSettings;
 import staffconnect.commons.core.LogsCenter;
 import staffconnect.model.person.Person;
+import staffconnect.model.person.comparators.DefaultComparator;
+import staffconnect.model.person.comparators.FavouriteComparator;
 
 /**
  * Represents the in-memory model of the staff book data.
@@ -37,7 +39,8 @@ public class ModelManager implements Model {
         this.staffBook = new StaffBook(staffBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.staffBook.getPersonList());
-        sortedFilteredPersons = new SortedList<>(filteredPersons);
+        sortedFilteredPersons = new SortedList<>(filteredPersons,
+                new FavouriteComparator(new DefaultComparator(this.staffBook)));
     }
 
     public ModelManager() {
@@ -115,6 +118,13 @@ public class ModelManager implements Model {
         staffBook.setPerson(target, editedPerson);
     }
 
+    @Override
+    public int indexOf(Person person) {
+        requireNonNull(person);
+        assert hasPerson(person);
+        return staffBook.indexOf(person);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -122,7 +132,7 @@ public class ModelManager implements Model {
      * {@code versionedStaffBook}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
+    public ObservableList<Person> getSortedFilteredPersonList() {
         return sortedFilteredPersons;
     }
 
@@ -131,16 +141,17 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
-        sortedFilteredPersons.setComparator(null);
-
     }
 
     @Override
     public void updateSortedPersonList(Comparator<Person> comparator) {
         requireNonNull(comparator);
         filteredPersons.setPredicate(null);
-        sortedFilteredPersons.setComparator(comparator);
-
+        if (comparator instanceof DefaultComparator) {
+            sortedFilteredPersons.setComparator(new FavouriteComparator(new DefaultComparator(this.staffBook)));
+        } else {
+            sortedFilteredPersons.setComparator(new FavouriteComparator(comparator));
+        }
     }
 
     @Override
@@ -159,5 +170,4 @@ public class ModelManager implements Model {
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }
-
 }

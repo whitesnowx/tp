@@ -21,6 +21,7 @@
           </minWidth>
         </Label>
         <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
+        <Label fx:id="favourite" id="favourite_label" text="\$favourite" />
       </HBox>
       <FlowPane fx:id="tags" />
       <FlowPane fx:id="availabilities" />

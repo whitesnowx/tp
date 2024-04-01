@@ -98,6 +98,15 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Returns index of specified Person in the list.
+     */
+    public int indexOf(Person person) {
+        requireNonNull(person);
+        assert contains(person);
+        return internalList.indexOf(person);
+    }
+
+    /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Person> asUnmodifiableObservableList() {

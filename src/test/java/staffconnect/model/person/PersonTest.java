@@ -38,7 +38,7 @@ public class PersonTest {
         // same name, all other attributes different -> returns true
         Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
             .withModule(VALID_MODULE_BOB).withFaculty(VALID_FACULTY_BOB).withVenue(VALID_VENUE_BOB)
-            .withTags(VALID_TAG_HUSBAND).build();
+            .withTags(VALID_TAG_HUSBAND).withFavourite(true).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
         // different name, all other attributes same -> returns false
@@ -104,6 +104,10 @@ public class PersonTest {
         // different availabilities -> returns false
         editedAlice = new PersonBuilder(ALICE).withAvailabilities(VALID_AVAILABILITY_THUR).build();
         assertFalse(ALICE.equals(editedAlice));
+
+        // different favourite -> returns false
+        editedAlice = new PersonBuilder(ALICE).withFavourite(true).build();
+        assertFalse(ALICE.equals(editedAlice));
     }
 
     @Test
@@ -112,7 +116,7 @@ public class PersonTest {
             + ", email=" + ALICE.getEmail() + ", module=" + ALICE.getModule()
             + ", faculty=" + ALICE.getFaculty() + ", venue=" + ALICE.getVenue()
             + ", tags=" + ALICE.getTags() + ", availabilities=" + ALICE.getAvailabilities() + ", meetings="
-            + ALICE.getMeetings() + "}";
+            + ALICE.getMeetings() + ", favourite=" + ALICE.getFavourite() + "}";
 
         assertEquals(expected, ALICE.toString());
     }
