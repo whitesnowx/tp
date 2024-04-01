@@ -15,6 +15,7 @@ import static staffconnect.model.person.comparators.PhoneComparator.PHONE_COMPAR
 import static staffconnect.model.person.comparators.VenueComparator.VENUE_COMPARATOR;
 
 import java.util.Comparator;
+import java.util.logging.Logger;
 
 import staffconnect.logic.commands.SortCommand;
 import staffconnect.logic.parser.exceptions.ParseException;
@@ -25,14 +26,18 @@ import staffconnect.model.person.Person;
  */
 public class SortCommandParser implements Parser<SortCommand> {
 
+    private static final Logger logger = Logger.getLogger(SortCommandParser.class.getName());
+
     /**
      * Parses the given {@code String} of arguments in the context of the SortCommand
      * and returns a SortCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public SortCommand parse(String args) throws ParseException {
+        logger.info("Parsing SortCommand with arguments: " + args);
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
+            logger.warning("Empty argument provided.");
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         }
@@ -42,20 +47,27 @@ public class SortCommandParser implements Parser<SortCommand> {
 
 
     private Comparator<Person> parseComparatorForKeywords(String keyword) throws ParseException {
-
+        logger.info("Parsing comparator for keyword: " + keyword);
         if (keyword.equals(PREFIX_NAME.getPrefix())) {
+            logger.fine("Using NameComparator.");
             return NAME_COMPARATOR;
         } else if (keyword.equals(PREFIX_PHONE.getPrefix())) {
+            logger.fine("Using PhoneComparator.");
             return PHONE_COMPARATOR;
         } else if (keyword.equals(PREFIX_MODULE.getPrefix())) {
+            logger.fine("Using ModuleComparator.");
             return MODULE_COMPARATOR;
         } else if (keyword.equals(PREFIX_FACULTY.getPrefix())) {
+            logger.fine("Using FacultyComparator.");
             return FACULTY_COMPARATOR;
         } else if (keyword.equals(PREFIX_VENUE.getPrefix())) {
+            logger.fine("Using VenueComparator.");
             return VENUE_COMPARATOR;
         } else if (keyword.equals(PREFIX_MEETING_STARTDATE.getPrefix())) {
+            logger.fine("Using MeetingListComparator.");
             return MEETING_LIST_COMPARATOR;
         } else {
+            logger.warning("Invalid command format.");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         }
 
