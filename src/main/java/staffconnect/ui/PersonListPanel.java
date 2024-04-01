@@ -39,6 +39,19 @@ public class PersonListPanel extends UiPart<Region> {
     }
 
     /**
+     * Changes the current highlighted selection item in the personListPanel.
+     * Only for internal use by the UI.
+     * @param index to change the selection to.
+     */
+    public void setListSelectedIndex(int index) {
+        // guard clause to prevent invalid index
+        if (index >= 0 && index < personListView.getItems().size()) {
+            personListView.getSelectionModel().clearAndSelect(index);
+        }
+
+    }
+
+    /**
      * Represents a function that can change PersonCard.
      */
     @FunctionalInterface

@@ -88,6 +88,7 @@ public class MainWindow extends UiPart<Stage> {
     void fillInnerParts() {
 
         personListPanel = new PersonListPanel(logic.getFilteredPersonList(), this::changePersonCard);
+        personListPanel.setListSelectedIndex(0);
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -101,6 +102,7 @@ public class MainWindow extends UiPart<Stage> {
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         personCardPanelPlaceholder.getChildren().add(personOnDisplay.getRoot());
+
 
 
     }
@@ -170,8 +172,9 @@ public class MainWindow extends UiPart<Stage> {
         personOnDisplay = logic.getFirstPersonIfExist().map(PersonCard::new).orElse(new PersonCard());
 
         personCardPanelPlaceholder.getChildren().clear();
-
         personCardPanelPlaceholder.getChildren().add(personOnDisplay.getRoot());
+
+        personListPanel.setListSelectedIndex(0);
 
     }
 
