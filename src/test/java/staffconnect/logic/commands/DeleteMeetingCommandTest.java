@@ -36,7 +36,7 @@ public class DeleteMeetingCommandTest {
     public void execute_validIndexUnfilteredList_success() {
 
         //Set a dummy meeting first
-        Person selectPerson = copyPersonWithNewMeetingManager(TEST_MODEL.getFilteredPersonList()
+        Person selectPerson = copyPersonWithNewMeetingManager(TEST_MODEL.getSortedFilteredPersonList()
                 .get(INDEX_FIRST_PERSON.getZeroBased()));
 
         selectPerson.addMeetings(VALID_MEETING);
@@ -61,7 +61,7 @@ public class DeleteMeetingCommandTest {
 
     @Test
     public void execute_invalidPersonIndexUnfilteredList_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(TEST_MODEL.getFilteredPersonList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(TEST_MODEL.getSortedFilteredPersonList().size() + 1);
         DeleteMeetingCommand deleteMeetingCommand = new DeleteMeetingCommand(outOfBoundIndex, INDEX_FIRST_MEETING);
 
         assertCommandFailure(deleteMeetingCommand, TEST_MODEL, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -70,7 +70,7 @@ public class DeleteMeetingCommandTest {
     @Test
     public void execute_invalidMeetingIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(TEST_MODEL
-                .getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased())
+                .getSortedFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased())
                 .getFilteredMeetings().size() + 1);
 
         DeleteMeetingCommand deleteMeetingCommand = new DeleteMeetingCommand(INDEX_FIRST_PERSON, outOfBoundIndex);
@@ -80,7 +80,7 @@ public class DeleteMeetingCommandTest {
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        Person personToSelect = copyPersonWithNewMeetingManager(TEST_MODEL.getFilteredPersonList()
+        Person personToSelect = copyPersonWithNewMeetingManager(TEST_MODEL.getSortedFilteredPersonList()
                 .get(INDEX_FIRST_PERSON.getZeroBased()));
         personToSelect.addMeetings(VALID_MEETING); //First valid meeting
         personToSelect.addMeetings(VALID_MEETING_STUDY); //Second valid meeting
@@ -96,7 +96,7 @@ public class DeleteMeetingCommandTest {
 
         Model expectedModel = new ModelManager(getTypicalStaffBook(), new UserPrefs());
         Person expectedPersonSelect =
-                copyPersonWithNewMeetingManager(expectedModel.getFilteredPersonList()
+                copyPersonWithNewMeetingManager(expectedModel.getSortedFilteredPersonList()
                         .get(INDEX_FIRST_PERSON.getZeroBased()));
 
         expectedPersonSelect.addMeetings(VALID_MEETING); //This should be the only meeting left in the model
@@ -117,7 +117,7 @@ public class DeleteMeetingCommandTest {
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
-        Person personToSelect = copyPersonWithNewMeetingManager(TEST_MODEL.getFilteredPersonList()
+        Person personToSelect = copyPersonWithNewMeetingManager(TEST_MODEL.getSortedFilteredPersonList()
                 .get(INDEX_FIRST_PERSON.getZeroBased()));
         personToSelect.addMeetings(VALID_MEETING);
         personToSelect.addMeetings(VALID_MEETING_STUDY);

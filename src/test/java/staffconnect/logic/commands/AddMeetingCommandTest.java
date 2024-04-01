@@ -36,12 +36,10 @@ public class AddMeetingCommandTest {
     private static final Model TEST_MODEL = new ModelManager(getTypicalStaffBook(), new UserPrefs());
 
     private Person buildValidPerson() {
-
-        Person pickPerson = TEST_MODEL.getFilteredPersonList().get(0);
+        Person pickPerson = TEST_MODEL.getSortedFilteredPersonList().get(0);
         return new Person(pickPerson.getName(), pickPerson.getPhone(), pickPerson.getEmail(),
                 pickPerson.getModule(), pickPerson.getFaculty(), pickPerson.getVenue(),
                 pickPerson.getTags(), pickPerson.getAvailabilities(), pickPerson.getFavourite());
-
     }
 
     @Test
@@ -53,7 +51,7 @@ public class AddMeetingCommandTest {
         String expectedMessage = String.format(AddMeetingCommand.MESSAGE_SUCCESS, Messages.format(VALID_MEETING));
 
         Model expectedModel = new ModelManager(new StaffBook(TEST_MODEL.getStaffBook()), new UserPrefs());
-        expectedModel.setPerson(TEST_MODEL.getFilteredPersonList().get(0), validPerson);
+        expectedModel.setPerson(TEST_MODEL.getSortedFilteredPersonList().get(0), validPerson);
 
         assertCommandSuccess(addMeetingCommand, TEST_MODEL, expectedMessage, expectedModel);
     }
@@ -66,14 +64,14 @@ public class AddMeetingCommandTest {
         AddMeetingCommand addMeetingCommand = new AddMeetingCommand(INDEX_FIRST_PERSON, VALID_MEETING);
 
         Model stubModel = new ModelManager(new StaffBook(TEST_MODEL.getStaffBook()), new UserPrefs());
-        stubModel.setPerson(TEST_MODEL.getFilteredPersonList().get(0), firstPerson);
+        stubModel.setPerson(TEST_MODEL.getSortedFilteredPersonList().get(0), firstPerson);
 
         assertCommandFailure(addMeetingCommand, stubModel, AddMeetingCommand.MESSAGE_DUPLICATE_MEETING);
     }
 
     @Test
     public void execute_invalidPersonIndexUnfilteredList_failure() {
-        Index outOfBoundIndex = Index.fromOneBased(TEST_MODEL.getFilteredPersonList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(TEST_MODEL.getSortedFilteredPersonList().size() + 1);
 
         AddMeetingCommand addMeetingCommand = new AddMeetingCommand(outOfBoundIndex, VALID_MEETING);
 
