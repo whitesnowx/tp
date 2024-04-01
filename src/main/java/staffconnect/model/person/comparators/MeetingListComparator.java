@@ -10,7 +10,7 @@ import staffconnect.model.person.Person;
 
 
 /**
- * Represents a Comparator for a Person's Venue in the staff book.
+ * Represents a Comparator for a Person's Earliest Meeting in the staff book.
  */
 public class MeetingListComparator implements Comparator<Person> {
 
@@ -34,6 +34,6 @@ public class MeetingListComparator implements Comparator<Person> {
 
     @Override
     public String toString() {
-        return "Faculty by alphanumerical order";
+        return "Earliest Meeting";
     }
 }
