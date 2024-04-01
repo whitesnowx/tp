@@ -14,6 +14,7 @@ import staffconnect.model.availability.Availability;
 import staffconnect.model.meeting.Meeting;
 import staffconnect.model.person.Email;
 import staffconnect.model.person.Faculty;
+import staffconnect.model.person.Favourite;
 import staffconnect.model.person.Module;
 import staffconnect.model.person.Name;
 import staffconnect.model.person.Person;
@@ -36,8 +37,8 @@ class JsonAdaptedPerson {
     private final String venue;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final List<JsonAdaptedAvailability> availabilities = new ArrayList<>();
-
     private final List<JsonAdaptedMeeting> meetings = new ArrayList<>();
+    private final String favourite;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -52,7 +53,8 @@ class JsonAdaptedPerson {
             @JsonProperty("venue") String venue,
             @JsonProperty("tags") List<JsonAdaptedTag> tags,
             @JsonProperty("availabilities") List<JsonAdaptedAvailability> availabilities,
-            @JsonProperty("meetings") List<JsonAdaptedMeeting> meetings) {
+            @JsonProperty("meetings") List<JsonAdaptedMeeting> meetings,
+            @JsonProperty("favourite") String favourite) {
 
         this.name = name;
         this.phone = phone;
@@ -69,6 +71,7 @@ class JsonAdaptedPerson {
         if (meetings != null) {
             this.meetings.addAll(meetings);
         }
+        this.favourite = favourite;
     }
 
     /**
@@ -81,6 +84,7 @@ class JsonAdaptedPerson {
         module = source.getModule().value;
         faculty = source.getFaculty().toString();
         venue = source.getVenue().value;
+
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -92,6 +96,8 @@ class JsonAdaptedPerson {
         meetings.addAll(source.getMeetings().stream()
                 .map(JsonAdaptedMeeting::new)
                 .collect(Collectors.toList()));
+
+        favourite = source.getFavourite().toString();
     }
 
     /**
@@ -108,6 +114,11 @@ class JsonAdaptedPerson {
         final List<Availability> personAvailabilities = new ArrayList<>();
         for (JsonAdaptedAvailability availability : availabilities) {
             personAvailabilities.add(availability.toModelType());
+        }
+
+        final List<Meeting> personMeetings = new ArrayList<>();
+        for (JsonAdaptedMeeting meeting : meetings) {
+            personMeetings.add(meeting.toModelType());
         }
 
         if (name == null) {
@@ -161,17 +172,20 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-
         final Set<Availability> modelAvailabilities = new HashSet<>(personAvailabilities);
-        final List<Meeting> personMeetings = new ArrayList<>();
-        for (JsonAdaptedMeeting meeting : meetings) {
-            personMeetings.add(meeting.toModelType());
-        }
-        final Set<Meeting> modelMeetings = new HashSet<>(personMeetings);
 
-        Person modelPerson = new Person(modelName, modelPhone, modelEmail, modelModule, modelFaculty, modelVenue,
-                modelTags, modelAvailabilities);
-        modelPerson.setMeetings(modelMeetings);
+        if (favourite == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Favourite.class.getSimpleName()));
+        }
+        if (!Favourite.isValidFavourite(favourite)) {
+            throw new IllegalValueException(Favourite.MESSAGE_CONSTRAINTS);
+        }
+        final Favourite modelFavourite = new Favourite(favourite);
+
+        Person modelPerson = new Person(modelName, modelPhone, modelEmail, modelModule, modelFaculty,
+                modelVenue, modelTags, modelAvailabilities, modelFavourite);
+        modelPerson.setMeetings(personMeetings);
 
         return modelPerson;
     }

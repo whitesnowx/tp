@@ -6,6 +6,7 @@ import java.util.Set;
 import staffconnect.model.availability.Availability;
 import staffconnect.model.person.Email;
 import staffconnect.model.person.Faculty;
+import staffconnect.model.person.Favourite;
 import staffconnect.model.person.Module;
 import staffconnect.model.person.Name;
 import staffconnect.model.person.Person;
@@ -34,6 +35,7 @@ public class PersonBuilder {
     private Venue venue;
     private Set<Tag> tags;
     private Set<Availability> availabilities;
+    private Favourite favourite;
 
 
     /**
@@ -48,6 +50,7 @@ public class PersonBuilder {
         venue = new Venue(DEFAULT_VENUE);
         tags = new HashSet<>();
         availabilities = new HashSet<>();
+        favourite = new Favourite(false);
     }
 
     /**
@@ -62,6 +65,7 @@ public class PersonBuilder {
         venue = personToCopy.getVenue();
         tags = new HashSet<>(personToCopy.getTags());
         availabilities = new HashSet<>(personToCopy.getAvailabilities());
+        favourite = personToCopy.getFavourite();
     }
 
     /**
@@ -129,8 +133,16 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Favourite} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withFavourite(boolean isFavourite) {
+        this.favourite = new Favourite(isFavourite);
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, module, faculty, venue, tags, availabilities);
+        return new Person(name, phone, email, module, faculty, venue, tags, availabilities, favourite);
     }
 
 }

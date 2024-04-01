@@ -27,6 +27,7 @@ import staffconnect.model.Model;
 import staffconnect.model.availability.Availability;
 import staffconnect.model.person.Email;
 import staffconnect.model.person.Faculty;
+import staffconnect.model.person.Favourite;
 import staffconnect.model.person.Module;
 import staffconnect.model.person.Name;
 import staffconnect.model.person.Person;
@@ -79,7 +80,7 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Person> lastShownList = model.getSortedFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -113,9 +114,12 @@ public class EditCommand extends Command {
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Set<Availability> updatedAvailabilities = editPersonDescriptor.getAvailabilities()
                 .orElse(personToEdit.getAvailabilities());
+        Favourite favourite = personToEdit.getFavourite();
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedModule,
-                updatedFaculty, updatedVenue, updatedTags, updatedAvailabilities);
+        Person editedPerson = new Person(updatedName, updatedPhone, updatedEmail, updatedModule,
+                updatedFaculty, updatedVenue, updatedTags, updatedAvailabilities, favourite);
+        editedPerson.setMeetings(personToEdit.getMeetings());
+        return editedPerson;
     }
 
     @Override

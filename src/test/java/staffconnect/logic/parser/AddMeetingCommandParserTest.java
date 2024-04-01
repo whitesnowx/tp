@@ -11,8 +11,8 @@ import static staffconnect.logic.commands.CommandTestUtil.VALID_DATE_APRIL;
 import static staffconnect.logic.commands.CommandTestUtil.VALID_DESCRIPTION_FINALS;
 import static staffconnect.logic.commands.CommandTestUtil.VALID_DESCRIPTION_MIDTERMS;
 import static staffconnect.logic.commands.CommandTestUtil.VALID_MEETING;
-import static staffconnect.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static staffconnect.logic.parser.CliSyntax.PREFIX_STARTDATE;
+import static staffconnect.logic.parser.CliSyntax.PREFIX_MEETING_DESCRIPTION;
+import static staffconnect.logic.parser.CliSyntax.PREFIX_MEETING_STARTDATE;
 import static staffconnect.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static staffconnect.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static staffconnect.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -23,8 +23,8 @@ import org.junit.jupiter.api.Test;
 import staffconnect.commons.core.index.Index;
 import staffconnect.logic.Messages;
 import staffconnect.logic.commands.AddMeetingCommand;
-import staffconnect.model.meeting.Description;
-import staffconnect.model.meeting.MeetDateTime;
+import staffconnect.model.meeting.MeetingDateTime;
+import staffconnect.model.meeting.MeetingDescription;
 
 public class AddMeetingCommandParserTest {
 
@@ -87,13 +87,13 @@ public class AddMeetingCommandParserTest {
 
         //both invalid values for description and date, first value reported
         assertParseFailure(parser, "1" + INVALID_DESCRIPTION + INVALID_STARTDATE,
-                Description.MESSAGE_CONSTRAINTS);
+                MeetingDescription.MESSAGE_CONSTRAINTS);
 
         // invalid description followed by valid date
         assertParseFailure(parser, "1" + INVALID_DESCRIPTION + DATE_STARTDATE,
-                Description.MESSAGE_CONSTRAINTS);
+                MeetingDescription.MESSAGE_CONSTRAINTS);
         // valid description followed by invalid date
-        assertParseFailure(parser, "1" + DESCRIPTION_MIDTERM + INVALID_STARTDATE, MeetDateTime.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + DESCRIPTION_MIDTERM + INVALID_STARTDATE, MeetingDateTime.MESSAGE_CONSTRAINTS);
     }
 
     @Test
@@ -113,25 +113,25 @@ public class AddMeetingCommandParserTest {
         Index targetIndex = INDEX_FIRST_PERSON;
         String userInput = targetIndex.getOneBased() + DESCRIPTION_MIDTERM + INVALID_DESCRIPTION + DATE_STARTDATE;
 
-        assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_DESCRIPTION));
+        assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_MEETING_DESCRIPTION));
 
         // invalid followed by valid
         userInput = targetIndex.getOneBased() + INVALID_DESCRIPTION + DESCRIPTION_MIDTERM + DATE_STARTDATE;
 
-        assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_DESCRIPTION));
+        assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_MEETING_DESCRIPTION));
 
         // multiple valid fields repeated
         userInput =
                 targetIndex.getOneBased() + DESCRIPTION_MIDTERM + DATE_STARTDATE + DESCRIPTION_MIDTERM + DATE_STARTDATE;
 
-        assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_DESCRIPTION,
-                PREFIX_STARTDATE));
+        assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_MEETING_DESCRIPTION,
+                PREFIX_MEETING_STARTDATE));
 
         // multiple invalid values
         userInput = targetIndex.getOneBased() + INVALID_DESCRIPTION + INVALID_STARTDATE + INVALID_DESCRIPTION
                 + INVALID_STARTDATE;
 
-        assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_DESCRIPTION,
-                PREFIX_STARTDATE));
+        assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_MEETING_DESCRIPTION,
+                PREFIX_MEETING_STARTDATE));
     }
 }

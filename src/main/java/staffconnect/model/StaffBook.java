@@ -94,6 +94,15 @@ public class StaffBook implements ReadOnlyStaffBook {
         persons.remove(key);
     }
 
+    /**
+     * Returns index of specified person in the list.
+     */
+    public int indexOf(Person person) {
+        requireNonNull(person);
+        assert hasPerson(person);
+        return persons.indexOf(person);
+    }
+
     //// util methods
 
     @Override
