@@ -2,6 +2,7 @@ package staffconnect.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static staffconnect.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static staffconnect.model.person.comparators.DefaultComparator.DEFAULT_COMPARATOR;
 
 import staffconnect.model.Model;
 
@@ -19,6 +20,7 @@ public class ListCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateSortedPersonList(DEFAULT_COMPARATOR);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
