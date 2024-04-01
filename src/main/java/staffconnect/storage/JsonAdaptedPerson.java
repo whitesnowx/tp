@@ -174,8 +174,6 @@ class JsonAdaptedPerson {
 
         final Set<Availability> modelAvailabilities = new HashSet<>(personAvailabilities);
 
-        final Set<Meeting> modelMeetings = new HashSet<>(personMeetings);
-
         if (favourite == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Favourite.class.getSimpleName()));
@@ -187,7 +185,7 @@ class JsonAdaptedPerson {
 
         Person modelPerson = new Person(modelName, modelPhone, modelEmail, modelModule, modelFaculty,
                 modelVenue, modelTags, modelAvailabilities, modelFavourite);
-        modelPerson.setMeetings(modelMeetings);
+        modelPerson.setMeetings(personMeetings);
 
         return modelPerson;
     }

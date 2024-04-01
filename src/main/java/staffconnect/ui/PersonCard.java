@@ -2,9 +2,7 @@ package staffconnect.ui;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Orientation;
@@ -118,9 +116,7 @@ public class PersonCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(availability -> availability.value))
                 .forEach(availability -> availabilities.getChildren().add(new Label(availability.value)));
 
-        ObservableList<Meeting> meetingsList = person.getMeetings().stream()
-                .sorted(Comparator.comparing(meeting -> meeting.getStartDate().getDateTime()))
-                .collect(Collectors.toCollection(FXCollections::observableArrayList));
+        ObservableList<Meeting> meetingsList = person.getFilteredMeetings();
 
 
         setUpMeetingListView(meetingsList);
@@ -136,7 +132,7 @@ public class PersonCard extends UiPart<Region> {
         meetingListView.setFocusTraversable(false);
         meetingListView.setItems(meetingsList);
         meetingListView.setCellFactory(listView -> new MeetingsListViewCell());
-        //Work around to set the the correct height and width of the nested list view.
+        //Work around to set the correct height and width of the nested list view.
         meetingListView.setPrefHeight((meetingsList.size() * ROW_HEIGHT) + 100);
         meetingListView.setPrefWidth(getLongestWidth(meetingsList));
         meetingListView.setFocusTraversable(false);
