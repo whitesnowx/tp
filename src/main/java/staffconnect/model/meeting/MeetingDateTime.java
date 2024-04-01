@@ -11,7 +11,7 @@ import java.time.format.DateTimeParseException;
  * Represents a Meeting's starting time in the staff book.
  * Guarantees: immutable; is valid as declared in {@link #isValidMeetDateTime(String)}
  */
-public class MeetDateTime {
+public class MeetingDateTime {
 
     public static final String MESSAGE_CONSTRAINTS = "DateTime should be of the correct format and values dd/mm/yyyy "
             + "HH:mm";
@@ -23,11 +23,11 @@ public class MeetDateTime {
     private final LocalDateTime value;
 
     /**
-     * Constructs a {@code MeetDateTime}.
+     * Constructs a {@code MeetingDateTime}.
      *
      * @param date A valid date.
      */
-    public MeetDateTime(String date) {
+    public MeetingDateTime(String date) {
         requireNonNull(date);
         checkArgument(isValidMeetDateTime(date), MESSAGE_CONSTRAINTS);
         value = java.time.LocalDateTime.parse(date, PROCESS_FORMAT);
@@ -66,11 +66,11 @@ public class MeetDateTime {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof MeetDateTime)) {
+        if (!(other instanceof MeetingDateTime)) {
             return false;
         }
 
-        MeetDateTime otherDate = (MeetDateTime) other;
+        MeetingDateTime otherDate = (MeetingDateTime) other;
         return value.equals(otherDate.value);
     }
 

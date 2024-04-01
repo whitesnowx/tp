@@ -116,8 +116,10 @@ public class EditCommand extends Command {
                 .orElse(personToEdit.getAvailabilities());
         Favourite favourite = personToEdit.getFavourite();
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedModule,
+        Person editedPerson = new Person(updatedName, updatedPhone, updatedEmail, updatedModule,
                 updatedFaculty, updatedVenue, updatedTags, updatedAvailabilities, favourite);
+        editedPerson.setMeetings(personToEdit.getMeetings());
+        return editedPerson;
     }
 
     @Override

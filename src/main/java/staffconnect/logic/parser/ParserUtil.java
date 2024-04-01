@@ -10,8 +10,8 @@ import staffconnect.commons.core.index.Index;
 import staffconnect.commons.util.StringUtil;
 import staffconnect.logic.parser.exceptions.ParseException;
 import staffconnect.model.availability.Availability;
-import staffconnect.model.meeting.Description;
-import staffconnect.model.meeting.MeetDateTime;
+import staffconnect.model.meeting.MeetingDateTime;
+import staffconnect.model.meeting.MeetingDescription;
 import staffconnect.model.person.Email;
 import staffconnect.model.person.Faculty;
 import staffconnect.model.person.Module;
@@ -159,33 +159,33 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String description} into a {@code Description}.
+     * Parses a {@code String description} into a {@code MeetingDescription}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code description} is invalid.
      */
-    public static Description parseDescription(String description) throws ParseException {
+    public static MeetingDescription parseDescription(String description) throws ParseException {
         requireNonNull(description);
         String trimmedDescription = description.trim();
-        if (!Description.isValidDescription(trimmedDescription)) {
-            throw new ParseException(Description.MESSAGE_CONSTRAINTS);
+        if (!MeetingDescription.isValidDescription(trimmedDescription)) {
+            throw new ParseException(MeetingDescription.MESSAGE_CONSTRAINTS);
         }
-        return new Description(trimmedDescription);
+        return new MeetingDescription(trimmedDescription);
     }
 
     /**
-     * Parses a {@code String dateTime} into a {@code MeetDateTime}.
+     * Parses a {@code String dateTime} into a {@code MeetingDateTime}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code dateTime} is invalid.
      */
-    public static MeetDateTime parseDateTime(String dateTime) throws ParseException {
+    public static MeetingDateTime parseDateTime(String dateTime) throws ParseException {
         requireNonNull(dateTime);
         String trimmedDateTime = dateTime.trim();
-        if (!MeetDateTime.isValidMeetDateTime(trimmedDateTime)) {
-            throw new ParseException(MeetDateTime.MESSAGE_CONSTRAINTS);
+        if (!MeetingDateTime.isValidMeetDateTime(trimmedDateTime)) {
+            throw new ParseException(MeetingDateTime.MESSAGE_CONSTRAINTS);
         }
-        return new MeetDateTime(trimmedDateTime);
+        return new MeetingDateTime(trimmedDateTime);
     }
 
     /**

@@ -7,10 +7,10 @@ import static staffconnect.commons.util.AppUtil.checkArgument;
  * Represents a Meeting's description in the staff book.
  * Guarantees: immutable; is valid as declared in {@link #isValidDescription(String)}
  */
-public class Description {
+public class MeetingDescription {
 
     public static final String MESSAGE_CONSTRAINTS =
-        "Description should only contain alphanumeric characters and spaces, and it should not be blank";
+        "MeetingDescription should only contain alphanumeric characters and spaces, and it should not be blank";
 
     /*
      * The first character of the name must not be a whitespace,
@@ -21,11 +21,11 @@ public class Description {
     public final String description;
 
     /**
-     * Constructs a {@code Description}.
+     * Constructs a {@code MeetingDescription}.
      *
      * @param textDescription A valid description.
      */
-    public Description(String textDescription) {
+    public MeetingDescription(String textDescription) {
         requireNonNull(textDescription);
         checkArgument(isValidDescription(textDescription), MESSAGE_CONSTRAINTS);
         description = textDescription;
@@ -50,12 +50,12 @@ public class Description {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Description)) {
+        if (!(other instanceof MeetingDescription)) {
             return false;
         }
 
-        Description otherDecription = (Description) other;
-        return description.equals(otherDecription.description);
+        MeetingDescription otherDescription = (MeetingDescription) other;
+        return description.equals(otherDescription.description);
     }
 
     @Override
