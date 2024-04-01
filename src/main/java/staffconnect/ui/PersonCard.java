@@ -6,15 +6,20 @@ import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ScrollBar;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import staffconnect.model.meeting.Meeting;
@@ -58,14 +63,18 @@ public class PersonCard extends UiPart<Region> {
     private FlowPane availabilities;
     @FXML
     private ListView<Meeting> meetingListView;
-    @FXML
-    private ScrollPane scrollPane;
 
     @FXML
     private StackPane displayMeetings;
 
     @FXML
     private SplitPane splitDisplay;
+
+    @FXML
+    private VBox displayPane;
+
+    @FXML
+    private VBox detailsCard;
 
     /**
      * Creates a {@code PersonCard} with an empty card that displays nothing.
@@ -118,8 +127,29 @@ public class PersonCard extends UiPart<Region> {
         meetingListView.setItems(meetingsList);
         meetingListView.setCellFactory(listView -> new MeetingsListViewCell());
 
-        scrollPane.setFitToHeight(true);
-        scrollPane.setFitToWidth(true);
+        ScrollPane scrollPane = new ScrollPane();
+        scrollPane.setContent(detailsCard);
+        //Custom vertical scroll baron the left
+        //Inspired from:
+        // https://stackoverflow.com/questions/35134155/move-the-vertical-scroll-bar-of-a-scroll-panel-to-the-left-side
+        ScrollBar vScrollBar = new ScrollBar();
+        vScrollBar.setOrientation(Orientation.VERTICAL);
+        vScrollBar.minProperty().bind(scrollPane.vminProperty());
+        vScrollBar.maxProperty().bind(scrollPane.vmaxProperty());
+        vScrollBar.visibleAmountProperty().bind(scrollPane.heightProperty().divide(detailsCard.heightProperty()));
+        scrollPane.vvalueProperty().bindBidirectional(vScrollBar.valueProperty());
+
+        // hide scrollpane scrollbars
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+
+        HBox hBox = new HBox();
+        HBox.setHgrow(scrollPane, Priority.ALWAYS);
+        hBox.getChildren().addAll(vScrollBar, scrollPane);
+
+        VBox.setVgrow(hBox, Priority.ALWAYS);
+        displayPane.getChildren().add(hBox);
+
+
 
     }
 

@@ -345,6 +345,15 @@
     -fx-background-insets: 3 0 3 3;
 }
 
+#displayPane .scroll-bar:vertical > .thumb {
+    -fx-background-color: accent-yellow;
+    -fx-background-insets: 3 3 3 0;
+}
+
+#displayPane .scroll-bar:horizontal > .thumb {
+    -fx-background-color: accent-yellow;
+    -fx-background-insets: 3 3 0 3;
+}
 .scroll-bar .increment-button, .scroll-bar .decrement-button {
     -fx-background-color: transparent;
     -fx-padding: 0 0 0 0;

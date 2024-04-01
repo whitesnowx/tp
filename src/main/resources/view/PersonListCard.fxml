@@ -7,8 +7,8 @@
 
 <SplitPane orientation="VERTICAL" dividerPositions="0.4" fx:id="splitDisplay" xmlns="http://javafx.com/javafx/17.0.2-ea"
            xmlns:fx="http://javafx.com/fxml/1" id="cardPane">
-    <ScrollPane fx:id="scrollPane"  prefHeight="350" minHeight="100">
-        <VBox spacing="10">
+    <VBox fx:id="displayPane"  prefHeight="350" minHeight="100" id="displayPane">
+        <VBox fx:id="detailsCard" spacing="10">
             <padding>
                 <Insets bottom="5" left="15" right="5" top="5"/>
             </padding>
@@ -21,7 +21,7 @@
             <Label fx:id="module" styleClass="cell_details_label" text="\$module"/>
             <Label fx:id="email" styleClass="cell_details_label" text="\$email"/>
         </VBox>
-    </ScrollPane>
+    </VBox>
     <StackPane fx:id="displayMeetings" minWidth="30" prefWidth="300">
         <ListView id="meetingListView" fx:id="meetingListView" VBox.vgrow="ALWAYS"/>
     </StackPane>
