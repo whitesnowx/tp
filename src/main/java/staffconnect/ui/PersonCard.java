@@ -8,9 +8,7 @@ import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -21,7 +19,6 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
@@ -116,7 +113,6 @@ public class PersonCard extends UiPart<Region> {
         module.setText("Module:  " + person.getModule().value);
         email.setText("Email:  " + person.getEmail().value);
 
-
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
@@ -151,7 +147,7 @@ public class PersonCard extends UiPart<Region> {
     private double getLongestWidth(List<Meeting> meetingList) {
         double maxWidth = 0;
         for (Meeting meet : meetingList) {
-            //100 is to account for the default spacing within the items
+            //200 is to account for the default spacing within the items
             double currentWidth = (meet.getDescription().description.length() + meet.getStartDate().toString().length())
                     * LABEL_MEETING_WIDTH + 200;
 
@@ -166,9 +162,10 @@ public class PersonCard extends UiPart<Region> {
         ScrollPane scrollPane = new ScrollPane();
         scrollPane.setContent(content);
         //Custom vertical scroll bar on the left
-        //Inspired from:
+        // Inspired from:
         // https://stackoverflow.com/questions/35134155/move-the-vertical-scroll-bar-of-a-scroll-panel-to-the-left-side
         ScrollBar vScrollBar = new ScrollBar();
+        vScrollBar.setPrefWidth(1);
         vScrollBar.setOrientation(Orientation.VERTICAL);
         vScrollBar.minProperty().bind(scrollPane.vminProperty());
         vScrollBar.maxProperty().bind(scrollPane.vmaxProperty());
