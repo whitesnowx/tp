@@ -26,4 +26,18 @@ public class MultiComparator implements Comparator<Person> {
         }
         return 0;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sortStringBuilder = new StringBuilder();
+        for (int i = 0; i < comparators.size(); i++) {
+            Comparator<Person> comparator = comparators.get(i);
+            sortStringBuilder.append(comparator.toString());
+            if (i < comparators.size() - 1) {
+                sortStringBuilder.append(", ");
+            }
+        }
+        return sortStringBuilder.toString();
+    }
+
 }
