@@ -75,8 +75,8 @@ public class LogicManager implements Logic {
     @Override
     public Optional<Person> getFirstPersonIfExist() {
 
-        return model.getFilteredPersonList().isEmpty()
-                ? Optional.empty() : Optional.of(model.getFilteredPersonList().get(0));
+        return model.getSortedFilteredPersonList().isEmpty()
+                ? Optional.empty() : Optional.of(model.getSortedFilteredPersonList().get(0));
     }
 
     @Override
