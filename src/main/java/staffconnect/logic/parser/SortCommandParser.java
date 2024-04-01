@@ -2,11 +2,13 @@ package staffconnect.logic.parser;
 
 import static staffconnect.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static staffconnect.logic.parser.CliSyntax.PREFIX_FACULTY;
+import static staffconnect.logic.parser.CliSyntax.PREFIX_MEETING_STARTDATE;
 import static staffconnect.logic.parser.CliSyntax.PREFIX_MODULE;
 import static staffconnect.logic.parser.CliSyntax.PREFIX_NAME;
 import static staffconnect.logic.parser.CliSyntax.PREFIX_PHONE;
 import static staffconnect.logic.parser.CliSyntax.PREFIX_VENUE;
 import static staffconnect.model.person.comparators.FacultyComparator.FACULTY_COMPARATOR;
+import static staffconnect.model.person.comparators.MeetingListComparator.MEETING_LIST_COMPARATOR;
 import static staffconnect.model.person.comparators.ModuleComparator.MODULE_COMPARATOR;
 import static staffconnect.model.person.comparators.NameComparator.NAME_COMPARATOR;
 import static staffconnect.model.person.comparators.PhoneComparator.PHONE_COMPARATOR;
@@ -51,6 +53,8 @@ public class SortCommandParser implements Parser<SortCommand> {
             return FACULTY_COMPARATOR;
         } else if (keyword.equals(PREFIX_VENUE.getPrefix())) {
             return VENUE_COMPARATOR;
+        } else if (keyword.equals(PREFIX_MEETING_STARTDATE.getPrefix())) {
+            return MEETING_LIST_COMPARATOR;
         } else {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         }
