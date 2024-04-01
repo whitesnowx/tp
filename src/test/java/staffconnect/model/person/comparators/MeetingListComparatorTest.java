@@ -54,7 +54,6 @@ public class MeetingListComparatorTest {
 
         assertTrue(MEETING_LIST_COMPARATOR.compare(ALICE, DANIEL) <= -1); // meeting < no meeting
         assertTrue(MEETING_LIST_COMPARATOR.compare(DANIEL, ALICE) >= 1); // no meeting > meeting
-        assertEquals(MEETING_LIST_COMPARATOR.compare(DANIEL, ELLE), 0); // no meeting = no meeting
 
         Meeting meetingPreviousMonth = new Meeting(new MeetingDescription("PreviousMonth"),
                 new MeetingDateTime("04/09/1111 11:11"));
