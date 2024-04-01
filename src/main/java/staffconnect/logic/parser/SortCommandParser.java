@@ -14,12 +14,15 @@ import static staffconnect.model.person.comparators.NameComparator.NAME_COMPARAT
 import static staffconnect.model.person.comparators.PhoneComparator.PHONE_COMPARATOR;
 import static staffconnect.model.person.comparators.VenueComparator.VENUE_COMPARATOR;
 
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 import java.util.logging.Logger;
 
 import staffconnect.logic.commands.SortCommand;
 import staffconnect.logic.parser.exceptions.ParseException;
 import staffconnect.model.person.Person;
+import staffconnect.model.person.comparators.MultiComparator;
 
 /**
  * Parses input arguments and creates a new SortCommand object
@@ -42,11 +45,21 @@ public class SortCommandParser implements Parser<SortCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         }
 
-        return new SortCommand(parseComparatorForKeywords(trimmedArgs));
+        return new SortCommand(new MultiComparator(parseComparatorsForKeywords(trimmedArgs)));
     }
 
+    private List<Comparator<Person>> parseComparatorsForKeywords(String keywords) throws ParseException {
+        String[] keywordsArray = keywords.split("\\s+");
 
-    private Comparator<Person> parseComparatorForKeywords(String keyword) throws ParseException {
+        List<Comparator<Person>> comparators = new ArrayList<>();
+        for (String keyword : keywordsArray) {
+            comparators.add(parseComparatorForKeyword(keyword));
+        }
+
+        return comparators;
+    }
+
+    private Comparator<Person> parseComparatorForKeyword(String keyword) throws ParseException {
         logger.info("Parsing comparator for keyword: " + keyword);
         if (keyword.equals(PREFIX_NAME.getPrefix())) {
             logger.fine("Using NameComparator.");
