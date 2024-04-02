@@ -6,6 +6,7 @@ import static staffconnect.commons.util.AppUtil.checkArgument;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.List;
 
 /**
  * Represents a Meeting's starting time in the staff book.
@@ -16,6 +17,27 @@ public class MeetingDateTime {
     public static final String MESSAGE_CONSTRAINTS = "DateTime should be of the correct format and values dd/mm/yyyy "
             + "HH:mm";
     public static final String VALIDATION_REGEX = "\\d{2}/\\d{2}/\\d{4} \\d{2}:\\d{2}";
+
+    private static final List<String> DATE_FORMATS = List.of(
+            "yyyy-MM-dd",
+            "yyyy-M-d",
+            "dd-MM-yyyy",
+            "yyyy-MM-d",
+            "d-MM-yyyy",
+            "d/MM/yyyy",
+            "dd/MM/yyyy",
+            "yyyy/MM/dd",
+            "yyyy/MM/d"
+    );
+
+    private static final List<String> TIME_FORMATS = List.of(
+            "HH:mm",
+            "H:mm",
+            "HHmm",
+            "hh:mm: a",
+            "h:mm a",
+            "hhmm a"
+    );
 
     private static final DateTimeFormatter PROCESS_FORMAT =
             DateTimeFormatter.ofPattern("dd/MM/uuuu HH:mm").withResolverStyle(java.time.format.ResolverStyle.STRICT);
