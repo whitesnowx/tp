@@ -3,8 +3,10 @@ package staffconnect.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
+import java.util.Optional;
 
 import staffconnect.commons.util.ToStringBuilder;
+import staffconnect.model.person.Person;
 
 /**
  * Represents the result of a command execution.
@@ -19,6 +21,10 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
+    private final int index;
+
+    private final Person personToSwitch;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
@@ -26,6 +32,8 @@ public class CommandResult {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        index = -999;
+        personToSwitch = null;
     }
 
     /**
@@ -34,6 +42,17 @@ public class CommandResult {
      */
     public CommandResult(String feedbackToUser) {
         this(feedbackToUser, false, false);
+    }
+
+    /**
+     *  Constructs a {@code CommandResult} with the specified person to store.
+     */
+    public CommandResult(String feedbackToUser, Person personToSwitch, int index) {
+        this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.showHelp = false;
+        this.exit = false;
+        this.personToSwitch = personToSwitch;
+        this.index = index;
     }
 
     public String getFeedbackToUser() {
@@ -46,6 +65,27 @@ public class CommandResult {
 
     public boolean isExit() {
         return exit;
+    }
+
+    /**
+     * Checks if there is a valid person and index to get in the result.
+     * @return
+     */
+    public boolean hasPersonAndIndex() {
+        return personToSwitch != null && index != -999;
+    }
+
+    /**
+     * Returns a person from the result to send to the UI display.
+     * @return a person from the command result.
+     */
+    public Optional<Person> getPersonToDisplay() {
+        return personToSwitch != null ? Optional.of(personToSwitch) : Optional.empty();
+    }
+
+    public int getIndex() {
+        return index;
+
     }
 
     @Override

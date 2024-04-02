@@ -69,7 +69,9 @@ public class AddMeetingCommand extends Command {
         //setPerson to force update the ui with the new items
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)), editedPerson,
+                index.getZeroBased());
     }
 
 
