@@ -26,7 +26,6 @@ import staffconnect.logic.commands.FilterCommand;
 import staffconnect.logic.commands.FindCommand;
 import staffconnect.logic.commands.HelpCommand;
 import staffconnect.logic.commands.ListCommand;
-import staffconnect.logic.commands.MarkCommand;
 import staffconnect.logic.commands.RefreshCommand;
 import staffconnect.logic.commands.SortCommand;
 import staffconnect.logic.commands.UnfavCommand;

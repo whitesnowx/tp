@@ -14,7 +14,7 @@ import staffconnect.model.person.Person;
 import staffconnect.model.person.PersonUtil;
 
 /**
- * deletes all meetings that are outdated.
+ * Deletes all meetings that are outdated.
  * An outdated meeting refers to a meeting that starts before the user types in the command.
  */
 public class RefreshCommand extends Command {
@@ -49,24 +49,15 @@ public class RefreshCommand extends Command {
 
         for (int i = 0; i < lastShownList.size(); i++) {
             Person person = lastShownList.get(i);
-            Person newPerson = PersonUtil.copyPerson(person);
-            List<Meeting> meetingShownList = newPerson.getFilteredMeetings();
-            List<Meeting> toDelete = new ArrayList<>();
             boolean isModified = false;
-
-            for (Meeting meeting : meetingShownList) {
-                if (meeting.getStartDate().getDateTime().isBefore(currentTime)) {
-                    toDelete.add(meeting);
-                    isModified = true;
-                    isAnyPersonModified = true;
-                    deletedMeetings += newPerson.getName() + String.format(" (Index: %d) %s\n", i + 1, meeting);
-                }
-            }
-
-            for (Meeting meeting : toDelete) {
-                newPerson.removeMeeting(meeting);
+            List<Meeting> toDelete = findMeetingstoDelete(person, currentTime);
+            if (!toDelete.isEmpty()) {
+                isModified = true;
+                isAnyPersonModified = true;
             }
             if (isModified) {
+                deletedMeetings += constructStringofMeetings(i + 1, person, toDelete);
+                Person newPerson = deleteMeetings(person, toDelete);
                 newPerson.updateSortedMeetingList(MEETING_DATE_THEN_DESCRIPTION_COMPARATOR);
                 model.setPerson(person, newPerson);
             }
@@ -77,6 +68,33 @@ public class RefreshCommand extends Command {
         } else {
             return new CommandResult(REFRESH_NO_MODIFICATION);
         }
+    }
+
+    private List<Meeting> findMeetingstoDelete(Person person, LocalDateTime currentTime) {
+        List<Meeting> meetingShownList = person.getFilteredMeetings();
+        List<Meeting> toDelete = new ArrayList<>();
+        for (Meeting meeting : meetingShownList) {
+            if (meeting.getStartDate().getDateTime().isBefore(currentTime)) {
+                toDelete.add(meeting);
+            }
+        }
+        return toDelete;
+    }
+
+    private String constructStringofMeetings(int index, Person person, List<Meeting> meetings) {
+        String result = "";
+        for (Meeting meeting : meetings) {
+            result += person.getName() + String.format(" (Index: %d) %s\n", index, meeting);
+        }
+        return result;
+    }
+
+    private Person deleteMeetings(Person person, List<Meeting> toDelete) {
+        Person newPerson = PersonUtil.copyPerson(person);
+        for (Meeting meeting : toDelete) {
+            newPerson.removeMeeting(meeting);
+        }
+        return newPerson;
     }
 
     @Override
