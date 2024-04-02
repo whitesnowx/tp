@@ -6,8 +6,6 @@ import staffconnect.model.meeting.Meeting;
 import staffconnect.model.person.Person;
 import staffconnect.model.person.PersonUtil;
 
-import static staffconnect.logic.parser.CliSyntax.PREFIX_MEETING_DESCRIPTION;
-import static staffconnect.logic.parser.CliSyntax.PREFIX_MEETING_STARTDATE;
 import static staffconnect.model.meeting.comparator.MeetingDateThenDescriptionComparator.MEETING_DATE_THEN_DESCRIPTION_COMPARATOR;
 
 import java.time.LocalDateTime;
@@ -34,7 +32,8 @@ public class RefreshCommand extends Command {
 
         List<Person> lastShownList = model.getSortedFilteredPersonList();
 
-        for (Person person : lastShownList) {
+        for (int i = 0; i < lastShownList.size(); i++) {
+            Person person = lastShownList.get(i);
             Person newPerson = PersonUtil.copyPerson(person);
             List<Meeting> meetingShownList = newPerson.getFilteredMeetings();
             List<Meeting> toDelete = new ArrayList<>();
@@ -53,5 +52,15 @@ public class RefreshCommand extends Command {
         }
 
         return new CommandResult(REFRESH_SUCCESS);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof RefreshCommand;
+    }
+
+    @Override
+    public String toString() {
+        return "Refresh";
     }
 }
