@@ -4,9 +4,20 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Menu?>
 <GridPane styleClass="status-bar" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10" />
   </columnConstraints>
   <Label fx:id="saveLocationStatus" />
+  <MenuBar fx:id="menuBar" GridPane.halignment="RIGHT" GridPane.columnIndex="1">
+    <Menu mnemonicParsing="false" text="File">
+      <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
+    </Menu>
+    <Menu mnemonicParsing="false" text="Help">
+      <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
+    </Menu>
+  </MenuBar>
 </GridPane>
