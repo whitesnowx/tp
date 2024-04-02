@@ -1,5 +1,10 @@
 package staffconnect.logic.commands;
 
+import static staffconnect.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static staffconnect.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static staffconnect.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static staffconnect.testutil.TypicalPersons.getTypicalStaffBook;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -11,11 +16,6 @@ import staffconnect.model.meeting.Meeting;
 import staffconnect.model.meeting.MeetingDateTime;
 import staffconnect.model.meeting.MeetingDescription;
 import staffconnect.model.person.Person;
-
-import static staffconnect.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static staffconnect.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static staffconnect.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static staffconnect.testutil.TypicalPersons.getTypicalStaffBook;
 
 public class RefreshCommandTest {
     private Model model;

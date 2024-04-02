@@ -1,19 +1,22 @@
 package staffconnect.logic.commands;
 
-import staffconnect.logic.commands.exceptions.CommandException;
-import staffconnect.model.Model;
-import staffconnect.model.meeting.Meeting;
-import staffconnect.model.person.Person;
-import staffconnect.model.person.PersonUtil;
-
+import static java.util.Objects.requireNonNull;
 import static staffconnect.model.meeting.comparator.MeetingDateThenDescriptionComparator.MEETING_DATE_THEN_DESCRIPTION_COMPARATOR;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.util.Objects.requireNonNull;
+import staffconnect.logic.commands.exceptions.CommandException;
+import staffconnect.model.Model;
+import staffconnect.model.meeting.Meeting;
+import staffconnect.model.person.Person;
+import staffconnect.model.person.PersonUtil;
 
+/**
+ * deletes all meetings that are outdated.
+ * An outdated meeting refers to a meeting that starts before the user types in the command.
+ */
 public class RefreshCommand extends Command {
 
     public static final String COMMAND_WORD = "refresh";
@@ -27,6 +30,13 @@ public class RefreshCommand extends Command {
     public static final String REFRESH_NO_MODIFICATION = "Upcoming meetings successfully refreshed. "
             + "No meetings are outdated.";
 
+    /**
+     * Deletes all outdated meetings.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return The detailed information of all deleted meetings
+     * @throws CommandException if the execution is unsuccessful.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -49,7 +59,7 @@ public class RefreshCommand extends Command {
                     toDelete.add(meeting);
                     isModified = true;
                     isAnyPersonModified = true;
-                    deletedMeetings += newPerson.getName() + String.format(" (Index: %d) %s\n", i+1, meeting);
+                    deletedMeetings += newPerson.getName() + String.format(" (Index: %d) %s\n", i + 1, meeting);
                 }
             }
 
