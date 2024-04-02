@@ -17,19 +17,20 @@ public class PersonUtil {
      * Copies and returns a new Person with the data of {@code personToCopy}.
      */
     public static Person copyPerson(Person personToCopy) {
-        Name name = personToCopy.getName();
-        Phone phone = personToCopy.getPhone();
-        Email email = personToCopy.getEmail();
-        Module module = personToCopy.getModule();
-        Faculty faculty = personToCopy.getFaculty();
-        Venue venue = personToCopy.getVenue();
-        Set<Tag> tags = personToCopy.getTags();
-        Set<Availability> availabilities = personToCopy.getAvailabilities();
-        List<Meeting> meetings = personToCopy.getMeetings();
-        Favourite favourite = personToCopy.getFavourite();
+        Name copiedName = personToCopy.getName();
+        Phone copiedPhone = personToCopy.getPhone();
+        Email copiedEmail = personToCopy.getEmail();
+        Module copiedModule = personToCopy.getModule();
+        Faculty copiedFaculty = personToCopy.getFaculty();
+        Venue copiedVenue = personToCopy.getVenue();
+        Set<Tag> copiedTags = personToCopy.getTags();
+        Set<Availability> copiedAvailabilities = personToCopy.getAvailabilities();
+        List<Meeting> copiedMeetings = personToCopy.getMeetings();
+        Favourite copiedFavourite = personToCopy.getFavourite();
 
-        Person personToCreate = new Person(name, phone, email, module, faculty, venue, tags, availabilities, favourite);
-        personToCreate.setMeetings(meetings);
-        return personToCreate;
+        Person copiedPerson = new Person(copiedName, copiedPhone, copiedEmail, copiedModule, copiedFaculty, copiedVenue,
+                copiedTags, copiedAvailabilities, copiedFavourite);
+        copiedPerson.setMeetings(copiedMeetings);
+        return copiedPerson;
     }
 }
