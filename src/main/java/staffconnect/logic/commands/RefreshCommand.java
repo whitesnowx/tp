@@ -21,7 +21,7 @@ public class RefreshCommand extends Command {
 
     public static final String COMMAND_WORD = "refresh";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deltes all meetings that has already started.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes all meetings that has already started.\n"
             + "Example: " + COMMAND_WORD;
 
     public static final String REFRESH_SUCCESS = "Upcoming meetings successfully refreshed. "
