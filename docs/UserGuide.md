@@ -229,6 +229,19 @@ Examples:
 * `list` followed by `unmark 2` unmarks the 2nd person in the contacts.
 * `find Betsy` followed by `unmark 1` unmarks the 1st person in the results of the `find` command.
 
+### Refresh and clear all outdated meetings: `refresh`
+
+Deletes all meetings that start before the very moment the user types in the command and enters.
+
+Format: `refresh`
+
+* The deleted meetings will be explicitly printed again to the use, specifying content of the meeting and who "owns" the meeting.
+* If no meetings are deleted, there will no error thrown. Instead, a prompt will be given to user that no meeting is deleted.
+
+Examples:
+* If there is a meeting `French Revolution` that happened in `14/07/1789 12:00`, when the user types in `refresh`, it will be deleted.
+* If there is a meeting `Future Meeting` that will happen in `31/12/2999 12:00`, when the user types in `refresh`, it will not be deleted.
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the contacts.
