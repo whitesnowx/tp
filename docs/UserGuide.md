@@ -201,33 +201,33 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the contacts.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-### Marking a person as favourite: `mark`
+### Setting a person as favourite: `fav`
 
-Marks the specified person from the contacts as favourite.
+Sets the specified person from the contacts as favourite.
 
-Format: `mark INDEX`
+Format: `fav INDEX`
 
-* Marks the person at the specified `INDEX`.
+* Sets the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `mark 2` marks the 2nd person in the contacts.
-* `find Betsy` followed by `mark 1` marks the 1st person in the results of the `find` command.
+* `list` followed by `fav 2` sets the 2nd person as favourite in the contacts.
+* `find Betsy` followed by `fav 1` sets the 1st person as favourite in the results of the `find` command.
 
-### Unmarking a person as favourite: `unmark`
+### Removes a person as favourite: `unfav`
 
-Unmarks the specified person from the contacts as favourite.
+Removes the specified person from the contacts as favourite.
 
-Format: `unmark INDEX`
+Format: `unfav INDEX`
 
-* Unmarks the person at the specified `INDEX`.
+* Removes the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `unmark 2` unmarks the 2nd person in the contacts.
-* `find Betsy` followed by `unmark 1` unmarks the 1st person in the results of the `find` command.
+* `list` followed by `unfav 2` removes the 2nd person as favourite in the contacts.
+* `find Betsy` followed by `unfav 1` removes the 1st person as favourite in the results of the `find` command.
 
 ### Refresh and clear all outdated meetings: `refresh`
 
@@ -311,7 +311,7 @@ Action | Format, Examples
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Sort** | `sort [ATTRIBUTE]`<br> e.g., `sort p/`
 **Add Meeting** | `meeting INDEX [d/DESCRIPTION] [s/DATETIME]`<br> e.g., `meeting 1 d/ Meet for finals preparation s/ 12/04/2024 18:00`
-**Mark** | `mark INDEX`<br> e.g., `mark 3`
-**Unmark** | `unmark INDEX`<br> e.g., `unmark 3`
+**Set as Favourite** | `fav INDEX`<br> e.g., `fav 3`
+**Remove as Favourite** | `unfav INDEX`<br> e.g., `unfav 3`
 **List** | `list`
 **Help** | `help`
