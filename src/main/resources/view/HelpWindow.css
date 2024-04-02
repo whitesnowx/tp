@@ -1,19 +1,29 @@
+.root {
+    background-blue: #8489B6;
+    accent-blue: #404A72;
+    dark-accent-blue: derive(#404A72, -10%);
+    accent-yellow: #F8E9D1;
+    accent-light-blue:#CCDFEF;
+}
+
 #copyButton, #helpMessage {
-    -fx-text-fill: white;
+    -fx-text-fill: accent-yellow;
 }
 
 #copyButton {
-    -fx-background-color: dimgray;
+    -fx-background-color: accent-light-blue;
+    -fx-text-fill: accent-blue;
 }
 
 #copyButton:hover {
-    -fx-background-color: gray;
+    -fx-background-color: accent-blue;
+    -fx-text-fill: accent-yellow;
 }
 
 #copyButton:armed {
-    -fx-background-color: darkgray;
+    -fx-background-color: dark-accent-blue;
 }
 
 #helpMessageContainer {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: background-blue;
 }
