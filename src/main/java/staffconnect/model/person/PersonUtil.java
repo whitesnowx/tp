@@ -33,4 +33,23 @@ public class PersonUtil {
         copiedPerson.setMeetings(copiedMeetings);
         return copiedPerson;
     }
+
+    /**
+     * Creates and returns a new Person with the data of {@code selectedPerson} and given {@code favourite}.
+     */
+    public static Person createPersonWithFavouriteStatus(Person selectedPerson, Favourite favourite) {
+        Name name = selectedPerson.getName();
+        Phone phone = selectedPerson.getPhone();
+        Email email = selectedPerson.getEmail();
+        Module module = selectedPerson.getModule();
+        Faculty faculty = selectedPerson.getFaculty();
+        Venue venue = selectedPerson.getVenue();
+        Set<Tag> tags = selectedPerson.getTags();
+        Set<Availability> availabilities = selectedPerson.getAvailabilities();
+
+        Person createdPerson =
+                new Person(name, phone, email, module, faculty, venue, tags, availabilities, favourite);
+        createdPerson.setMeetings(selectedPerson.getMeetings());
+        return createdPerson;
+    }
 }
