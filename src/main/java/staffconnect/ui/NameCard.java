@@ -26,6 +26,7 @@ public class NameCard extends UiPart<Region> {
         super(FXML);
         id.setText(index + ".  ");
         name.setText(person.getName().fullName);
+        favourite.setStyle("-fx-text-fill: accent-orange");
         favourite.setText(person.getFavourite().toDisplayString() + " ");
     }
 
