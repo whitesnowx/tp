@@ -136,6 +136,15 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
+            if (commandResult.hasPersonAndIndex()) {
+                int index = commandResult.getIndex();
+                commandResult.getPersonToDisplay()
+                        .ifPresentOrElse(person -> reloadPersonCardWithPerson(new PersonCard(person), index),
+                                this::reloadPersonCardWithRoot);
+            } else {
+                reloadPersonCardWithRoot();
+            }
+
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
@@ -175,6 +184,16 @@ public class MainWindow extends UiPart<Stage> {
         personCardPanelPlaceholder.getChildren().add(personOnDisplay.getRoot());
 
         personListPanel.setListSelectedIndex(0);
+
+    }
+
+    private void reloadPersonCardWithPerson(PersonCard person, int index) {
+
+        personOnDisplay = person;
+        personCardPanelPlaceholder.getChildren().clear();
+        personCardPanelPlaceholder.getChildren().add(personOnDisplay.getRoot());
+
+        personListPanel.setListSelectedIndex(index);
 
     }
 
