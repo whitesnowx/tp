@@ -70,7 +70,7 @@ public class DeleteMeetingCommand extends Command {
         //force update the ui
         model.setPerson(personToSelect, editedPerson);
         return new CommandResult(String.format(MESSAGE_DELETE_MEETING_SUCCESS, Messages.format(meetingToSelect)),
-                editedPerson,targetPersonIndex.getZeroBased());
+                editedPerson, targetPersonIndex.getZeroBased());
     }
 
     @Override

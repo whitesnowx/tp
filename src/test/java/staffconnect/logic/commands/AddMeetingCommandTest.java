@@ -11,6 +11,7 @@ import static staffconnect.logic.commands.CommandTestUtil.VALID_MEETING_FINALS;
 import static staffconnect.logic.commands.CommandTestUtil.assertCommandFailure;
 import static staffconnect.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static staffconnect.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static staffconnect.model.meeting.comparator.MeetingDateThenDescriptionComparator.MEETING_DATE_THEN_DESCRIPTION_COMPARATOR;
 import static staffconnect.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static staffconnect.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static staffconnect.testutil.TypicalPersons.getTypicalStaffBook;
@@ -44,14 +45,21 @@ public class AddMeetingCommandTest {
 
     @Test
     public void execute_allFieldsValid_success() {
-        Person validPerson = buildValidPerson();
+
+        //Requires both filtered predicate to be the same
+        TEST_MODEL.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
 
         AddMeetingCommand addMeetingCommand = new AddMeetingCommand(INDEX_FIRST_PERSON, VALID_MEETING);
 
         String expectedMessage = String.format(AddMeetingCommand.MESSAGE_SUCCESS, Messages.format(VALID_MEETING));
 
         Model expectedModel = new ModelManager(new StaffBook(TEST_MODEL.getStaffBook()), new UserPrefs());
-        expectedModel.setPerson(TEST_MODEL.getSortedFilteredPersonList().get(0), validPerson);
+        expectedModel.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+
+        Person validPerson = buildValidPerson();
+        validPerson.addMeetings(VALID_MEETING);
+        validPerson.updateSortedMeetingList(MEETING_DATE_THEN_DESCRIPTION_COMPARATOR);
+        expectedModel.setPerson(expectedModel.getSortedFilteredPersonList().get(0), validPerson);
 
         assertCommandSuccess(addMeetingCommand, TEST_MODEL, expectedMessage, expectedModel);
     }
