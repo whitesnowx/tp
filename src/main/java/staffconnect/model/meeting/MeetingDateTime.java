@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Represents a Meeting's starting time in the staff book.
@@ -14,8 +15,10 @@ import java.util.List;
  */
 public class MeetingDateTime {
 
-    public static final String MESSAGE_CONSTRAINTS = "DateTime should be of the correct format and values dd/mm/yyyy "
-            + "HH:mm";
+    public static final String MESSAGE_CONSTRAINTS = "DateTime should be of the correct format and values\n"
+            + "accepted formats for dates include yyyy-MM-dd, yyyy-M-d, dd-MM-yyyy, yyyy-MM-d, "
+            + "d-MM-yyyy, d/MM/yyyy, dd/MM/yyyy, yyyy/MM/dd, yyyy/MM/d\n"
+            + "accepted formats for time include HH:mm, H:mm, HHmm";
     public static final String VALIDATION_REGEX = "\\d{2}/\\d{2}/\\d{4} \\d{2}:\\d{2}";
 
     private static final List<String> DATE_FORMATS = List.of(
@@ -33,10 +36,25 @@ public class MeetingDateTime {
     private static final List<String> TIME_FORMATS = List.of(
             "HH:mm",
             "H:mm",
-            "HHmm",
-            "hh:mm: a",
-            "h:mm a",
-            "hhmm a"
+            "HHmm"
+    );
+
+    private static final List<String> DATE_REGEXS = List.of(
+            "\\d{4}-\\d{2}-\\d{2}", // yyyy-MM-dd
+            "\\d{4}-\\d{1,2}-\\d{1,2}", // yyyy-M-d
+            "\\d{2}-\\d{2}-\\d{4}", // dd-MM-yyyy
+            "\\d{4}-\\d{2}-\\d{1,2}", // yyyy-MM-d
+            "\\d{1,2}-\\d{2}-\\d{4}", // d-MM-yyyy
+            "\\d{1,2}/\\d{2}/\\d{4}", // d/MM/yyyy
+            "\\d{2}/\\d{2}/\\d{4}", // dd/MM/yyyy
+            "\\d{4}/\\d{2}/\\d{2}", // yyyy/MM/dd
+            "\\d{4}/\\d{2}/\\d{1,2}" // yyyy/MM/d
+    );
+
+    private static final List<String> TIME_REGEXS = List.of(
+            "\\d{2}:\\d{2}", // HH:mm
+            "\\d{1,2}:\\d{2}", // H:mm
+            "\\d{2}\\d{2}" // HHmm
     );
 
     private static final DateTimeFormatter PROCESS_FORMAT =
@@ -52,24 +70,49 @@ public class MeetingDateTime {
     public MeetingDateTime(String date) {
         requireNonNull(date);
         checkArgument(isValidMeetDateTime(date), MESSAGE_CONSTRAINTS);
-        value = java.time.LocalDateTime.parse(date, PROCESS_FORMAT);
+        value = parse(date);
     }
 
     /**
      * Returns true if a given string is a valid date.
      */
     public static boolean isValidMeetDateTime(String test) {
-        return test.matches(VALIDATION_REGEX) && isParsable(test);
+        for (int i = 0; i < DATE_FORMATS.size(); i++) {
+            for (int j = 0; j < TIME_FORMATS.size(); j++) {
+                String regex = DATE_REGEXS.get(i)+" "+TIME_REGEXS.get(j);
+                String format = DATE_FORMATS.get(i) + " " + TIME_FORMATS.get(j);
+                if (test.matches(regex) && isParsable(test, format)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     //Wrapper method only unique to this class
-    private static boolean isParsable(String test) {
+    private static boolean isParsable(String test, String format) {
         try {
-            LocalDateTime.parse(test, PROCESS_FORMAT);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format, Locale.ENGLISH);
+            LocalDateTime.parse(test, formatter);
         } catch (DateTimeParseException e) {
             return false;
         }
         return true;
+    }
+
+    private static LocalDateTime parse(String date) {
+        for (String dateFormat : DATE_FORMATS) {
+            for (String timeFormat : TIME_FORMATS) {
+                String format = dateFormat + " " + timeFormat;
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format, Locale.ENGLISH);
+                try {
+                    return java.time.LocalDateTime.parse(date, formatter);
+                } catch (DateTimeParseException e) {
+                    continue;
+                }
+            }
+        }
+        throw new IllegalArgumentException();
     }
 
     public LocalDateTime getDateTime() {
