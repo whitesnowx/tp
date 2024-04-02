@@ -56,7 +56,7 @@ public class FilterCommandTest {
         expectedModel.updateFilteredPersonList(
                 modulePredicate.and(emptyFacultyPredicate.and(emptyTagsPredicate.and(emptyAvailabilitiesPredicate))));
         assertCommandSuccess(command, model, expectedMessage, model);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+        assertEquals(Collections.emptyList(), model.getSortedFilteredPersonList());
     }
 
     @Test
@@ -68,7 +68,7 @@ public class FilterCommandTest {
         expectedModel.updateFilteredPersonList(
                 modulePredicate.and(emptyFacultyPredicate.and(emptyTagsPredicate.and(emptyAvailabilitiesPredicate))));
         assertCommandSuccess(command, model, expectedMessage, model);
-        assertEquals(Arrays.asList(CLARA, GEORGE, KAFKA, NATASHA), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(CLARA, GEORGE, KAFKA, NATASHA), model.getSortedFilteredPersonList());
     }
 
     @Test
@@ -80,7 +80,7 @@ public class FilterCommandTest {
         expectedModel.updateFilteredPersonList(
                 emptyModulePredicate.and(facultyPredicate.and(emptyTagsPredicate.and(emptyAvailabilitiesPredicate))));
         assertCommandSuccess(command, model, expectedMessage, model);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+        assertEquals(Collections.emptyList(), model.getSortedFilteredPersonList());
     }
 
     @Test
@@ -92,8 +92,8 @@ public class FilterCommandTest {
         expectedModel.updateFilteredPersonList(
                 emptyModulePredicate.and(facultyPredicate.and(emptyTagsPredicate.and(emptyAvailabilitiesPredicate))));
         assertCommandSuccess(command, model, expectedMessage, model);
-        assertEquals(Arrays.asList(ALICE, BENSON, CARL, CLARA, DANIEL, ELLE, FIONA, GEORGE, NATASHA),
-                model.getFilteredPersonList());
+        assertEquals(Arrays.asList(BENSON, CARL, CLARA, ALICE, DANIEL, ELLE, FIONA, GEORGE, NATASHA),
+                model.getSortedFilteredPersonList());
     }
 
     @Test
@@ -105,7 +105,7 @@ public class FilterCommandTest {
         expectedModel.updateFilteredPersonList(
                 emptyModulePredicate.and(emptyFacultyPredicate.and(tagsPredicate.and(emptyAvailabilitiesPredicate))));
         assertCommandSuccess(command, model, expectedMessage, model);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+        assertEquals(Collections.emptyList(), model.getSortedFilteredPersonList());
     }
 
     @Test
@@ -117,7 +117,7 @@ public class FilterCommandTest {
         expectedModel.updateFilteredPersonList(
                 emptyModulePredicate.and(emptyFacultyPredicate.and(tagsPredicate.and(emptyAvailabilitiesPredicate))));
         assertCommandSuccess(command, model, expectedMessage, model);
-        assertEquals(Arrays.asList(ALICE, BENSON, DANIEL), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(BENSON, ALICE, DANIEL), model.getSortedFilteredPersonList());
     }
 
     @Test
@@ -129,7 +129,7 @@ public class FilterCommandTest {
         expectedModel.updateFilteredPersonList(
                 emptyModulePredicate.and(emptyFacultyPredicate.and(emptyTagsPredicate.and(availabilitiesPredicate))));
         assertCommandSuccess(command, model, expectedMessage, model);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+        assertEquals(Collections.emptyList(), model.getSortedFilteredPersonList());
     }
 
     @Test
@@ -141,7 +141,7 @@ public class FilterCommandTest {
         expectedModel.updateFilteredPersonList(
                 emptyModulePredicate.and(emptyFacultyPredicate.and(emptyTagsPredicate.and(availabilitiesPredicate))));
         assertCommandSuccess(command, model, expectedMessage, model);
-        assertEquals(Arrays.asList(CLARA, DANIEL, KAFKA, NATASHA), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(CLARA, DANIEL, KAFKA, NATASHA), model.getSortedFilteredPersonList());
     }
 
     @Test
@@ -154,7 +154,7 @@ public class FilterCommandTest {
         expectedModel.updateFilteredPersonList(
                 modulePredicate.and(emptyFacultyPredicate.and(tagsPredicate.and(emptyAvailabilitiesPredicate))));
         assertCommandSuccess(command, model, expectedMessage, model);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+        assertEquals(Collections.emptyList(), model.getSortedFilteredPersonList());
     }
 
     @Test
@@ -167,7 +167,7 @@ public class FilterCommandTest {
         expectedModel.updateFilteredPersonList(
                 modulePredicate.and(emptyFacultyPredicate.and(tagsPredicate.and(emptyAvailabilitiesPredicate))));
         assertCommandSuccess(command, model, expectedMessage, model);
-        assertEquals(Arrays.asList(CLARA, KAFKA, NATASHA), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(CLARA, KAFKA, NATASHA), model.getSortedFilteredPersonList());
     }
 
     @Test
@@ -180,7 +180,7 @@ public class FilterCommandTest {
         expectedModel.updateFilteredPersonList(
                 modulePredicate.and(facultyPredicate.and(emptyTagsPredicate.and(emptyAvailabilitiesPredicate))));
         assertCommandSuccess(command, model, expectedMessage, model);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+        assertEquals(Collections.emptyList(), model.getSortedFilteredPersonList());
     }
 
     @Test
@@ -193,7 +193,7 @@ public class FilterCommandTest {
         expectedModel.updateFilteredPersonList(
                 modulePredicate.and(facultyPredicate.and(emptyTagsPredicate.and(emptyAvailabilitiesPredicate))));
         assertCommandSuccess(command, model, expectedMessage, model);
-        assertEquals(Arrays.asList(CLARA, GEORGE, NATASHA), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(CLARA, GEORGE, NATASHA), model.getSortedFilteredPersonList());
     }
 
     @Test
@@ -206,7 +206,7 @@ public class FilterCommandTest {
         expectedModel.updateFilteredPersonList(
                 modulePredicate.and(emptyFacultyPredicate.and(emptyTagsPredicate.and(availabilitiesPredicate))));
         assertCommandSuccess(command, model, expectedMessage, model);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+        assertEquals(Collections.emptyList(), model.getSortedFilteredPersonList());
     }
 
     @Test
@@ -219,7 +219,7 @@ public class FilterCommandTest {
         expectedModel.updateFilteredPersonList(
                 modulePredicate.and(emptyFacultyPredicate.and(emptyTagsPredicate.and(availabilitiesPredicate))));
         assertCommandSuccess(command, model, expectedMessage, model);
-        assertEquals(Arrays.asList(CLARA, KAFKA, NATASHA), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(CLARA, KAFKA, NATASHA), model.getSortedFilteredPersonList());
     }
 
     @Test
@@ -232,7 +232,7 @@ public class FilterCommandTest {
         expectedModel.updateFilteredPersonList(
                 emptyModulePredicate.and(facultyPredicate.and(tagsPredicate.and(emptyAvailabilitiesPredicate))));
         assertCommandSuccess(command, model, expectedMessage, model);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+        assertEquals(Collections.emptyList(), model.getSortedFilteredPersonList());
     }
 
     @Test
@@ -245,7 +245,7 @@ public class FilterCommandTest {
         expectedModel.updateFilteredPersonList(
                 emptyModulePredicate.and(facultyPredicate.and(tagsPredicate.and(emptyAvailabilitiesPredicate))));
         assertCommandSuccess(command, model, expectedMessage, model);
-        assertEquals(Arrays.asList(ALICE, BENSON, DANIEL), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(BENSON, ALICE, DANIEL), model.getSortedFilteredPersonList());
     }
 
     @Test
@@ -258,7 +258,7 @@ public class FilterCommandTest {
         expectedModel.updateFilteredPersonList(
                 emptyModulePredicate.and(facultyPredicate.and(emptyTagsPredicate.and(availabilitiesPredicate))));
         assertCommandSuccess(command, model, expectedMessage, model);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+        assertEquals(Collections.emptyList(), model.getSortedFilteredPersonList());
     }
 
     @Test
@@ -271,7 +271,7 @@ public class FilterCommandTest {
         expectedModel.updateFilteredPersonList(
                 emptyModulePredicate.and(facultyPredicate.and(emptyTagsPredicate.and(availabilitiesPredicate))));
         assertCommandSuccess(command, model, expectedMessage, model);
-        assertEquals(Arrays.asList(CLARA, DANIEL, NATASHA), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(CLARA, DANIEL, NATASHA), model.getSortedFilteredPersonList());
     }
 
     @Test
@@ -284,7 +284,7 @@ public class FilterCommandTest {
         expectedModel.updateFilteredPersonList(
                 emptyModulePredicate.and(emptyFacultyPredicate.and(tagsPredicate.and(availabilitiesPredicate))));
         assertCommandSuccess(command, model, expectedMessage, model);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+        assertEquals(Collections.emptyList(), model.getSortedFilteredPersonList());
     }
 
     @Test
@@ -297,7 +297,7 @@ public class FilterCommandTest {
         expectedModel.updateFilteredPersonList(
                 emptyModulePredicate.and(emptyFacultyPredicate.and(tagsPredicate.and(availabilitiesPredicate))));
         assertCommandSuccess(command, model, expectedMessage, model);
-        assertEquals(Arrays.asList(CLARA, KAFKA, NATASHA), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(CLARA, KAFKA, NATASHA), model.getSortedFilteredPersonList());
     }
 
     @Test
@@ -311,7 +311,7 @@ public class FilterCommandTest {
         expectedModel.updateFilteredPersonList(
                 modulePredicate.and(facultyPredicate.and(tagsPredicate.and(emptyAvailabilitiesPredicate))));
         assertCommandSuccess(command, model, expectedMessage, model);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+        assertEquals(Collections.emptyList(), model.getSortedFilteredPersonList());
     }
 
     @Test
@@ -325,7 +325,7 @@ public class FilterCommandTest {
         expectedModel.updateFilteredPersonList(
                 modulePredicate.and(facultyPredicate.and(tagsPredicate.and(emptyAvailabilitiesPredicate))));
         assertCommandSuccess(command, model, expectedMessage, model);
-        assertEquals(Arrays.asList(CLARA, NATASHA), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(CLARA, NATASHA), model.getSortedFilteredPersonList());
     }
 
     @Test
@@ -339,7 +339,7 @@ public class FilterCommandTest {
         expectedModel.updateFilteredPersonList(
                 modulePredicate.and(facultyPredicate.and(emptyTagsPredicate.and(availabilitiesPredicate))));
         assertCommandSuccess(command, model, expectedMessage, model);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+        assertEquals(Collections.emptyList(), model.getSortedFilteredPersonList());
     }
 
     @Test
@@ -353,7 +353,7 @@ public class FilterCommandTest {
         expectedModel.updateFilteredPersonList(
                 modulePredicate.and(facultyPredicate.and(emptyTagsPredicate.and(availabilitiesPredicate))));
         assertCommandSuccess(command, model, expectedMessage, model);
-        assertEquals(Arrays.asList(CLARA, NATASHA), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(CLARA, NATASHA), model.getSortedFilteredPersonList());
     }
 
     @Test
@@ -367,7 +367,7 @@ public class FilterCommandTest {
         expectedModel.updateFilteredPersonList(
                 modulePredicate.and(emptyFacultyPredicate.and(tagsPredicate.and(availabilitiesPredicate))));
         assertCommandSuccess(command, model, expectedMessage, model);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+        assertEquals(Collections.emptyList(), model.getSortedFilteredPersonList());
     }
 
     @Test
@@ -381,7 +381,7 @@ public class FilterCommandTest {
         expectedModel.updateFilteredPersonList(
                 modulePredicate.and(emptyFacultyPredicate.and(tagsPredicate.and(availabilitiesPredicate))));
         assertCommandSuccess(command, model, expectedMessage, model);
-        assertEquals(Arrays.asList(CLARA, KAFKA, NATASHA), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(CLARA, KAFKA, NATASHA), model.getSortedFilteredPersonList());
     }
 
     @Test
@@ -395,7 +395,7 @@ public class FilterCommandTest {
         expectedModel.updateFilteredPersonList(
                 emptyModulePredicate.and(facultyPredicate.and(tagsPredicate.and(availabilitiesPredicate))));
         assertCommandSuccess(command, model, expectedMessage, model);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+        assertEquals(Collections.emptyList(), model.getSortedFilteredPersonList());
     }
 
     @Test
@@ -409,7 +409,7 @@ public class FilterCommandTest {
         expectedModel.updateFilteredPersonList(
                 emptyModulePredicate.and(facultyPredicate.and(tagsPredicate.and(availabilitiesPredicate))));
         assertCommandSuccess(command, model, expectedMessage, model);
-        assertEquals(Arrays.asList(CLARA, NATASHA), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(CLARA, NATASHA), model.getSortedFilteredPersonList());
     }
 
     @Test
