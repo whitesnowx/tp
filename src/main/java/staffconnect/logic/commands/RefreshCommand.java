@@ -24,7 +24,7 @@ public class RefreshCommand extends Command {
     public static final String REFRESH_SUCCESS = "Upcoming meetings successfully refreshed. "
             + "All outdated meetings are deleted.";
 
-    public static final String REFRESH_NO_MODIFICATION = "Upcoming meetinns successfully refreshed. "
+    public static final String REFRESH_NO_MODIFICATION = "Upcoming meetings successfully refreshed. "
             + "No meetings are outdated.";
 
     @Override
@@ -63,7 +63,7 @@ public class RefreshCommand extends Command {
         }
         if (isAnyPersonModified) {
             return new CommandResult(String.format("%s\n%s\n%s", REFRESH_SUCCESS,
-                    "The following meetings are deleted", deletedMeetings));
+                    "The following meeting(s) is(are) deleted", deletedMeetings));
         } else {
             return new CommandResult(REFRESH_NO_MODIFICATION);
         }
