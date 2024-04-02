@@ -23,26 +23,26 @@ import staffconnect.model.person.Venue;
 import staffconnect.model.tag.Tag;
 
 /**
- * Marks a person as favourite in the staff book.
+ * Sets a person as favourite in the staff book.
  */
-public class MarkCommand extends Command {
+public class FavCommand extends Command {
 
-    public static final String COMMAND_WORD = "mark";
+    public static final String COMMAND_WORD = "fav";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks a person as favourite in the staff book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sets a person as favourite in the staff book. "
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_MARK_PERSON_SUCCESS = "Person marked as favourite: %1$s";
+    public static final String MESSAGE_SET_PERSON_FAVOURITE_SUCCESS = "Person set as favourite: %1$s";
 
-    public static final String MESSAGE_DUPLICATE_MARK = "This person has already been marked in the staff book.";
+    public static final String MESSAGE_DUPLICATE_FAV = "This person is already your favourite in the staff book.";
 
     private final Index targetIndex;
 
     /**
-     * @param targetIndex of the person in the filtered person list to mark.
+     * @param targetIndex of the person in the filtered person list to set as favourite.
      */
-    public MarkCommand(Index targetIndex) {
+    public FavCommand(Index targetIndex) {
         requireNonNull(targetIndex);
 
         this.targetIndex = targetIndex;
@@ -57,39 +57,39 @@ public class MarkCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToMark = lastShownList.get(targetIndex.getZeroBased());
+        Person personToFav = lastShownList.get(targetIndex.getZeroBased());
 
-        if (personToMark.getFavourite().hasFavourite()) {
-            throw new CommandException(MESSAGE_DUPLICATE_MARK);
+        if (personToFav.getFavourite().hasFavourite()) {
+            throw new CommandException(MESSAGE_DUPLICATE_FAV);
         }
 
-        Person markedPerson = createMarkedPerson(personToMark);
+        Person favPerson = createFavPerson(personToFav);
 
-        model.setPerson(personToMark, markedPerson);
+        model.setPerson(personToFav, favPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_MARK_PERSON_SUCCESS, Messages.format(markedPerson)));
+        return new CommandResult(String.format(MESSAGE_SET_PERSON_FAVOURITE_SUCCESS, Messages.format(favPerson)));
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToMark}.
+     * Creates and returns a {@code Person} with the details of {@code personToFav}.
      */
-    private static Person createMarkedPerson(Person personToMark) {
-        assert personToMark != null;
+    private static Person createFavPerson(Person personToFav) {
+        assert personToFav != null;
 
-        Name name = personToMark.getName();
-        Phone phone = personToMark.getPhone();
-        Email email = personToMark.getEmail();
-        Module module = personToMark.getModule();
-        Faculty faculty = personToMark.getFaculty();
-        Venue venue = personToMark.getVenue();
-        Set<Tag> tags = personToMark.getTags();
-        Set<Availability> availabilities = personToMark.getAvailabilities();
+        Name name = personToFav.getName();
+        Phone phone = personToFav.getPhone();
+        Email email = personToFav.getEmail();
+        Module module = personToFav.getModule();
+        Faculty faculty = personToFav.getFaculty();
+        Venue venue = personToFav.getVenue();
+        Set<Tag> tags = personToFav.getTags();
+        Set<Availability> availabilities = personToFav.getAvailabilities();
         Favourite updatedFavourite = new Favourite(true);
 
-        Person markedPerson =
+        Person favPerson =
                 new Person(name, phone, email, module, faculty, venue, tags, availabilities, updatedFavourite);
-        markedPerson.setMeetings(personToMark.getMeetings());
-        return markedPerson;
+        favPerson.setMeetings(personToFav.getMeetings());
+        return favPerson;
     }
 
     @Override
@@ -99,12 +99,12 @@ public class MarkCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof MarkCommand)) {
+        if (!(other instanceof FavCommand)) {
             return false;
         }
 
-        MarkCommand otherMarkCommand = (MarkCommand) other;
-        return targetIndex.equals(otherMarkCommand.targetIndex);
+        FavCommand otherFavCommand = (FavCommand) other;
+        return targetIndex.equals(otherFavCommand.targetIndex);
     }
 
     @Override
