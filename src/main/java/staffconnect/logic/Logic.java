@@ -1,6 +1,7 @@
 package staffconnect.logic;
 
 import java.nio.file.Path;
+import java.util.Optional;
 
 import javafx.collections.ObservableList;
 import staffconnect.commons.core.GuiSettings;
@@ -32,6 +33,9 @@ public interface Logic {
 
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();
+
+    /** Returns the first person if it exists. */
+    Optional<Person> getFirstPersonIfExist();
 
     /**
      * Returns the user prefs' StaffConnect file path.

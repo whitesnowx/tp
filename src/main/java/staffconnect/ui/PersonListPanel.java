@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Region;
 import staffconnect.commons.core.LogsCenter;
 import staffconnect.model.person.Person;
@@ -23,16 +24,49 @@ public class PersonListPanel extends UiPart<Region> {
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
-    public PersonListPanel(ObservableList<Person> personList) {
+    public PersonListPanel(ObservableList<Person> personList, PersonDisplay personDisplay) {
         super(FXML);
         personListView.setItems(personList);
-        personListView.setCellFactory(listView -> new PersonListViewCell());
+        personListView.setCellFactory(listView -> new NameListViewCell());
+        personListView.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                personDisplay.changePersonCard(new PersonCard(personListView.getSelectionModel().getSelectedItem()));
+            }
+        });
+        personListView.setOnMouseClicked(event -> {
+            personDisplay.changePersonCard(new PersonCard(personListView.getSelectionModel().getSelectedItem()));
+        });
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
+     * Changes the current highlighted selection item in the personListPanel.
+     * Only for internal use by the UI.
+     * @param index to change the selection to.
      */
-    class PersonListViewCell extends ListCell<Person> {
+    public void setListSelectedIndex(int index) {
+        // guard clause to prevent invalid index
+        if (index >= 0 && index < personListView.getItems().size()) {
+            personListView.getSelectionModel().clearAndSelect(index);
+        }
+
+    }
+
+    /**
+     * Represents a function that can change PersonCard.
+     */
+    @FunctionalInterface
+    public interface PersonDisplay {
+
+        /**
+         * Executes the changes to the person
+         */
+        void changePersonCard(PersonCard toChange);
+    }
+
+    /**
+     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code NameCard}.
+     */
+    class NameListViewCell extends ListCell<Person> {
         @Override
         protected void updateItem(Person person, boolean empty) {
             super.updateItem(person, empty);
@@ -41,9 +75,10 @@ public class PersonListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new PersonCard(person, getIndex() + 1).getRoot());
+                setGraphic(new NameCard(person, getIndex() + 1).getRoot());
             }
         }
     }
+
 
 }
