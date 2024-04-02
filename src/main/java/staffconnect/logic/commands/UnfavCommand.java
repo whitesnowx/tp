@@ -23,26 +23,27 @@ import staffconnect.model.person.Venue;
 import staffconnect.model.tag.Tag;
 
 /**
- * Unmarks a person as favourite in the staff book.
+ * Removes a person as favourite in the staff book.
  */
-public class UnmarkCommand extends Command {
+public class UnfavCommand extends Command {
 
-    public static final String COMMAND_WORD = "unmark";
+    public static final String COMMAND_WORD = "unfav";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Unmarks a person as favourite in the staff book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes a person as favourite in the staff book. "
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_UNMARK_PERSON_SUCCESS = "Person unmarked as favourite: %1$s";
+    public static final String MESSAGE_REMOVE_PERSON_FAVOURITE_SUCCESS = "Person removed as favourite: %1$s";
 
-    public static final String MESSAGE_DUPLICATE_UNMARK = "This person has already been unmarked in the staff book.";
+    public static final String MESSAGE_DUPLICATE_UNFAV = "This person is already no longer your favourite "
+            + "in the staff book.";
 
     private final Index targetIndex;
 
     /**
-     * @param targetIndex of the person in the filtered person list to unmark.
+     * @param targetIndex of the person in the filtered person list to remove as favourite.
      */
-    public UnmarkCommand(Index targetIndex) {
+    public UnfavCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
@@ -55,39 +56,39 @@ public class UnmarkCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToUnmark = lastShownList.get(targetIndex.getZeroBased());
+        Person personToUnfav = lastShownList.get(targetIndex.getZeroBased());
 
-        if (!personToUnmark.getFavourite().hasFavourite()) {
-            throw new CommandException(MESSAGE_DUPLICATE_UNMARK);
+        if (!personToUnfav.getFavourite().hasFavourite()) {
+            throw new CommandException(MESSAGE_DUPLICATE_UNFAV);
         }
 
-        Person unmarkedPerson = createUnmarkedPerson(personToUnmark);
+        Person unfavPerson = createUnmarkedPerson(personToUnfav);
 
-        model.setPerson(personToUnmark, unmarkedPerson);
+        model.setPerson(personToUnfav, unfavPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_UNMARK_PERSON_SUCCESS, Messages.format(unmarkedPerson)));
+        return new CommandResult(String.format(MESSAGE_REMOVE_PERSON_FAVOURITE_SUCCESS, Messages.format(unfavPerson)));
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToUnmark}.
+     * Creates and returns a {@code Person} with the details of {@code personToUnfav}.
      */
-    private static Person createUnmarkedPerson(Person personToUnmark) {
-        assert personToUnmark != null;
+    private static Person createUnmarkedPerson(Person personToUnfav) {
+        assert personToUnfav != null;
 
-        Name name = personToUnmark.getName();
-        Phone phone = personToUnmark.getPhone();
-        Email email = personToUnmark.getEmail();
-        Module module = personToUnmark.getModule();
-        Faculty faculty = personToUnmark.getFaculty();
-        Venue venue = personToUnmark.getVenue();
-        Set<Tag> tags = personToUnmark.getTags();
-        Set<Availability> availabilities = personToUnmark.getAvailabilities();
+        Name name = personToUnfav.getName();
+        Phone phone = personToUnfav.getPhone();
+        Email email = personToUnfav.getEmail();
+        Module module = personToUnfav.getModule();
+        Faculty faculty = personToUnfav.getFaculty();
+        Venue venue = personToUnfav.getVenue();
+        Set<Tag> tags = personToUnfav.getTags();
+        Set<Availability> availabilities = personToUnfav.getAvailabilities();
         Favourite updatedFavourite = new Favourite(false);
 
-        Person unmarkedPerson =
+        Person unfavPerson =
                 new Person(name, phone, email, module, faculty, venue, tags, availabilities, updatedFavourite);
-        unmarkedPerson.setMeetings(personToUnmark.getMeetings());
-        return unmarkedPerson;
+        unfavPerson.setMeetings(personToUnfav.getMeetings());
+        return unfavPerson;
     }
 
     @Override
@@ -97,12 +98,12 @@ public class UnmarkCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof UnmarkCommand)) {
+        if (!(other instanceof UnfavCommand)) {
             return false;
         }
 
-        UnmarkCommand otherUnmarkCommand = (UnmarkCommand) other;
-        return targetIndex.equals(otherUnmarkCommand.targetIndex);
+        UnfavCommand otherUnfavCommand = (UnfavCommand) other;
+        return targetIndex.equals(otherUnfavCommand.targetIndex);
     }
 
     @Override

@@ -1,15 +1,24 @@
 package staffconnect.ui;
 
 import java.util.Comparator;
+import java.util.List;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.geometry.Orientation;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ScrollBar;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.SplitPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import staffconnect.model.meeting.Meeting;
 import staffconnect.model.person.Person;
 
@@ -19,8 +28,10 @@ import staffconnect.model.person.Person;
 public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
-    private static final int ROW_HEIGHT = 33; //row height of each meeting
 
+    private static final int ROW_HEIGHT = 60; //row height of each meeting
+
+    private static final int LABEL_MEETING_WIDTH = 10; //the width of the meeting label
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
      * As a consequence, UI elements' variable names cannot be set to such keywords
@@ -30,13 +41,10 @@ public class PersonCard extends UiPart<Region> {
      */
 
     public final Person person;
-
     @FXML
     private HBox cardPane;
     @FXML
-    private Label name;
-    @FXML
-    private Label id;
+    private Text name;
     @FXML
     private Label phone;
     @FXML
@@ -53,24 +61,52 @@ public class PersonCard extends UiPart<Region> {
     private FlowPane availabilities;
     @FXML
     private ListView<Meeting> meetingListView;
-    @FXML
-    private Label favourite;
 
+    @FXML
+    private VBox displayMeetings;
+
+    @FXML
+    private SplitPane splitDisplay;
+
+    @FXML
+    private VBox displayPane;
+
+    @FXML
+    private VBox detailsCard;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code PersonCard} with an empty card that displays nothing.
      */
-    public PersonCard(Person person, int displayedIndex) {
+    public PersonCard() {
+        super(FXML);
+        this.person = null;
+
+        name.setText("");
+        phone.setText("");
+        faculty.setText("");
+        venue.setText("");
+        module.setText("");
+        email.setText("");
+
+        meetingListView.setCellFactory(listView -> new MeetingsListViewCell());
+
+    }
+
+    /**
+     * Creates a {@code PersonCard} with the given {@code Person} and index to display.
+     */
+    public PersonCard(Person person) {
         super(FXML);
         this.person = person;
 
-        id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
+        name.setTextAlignment(TextAlignment.JUSTIFY);
+        name.setWrappingWidth(1000);
         phone.setText(person.getPhone().value);
-        faculty.setText(person.getFaculty().toString());
-        venue.setText(person.getVenue().value);
-        module.setText(person.getModule().value);
-        email.setText(person.getEmail().value);
+        faculty.setText("Faculty:  " + person.getFaculty().toString());
+        venue.setText("Venue:  " + person.getVenue().value);
+        module.setText("Module:  " + person.getModule().value);
+        email.setText("Email:  " + person.getEmail().value);
 
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
@@ -82,20 +118,91 @@ public class PersonCard extends UiPart<Region> {
 
         ObservableList<Meeting> meetingsList = person.getFilteredMeetings();
 
-        //This is probably only feasible workaround for now without messing or revamping UI.
-        //To set the correct height
-        meetingListView.setPrefHeight((meetingsList.size() * ROW_HEIGHT) + 10);
 
+        setUpMeetingListView(meetingsList);
+
+        setUpScrollPane(displayPane, detailsCard, false, false, new Region());
+
+        setUpScrollPane(displayMeetings, meetingListView, true, true, displayMeetings);
+
+    }
+
+    private void setUpMeetingListView(ObservableList<Meeting> meetingsList) {
+
+        meetingListView.setFocusTraversable(false);
         meetingListView.setItems(meetingsList);
         meetingListView.setCellFactory(listView -> new MeetingsListViewCell());
+        //Work around to set the correct height and width of the nested list view.
+        meetingListView.setPrefHeight((meetingsList.size() * ROW_HEIGHT) + 100);
+        meetingListView.setPrefWidth(getLongestWidth(meetingsList));
+        meetingListView.setFocusTraversable(false);
+        meetingListView.setMouseTransparent(true);
+    }
 
-        favourite.setText(person.getFavourite().toDisplayString());
+    private double getLongestWidth(List<Meeting> meetingList) {
+        double maxWidth = 0;
+        for (Meeting meet : meetingList) {
+
+            //200 is to account for the default spacing within the items
+            double currentWidth = (meet.getDescription().description.length() + meet.getStartDate().toString().length())
+                    * LABEL_MEETING_WIDTH + 200;
+
+            if (currentWidth > maxWidth) {
+                maxWidth = currentWidth;
+            }
+        }
+        return maxWidth;
+    }
+
+    private void setUpScrollPane(VBox display, Region content, boolean enableHbar, boolean swap, Region swapRegion) {
+        ScrollPane scrollPane = new ScrollPane();
+        scrollPane.setContent(content);
+        //Custom vertical scroll bar on the left
+        // Inspired from:
+        // https://stackoverflow.com/questions/35134155/move-the-vertical-scroll-bar-of-a-scroll-panel-to-the-left-side
+        ScrollBar vScrollBar = new ScrollBar();
+        vScrollBar.setPrefWidth(1);
+        vScrollBar.setOrientation(Orientation.VERTICAL);
+        vScrollBar.minProperty().bind(scrollPane.vminProperty());
+        vScrollBar.maxProperty().bind(scrollPane.vmaxProperty());
+        if (swap) {
+            vScrollBar.visibleAmountProperty().bind(scrollPane.heightProperty().divide(swapRegion.heightProperty()));
+        } else {
+            vScrollBar.visibleAmountProperty().bind(scrollPane.heightProperty().divide(content.heightProperty()));
+        }
+        scrollPane.vvalueProperty().bindBidirectional(vScrollBar.valueProperty());
+
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        HBox hBox = new HBox();
+        HBox.setHgrow(scrollPane, Priority.ALWAYS);
+        hBox.getChildren().addAll(vScrollBar, scrollPane);
+
+        VBox.setVgrow(hBox, Priority.ALWAYS);
+
+        if (enableHbar) {
+            ScrollBar hScrollBar = new ScrollBar();
+            hScrollBar.setOrientation(Orientation.HORIZONTAL);
+            hScrollBar.minProperty().bind(scrollPane.hminProperty());
+            hScrollBar.maxProperty().bind(scrollPane.hmaxProperty());
+            if (swap) {
+                hScrollBar.visibleAmountProperty().bind(scrollPane.widthProperty().divide(swapRegion.widthProperty()));
+            } else {
+                hScrollBar.visibleAmountProperty().bind(scrollPane.widthProperty().divide(content.widthProperty()));
+            }
+            scrollPane.hvalueProperty().bindBidirectional(hScrollBar.valueProperty());
+
+            scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+            display.getChildren().addAll(hScrollBar, hBox);
+        } else {
+            display.getChildren().add(hBox);
+        }
     }
 
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Meetings} using a {@code MeetingsCard}.
      */
     private static class MeetingsListViewCell extends ListCell<Meeting> {
+
         @Override
         protected void updateItem(Meeting meeting, boolean empty) {
             super.updateItem(meeting, empty);
