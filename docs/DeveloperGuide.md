@@ -267,23 +267,23 @@ The following activity diagram summarizes what happens when a user executes a ne
 #### Design considerations:
 **Aspect: Determining order of sorting of an attribute:**
 
-* **Current Design:** Use a configured comparator for each attribute in ascending order.
-    * Pros: Controlled and more simple for user.
-    * Cons: Less flexibility and unable to do more advance sorting such as multiple attributes. We must implement a comparator for each attribute used for sorting.
-
-* **Alternative 1:** Get order of sorting from user, prompting for an input in the form of toCompare.
+* **Current Design:** Get order of sorting from user, prompting for an input in the form of toCompare.
     * Pros: More functionality and more suited to the user's needs.
     * Cons: Harder to implement and guide user to use, may have more leeway for error. User unlikely to use this advancement.
 
+* **Alternative 1:** Use a configured comparator for each attribute in ascending order.
+    * Pros: Controlled and more simple for user.
+    * Cons: Less flexibility and unable to do more advance sorting such as multiple attributes. We must implement a comparator for each attribute used for sorting.
+
 **Aspect: Number of Attribute:**
 
-* **Current Design:** Only 1 attribute per sort.
-    * Pros: Easy to implement, controlled and less likely to be used incorrectly. This increase ease of use for users.
-    * Cons: Limited sorting and lesser functionality.
-
-* **Alternative 1:** 1 or more attribute per sort.
+* **Current Design:** 1 or more attribute per sort.
     * Pros: More functionality, more advanced view of contacts.
     * Cons: Harder to implement, order of prefix affects priority of attribute and have to specify to user.
+
+* **Alternative 1:** Only 1 attribute per sort.
+    * Pros: Easy to implement, controlled and less likely to be used incorrectly. This increase ease of use for users.
+    * Cons: Limited sorting and lesser functionality.
 
 ### Find feature
 
