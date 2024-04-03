@@ -42,6 +42,7 @@ public class MeetingListComparatorTest {
         assertEquals(MEETING_LIST_COMPARATOR.compare(ALICE, BENSON), 0);
 
         BENSON.removeMeeting(meetingDay1A);
+        assert BENSON.getMeetings().isEmpty();
         BENSON.addMeetings(meetingDay1B);
 
         // same Date but different Description (AA, 01/10/1111 11:11) < (BB, 01/10/1111 11:11)
@@ -50,6 +51,7 @@ public class MeetingListComparatorTest {
         assertTrue(MEETING_LIST_COMPARATOR.compare(BENSON, ALICE) > 0);
 
         BENSON.removeMeeting(meetingDay1B);
+        assert BENSON.getMeetings().isEmpty();
         BENSON.addMeetings(meetingDay2A);
 
         // same Description but different Date (AA, 01/10/1111 11:11) < (AA, 02/10/1111 11:11)
@@ -59,6 +61,9 @@ public class MeetingListComparatorTest {
 
         ALICE.removeMeeting(meetingDay1A);
         BENSON.removeMeeting(meetingDay2A);
+
+        assert ALICE.getMeetings().isEmpty();
+        assert BENSON.getMeetings().isEmpty();
 
         ALICE.addMeetings(meetingDay1B);
         BENSON.addMeetings(meetingDay2A);
