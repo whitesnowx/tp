@@ -7,9 +7,9 @@ start
 
 
 if() then ([attributes are not sortable])
-    :each person is compared against their attribute;
-        if() then ([have person to compare])
-            while(attribute value with the next person in the list are equal)
+    :get person from list;
+        while (have person to compare)
+            while(attribute value with the next person in the list are equal or no more attributes)
                 :use next attribute to check;
             endwhile
             if() then ([person smaller])
@@ -17,9 +17,10 @@ if() then ([attributes are not sortable])
             else([person bigger])
                 :shift back;
             endif
-        else([no person to compare])
-    endif
-    :Sorts person list in the view by attributes;
+'        else([no person to compare])
+'    endif
+        endwhile
+    :Shows sorted person list;
 else([any attribute is not sortable])
     :displays Sort Usage message;
 endif
