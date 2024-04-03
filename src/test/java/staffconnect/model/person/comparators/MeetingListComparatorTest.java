@@ -8,6 +8,8 @@ import static staffconnect.model.person.comparators.NameComparator.NAME_COMPARAT
 import static staffconnect.model.person.comparators.PhoneComparator.PHONE_COMPARATOR;
 import static staffconnect.testutil.TypicalPersons.ALICE;
 import static staffconnect.testutil.TypicalPersons.BENSON;
+import static staffconnect.testutil.TypicalPersons.CARL;
+import static staffconnect.testutil.TypicalPersons.DANIEL;
 
 import org.junit.jupiter.api.Test;
 
@@ -31,8 +33,20 @@ public class MeetingListComparatorTest {
 
         assert ALICE.getMeetings().isEmpty();
         assert BENSON.getMeetings().isEmpty();
+        assert CARL.getMeetings().isEmpty();
+        assert DANIEL.getMeetings().isEmpty();
+
+        // not meeting = no meeting
+        assertEquals(MEETING_LIST_COMPARATOR.compare(CARL, DANIEL), 0);
 
         ALICE.addMeetings(meetingDay1A);
+
+        // has meeting < no meeting
+        assertTrue(MEETING_LIST_COMPARATOR.compare(ALICE, DANIEL) < 0);
+        // no meeting < has meeting
+        assertTrue(MEETING_LIST_COMPARATOR.compare(DANIEL, ALICE) > 0);
+
+
         BENSON.addMeetings(meetingDay1A);
 
         // same person (AA, 01/10/1111 11:11) = (AA, 01/10/1111 11:11)
@@ -78,6 +92,8 @@ public class MeetingListComparatorTest {
 
         assert ALICE.getMeetings().isEmpty();
         assert BENSON.getMeetings().isEmpty();
+        assert CARL.getMeetings().isEmpty();
+        assert DANIEL.getMeetings().isEmpty();
     }
 
     @Test

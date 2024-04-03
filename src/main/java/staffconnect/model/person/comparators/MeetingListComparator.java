@@ -17,8 +17,10 @@ public class MeetingListComparator implements Comparator<Person> {
 
     @Override
     public int compare(Person p1, Person p2) {
-        Meeting earliestAlphanumericMeeting1 = p1.getMeetings().stream().min(MEETING_DATE_THEN_DESCRIPTION_COMPARATOR).orElse(null);
-        Meeting earliestAlphanumericMeeting2 = p2.getMeetings().stream().min(MEETING_DATE_THEN_DESCRIPTION_COMPARATOR).orElse(null);
+        Meeting earliestAlphanumericMeeting1 = p1.getMeetings().stream().min(MEETING_DATE_THEN_DESCRIPTION_COMPARATOR)
+                .orElse(null);
+        Meeting earliestAlphanumericMeeting2 = p2.getMeetings().stream().min(MEETING_DATE_THEN_DESCRIPTION_COMPARATOR)
+                .orElse(null);
 
         if ((earliestAlphanumericMeeting1 == null) && (earliestAlphanumericMeeting2 == null)) {
             return 0;
@@ -28,7 +30,8 @@ public class MeetingListComparator implements Comparator<Person> {
             return -1;
         }
 
-        return MEETING_DATE_THEN_DESCRIPTION_COMPARATOR.compare(earliestAlphanumericMeeting1, earliestAlphanumericMeeting2);
+        return MEETING_DATE_THEN_DESCRIPTION_COMPARATOR.compare(earliestAlphanumericMeeting1,
+                earliestAlphanumericMeeting2);
     }
 
     @Override
