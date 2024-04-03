@@ -17,18 +17,18 @@ public class MeetingListComparator implements Comparator<Person> {
 
     @Override
     public int compare(Person p1, Person p2) {
-        Meeting earliestMeeting1 = p1.getMeetings().stream().min(MEETING_DATE_THEN_DESCRIPTION_COMPARATOR).orElse(null);
-        Meeting earliestMeeting2 = p2.getMeetings().stream().min(MEETING_DATE_THEN_DESCRIPTION_COMPARATOR).orElse(null);
+        Meeting earliestAlphanumericMeeting1 = p1.getMeetings().stream().min(MEETING_DATE_THEN_DESCRIPTION_COMPARATOR).orElse(null);
+        Meeting earliestAlphanumericMeeting2 = p2.getMeetings().stream().min(MEETING_DATE_THEN_DESCRIPTION_COMPARATOR).orElse(null);
 
-        if ((earliestMeeting1 == null) && (earliestMeeting2 == null)) {
+        if ((earliestAlphanumericMeeting1 == null) && (earliestAlphanumericMeeting2 == null)) {
             return 0;
-        } else if (earliestMeeting1 == (null)) {
+        } else if (earliestAlphanumericMeeting1 == (null)) {
             return 1;
-        } else if (earliestMeeting2 == (null)) {
+        } else if (earliestAlphanumericMeeting2 == (null)) {
             return -1;
         }
 
-        return MEETING_DATE_THEN_DESCRIPTION_COMPARATOR.compare(earliestMeeting1, earliestMeeting2);
+        return MEETING_DATE_THEN_DESCRIPTION_COMPARATOR.compare(earliestAlphanumericMeeting1, earliestAlphanumericMeeting2);
     }
 
     @Override
