@@ -163,6 +163,7 @@ Format: `sort [ATTRIBUTE]`
 * The order of character priority would be letters (A-Z), numbers (0-9), special characters (!@#$%^&*).
 * The capitalisation of the letters do not affect their priority such that `Aaron` will have same priority as `aaron`.
 * For attribute with exact same values, the tie-breaker is determined by their added order.
+* For sorting of multiple attributes, the weightage will be determined by the order in which it was entered. E.g `sort m/ p/ v/` will sort by contact by their module, among those with equal modules would then be sorted by their phone number and similarly for venue.
 * `[ATTRIBUTE]` is to be noted by their prefix. e.g `name` will be `n/`.
 * `s/` sorts contacts by person with the earliest meeting
 * `meet/` sorts contacts by person with the earliest meeting, followed by alphanumeric order of meeting description
