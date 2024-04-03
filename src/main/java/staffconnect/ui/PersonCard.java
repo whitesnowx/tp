@@ -20,6 +20,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import staffconnect.model.meeting.Meeting;
+import staffconnect.model.meeting.MeetingDateTime;
+import staffconnect.model.meeting.MeetingDescription;
 import staffconnect.model.person.Person;
 
 /**
@@ -29,9 +31,11 @@ public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
 
-    private static final int ROW_HEIGHT = 56; //row height of each meeting
+    //These values are used for computation of the list view height and width for different system's resolution.
+    //To ensure that list view is always  displayed properly.
+    private static double pixelHeight = 0;
+    private static double pixelWidth = 0;
 
-    private static final double LABEL_MEETING_WIDTH = 8; //the width of the meeting label
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
      * As a consequence, UI elements' variable names cannot be set to such keywords
@@ -108,6 +112,8 @@ public class PersonCard extends UiPart<Region> {
         module.setText("Module:  " + person.getModule().value);
         email.setText("Email:  " + person.getEmail().value);
 
+        computePixelHeight(); //Set up the pixel height variables
+
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
@@ -127,31 +133,25 @@ public class PersonCard extends UiPart<Region> {
 
     }
 
+    private void computePixelHeight() {
+        //Dummy meeting used for computation of font size
+        Meeting dummy = new Meeting(new MeetingDescription("test"), new MeetingDateTime("12/02/2023 15:00"));
+        MeetingsCard test = new MeetingsCard(dummy, 0);
+        pixelHeight = test.getHeight();
+        pixelWidth = test.getWidth();
+
+    }
+
     private void setUpMeetingListView(ObservableList<Meeting> meetingsList) {
 
         meetingListView.setFocusTraversable(false);
         meetingListView.setItems(meetingsList);
         meetingListView.setCellFactory(listView -> new MeetingsListViewCell());
         //Work around to set the correct height and width of the nested list view.
-        meetingListView.setPrefHeight((meetingsList.size() * ROW_HEIGHT) + 20);
+        meetingListView.setPrefHeight(meetingsList.size() * (pixelHeight + (2.8 * pixelHeight)) + pixelHeight);
         meetingListView.setPrefWidth(getLongestWidth(meetingsList));
         meetingListView.setFocusTraversable(false);
         meetingListView.setMouseTransparent(true);
-    }
-
-    private double getLongestWidth(List<Meeting> meetingList) {
-        double maxWidth = 0;
-        for (Meeting meet : meetingList) {
-
-            //200 is to account for the default spacing within the items
-            double currentWidth = (meet.getDescription().description.length() + meet.getStartDate().toString().length())
-                    * LABEL_MEETING_WIDTH + 270;
-
-            if (currentWidth > maxWidth) {
-                maxWidth = currentWidth;
-            }
-        }
-        return maxWidth;
     }
 
     private void setUpScrollPane(VBox display, Region content, boolean enableHbar, boolean swap, Region swapRegion) {
@@ -195,6 +195,26 @@ public class PersonCard extends UiPart<Region> {
             display.getChildren().addAll(hScrollBar, hBox);
         } else {
             display.getChildren().add(hBox);
+        }
+    }
+
+    private double getLongestWidth(List<Meeting> meetingList) {
+        double maxWidth = 0;
+        Meeting longestMeeting = null;
+        for (Meeting meet : meetingList) {
+
+            double currentWidth = meet.getDescription().description.length() + meet.getStartDate().toString().length();
+            if (currentWidth > maxWidth) {
+                maxWidth = currentWidth;
+                longestMeeting = meet;
+            }
+
+        }
+
+        if (longestMeeting != null) {
+            return (maxWidth * pixelWidth) + (pixelWidth * 15) + 3 * pixelWidth;
+        } else {
+            return 0; // empty meeting return zero.
         }
     }
 
