@@ -20,6 +20,9 @@ public class MultiComparatorTest {
 
         MultiComparator sortModuleThenNameComparator = new MultiComparator(List.of(MODULE_COMPARATOR, NAME_COMPARATOR));
 
+        //same comparator
+        assertEquals(sortModuleThenNameComparator, sortModuleThenNameComparator);
+
         //correct order
         assertEquals(new MultiComparator(List.of(MODULE_COMPARATOR, NAME_COMPARATOR)), sortModuleThenNameComparator);
 
@@ -28,6 +31,9 @@ public class MultiComparatorTest {
 
         //missing 1 attribute
         assertNotEquals(new MultiComparator(List.of(MODULE_COMPARATOR)), sortModuleThenNameComparator);
+
+        //not null
+        assertNotEquals(sortModuleThenNameComparator, null);
     }
 
     @Test
