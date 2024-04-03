@@ -1,10 +1,5 @@
 package staffconnect.model.person.comparators;
 
-import org.junit.jupiter.api.Test;
-import staffconnect.model.meeting.Meeting;
-import staffconnect.model.meeting.MeetingDateTime;
-import staffconnect.model.meeting.MeetingDescription;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -16,6 +11,14 @@ import static staffconnect.testutil.TypicalPersons.BENSON;
 import static staffconnect.testutil.TypicalPersons.CARL;
 import static staffconnect.testutil.TypicalPersons.DANIEL;
 import static staffconnect.testutil.TypicalPersons.ELLE;
+
+import org.junit.jupiter.api.Test;
+
+import staffconnect.model.meeting.Meeting;
+import staffconnect.model.meeting.MeetingDateTime;
+import staffconnect.model.meeting.MeetingDescription;
+
+
 
 
 public class MeetingListComparatorTest {

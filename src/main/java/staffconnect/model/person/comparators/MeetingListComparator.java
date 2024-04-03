@@ -1,11 +1,11 @@
 package staffconnect.model.person.comparators;
 
-import staffconnect.model.meeting.Meeting;
-import staffconnect.model.person.Person;
+import static staffconnect.model.meeting.comparator.MeetingDateThenDescriptionComparator.MEETING_DATE_THEN_DESCRIPTION_COMPARATOR;
 
 import java.util.Comparator;
 
-import static staffconnect.model.meeting.comparator.MeetingDateThenDescriptionComparator.MEETING_DATE_THEN_DESCRIPTION_COMPARATOR;
+import staffconnect.model.meeting.Meeting;
+import staffconnect.model.person.Person;
 
 
 /**

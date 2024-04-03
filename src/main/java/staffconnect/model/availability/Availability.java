@@ -100,21 +100,6 @@ public class Availability {
     }
 
     /**
-     * Checks whether the given availability string matches a pre-indicated shorthand.
-     *
-     * @param availabilityString the string to be checked for shorthand
-     * @return {@code true} if the string matches the pre-indicated shorthand, {@code false} otherwise
-     */
-    public static boolean isShorthand(String availabilityString) {
-        try {
-            Shorthand.valueOf(availabilityString);
-            return true;
-        } catch (IllegalArgumentException e) {
-            return false;
-        }
-    }
-
-    /**
      * Returns a standardised LocalTime.
      *
      * @param validTime a valid Time String to be translated.
