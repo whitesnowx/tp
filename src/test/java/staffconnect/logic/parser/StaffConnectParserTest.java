@@ -26,6 +26,7 @@ import staffconnect.logic.commands.FilterCommand;
 import staffconnect.logic.commands.FindCommand;
 import staffconnect.logic.commands.HelpCommand;
 import staffconnect.logic.commands.ListCommand;
+import staffconnect.logic.commands.RefreshCommand;
 import staffconnect.logic.commands.SortCommand;
 import staffconnect.logic.commands.UnfavCommand;
 import staffconnect.logic.parser.exceptions.ParseException;
@@ -161,6 +162,12 @@ public class StaffConnectParserTest {
                         multipleAvailabilitiesPredicate),
                 multipleAvailabilitiesFilterCommand);
 
+    }
+
+    @Test
+    public void parseCommand_refresh() throws Exception {
+        assertTrue(parser.parseCommand(RefreshCommand.COMMAND_WORD) instanceof RefreshCommand);
+        assertTrue(parser.parseCommand(RefreshCommand.COMMAND_WORD + " 1") instanceof RefreshCommand);
     }
 
     @Test
