@@ -82,7 +82,7 @@ public class MeetingListComparatorTest {
 
     @Test
     public void toStringTest() {
-        assertEquals(MEETING_LIST_COMPARATOR.toString(), "Earliest Meeting, Ascending Description");
+        assertEquals(MEETING_LIST_COMPARATOR.toString(), "Earliest Meeting, Ascending alphanumeric Description");
 
         assertNotEquals(MEETING_LIST_COMPARATOR.toString(), "Name by alphanumerical order");
     }
