@@ -209,9 +209,9 @@ Examples:
 #### Results for delete meeting:
 The following command was applied:  `find Bernice Yu` followed by `meeting-delete 1 i/2`.
 <br> __(Disclaimer: The content shown in the examples may not match what you have added to your own meetings within the contact book).__
-<br> **Before:**
+<br> **Before:**<br>
     ![result for before `find Bernice Yu` followed by `meeting-delete 1 i/2`](images/deleteMeetingResultBefore.png)
-    **After:**
+<br> **After:**<br>
     ![result for after `find Bernice Yu` followed by `meeting-delete 1 i/2`](images/deleteMeetingResultAfter.png)
 
 ### Deleting a person : `delete`
