@@ -12,9 +12,9 @@ import staffconnect.model.person.Person;
 /**
  * Represents a Comparator for a Person's Earliest Meeting in the staff book.
  */
-public class MeetingListComparator implements Comparator<Person> {
+public class MeetingListDateComparator implements Comparator<Person> {
 
-    public static final MeetingListComparator MEETING_LIST_COMPARATOR = new MeetingListComparator();
+    public static final MeetingListDateComparator MEETING_LIST_DATE_COMPARATOR = new MeetingListDateComparator();
 
     @Override
     public int compare(Person p1, Person p2) {

@@ -11,7 +11,7 @@ import static staffconnect.logic.parser.CliSyntax.PREFIX_VENUE;
 import static staffconnect.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static staffconnect.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static staffconnect.model.person.comparators.FacultyComparator.FACULTY_COMPARATOR;
-import static staffconnect.model.person.comparators.MeetingListComparator.MEETING_LIST_COMPARATOR;
+import static staffconnect.model.person.comparators.MeetingListDateComparator.MEETING_LIST_DATE_COMPARATOR;
 import static staffconnect.model.person.comparators.ModuleComparator.MODULE_COMPARATOR;
 import static staffconnect.model.person.comparators.NameComparator.NAME_COMPARATOR;
 import static staffconnect.model.person.comparators.PhoneComparator.PHONE_COMPARATOR;
@@ -88,7 +88,7 @@ public class SortCommandParserTest {
         assertParseSuccess(parser, "" + PREFIX_VENUE,
                 new SortCommand(new MultiComparator(List.of(VENUE_COMPARATOR))));
         assertParseSuccess(parser, "" + PREFIX_MEETING_STARTDATE,
-                new SortCommand(new MultiComparator(List.of(MEETING_LIST_COMPARATOR))));
+                new SortCommand(new MultiComparator(List.of(MEETING_LIST_DATE_COMPARATOR))));
 
         // Multiple Attribute
         assertParseSuccess(parser, PREFIX_VENUE + " " + PREFIX_FACULTY + " " + PREFIX_MODULE,
