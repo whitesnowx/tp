@@ -200,11 +200,11 @@ Format: `meeting INDEX i/MEETING-INDEX `
 * The index **must be a positive integer** 1, 2, 3,…​ and tally within range index of the displayed person list.
 * The meeting-index refers to the index number shown in the displayed meeting list.
 * The index **must be a positive integer** 1, 2, 3,…​ and tally within range index of the displayed meeting list.
-* The meeting must exist within the person before it can be deleted otherwise an error will be displayed.
+* The meeting from the person must exist before it can be deleted otherwise an error will be displayed.
 Examples:
 * The following commands assumes that meetings have been added prior to the command. Otherwise, an error will be thrown. <br> **(Refer to the section above on how to add a meeting)**
   * `list` followed by `meeting-delete 1 i/1` deletes the 1st meeting from the 1st person in the contacts.
-  * `find Bernice Yu` followed by `meeting-delete 1 i/2` deletes the 1st meeting 1st person in the results of the `find` command.
+  * `find Bernice Yu` followed by `meeting-delete 1 i/2` deletes the 1st meeting form the 1st person in the results of the `find` command.
       
 #### Results for delete meeting:
 The following command was applied:  `find Bernice Yu` followed by `meeting-delete 1 i/2`.
@@ -268,6 +268,10 @@ Format: `refresh`
 Examples:
 * If there is a meeting `French Revolution` that happened in `14/07/1789 12:00`, when the user types in `refresh`, it will be deleted.
 * If there is a meeting `Future Meeting` that will happen in `31/12/2999 12:00`, when the user types in `refresh`, it will not be deleted.
+
+## Known limitations:
+Refresh is only used when the user decides to remove clutter in the staff book, and wants to remove old meetings. 
+This process is not done automatically as sometimes the user would like to retain old meetings for bookkeeping purposes.
 
 ### Clearing all entries : `clear`
 
@@ -341,5 +345,6 @@ Action | Format, Examples
 **Delete Meeting** | `meeting-delete INDEX I/MEETING-INDEX`<br> e.g., `meeting-delete 1 i/1 `
 **Set as Favourite** | `fav INDEX`<br> e.g., `fav 3`
 **Remove as Favourite** | `unfav INDEX`<br> e.g., `unfav 3`
+**Refresh** | `refresh` <br> e.g., `refresh`
 **List** | `list`
 **Help** | `help`
