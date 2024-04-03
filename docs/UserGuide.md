@@ -39,6 +39,31 @@ StaffConnect (SC) is a **desktop app for managing contacts of Professors and Tut
 
 --------------------------------------------------------------------------------------------------------------------
 
+
+## Navigability
+
+Before we get started StaffConnect offers a unique suite of UI controls for users to customise their own unique experience!
+
+1. Clicking any items on the left panel will allow you to select the person contact to display.
+<br>Alternatively, clicking anywhere in the list panel then using your arrow keys to navigate and hitting enter to select would give the same result.
+<br>![Region to select the person](images/personPanelRegion.png)
+
+2. There is a divider that is draggable up and down to hide and show details on the right side and to customise the look of your application.
+<br>![Region to select the divider](images/detailsDividerRegion.png)
+
+<Br><Br> 
+### Below are some examples of alternatives UI you may customise to:
+<br>![first alternative ui](images/firstAlternative.png)
+<br>![second alternative ui](images/secondAlternative.png)
+
+**Known Limitations**
+1. The divider is not controllable by keyboard input, hence the only way to customise the look is mostly by mouse input.
+2. As font sizes does not automatically resize in this application, scroll bars will appear in smaller windows variants of this application to help with your viewing process of the details.
+
+
+--------------------------------------------------------------------------------------------------------------------
+
+
 ## Features
 
 <div markdown="block" class="alert alert-info">
