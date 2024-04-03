@@ -164,6 +164,8 @@ Format: `sort [ATTRIBUTE]`
 * The capitalisation of the letters do not affect their priority such that `Aaron` will have same priority as `aaron`.
 * For attribute with exact same values, the tie-breaker is determined by their added order.
 * `[ATTRIBUTE]` is to be noted by their prefix. e.g `name` will be `n/`.
+* `s/` sorts contacts by person with the earliest meeting
+* `meet/` sorts contacts by person with the earliest meeting, followed by alphanumeric order of meeting description
 
 Examples:
 * `sort m/ p/` returns person by ascending module codes followed by ascending phone numbers `CS2000 80000000`, `CS2000 90000000`, `CS3000 80000000`followed by `CS3000 90000000`
