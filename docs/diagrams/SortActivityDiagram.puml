@@ -8,7 +8,7 @@ start
 
 if() then ([attributes are not sortable])
     :each person is compared against their attribute;
-        fork
+        if() then ([have person to compare])
             while(attribute value with the next person in the list are equal)
                 :use next attribute to check;
             endwhile
@@ -17,7 +17,8 @@ if() then ([attributes are not sortable])
             else([person bigger])
                 :shift back;
             endif
-        end fork
+        else([no person to compare])
+    endif
     :Sorts person list in the view by attributes;
 else([any attribute is not sortable])
     :displays Sort Usage message;

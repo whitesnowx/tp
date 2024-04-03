@@ -24,6 +24,14 @@ public class Availability {
 
     private static final DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
 
+    public enum Shorthand {
+        Weekend,
+        Weekday,
+        Morning,
+        Afternoon,
+        Evening,
+        Night
+    };
 
     public final String value;
     private final DayOfWeek day;
@@ -97,6 +105,21 @@ public class Availability {
             return DayOfWeek.SATURDAY;
         } else {
             return DayOfWeek.SUNDAY;
+        }
+    }
+
+    /**
+     * Checks whether the given availability string matches a pre-indicated shorthand.
+     *
+     * @param availabilityString the string to be checked for shorthand
+     * @return {@code true} if the string matches the pre-indicated shorthand, {@code false} otherwise
+     */
+    public static boolean isShorthand(String availabilityString) {
+        try {
+            Shorthand.valueOf(availabilityString);
+            return true;
+        } catch (IllegalArgumentException e) {
+            return false;
         }
     }
 
