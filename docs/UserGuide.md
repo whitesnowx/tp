@@ -179,7 +179,7 @@ Format: `meeting INDEX [d/DESCRIPTION] [s/DATETIME]`
 * Adds a meeting to the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3,…​ and tally within range index of the displayed list.
 * Both of the fields must be provided and valid values.
 * A valid `DESCRIPTION` of the meeting can only contain latin alphanumeric characters.
-* A valid `DATETIME` of the meeting can only contain valid date and 24 hour time values with a single space to separate the date and time. Variable formats are allowed.
+* A valid `DATETIME` of the meeting can only contain valid date and 24 hour time values with a single space to separate the date and time. Multiple formats are allowed.
     * Date Formats
         - Separators: `-`
             1. `d-M-yyyy`
