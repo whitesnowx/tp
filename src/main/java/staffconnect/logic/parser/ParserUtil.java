@@ -181,7 +181,7 @@ public class ParserUtil {
      */
     public static MeetingDateTime parseDateTime(String dateTime) throws ParseException {
         requireNonNull(dateTime);
-        String trimmedDateTime = dateTime.trim();
+        String trimmedDateTime = dateTime.trim().replaceAll("\\s+", " ");
         try {
             return new MeetingDateTime(trimmedDateTime);
         } catch (IllegalArgumentException e) {
