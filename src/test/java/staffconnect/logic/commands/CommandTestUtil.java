@@ -101,11 +101,11 @@ public class CommandTestUtil {
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
     public static final Meeting VALID_MEETING =
-        new Meeting(new MeetingDescription(VALID_DESCRIPTION_MIDTERMS), new MeetingDateTime(VALID_DATE_MARCH));
+            new Meeting(new MeetingDescription(VALID_DESCRIPTION_MIDTERMS), new MeetingDateTime(VALID_DATE_MARCH));
     public static final Meeting VALID_MEETING_FINALS =
-        new Meeting(new MeetingDescription(VALID_DESCRIPTION_FINALS), new MeetingDateTime(VALID_DATE_MARCH));
+            new Meeting(new MeetingDescription(VALID_DESCRIPTION_FINALS), new MeetingDateTime(VALID_DATE_MARCH));
     public static final Meeting VALID_MEETING_APRIL =
-        new Meeting(new MeetingDescription(VALID_DESCRIPTION_MIDTERMS), new MeetingDateTime(VALID_DATE_APRIL));
+            new Meeting(new MeetingDescription(VALID_DESCRIPTION_MIDTERMS), new MeetingDateTime(VALID_DATE_APRIL));
     public static final Meeting VALID_MEETING_STUDY =
             new Meeting(new MeetingDescription(VALID_DESCRIPTION_STUDY), new MeetingDateTime(VALID_DATE_MARCH));
 
@@ -122,12 +122,22 @@ public class CommandTestUtil {
     }
 
     /**
+     * Convenience wrapper to {@link #assertCommandSuccess(Command, Model, CommandResult, Model)}
+     * that takes a string {@code expectedMessage}.
+     */
+    public static void assertCommandSuccess(Command command, Model actualModel, String expectedMessage,
+            Model expectedModel) {
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage);
+        assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
+    }
+
+    /**
      * Executes the given {@code command}, confirms that <br>
      * - the returned {@link CommandResult} matches {@code expectedCommandResult} <br>
      * - the {@code actualModel} matches {@code expectedModel}
      */
     public static void assertCommandSuccess(Command command, Model actualModel, CommandResult expectedCommandResult,
-                                            Model expectedModel) {
+            Model expectedModel) {
         try {
             CommandResult result = command.execute(actualModel);
             assertEquals(expectedCommandResult, result);
@@ -139,13 +149,14 @@ public class CommandTestUtil {
 
     /**
      * Convenience wrapper to {@link #assertCommandSuccess(Command, Model, CommandResult, Model)}
-     * that takes a string {@code expectedMessage}.
+     * that takes a string {@code expectedMessage} with a person and index .
      */
-    public static void assertCommandSuccess(Command command, Model actualModel, String expectedMessage,
-                                            Model expectedModel) {
-        CommandResult expectedCommandResult = new CommandResult(expectedMessage);
+    public static void assertCommandSuccessWithPerson(Command command, Model actualModel,
+            String expectedMessage, Model expectedModel, Person expectedPerson, int expectedIndex) {
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, expectedPerson, expectedIndex);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }
+
 
     /**
      * Executes the given {@code command}, confirms that <br>

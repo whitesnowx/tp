@@ -15,15 +15,27 @@ public class CommandResult {
 
     private final String feedbackToUser;
 
-    /** Help information should be shown to the user. */
+    /**
+     * Help information should be shown to the user.
+     */
     private final boolean showHelp;
 
-    /** The application should exit. */
+    /**
+     * The application should exit.
+     */
     private final boolean exit;
 
     private final int index;
 
     private final Person personToSwitch;
+
+    /**
+     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
+     * and other fields set to their default value.
+     */
+    public CommandResult(String feedbackToUser) {
+        this(feedbackToUser, false, false);
+    }
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
@@ -37,15 +49,7 @@ public class CommandResult {
     }
 
     /**
-     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
-     * and other fields set to their default value.
-     */
-    public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false);
-    }
-
-    /**
-     *  Constructs a {@code CommandResult} with the specified person to store.
+     * Constructs a {@code CommandResult} with the specified person to store.
      */
     public CommandResult(String feedbackToUser, Person personToSwitch, int index) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
@@ -69,6 +73,7 @@ public class CommandResult {
 
     /**
      * Checks if there is a valid person and index to get in the result.
+     *
      * @return
      */
     public boolean hasPersonAndIndex() {
@@ -77,6 +82,7 @@ public class CommandResult {
 
     /**
      * Returns a person from the result to send to the UI display.
+     *
      * @return a person from the command result.
      */
     public Optional<Person> getPersonToDisplay() {
@@ -86,6 +92,11 @@ public class CommandResult {
     public int getIndex() {
         return index;
 
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(feedbackToUser, showHelp, exit, index, personToSwitch);
     }
 
     @Override
@@ -102,12 +113,11 @@ public class CommandResult {
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit);
+                && exit == otherCommandResult.exit
+                && index == otherCommandResult.index
+                && (personToSwitch != null
+                            ? personToSwitch.equals(otherCommandResult.personToSwitch)
+                            : personToSwitch == otherCommandResult.personToSwitch);
     }
 
     @Override
@@ -116,6 +126,8 @@ public class CommandResult {
                 .add("feedbackToUser", feedbackToUser)
                 .add("showHelp", showHelp)
                 .add("exit", exit)
+                .add("index", index)
+                .add("person", personToSwitch)
                 .toString();
     }
 

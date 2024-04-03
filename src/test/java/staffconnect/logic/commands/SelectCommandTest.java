@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static staffconnect.logic.commands.CommandTestUtil.assertCommandFailure;
-import static staffconnect.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static staffconnect.logic.commands.CommandTestUtil.assertCommandSuccessWithPerson;
 import static staffconnect.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static staffconnect.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static staffconnect.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
@@ -30,14 +30,15 @@ public class SelectCommandTest {
     @Test
     public void execute_validIndexUnfilteredList_success() {
         Person personToSelect = model.getSortedFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        SelectCommand selectCommnad = new SelectCommand(INDEX_FIRST_PERSON);
+        SelectCommand selectCommand = new SelectCommand(INDEX_FIRST_PERSON);
 
         String expectedMessage = String.format(SelectCommand.MESSAGE_SELECT_PERSON_SUCCESS,
                 Messages.format(personToSelect));
 
         ModelManager expectedModel = new ModelManager(model.getStaffBook(), new UserPrefs());
 
-        assertCommandSuccess(selectCommnad, model, expectedMessage, expectedModel);
+        assertCommandSuccessWithPerson(selectCommand, model, expectedMessage,
+                expectedModel, personToSelect, 0);
     }
 
     @Test
@@ -62,7 +63,8 @@ public class SelectCommandTest {
 
         Model expectedModel = new ModelManager(model.getStaffBook(), new UserPrefs());
 
-        assertCommandSuccess(selectCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccessWithPerson(selectCommand, model, expectedMessage, expectedModel,
+                personToSelect, 0);
     }
 
     @Test

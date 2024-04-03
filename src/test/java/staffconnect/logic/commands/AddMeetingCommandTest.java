@@ -9,7 +9,7 @@ import static staffconnect.logic.commands.CommandTestUtil.VALID_MEETING;
 import static staffconnect.logic.commands.CommandTestUtil.VALID_MEETING_APRIL;
 import static staffconnect.logic.commands.CommandTestUtil.VALID_MEETING_FINALS;
 import static staffconnect.logic.commands.CommandTestUtil.assertCommandFailure;
-import static staffconnect.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static staffconnect.logic.commands.CommandTestUtil.assertCommandSuccessWithPerson;
 import static staffconnect.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static staffconnect.model.meeting.comparator.MeetingDateThenDescriptionComparator.MEETING_DATE_THEN_DESCRIPTION_COMPARATOR;
 import static staffconnect.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -61,7 +61,8 @@ public class AddMeetingCommandTest {
         validPerson.updateSortedMeetingList(MEETING_DATE_THEN_DESCRIPTION_COMPARATOR);
         expectedModel.setPerson(expectedModel.getSortedFilteredPersonList().get(0), validPerson);
 
-        assertCommandSuccess(addMeetingCommand, TEST_MODEL, expectedMessage, expectedModel);
+        assertCommandSuccessWithPerson(addMeetingCommand, TEST_MODEL,
+                expectedMessage, expectedModel, validPerson, 0);
     }
 
     @Test
@@ -103,7 +104,7 @@ public class AddMeetingCommandTest {
         final AddMeetingCommand standardCommand = new AddMeetingCommand(INDEX_FIRST_PERSON, VALID_MEETING);
         // same values -> returns true
         final Meeting copyMeeting =
-            new Meeting(new MeetingDescription(VALID_DESCRIPTION_MIDTERMS), new MeetingDateTime(VALID_DATE_MARCH));
+                new Meeting(new MeetingDescription(VALID_DESCRIPTION_MIDTERMS), new MeetingDateTime(VALID_DATE_MARCH));
         AddMeetingCommand commandWithSameValues = new AddMeetingCommand(INDEX_FIRST_PERSON, copyMeeting);
         assertEquals(standardCommand, commandWithSameValues);
 
@@ -131,7 +132,7 @@ public class AddMeetingCommandTest {
         Index index = Index.fromOneBased(1);
         AddMeetingCommand addMeetingCommand = new AddMeetingCommand(index, VALID_MEETING);
         String expected =
-            AddMeetingCommand.class.getCanonicalName() + "{index=" + index + ", toAdd=" + VALID_MEETING + "}";
+                AddMeetingCommand.class.getCanonicalName() + "{index=" + index + ", toAdd=" + VALID_MEETING + "}";
         assertEquals(expected, addMeetingCommand.toString());
     }
 
