@@ -33,6 +33,6 @@ public class MeetingListComparator implements Comparator<Person> {
 
     @Override
     public String toString() {
-        return "Earliest Meeting";
+        return "Earliest Meeting, Ascending Description";
     }
 }

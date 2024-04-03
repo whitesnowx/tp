@@ -32,6 +32,12 @@ public class MeetingListDateComparatorTest {
         Meeting meetingDay3 = new Meeting(new MeetingDescription("Day3"), new MeetingDateTime("03/10/1111 11:11"));
         Meeting meetingDay4 = new Meeting(new MeetingDescription("Day4"), new MeetingDateTime("04/10/1111 11:11"));
 
+        assert ALICE.getMeetings().isEmpty();
+        assert BENSON.getMeetings().isEmpty();
+        assert CARL.getMeetings().isEmpty();
+        assert DANIEL.getMeetings().isEmpty();
+        assert ELLE.getMeetings().isEmpty();
+
         ALICE.addMeetings(meetingDay3); //A (3), B, C, D, E
         BENSON.addMeetings(meetingDay2); //A (3), B (2), C, D, E
         CARL.addMeetings(meetingDay4); //A (3), B (2), C (4), D, E
@@ -67,6 +73,20 @@ public class MeetingListDateComparatorTest {
         assertTrue(MEETING_LIST_DATE_COMPARATOR.compare(ALICE, ELLE) >= 1); // 04/10/1111 later than 04/10/1110
 
         assertTrue(MEETING_LIST_DATE_COMPARATOR.compare(DANIEL, ELLE) >= 1); // 04/09/1111 later than 04/10/1110
+
+        ALICE.removeMeeting(meetingDay3); //A (3), B, C, D, E
+        BENSON.removeMeeting(meetingDay2); //A (3), B (2), C, D, E
+        CARL.removeMeeting(meetingDay4); //A (3), B (2), C (4), D, E
+        CARL.removeMeeting(meetingDay1); //A (3), B (2), C (1, 4), D, E
+        ALICE.removeMeeting(meetingDay1); //A (1, 3), B (2), C (1, 4), D, E
+        DANIEL.removeMeeting(meetingPreviousMonth); //A (1, 3), B (2), C (1, 4), D (-1YEAR), E
+        ELLE.removeMeeting(meetingPreviousYear); //A (1, 3), B (2), C (1, 4), D (-1MONTH), E (-1YEAR)
+        assert ALICE.getMeetings().isEmpty();
+        assert BENSON.getMeetings().isEmpty();
+        assert CARL.getMeetings().isEmpty();
+        assert DANIEL.getMeetings().isEmpty();
+        assert ELLE.getMeetings().isEmpty();
+
     }
 
     @Test

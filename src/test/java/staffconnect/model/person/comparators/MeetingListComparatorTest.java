@@ -29,6 +29,9 @@ public class MeetingListComparatorTest {
         Meeting meetingDay1B = new Meeting(new MeetingDescription("BB"), new MeetingDateTime("01/10/1111 11:11"));
         Meeting meetingDay2A = new Meeting(new MeetingDescription("AA"), new MeetingDateTime("02/10/1111 11:11"));
 
+        assert ALICE.getMeetings().isEmpty();
+        assert BENSON.getMeetings().isEmpty();
+
         ALICE.addMeetings(meetingDay1A);
         BENSON.addMeetings(meetingDay1A);
 
@@ -65,11 +68,16 @@ public class MeetingListComparatorTest {
         // Later Date but Smaller alphabetical Description (BB, 01/10/1111 11:11) > (AA, 02/10/1111 11:11)
         assertTrue(MEETING_LIST_COMPARATOR.compare(BENSON, ALICE) > 0);
 
+        ALICE.removeMeeting(meetingDay1B);
+        BENSON.removeMeeting(meetingDay2A);
+
+        assert ALICE.getMeetings().isEmpty();
+        assert BENSON.getMeetings().isEmpty();
     }
 
     @Test
     public void toStringTest() {
-        assertEquals(MEETING_LIST_COMPARATOR.toString(), "Earliest Meeting");
+        assertEquals(MEETING_LIST_COMPARATOR.toString(), "Earliest Meeting, Ascending Description");
 
         assertNotEquals(MEETING_LIST_COMPARATOR.toString(), "Name by alphanumerical order");
     }
