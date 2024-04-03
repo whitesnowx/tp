@@ -17,8 +17,6 @@ if() then ([attributes are not sortable])
             else([person bigger])
                 :shift back;
             endif
-'        else([no person to compare])
-'    endif
         endwhile
     :Shows sorted person list;
 else([any attribute is not sortable])
