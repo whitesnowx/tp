@@ -268,10 +268,25 @@ Format: `refresh`
 Examples:
 * If there is a meeting `French Revolution` that happened in `14/07/1789 12:00`, when the user types in `refresh`, it will be deleted.
 * If there is a meeting `Future Meeting` that will happen in `31/12/2999 12:00`, when the user types in `refresh`, it will not be deleted.
-
-## Known limitations:
-Refresh is only used when the user decides to remove clutter in the staff book, and wants to remove old meetings. 
+ 
+**Known limitations:**
+Refresh is only used when the user decides to remove clutter in the staff book, and wants to remove outdated meetings. 
 This process is not done automatically as sometimes the user would like to retain old meetings for bookkeeping purposes.
+
+### Selecting the detailed contact to display: `select`
+
+Selects the person identified by the index number used in the displayed person list for display.
+
+Format: `select INDEX`
+
+* Select the person and loads its contact with meeting details for display at the specified **INDEX**
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `select 2`. <br> Selects the 2nd person in the staff book.
+* `filter t/tutor` followed by `select 1` <br> Selects the 1st person in the results of the `filter` command.
+
 
 ### Clearing all entries : `clear`
 
@@ -346,5 +361,6 @@ Action | Format, Examples
 **Set as Favourite** | `fav INDEX`<br> e.g., `fav 3`
 **Remove as Favourite** | `unfav INDEX`<br> e.g., `unfav 3`
 **Refresh** | `refresh` <br> e.g., `refresh`
+**Select** | `select INDEX`<br> e.g., `select 3`
 **List** | `list`
 **Help** | `help`
