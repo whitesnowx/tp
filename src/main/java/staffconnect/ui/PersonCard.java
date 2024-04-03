@@ -29,9 +29,9 @@ public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
 
-    private static final int ROW_HEIGHT = 60; //row height of each meeting
+    private static final int ROW_HEIGHT = 56; //row height of each meeting
 
-    private static final int LABEL_MEETING_WIDTH = 10; //the width of the meeting label
+    private static final double LABEL_MEETING_WIDTH = 8; //the width of the meeting label
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
      * As a consequence, UI elements' variable names cannot be set to such keywords
@@ -133,7 +133,7 @@ public class PersonCard extends UiPart<Region> {
         meetingListView.setItems(meetingsList);
         meetingListView.setCellFactory(listView -> new MeetingsListViewCell());
         //Work around to set the correct height and width of the nested list view.
-        meetingListView.setPrefHeight((meetingsList.size() * ROW_HEIGHT) + 100);
+        meetingListView.setPrefHeight((meetingsList.size() * ROW_HEIGHT) + 20);
         meetingListView.setPrefWidth(getLongestWidth(meetingsList));
         meetingListView.setFocusTraversable(false);
         meetingListView.setMouseTransparent(true);
@@ -145,7 +145,7 @@ public class PersonCard extends UiPart<Region> {
 
             //200 is to account for the default spacing within the items
             double currentWidth = (meet.getDescription().description.length() + meet.getStartDate().toString().length())
-                    * LABEL_MEETING_WIDTH + 200;
+                    * LABEL_MEETING_WIDTH + 270;
 
             if (currentWidth > maxWidth) {
                 maxWidth = currentWidth;
