@@ -5,10 +5,21 @@ skinparam ArrowFontSize 12
 start
 :User enters a sort command;
 
-if () then ([attribute is sortable])
-    :Listed contacts are sorted
-    based on the given attribute;
-else ([else])
+
+if() then ([attributes are not sortable])
+    :get person from list;
+        while (have person to compare)
+            while(attribute value with the next person in the list are equal or no more attributes)
+                :use next attribute to check;
+            endwhile
+            if() then ([person smaller])
+                :shift front;
+            else([person bigger])
+                :shift back;
+            endif
+        endwhile
+    :Shows sorted person list;
+else([any attribute is not sortable])
     :displays Sort Usage message;
 endif
 stop

@@ -2,6 +2,8 @@ package staffconnect.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static staffconnect.logic.parser.CliSyntax.PREFIX_FACULTY;
+import static staffconnect.logic.parser.CliSyntax.PREFIX_MEETING;
+import static staffconnect.logic.parser.CliSyntax.PREFIX_MEETING_STARTDATE;
 import static staffconnect.logic.parser.CliSyntax.PREFIX_MODULE;
 import static staffconnect.logic.parser.CliSyntax.PREFIX_NAME;
 import static staffconnect.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -30,6 +32,8 @@ public class SortCommand extends Command {
             + "[" + PREFIX_MODULE + "] "
             + "[" + PREFIX_FACULTY + "] "
             + "[" + PREFIX_VENUE + "] "
+            + "[" + PREFIX_MEETING_STARTDATE + "] "
+            + "[" + PREFIX_MEETING + "] "
             + "Example: " + COMMAND_WORD + " " + PREFIX_NAME;
 
     private final Comparator<Person> comparator;
