@@ -160,6 +160,7 @@ public class PersonCard extends UiPart<Region> {
     private void setUpScrollPane(VBox display, Region content, boolean enableHbar, boolean swap, Region swapRegion) {
         ScrollPane scrollPane = new ScrollPane();
         scrollPane.setContent(content);
+        scrollPane.setPannable(true);
         //Custom vertical scroll bar on the left
         // Inspired from:
         // https://stackoverflow.com/questions/35134155/move-the-vertical-scroll-bar-of-a-scroll-panel-to-the-left-side
