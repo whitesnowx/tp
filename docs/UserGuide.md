@@ -261,7 +261,7 @@ Format: `delete INDEX`
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the contacts.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `find Bernice Yu` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
 ### Setting a person as favourite: `fav`
 
