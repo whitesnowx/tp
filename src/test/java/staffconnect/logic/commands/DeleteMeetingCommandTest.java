@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static staffconnect.logic.commands.CommandTestUtil.VALID_MEETING;
 import static staffconnect.logic.commands.CommandTestUtil.VALID_MEETING_STUDY;
 import static staffconnect.logic.commands.CommandTestUtil.assertCommandFailure;
-import static staffconnect.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static staffconnect.logic.commands.CommandTestUtil.assertCommandSuccessWithPerson;
 import static staffconnect.logic.commands.CommandTestUtil.showMeetingAtIndex;
 import static staffconnect.testutil.TypicalIndexes.INDEX_FIRST_MEETING;
 import static staffconnect.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -38,6 +38,7 @@ public class DeleteMeetingCommandTest {
         //Set a dummy meeting first
         Person selectPerson = copyPersonWithNewMeetingManager(TEST_MODEL.getSortedFilteredPersonList()
                 .get(INDEX_FIRST_PERSON.getZeroBased()));
+        Person expectedPerson = copyPersonWithNewMeetingManager(selectPerson);
 
         selectPerson.addMeetings(VALID_MEETING);
         TEST_MODEL.setPerson(selectPerson, selectPerson);
@@ -49,7 +50,8 @@ public class DeleteMeetingCommandTest {
 
         ModelManager expectedModel = new ModelManager(getTypicalStaffBook(), new UserPrefs());
 
-        assertCommandSuccess(deleteMeetingCommand, TEST_MODEL, expectedMessage, expectedModel);
+        assertCommandSuccessWithPerson(deleteMeetingCommand, TEST_MODEL, expectedMessage, expectedModel,
+                expectedPerson, 0);
     }
 
     private Person copyPersonWithNewMeetingManager(Person pickPerson) {
@@ -103,7 +105,8 @@ public class DeleteMeetingCommandTest {
         showNoMeeting(expectedPersonSelect); //But it is not visible
         expectedModel.setPerson(expectedPersonSelect, expectedPersonSelect);
 
-        assertCommandSuccess(deleteMeetingCommand, TEST_MODEL, expectedMessage, expectedModel);
+        assertCommandSuccessWithPerson(deleteMeetingCommand, TEST_MODEL, expectedMessage, expectedModel,
+                expectedPersonSelect, 0);
     }
 
     /**

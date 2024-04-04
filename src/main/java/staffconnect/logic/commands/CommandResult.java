@@ -3,8 +3,10 @@ package staffconnect.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
+import java.util.Optional;
 
 import staffconnect.commons.util.ToStringBuilder;
+import staffconnect.model.person.Person;
 
 /**
  * Represents the result of a command execution.
@@ -13,11 +15,27 @@ public class CommandResult {
 
     private final String feedbackToUser;
 
-    /** Help information should be shown to the user. */
+    /**
+     * Help information should be shown to the user.
+     */
     private final boolean showHelp;
 
-    /** The application should exit. */
+    /**
+     * The application should exit.
+     */
     private final boolean exit;
+
+    private final int index;
+
+    private final Person personToSwitch;
+
+    /**
+     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
+     * and other fields set to their default value.
+     */
+    public CommandResult(String feedbackToUser) {
+        this(feedbackToUser, false, false);
+    }
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
@@ -26,14 +44,19 @@ public class CommandResult {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        index = -999;
+        personToSwitch = null;
     }
 
     /**
-     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
-     * and other fields set to their default value.
+     * Constructs a {@code CommandResult} with the specified person to store.
      */
-    public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false);
+    public CommandResult(String feedbackToUser, Person personToSwitch, int index) {
+        this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.showHelp = false;
+        this.exit = false;
+        this.personToSwitch = personToSwitch;
+        this.index = index;
     }
 
     public String getFeedbackToUser() {
@@ -46,6 +69,34 @@ public class CommandResult {
 
     public boolean isExit() {
         return exit;
+    }
+
+    /**
+     * Checks if there is a valid person and index to get in the result.
+     *
+     * @return
+     */
+    public boolean hasPersonAndIndex() {
+        return personToSwitch != null && index != -999;
+    }
+
+    /**
+     * Returns a person from the result to send to the UI display.
+     *
+     * @return a person from the command result.
+     */
+    public Optional<Person> getPersonToDisplay() {
+        return personToSwitch != null ? Optional.of(personToSwitch) : Optional.empty();
+    }
+
+    public int getIndex() {
+        return index;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(feedbackToUser, showHelp, exit, index, personToSwitch);
     }
 
     @Override
@@ -62,12 +113,11 @@ public class CommandResult {
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit);
+                && exit == otherCommandResult.exit
+                && index == otherCommandResult.index
+                && (personToSwitch != null
+                            ? personToSwitch.equals(otherCommandResult.personToSwitch)
+                            : personToSwitch == otherCommandResult.personToSwitch);
     }
 
     @Override
@@ -76,6 +126,8 @@ public class CommandResult {
                 .add("feedbackToUser", feedbackToUser)
                 .add("showHelp", showHelp)
                 .add("exit", exit)
+                .add("index", index)
+                .add("person", personToSwitch)
                 .toString();
     }
 
