@@ -54,10 +54,12 @@ Before we get started StaffConnect offers a unique suite of UI controls for user
 <br>![Region to select the divider](images/detailsDividerRegion.png)
 
 3. Each of the 3 display panes of information they are able to pan in all four directions to view the content:
-    - For mouse pad users, dragging the around would pan in that direction
-    - For mouse users, __[mouse wheel]__ will scroll up and down while __[shift + mouse wheel]__ will scroll left and right
+    - For mouse pad users, dragging around with two fingers the around would pan around the pane.
+    - For mouse users, __[mouse wheel]__ will scroll up and down while __[shift + mouse wheel]__ will scroll left and right.
+    - __[Left click + drag]__ would pan around in the details pane as well.
     - Keyboard arrow keys are able to pan around as well, but the scroll speed may differ on different systems.
     - There are scroll bars at the vertical and horizontal dividers of the window pane, dragging them in the respective direction will pan around as well.
+    
 
 <Br><Br> 
 ### Alternative UI arrangements
