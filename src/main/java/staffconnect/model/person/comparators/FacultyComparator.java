@@ -6,7 +6,7 @@ import staffconnect.model.person.Person;
 
 
 /**
- * Represents a Comparator for a Person's Venue in the staff book.
+ * Represents a Comparator for a Person's Faculty in the staff book.
  */
 public class FacultyComparator implements Comparator<Person> {
 

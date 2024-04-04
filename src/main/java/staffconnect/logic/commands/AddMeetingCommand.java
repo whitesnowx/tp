@@ -3,7 +3,6 @@ package staffconnect.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static staffconnect.logic.parser.CliSyntax.PREFIX_MEETING_DESCRIPTION;
 import static staffconnect.logic.parser.CliSyntax.PREFIX_MEETING_STARTDATE;
-import static staffconnect.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static staffconnect.model.meeting.comparator.MeetingDateThenDescriptionComparator.MEETING_DATE_THEN_DESCRIPTION_COMPARATOR;
 
 import java.util.List;
@@ -28,6 +27,7 @@ public class AddMeetingCommand extends Command {
             + "by the index number used in the displayed person list. \n"
             + "Parameters: INDEX (must be a positive integer) " + PREFIX_MEETING_DESCRIPTION + "DESCRIPTION "
             + PREFIX_MEETING_STARTDATE + "DATETIME[dd/MM/yyyy HH:mm] \n"
+            + "There are various ways to type the start date. The one above is recommended.\n"
             + "Example: " + COMMAND_WORD + " 1 " + PREFIX_MEETING_DESCRIPTION
             + "Meet for finals " + PREFIX_MEETING_STARTDATE + "12/04/2023 18:00";
 
@@ -68,8 +68,9 @@ public class AddMeetingCommand extends Command {
 
         //setPerson to force update the ui with the new items
         model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)), editedPerson,
+                index.getZeroBased());
     }
 
 

@@ -181,11 +181,12 @@ public class ParserUtil {
      */
     public static MeetingDateTime parseDateTime(String dateTime) throws ParseException {
         requireNonNull(dateTime);
-        String trimmedDateTime = dateTime.trim();
-        if (!MeetingDateTime.isValidMeetDateTime(trimmedDateTime)) {
+        String trimmedDateTime = dateTime.trim().replaceAll("\\s+", " ");
+        try {
+            return new MeetingDateTime(trimmedDateTime);
+        } catch (IllegalArgumentException e) {
             throw new ParseException(MeetingDateTime.MESSAGE_CONSTRAINTS);
         }
-        return new MeetingDateTime(trimmedDateTime);
     }
 
     /**

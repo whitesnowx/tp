@@ -10,7 +10,7 @@ import staffconnect.model.person.Person;
 import staffconnect.model.person.UniquePersonList;
 
 /**
- * Wraps all data at the address-book level
+ * Wraps all data at the staff-book level
  * Duplicates are not allowed (by .isSamePerson comparison)
  */
 public class StaffBook implements ReadOnlyStaffBook {
