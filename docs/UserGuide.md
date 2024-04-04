@@ -245,11 +245,11 @@ Format: `meeting-add INDEX d/DESCRIPTION s/DATETIME`
 * Duplicate meetings with the same `DESCRIPTION` and `DATETIME` in the same person is not allowed.
 
 Examples:
-* `meeting-add 1 d/ Meet for finals preparation s/ 12/04/2024 18:00` adds a meeting to the first person with the description of `Meet for finals preparation` and the date and time of `12/04/2024 18:00`
-* `meeting-add 2 d/ Meet for practical exam s/ 20/04/2024 15:00` adds a meeting to the second person with the description of `Meet for practical exam` and the date and time of `20/04/2024 15:00`
+* `meeting-add 1 d/Meet for finals preparation s/12/04/2024 18:00` adds a meeting to the first person with the description of `Meet for finals preparation` and the date and time of `12/04/2024 18:00`
+* `meeting-add 2 d/Meet for practical exam s/20/04/2024 15:00` adds a meeting to the second person with the description of `Meet for practical exam` and the date and time of `20/04/2024 15:00`
 
-<br>**Result for `meeting-add 1 d/ Meet for finals preparation s/ 12/04/2024 18:00`:**
-  ![result for 'meeting-add 1 d/ Meet for finals preparation s/ 12/04/2024 18:00'](images/addMeetingResult.png)
+<br>**Result for `meeting-add 1 d/Meet for finals preparation s/12/04/2024 18:00`:**
+  ![result for 'meeting-add 1 d/Meet for finals preparation s/12/04/2024 18:00'](images/addMeetingResult.png)
 
 ### Deleting a meeting from a person: `meeting-delete`
 
@@ -419,7 +419,7 @@ Action | Format, Examples
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [m/MODULE] [f/FACULTY] [v/VENUE] [t/TAG]…​ [a/AVAILABILITY]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Filter** | `filter [m/MODULE] [f/FACULTY] [t/TAG]… [a/AVAILABILITY]…`<br> e.g., `filter m/CS2100 t/friends`
 **Sort** | `sort [ATTRIBUTE]`<br> e.g., `sort p/`
-**Add Meeting** | `meeting-add INDEX d/DESCRIPTION s/DATETIME`<br> e.g., `meeting-add 1 d/ Meet for finals preparation s/ 12/04/2024 18:00`
+**Add Meeting** | `meeting-add INDEX d/DESCRIPTION s/DATETIME`<br> e.g., `meeting-add 1 d/Meet for finals preparation s/12/04/2024 18:00`
 **Delete Meeting** | `meeting-delete INDEX i/MEETING-INDEX`<br> e.g., `meeting-delete 1 i/1 `
 **Set as Favourite** | `fav INDEX`<br> e.g., `fav 3`
 **Remove as Favourite** | `unfav INDEX`<br> e.g., `unfav 3`
