@@ -7,8 +7,10 @@ participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":StaffConnectParser" as StaffConnectParser LOGIC_COLOR
 participant ":FavCommandParser" as FavCommandParser LOGIC_COLOR
 participant "<<class>>\nParserUtil" as ParserUtil LOGIC_COLOR
-participant "d:FavCommand" as FavCommand LOGIC_COLOR
+participant "f:FavCommand" as FavCommand LOGIC_COLOR
 participant "r:CommandResult" as CommandResult LOGIC_COLOR
+participant FavCommand as FavCommand1 <<class>> LOGIC_COLOR
+participant "<<class>>\nPersonUtil" as PersonUtil LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
@@ -40,19 +42,28 @@ create FavCommand
 FavCommandParser -> FavCommand++
 return
 
-return m
+return f
 destroy FavCommandParser
-return m
+return f
 
 LogicManager -> FavCommand : execute(model)
 activate FavCommand
 
-FavCommand -> Model : getFilteredPersonList()
+FavCommand -> Model : getSortedFilteredPersonList()
 activate Model
 return
 
+FavCommand -> FavCommand1 : createFavPerson(personToFav)
+activate FavCommand1
+
+FavCommand1 -> PersonUtil : createPersonWithFavouriteStatus(Person selectedPerson, Favourite favourite)
+activate PersonUtil
+
 create Person
-FavCommand -> Person++
+PersonUtil -> Person++
+return createdPerson
+
+return favPerson
 return favPerson
 
 FavCommand -> Model : setPerson(personToFav, favPerson)
