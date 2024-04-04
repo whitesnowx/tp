@@ -65,10 +65,10 @@ Before we get started StaffConnect offers a unique suite of UI controls for user
 <br>![second alternative ui](images/secondAlternative.png)
 
 **Intended Limitations**
-1. The divider is not controllable by keyboard input, hence the only way to customise the look is mostly by mouse input.
+1. The divider position is not controllable by keyboard input, hence the only way to customise the look is mostly by mouse input.
 2. Pane switching by keyboard input,like a terminal is not supported.
 3. Font sizes does not automatically resize in this application, scroll bars will appear in smaller windows variants of this application to help with your viewing process of the details.
-4. The UI will do a soft reset on its divider position every time you relaunch the application, as this is to allow users who wish to fall back to the default layout settings.
+4. The UI will do a soft reset on its divider position every time the application is relaunched, as this is to allow users who wish to fall back to the default layout settings.
 
 
 --------------------------------------------------------------------------------------------------------------------
