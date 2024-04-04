@@ -248,7 +248,7 @@ Examples:
 * `meeting-add 1 d/Meet for finals preparation s/12/04/2024 18:00` adds a meeting to the first person with the description of `Meet for finals preparation` and the date and time of `12/04/2024 18:00`
 * `meeting-add 2 d/Meet for practical exam s/20/04/2024 15:00` adds a meeting to the second person with the description of `Meet for practical exam` and the date and time of `20/04/2024 15:00`
 
-<br>**Result for `meeting-add 1 d/Meet for finals preparation s/12/04/2024 18:00`:**
+<br>**Result for add meeting:** <br> `meeting-add 1 d/Meet for finals preparation s/12/04/2024 18:00`<br>
   ![result for 'meeting-add 1 d/Meet for finals preparation s/12/04/2024 18:00'](images/addMeetingResult.png)
 
 ### Deleting a meeting from a person: `meeting-delete`
@@ -268,11 +268,13 @@ Examples:
   * `list` followed by `meeting-delete 1 i/1` deletes the 1st meeting from the 1st person in the contacts.
   * `find Bernice Yu` followed by `meeting-delete 1 i/2` deletes the 1st meeting form the 1st person in the results of the `find` command.
       
-<br>**Results for delete meeting:**
+<br>**Results for delete meeting:**<br>
 The following command was applied:  `find Bernice Yu` followed by `meeting-delete 1 i/2`.
 <br> __(Disclaimer: The content shown in the examples may not match what you have added to your own meetings within the contact book).__
+<br>
 <br> **Before:**<br>
     ![result for before `find Bernice Yu` followed by `meeting-delete 1 i/2`](images/deleteMeetingResultBefore.png)
+<br>
 <br> **After:**<br>
     ![result for after `find Bernice Yu` followed by `meeting-delete 1 i/2`](images/deleteMeetingResultAfter.png)
 
