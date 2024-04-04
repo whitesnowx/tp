@@ -422,7 +422,8 @@ Action | Format, Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [m/MODULE] [f/FACULTY] [v/VENUE] [t/TAG]…​ [a/AVAILABILITY]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Filter** | `filter [m/MODULE] [f/FACULTY] [t/TAG]… [a/AVAILABILITY]…`<br> e.g., `filter m/CS2100 t/friends`
-**Sort** | `sort [ATTRIBUTE]`<br> e.g., `sort p/`
+**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Sort** | `sort [n/] [p/] [m/] [f/] [v/] [s/] [meet/]...`<br> e.g., `sort n/ p/ m/`
 **Add Meeting** | `meeting-add INDEX d/DESCRIPTION s/DATETIME`<br> e.g., `meeting-add 1 d/Meet for finals preparation s/12/04/2024 18:00`
 **Delete Meeting** | `meeting-delete INDEX i/MEETING-INDEX`<br> e.g., `meeting-delete 1 i/1 `
 **Set as Favourite** | `fav INDEX`<br> e.g., `fav 3`
