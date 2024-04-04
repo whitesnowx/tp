@@ -50,6 +50,7 @@ public class PersonListPanel extends UiPart<Region> {
         // guard clause to prevent invalid index
         if (index >= 0 && index < personListView.getItems().size()) {
             personListView.getSelectionModel().clearAndSelect(index);
+            personListView.scrollTo(index);
         }
 
     }
