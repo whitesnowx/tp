@@ -93,7 +93,7 @@ public class CommandTestUtil {
     public static final String INVALID_DESCRIPTION =
             " " + PREFIX_MEETING_DESCRIPTION + "&@#&*@*&@*"; //special characters
 
-    public static final String INVALID_STARTDATE = " " + PREFIX_MEETING_STARTDATE + "12-04-2023 1800";
+    public static final String INVALID_STARTDATE = " " + PREFIX_MEETING_STARTDATE + "12-04-23 1800";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
