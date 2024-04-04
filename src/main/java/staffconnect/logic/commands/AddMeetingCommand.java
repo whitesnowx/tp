@@ -28,6 +28,7 @@ public class AddMeetingCommand extends Command {
             + "by the index number used in the displayed person list. \n"
             + "Parameters: INDEX (must be a positive integer) " + PREFIX_MEETING_DESCRIPTION + "DESCRIPTION "
             + PREFIX_MEETING_STARTDATE + "DATETIME[dd/MM/yyyy HH:mm] \n"
+            + "There are various ways to type the start date. The one above is recommended.\n"
             + "Example: " + COMMAND_WORD + " 1 " + PREFIX_MEETING_DESCRIPTION
             + "Meet for finals " + PREFIX_MEETING_STARTDATE + "12/04/2023 18:00";
 
