@@ -99,7 +99,7 @@ public class PersonCard extends UiPart<Region> {
     /**
      * Creates a {@code PersonCard} with the given {@code Person} and index to display.
      */
-    public PersonCard(Person person) {
+    public PersonCard(Person person, double previousDivider) {
         super(FXML);
         this.person = person;
 
@@ -111,6 +111,9 @@ public class PersonCard extends UiPart<Region> {
         venue.setText("Venue:  " + person.getVenue().value);
         module.setText("Module:  " + person.getModule().value);
         email.setText("Email:  " + person.getEmail().value);
+
+        // Set the previous divider position from the old index
+        splitDisplay.setDividerPosition(0, previousDivider);
 
         computePixelHeight(); //Set up the pixel height variables
 
@@ -216,6 +219,15 @@ public class PersonCard extends UiPart<Region> {
         } else {
             return 0; // empty meeting return zero.
         }
+    }
+
+    /**
+     * Gets the current divider position for usage in the UI.
+     * @return a double value of the current divider position.
+     */
+    public double getCurrentDividerPosition() {
+        double[] positions = splitDisplay.getDividerPositions();
+        return positions[0];
     }
 
     /**

@@ -24,17 +24,20 @@ public class PersonListPanel extends UiPart<Region> {
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
-    public PersonListPanel(ObservableList<Person> personList, PersonDisplay personDisplay) {
+    public PersonListPanel(ObservableList<Person> personList, PersonDisplay personDisplay,
+            DividerPosition dividerPosition) {
         super(FXML);
         personListView.setItems(personList);
         personListView.setCellFactory(listView -> new NameListViewCell());
         personListView.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
-                personDisplay.changePersonCard(new PersonCard(personListView.getSelectionModel().getSelectedItem()));
+                personDisplay.changePersonCard(new PersonCard(personListView.getSelectionModel().getSelectedItem(),
+                        dividerPosition.getDividerPosition()));
             }
         });
         personListView.setOnMouseClicked(event -> {
-            personDisplay.changePersonCard(new PersonCard(personListView.getSelectionModel().getSelectedItem()));
+            personDisplay.changePersonCard(new PersonCard(personListView.getSelectionModel().getSelectedItem(),
+                    dividerPosition.getDividerPosition()));
         });
     }
 
@@ -49,6 +52,18 @@ public class PersonListPanel extends UiPart<Region> {
             personListView.getSelectionModel().clearAndSelect(index);
         }
 
+    }
+
+    /**
+     * Represents a function that gets the previous divider position.
+     */
+    @FunctionalInterface
+    public interface DividerPosition {
+
+        /**
+         * Gets the current divider position
+         */
+        double getDividerPosition();
     }
 
     /**
