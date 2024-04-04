@@ -31,7 +31,7 @@ public class JsonAdaptedPersonTest {
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_AVAILABILITY = "m0n";
     private static final String INVALID_MEETING_DESCRIPTION = "*!&@#&*@*&@*";
-    private static final String INVALID_MEETING_DATE = "12-04-2023 18:00";
+    private static final String INVALID_MEETING_DATE = "12-04-23 18:00";
     private static final String INVALID_FAVOURITE = " ";
 
     private static final String VALID_NAME = BENSON.getName().toString();

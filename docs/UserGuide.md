@@ -183,7 +183,29 @@ Format: `meeting INDEX [d/DESCRIPTION] [s/DATETIME]`
 * Adds a meeting to the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3,…​ and tally within range index of the displayed list.
 * Both of the fields must be provided and valid values.
 * A valid `DESCRIPTION` of the meeting can only contain latin alphanumeric characters.
-* A valid `DATETIME` of the meeting can only contain valid date and 24 hour time values with a single space to separate the date and time in the format of `dd/MM/yyyy HH:mm`.
+* A valid `DATETIME` of the meeting can only contain valid date and 24 hour time values with a single space to separate the date and time. Multiple formats are allowed.
+    * Date Formats
+        - Separators: `-`
+            1. `d-M-yyyy`
+            2. `dd-M-yyyy`
+            3. `d-MM-yyyy`
+            4. `dd-MM-yyyy`
+            5. `yyyy-M-d`
+            6. `yyyy-MM-d`
+            7. `yyyy-MM-dd`
+        - Separators: `/`
+            1. `d/M/yyyy`
+            2. `dd/M/yyyy`
+            3. `d/MM/yyyy`
+            4. `dd/MM/yyyy`
+            5. `yyyy/M/d`
+            6. `yyyy/M/dd`
+            7. `yyyy/MM/d`
+            8. `yyyy/MM/dd`
+    * Time Formats
+        1. `HH:mm`
+        2. `H:mm`
+        3. `HHmm`
 * Duplicate meetings with the same `DESCRIPTION` and `DATETIME` in the same person is not allowed.
 
 Examples:
@@ -205,33 +227,46 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the contacts.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-### Marking a person as favourite: `mark`
+### Setting a person as favourite: `fav`
 
-Marks the specified person from the contacts as favourite.
+Sets the specified person from the contacts as favourite.
 
-Format: `mark INDEX`
+Format: `fav INDEX`
 
-* Marks the person at the specified `INDEX`.
+* Sets the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `mark 2` marks the 2nd person in the contacts.
-* `find Betsy` followed by `mark 1` marks the 1st person in the results of the `find` command.
+* `list` followed by `fav 2` sets the 2nd person as favourite in the contacts.
+* `find Betsy` followed by `fav 1` sets the 1st person as favourite in the results of the `find` command.
 
-### Unmarking a person as favourite: `unmark`
+### Removes a person as favourite: `unfav`
 
-Unmarks the specified person from the contacts as favourite.
+Removes the specified person from the contacts as favourite.
 
-Format: `unmark INDEX`
+Format: `unfav INDEX`
 
-* Unmarks the person at the specified `INDEX`.
+* Removes the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `unmark 2` unmarks the 2nd person in the contacts.
-* `find Betsy` followed by `unmark 1` unmarks the 1st person in the results of the `find` command.
+* `list` followed by `unfav 2` removes the 2nd person as favourite in the contacts.
+* `find Betsy` followed by `unfav 1` removes the 1st person as favourite in the results of the `find` command.
+
+### Refresh and clear all outdated meetings: `refresh`
+
+Deletes all meetings that start before the very moment the user types in the command and enters.
+
+Format: `refresh`
+
+* The deleted meetings will be explicitly printed again to the use, specifying content of the meeting and who "owns" the meeting.
+* If no meetings are deleted, there will no error thrown. Instead, a prompt will be given to user that no meeting is deleted.
+
+Examples:
+* If there is a meeting `French Revolution` that happened in `14/07/1789 12:00`, when the user types in `refresh`, it will be deleted.
+* If there is a meeting `Future Meeting` that will happen in `31/12/2999 12:00`, when the user types in `refresh`, it will not be deleted.
 
 ### Clearing all entries : `clear`
 
@@ -302,7 +337,7 @@ Action | Format, Examples
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Sort** | `sort [n/] [p/] [m/] [f/] [v/] [s/] [meet/]...`<br> e.g., `sort n/ p/ m/`
 **Add Meeting** | `meeting INDEX [d/DESCRIPTION] [s/DATETIME]`<br> e.g., `meeting 1 d/ Meet for finals preparation s/ 12/04/2024 18:00`
-**Mark** | `mark INDEX`<br> e.g., `mark 3`
-**Unmark** | `unmark INDEX`<br> e.g., `unmark 3`
+**Set as Favourite** | `fav INDEX`<br> e.g., `fav 3`
+**Remove as Favourite** | `unfav INDEX`<br> e.g., `unfav 3`
 **List** | `list`
 **Help** | `help`

@@ -25,13 +25,14 @@ import staffconnect.logic.commands.DeleteCommand;
 import staffconnect.logic.commands.EditCommand;
 import staffconnect.logic.commands.EditCommand.EditPersonDescriptor;
 import staffconnect.logic.commands.ExitCommand;
+import staffconnect.logic.commands.FavCommand;
 import staffconnect.logic.commands.FilterCommand;
 import staffconnect.logic.commands.FindCommand;
 import staffconnect.logic.commands.HelpCommand;
 import staffconnect.logic.commands.ListCommand;
-import staffconnect.logic.commands.MarkCommand;
+import staffconnect.logic.commands.RefreshCommand;
 import staffconnect.logic.commands.SortCommand;
-import staffconnect.logic.commands.UnmarkCommand;
+import staffconnect.logic.commands.UnfavCommand;
 import staffconnect.logic.parser.exceptions.ParseException;
 import staffconnect.model.availability.Availability;
 import staffconnect.model.person.Faculty;
@@ -165,6 +166,12 @@ public class StaffConnectParserTest {
     }
 
     @Test
+    public void parseCommand_refresh() throws Exception {
+        assertTrue(parser.parseCommand(RefreshCommand.COMMAND_WORD) instanceof RefreshCommand);
+        assertTrue(parser.parseCommand(RefreshCommand.COMMAND_WORD + " 1") instanceof RefreshCommand);
+    }
+
+    @Test
     public void parseCommand_sort() throws Exception {
         SortCommand nameSortCommand = (SortCommand) parser.parseCommand(SortCommand.COMMAND_WORD + " " + "n/");
         SortCommand phoneSortCommand = (SortCommand) parser.parseCommand(SortCommand.COMMAND_WORD + " " + "p/");
@@ -199,17 +206,17 @@ public class StaffConnectParserTest {
     }
 
     @Test
-    public void parseCommand_mark() throws Exception {
-        MarkCommand command = (MarkCommand) parser.parseCommand(
-                MarkCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new MarkCommand(INDEX_FIRST_PERSON), command);
+    public void parseCommand_fav() throws Exception {
+        FavCommand command = (FavCommand) parser.parseCommand(
+                FavCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new FavCommand(INDEX_FIRST_PERSON), command);
     }
 
     @Test
-    public void parseCommand_unmark() throws Exception {
-        UnmarkCommand command = (UnmarkCommand) parser.parseCommand(
-                UnmarkCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new UnmarkCommand(INDEX_FIRST_PERSON), command);
+    public void parseCommand_unfav() throws Exception {
+        UnfavCommand command = (UnfavCommand) parser.parseCommand(
+                UnfavCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new UnfavCommand(INDEX_FIRST_PERSON), command);
     }
 
     @Test

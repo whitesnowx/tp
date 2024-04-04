@@ -35,10 +35,7 @@ class MeetingDateTimeTest {
         assertFalse(MeetingDateTime.isValidMeetDateTime("120420231200")); // missing separator no space
         assertFalse(MeetingDateTime.isValidMeetDateTime("12/0420231200")); // only 1 separator no space
         assertFalse(MeetingDateTime.isValidMeetDateTime("1204/2023 1200")); // only 1 separator
-        assertFalse(MeetingDateTime.isValidMeetDateTime("12-04-2023 12:00")); // wrong separator
         assertFalse(MeetingDateTime.isValidMeetDateTime("12/04/23 12:00")); // wrong digits for year
-        assertFalse(MeetingDateTime.isValidMeetDateTime("12/4/2023 12:00")); // wrong number digits for month
-        assertFalse(MeetingDateTime.isValidMeetDateTime("1/04/2023 12:00")); // wrong number digits for day
         assertFalse(MeetingDateTime.isValidMeetDateTime("99/04/2023 12:00")); // wrong date values
         assertFalse(MeetingDateTime.isValidMeetDateTime("01/04/2023 99:00")); // wrong time values
         // date does not exist, but error not caught by a normal parse operation. Only strict would catch this.
@@ -47,9 +44,29 @@ class MeetingDateTimeTest {
 
 
         // valid meeting Date
-        assertTrue(MeetingDateTime.isValidMeetDateTime("12/04/2023 12:00")); // dd/MM/yyyy HH:mm
-        assertTrue(MeetingDateTime.isValidMeetDateTime("15/02/2024 12:00")); // dd/MM/yyyy HH:mm
         assertTrue(MeetingDateTime.isValidMeetDateTime("29/02/2024 12:00")); //valid date on a leap year
+        // Separator: -
+        assertTrue(MeetingDateTime.isValidMeetDateTime("1-4-2023 12:00")); // d-M-yyyy HH:mm
+        assertTrue(MeetingDateTime.isValidMeetDateTime("12-2-2024 12:00")); // dd-M-yyyy HH:mm
+        assertTrue(MeetingDateTime.isValidMeetDateTime("1-04-2023 12:00")); // d-MM-yyyy HH:mm
+        assertTrue(MeetingDateTime.isValidMeetDateTime("12-04-2023 12:00")); // dd-MM-yyyy HH:mm
+        assertTrue(MeetingDateTime.isValidMeetDateTime("2023-4-1 12:00")); // yyyy-M-d HH:mm
+        assertTrue(MeetingDateTime.isValidMeetDateTime("2023-04-1 12:00")); // yyyy-MM-d HH:mm
+        assertTrue(MeetingDateTime.isValidMeetDateTime("2023-4-12 12:00")); // yyyy-M-dd HH:mm
+
+        // Separator: /
+        assertTrue(MeetingDateTime.isValidMeetDateTime("1/4/2023 12:00")); // d/M/yyyy HH:mm
+        assertTrue(MeetingDateTime.isValidMeetDateTime("12/2/2024 12:00")); // dd/M/yyyy HH:mm
+        assertTrue(MeetingDateTime.isValidMeetDateTime("1/04/2023 12:00")); // d/MM/yyyy HH:mm
+        assertTrue(MeetingDateTime.isValidMeetDateTime("12/04/2023 12:00")); // dd/MM/yyyy HH:mm
+        assertTrue(MeetingDateTime.isValidMeetDateTime("2023/4/1 12:00")); // yyyy/M/d HH:mm
+        assertTrue(MeetingDateTime.isValidMeetDateTime("2023/4/12 12:00")); // yyyy/M/dd HH:mm
+        assertTrue(MeetingDateTime.isValidMeetDateTime("2023/04/1 12:00")); // yyyy/MM/d HH:mm
+        assertTrue(MeetingDateTime.isValidMeetDateTime("2023/04/12 12:00")); // yyyy/MM/dd HH:mm
+
+        // Handling different time formats
+        assertTrue(MeetingDateTime.isValidMeetDateTime("12/4/2023 8:00")); // dd/M/yyyy H:mm
+        assertTrue(MeetingDateTime.isValidMeetDateTime("1/04/2023 1200")); // d/MM/yyyy HHmm
     }
 
     @Test
