@@ -42,6 +42,8 @@ StaffConnect (SC) is a **desktop app for managing contacts of Professors and Tut
 
 ## Navigability
 
+### Mouse and Keyboard controls
+
 Before we get started StaffConnect offers a unique suite of UI controls for users to customise their own unique experience!
 
 1. Clicking any items on the left panel will allow you to select the person contact to display.
@@ -51,14 +53,22 @@ Before we get started StaffConnect offers a unique suite of UI controls for user
 2. There is a divider that is draggable up and down to hide and show details on the right side and to customise the look of your application.
 <br>![Region to select the divider](images/detailsDividerRegion.png)
 
+3. Each of the 3 display panes of information they are able to pan in all four directions to view the content:
+    - For mouse pad users, dragging the around would pan in that direction
+    - For mouse users, __[mouse wheel]__ will scroll up and down while __[shift + mouse wheel]__ will scroll left and right
+    - Keyboard arrow keys are able to pan around as well, but the scroll speed may differ on different systems.
+    - There are scroll bars at the vertical and horizontal dividers of the window pane, dragging them in the respective direction will pan around as well.
+
 <Br><Br> 
-### Below are some examples of alternatives UI you may customise to:
+### Alternative UI arrangements
 <br>![first alternative ui](images/firstAlternative.png)
 <br>![second alternative ui](images/secondAlternative.png)
 
-**Known Limitations**
+**Intended Limitations**
 1. The divider is not controllable by keyboard input, hence the only way to customise the look is mostly by mouse input.
-2. As font sizes does not automatically resize in this application, scroll bars will appear in smaller windows variants of this application to help with your viewing process of the details.
+2. Pane switching by keyboard input,like a terminal is not supported.
+3. Font sizes does not automatically resize in this application, scroll bars will appear in smaller windows variants of this application to help with your viewing process of the details.
+4. The UI will do a soft reset on its divider position every time you relaunch the application, as this is to allow users who wish to fall back to the default layout settings.
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -129,7 +139,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [m/MODULE] [f/FACULTY] [v/VENUE
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
   specifying any tags after it.
-* When editing availabilities, the existing availabilites of the person will be removed i.e adding of availabilities is not cumulative.
+* When editing availabilities, the existing availabilities of the person will be removed i.e adding of availabilities is not cumulative.
 * You can remove all the person’s availabilities by typing `a/` without
   specifying any availabilities after it.
 
@@ -211,7 +221,7 @@ Examples:
 * `meeting-add 1 d/ Meet for finals preparation s/ 12/04/2024 18:00` adds a meeting to the first person with the description of `Meet for finals preparation` and the date and time of `12/04/2024 18:00`
 * `meeting-add 2 d/ Meet for practical exam s/ 20/04/2024 15:00` adds a meeting to the second person with the description of `Meet for practical exam` and the date and time of `20/04/2024 15:00`
 
-#### Result for `meeting-add 1 d/ Meet for finals preparation s/ 12/04/2024 18:00`:
+<br>**Result for `meeting-add 1 d/ Meet for finals preparation s/ 12/04/2024 18:00`:**
   ![result for 'meeting-add 1 d/ Meet for finals preparation s/ 12/04/2024 18:00'](images/addMeetingResult.png)
 
 ### Deleting a meeting from a person: `meeting-delete`
@@ -231,7 +241,7 @@ Examples:
   * `list` followed by `meeting-delete 1 i/1` deletes the 1st meeting from the 1st person in the contacts.
   * `find Bernice Yu` followed by `meeting-delete 1 i/2` deletes the 1st meeting form the 1st person in the results of the `find` command.
       
-#### Results for delete meeting:
+<br>**Results for delete meeting:**
 The following command was applied:  `find Bernice Yu` followed by `meeting-delete 1 i/2`.
 <br> __(Disclaimer: The content shown in the examples may not match what you have added to your own meetings within the contact book).__
 <br> **Before:**<br>
