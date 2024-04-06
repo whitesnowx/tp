@@ -24,7 +24,6 @@ public class Availability {
 
     private static final DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
 
-
     public final String value;
     private final DayOfWeek day;
     private final LocalTime startTime;

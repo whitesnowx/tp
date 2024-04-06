@@ -4,17 +4,23 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static staffconnect.testutil.TypicalPersons.ALICE;
+import static staffconnect.testutil.TypicalPersons.BOB;
 
 import org.junit.jupiter.api.Test;
+
+import staffconnect.model.person.Person;
 
 public class CommandResultTest {
     @Test
     public void equals() {
         CommandResult commandResult = new CommandResult("feedback");
+        CommandResult commandResultWithPerson = new CommandResult("feedback", ALICE, 0);
 
         // same values -> returns true
         assertTrue(commandResult.equals(new CommandResult("feedback")));
         assertTrue(commandResult.equals(new CommandResult("feedback", false, false)));
+        assertTrue(commandResultWithPerson.equals(new CommandResult("feedback", ALICE, 0)));
 
         // same object -> returns true
         assertTrue(commandResult.equals(commandResult));
@@ -33,14 +39,23 @@ public class CommandResultTest {
 
         // different exit value -> returns false
         assertFalse(commandResult.equals(new CommandResult("feedback", false, true)));
+
+        // different person value
+        assertFalse(commandResultWithPerson.equals(new CommandResult("feedback", BOB, 0)));
+        // different index value
+        assertFalse(commandResultWithPerson.equals(new CommandResult("feedback", ALICE, 1)));
+
     }
 
     @Test
     public void hashcode() {
         CommandResult commandResult = new CommandResult("feedback");
+        CommandResult commandResultWithPerson = new CommandResult("feedback", ALICE, 0);
 
         // same values -> returns same hashcode
         assertEquals(commandResult.hashCode(), new CommandResult("feedback").hashCode());
+        assertEquals(commandResultWithPerson.hashCode(),
+                new CommandResult("feedback", ALICE, 0).hashCode());
 
         // different feedbackToUser value -> returns different hashcode
         assertNotEquals(commandResult.hashCode(), new CommandResult("different").hashCode());
@@ -50,6 +65,14 @@ public class CommandResultTest {
 
         // different exit value -> returns different hashcode
         assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, true).hashCode());
+
+        // different person value -> returns different hashcode
+        assertNotEquals(commandResultWithPerson.hashCode(), new CommandResult("feedback", BOB, 0));
+
+        // different index value -> returns different hashcode
+        assertNotEquals(commandResultWithPerson.hashCode(), new CommandResult("feedback", ALICE, 1));
+
+
     }
 
     @Test
@@ -57,7 +80,8 @@ public class CommandResultTest {
         CommandResult commandResult = new CommandResult("feedback");
         String expected = CommandResult.class.getCanonicalName() + "{feedbackToUser="
                 + commandResult.getFeedbackToUser() + ", showHelp=" + commandResult.isShowHelp()
-                + ", exit=" + commandResult.isExit() + "}";
+                + ", exit=" + commandResult.isExit() + ", index=" + commandResult.getIndex()
+                + ", person=" + commandResult.getPersonToDisplay().map(Person::toString).orElse("null") + "}";
         assertEquals(expected, commandResult.toString());
     }
 }

@@ -4,6 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static staffconnect.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static staffconnect.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static staffconnect.model.person.comparators.ModuleComparator.MODULE_COMPARATOR;
+import static staffconnect.model.person.comparators.NameComparator.NAME_COMPARATOR;
+import static staffconnect.model.person.comparators.PhoneComparator.PHONE_COMPARATOR;
+import static staffconnect.model.person.comparators.VenueComparator.VENUE_COMPARATOR;
 import static staffconnect.testutil.Assert.assertThrows;
 import static staffconnect.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -34,10 +38,7 @@ import staffconnect.model.availability.Availability;
 import staffconnect.model.person.Faculty;
 import staffconnect.model.person.Module;
 import staffconnect.model.person.Person;
-import staffconnect.model.person.comparators.ModuleComparator;
-import staffconnect.model.person.comparators.NameComparator;
-import staffconnect.model.person.comparators.PhoneComparator;
-import staffconnect.model.person.comparators.VenueComparator;
+import staffconnect.model.person.comparators.MultiComparator;
 import staffconnect.model.person.predicates.NameContainsKeywordsPredicate;
 import staffconnect.model.person.predicates.PersonHasAvailabilitiesPredicate;
 import staffconnect.model.person.predicates.PersonHasFacultyPredicate;
@@ -176,10 +177,11 @@ public class StaffConnectParserTest {
         SortCommand phoneSortCommand = (SortCommand) parser.parseCommand(SortCommand.COMMAND_WORD + " " + "p/");
         SortCommand venueSortCommand = (SortCommand) parser.parseCommand(SortCommand.COMMAND_WORD + " " + "v/");
         SortCommand moduleSortCommand = (SortCommand) parser.parseCommand(SortCommand.COMMAND_WORD + " " + "m/");
-        assertEquals(new SortCommand(NameComparator.NAME_COMPARATOR), nameSortCommand); // name
-        assertEquals(new SortCommand(PhoneComparator.PHONE_COMPARATOR), phoneSortCommand); // phone
-        assertEquals(new SortCommand(VenueComparator.VENUE_COMPARATOR), venueSortCommand); // venue
-        assertEquals(new SortCommand(ModuleComparator.MODULE_COMPARATOR), moduleSortCommand); // module
+        assertEquals(new SortCommand(new MultiComparator(List.of(NAME_COMPARATOR))), nameSortCommand); // name
+        assertEquals(new SortCommand(new MultiComparator(List.of(PHONE_COMPARATOR))), phoneSortCommand); // phone
+        assertEquals(new SortCommand(new MultiComparator(List.of(VENUE_COMPARATOR))), venueSortCommand); // venue
+        assertEquals(new SortCommand(new MultiComparator(List.of(MODULE_COMPARATOR))), moduleSortCommand); // module
+
     }
 
     @Test
