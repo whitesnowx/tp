@@ -124,6 +124,8 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com f/Computing v/John street, block 123, #01-01 m/CS2103`
 * `add n/Betsy Crowe t/friend m/CS2103T e/betsycrowe@example.com f/Computing v/Newgate Prison p/1234567 t/criminal a/monday 11:00 12:00 a/wednesday 14:00 16:00`
 
+![Effects of an add command](images/AfterAddCommand.png)
+
 ### Listing all persons : `list`
 
 Shows a list of all persons in the contacts.
@@ -149,6 +151,11 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [m/MODULE] [f/FACULTY] [v/VENUE
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+    <br>**Before editing the second person:** <br>
+    ![Before editing the second person](images/BeforeEditCommand.png)
+    <br>
+    <br>**After editing the second person:** <br>
+    ![After editing the second person](images/AfterEditCommand.png)
 
 ### Filtering persons by attribute: `filter`
 
@@ -293,6 +300,14 @@ Format: `delete INDEX`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the contacts.
 * `find Bernice Yu` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+  <br>**Before deletion:**<br>
+  ![All persons listed](images/BeforeDeleteCommand1.png)
+  <br>**First find Bernice:**<br>
+  ![Result of finding Bernice](images/BeforeDeleteCommand2.png)
+  <br>**Then delete Bernice:**<br>
+  ![Result of deletion](images/AfterDeleteCommand1.png)
+  <br>**List all persons and Bernice is deleted:**<br>
+  ![Result of deletion](images/AfterDeleteCommand2.png)
 
 ### Setting a person as favourite: `fav`
 
@@ -307,6 +322,7 @@ Format: `fav INDEX`
 Examples:
 * `list` followed by `fav 2` sets the 2nd person as favourite in the contacts.
 * `find Betsy` followed by `fav 1` sets the 1st person as favourite in the results of the `find` command.
+![Result of fav command](images/AfterFavCommand.png)
 
 ### Removes a person as favourite: `unfav`
 
@@ -334,7 +350,12 @@ Format: `refresh`
 Examples:
 * If there is a meeting `French Revolution` that happened in `14/07/1789 12:00`, when the user types in `refresh`, it will be deleted.
 * If there is a meeting `Future Meeting` that will happen in `31/12/2999 12:00`, when the user types in `refresh`, it will not be deleted.
- 
+  <br>**Before:**<br>
+  ![Before refreshing](images/BeforeRefreshCommand.png)
+  <br>
+  ![After refreshing](images/AfterRefreshCommand.png)
+  <br>**After:**<br>
+
 **Known limitations:**
 Refresh is only used when the user decides to remove clutter in the staff book, and wants to remove outdated meetings. 
 This process is not done automatically as sometimes the user would like to retain old meetings for bookkeeping purposes.
@@ -359,6 +380,8 @@ Examples:
 Clears all entries from the contacts.
 
 Format: `clear`
+
+![Effects of clear command](images/AfterClearCommand.png)
 
 ### Exiting the program : `exit`
 
