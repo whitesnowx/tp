@@ -7,8 +7,7 @@ box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":StaffConnectParser" as StaffConnectParser LOGIC_COLOR
 participant ":SortCommandParser" as SortCommandParser LOGIC_COLOR
-participant "<<class>>\nNameComparator" as NameComparator LOGIC_COLOR
-participant "c:NameComparator" as NAME_COMPARATOR LOGIC_COLOR
+participant "c:MultiComparator" as MultiComparator LOGIC_COLOR
 participant "s:SortCommand" as SortCommand LOGIC_COLOR
 participant "r:CommandResult" as CommandResult LOGIC_COLOR
 end box
@@ -35,19 +34,13 @@ activate SortCommandParser
 SortCommandParser -> SortCommandParser : parseComparatorForKeywords("n/")
 activate SortCommandParser
 
-create NameComparator
-SortCommandParser -> NameComparator
-activate NameComparator
+create MultiComparator
+SortCommandParser -> MultiComparator
+activate MultiComparator
 
-create NAME_COMPARATOR
-NameComparator -> NAME_COMPARATOR
-activate NAME_COMPARATOR
+MultiComparator --> SortCommandParser : c
+deactivate MultiComparator
 
-NAME_COMPARATOR --> NameComparator : c
-deactivate NAME_COMPARATOR
-
-NameComparator --> SortCommandParser : c
-deactivate NameComparator
 SortCommandParser --> SortCommandParser : c
 deactivate SortCommandParser
 

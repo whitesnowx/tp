@@ -59,9 +59,9 @@ public class MainWindow extends UiPart<Stage> {
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
-
+        // The default divider is 0.43
         personOnDisplay = logic.getFirstPersonIfExist()
-                .map(PersonCard::new).orElse(new PersonCard());
+                .map(person -> new PersonCard(person, 0.43)).orElse(new PersonCard());
 
         helpWindow = new HelpWindow();
     }
@@ -87,7 +87,8 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
 
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), this::changePersonCard);
+        personListPanel =
+                new PersonListPanel(logic.getFilteredPersonList(), this::changePersonCard, this::getDividerPosition);
         personListPanel.setListSelectedIndex(0);
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
@@ -104,7 +105,6 @@ public class MainWindow extends UiPart<Stage> {
         personCardPanelPlaceholder.getChildren().add(personOnDisplay.getRoot());
 
 
-
     }
 
     private void changePersonCard(PersonCard personToUpdate) {
@@ -113,6 +113,15 @@ public class MainWindow extends UiPart<Stage> {
         personCardPanelPlaceholder.getChildren().clear();
         personCardPanelPlaceholder.getChildren().add(personOnDisplay.getRoot());
 
+    }
+
+    /**
+     * Gets the current divider position, to be used by the UI only
+     *
+     * @return a double value of the divider position.
+     */
+    public double getDividerPosition() {
+        return personOnDisplay.getCurrentDividerPosition();
     }
 
     /**
@@ -134,6 +143,18 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.hasPersonAndIndex()) {
+
+                double dividerPosition = personOnDisplay.getCurrentDividerPosition();
+                int index = commandResult.getIndex();
+                commandResult.getPersonToDisplay()
+                        .ifPresentOrElse(
+                                person -> reloadPersonCardWithPerson(new PersonCard(person, dividerPosition), index),
+                                this::reloadPersonCardWithRoot);
+            } else {
+                reloadPersonCardWithRoot();
             }
 
             return commandResult;
@@ -168,13 +189,24 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void reloadPersonCardWithRoot() {
-
-        personOnDisplay = logic.getFirstPersonIfExist().map(PersonCard::new).orElse(new PersonCard());
+        double previousDividerPosition = personOnDisplay.getCurrentDividerPosition();
+        personOnDisplay = logic.getFirstPersonIfExist()
+                .map(person -> new PersonCard(person, previousDividerPosition)).orElse(new PersonCard());
 
         personCardPanelPlaceholder.getChildren().clear();
         personCardPanelPlaceholder.getChildren().add(personOnDisplay.getRoot());
 
         personListPanel.setListSelectedIndex(0);
+
+    }
+
+    private void reloadPersonCardWithPerson(PersonCard person, int index) {
+
+        personOnDisplay = person;
+        personCardPanelPlaceholder.getChildren().clear();
+        personCardPanelPlaceholder.getChildren().add(personOnDisplay.getRoot());
+
+        personListPanel.setListSelectedIndex(index);
 
     }
 

@@ -19,7 +19,7 @@ StaffConnect (SC) is a **desktop app for managing contacts of Professors and Tut
 3. Copy the file to the folder you want to use as the _home folder_ for your StaffConnect application.
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar StaffConnect.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>__(The data in preview image below may not match with the sample data provided)__<br>
    ![Ui](images/Ui.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -38,6 +38,44 @@ StaffConnect (SC) is a **desktop app for managing contacts of Professors and Tut
 6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
+
+
+## Navigability
+
+### Mouse and Keyboard controls
+
+Before we get started StaffConnect offers a unique suite of UI controls for users to customise their own unique experience!
+
+1. Clicking any items on the left panel will allow you to select the person contact to display.
+<br>Alternatively, clicking anywhere in the list panel then using your arrow keys to navigate and hitting enter to select would give the same result.
+<br>![Region to select the person](images/personPanelRegion.png)
+
+2. There is a divider that is draggable up and down to hide and show details on the right side and to customise the look of your application.
+<br>![Region to select the divider](images/detailsDividerRegion.png)
+
+3. Each of the 3 display panes of information they are able to pan in all four directions to view the content:
+    - For mouse pad users, dragging around with two fingers the around would pan around the pane.
+    - For mouse users, __[mouse wheel]__ will scroll up and down while __[shift + mouse wheel]__ will scroll left and right.
+    - __[Left click + drag]__ would pan around in the details pane as well.
+    - Keyboard arrow keys are able to pan around as well, but the scroll speed may differ on different systems.
+    - There are scroll bars at the vertical and horizontal dividers of the window pane, dragging them in the respective direction will pan around as well.
+    
+
+<Br><Br> 
+### Alternative UI arrangements
+<br>![first alternative ui](images/firstAlternative.png)
+<br>
+<br>![second alternative ui](images/secondAlternative.png)
+
+**Intended Limitations**
+1. The divider position is not controllable by keyboard input, hence the only way to customise the look is mostly by mouse input.
+2. Pane switching by keyboard input, like a terminal is not supported.
+3. Font sizes does not automatically resize in this application, scroll bars will appear in smaller window variants of this application to help with the viewing of details.
+4. The UI will do a soft reset on its divider position every time the application is relaunched, as this is to allow users who wish to fall back to the default layout settings.
+
+
+--------------------------------------------------------------------------------------------------------------------
+
 
 ## Features
 
@@ -104,7 +142,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [m/MODULE] [f/FACULTY] [v/VENUE
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
   specifying any tags after it.
-* When editing availabilities, the existing availabilites of the person will be removed i.e adding of availabilities is not cumulative.
+* When editing availabilities, the existing availabilities of the person will be removed i.e adding of availabilities is not cumulative.
 * You can remove all the person’s availabilities by typing `a/` without
   specifying any availabilities after it.
 
@@ -163,18 +201,22 @@ Format: `sort [ATTRIBUTE]`
 * The order of character priority would be letters (A-Z), numbers (0-9), special characters (!@#$%^&*).
 * The capitalisation of the letters do not affect their priority such that `Aaron` will have same priority as `aaron`.
 * For attribute with exact same values, the tie-breaker is determined by their added order.
+* For sorting of multiple attributes, the weightage will be determined by the order in which it was entered. E.g `sort m/ p/ v/` will sort by contact by their module, among those with equal modules would then be sorted by their phone number and similarly for venue.
 * `[ATTRIBUTE]` is to be noted by their prefix. e.g `name` will be `n/`.
+* `s/` sorts contacts by person with the earliest meeting
+* `meet/` sorts contacts by person with the earliest meeting, followed by alphanumeric order of meeting description
 
 Examples:
+* `sort m/ p/` returns person by ascending module codes followed by ascending phone numbers `CS2000 80000000`, `CS2000 90000000`, `CS3000 80000000`followed by `CS3000 90000000`
 * `sort n/` returns person by ascending names `Alex`, `Bernice` followed by `Charlotte`
 * `sort p/` returns person by ascending phone numbers `87438807`, `91031282` followed by `92492021`<br>
   ![result for 'sort p/'](images/sortByPhoneNumberResult.png)
 
-### Adding a meeting to a person: `meeting`
+### Adding a meeting to a person: `meeting-add`
 
 Add a meeting to a person based on specified description and date.
 
-Format: `meeting INDEX [d/DESCRIPTION] [s/DATETIME]`
+Format: `meeting-add INDEX d/DESCRIPTION s/DATETIME`
 
 * Adds a meeting to the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3,…​ and tally within range index of the displayed list.
 * Both of the fields must be provided and valid values.
@@ -205,9 +247,38 @@ Format: `meeting INDEX [d/DESCRIPTION] [s/DATETIME]`
 * Duplicate meetings with the same `DESCRIPTION` and `DATETIME` in the same person is not allowed.
 
 Examples:
-* `meeting 1 d/ Meet for finals preparation s/ 12/04/2024 18:00` adds a meeting to the first person with the description of `Meet for finals preparation` and the date and time of `12/04/2024 18:00`
-* `meeting 2 d/ Meet for practical exam s/ 20/04/2024 15:00` adds a meeting to the second person with the description of `Meet for practical exam` and the date and time of `20/04/2024 15:00`
-  ![result for 'meeting 1 d/ Meet for finals preparation s/ 12/04/2024 18:00'](images/addMeetingResult.png)
+* `meeting-add 1 d/Meet for finals preparation s/12/04/2024 18:00` adds a meeting to the first person with the description of `Meet for finals preparation` and the date and time of `12/04/2024 18:00`
+* `meeting-add 2 d/Meet for practical exam s/20/04/2024 15:00` adds a meeting to the second person with the description of `Meet for practical exam` and the date and time of `20/04/2024 15:00`
+
+<br>**Result for add meeting:** <br> `meeting-add 1 d/Meet for finals preparation s/12/04/2024 18:00`<br>
+  ![result for 'meeting-add 1 d/Meet for finals preparation s/12/04/2024 18:00'](images/addMeetingResult.png)
+
+### Deleting a meeting from a person: `meeting-delete`
+
+Deletes a meeting from  person based on specified meeting index.
+
+Format: `meeting-delete INDEX i/MEETING-INDEX `
+
+* Deletes the  meeting at specified `MEETING-INDEX` from the person at specified `INDEX`. 
+* The index refers to the index number shown in the displayed person list. 
+* The index **must be a positive integer** 1, 2, 3,…​ and tally within range index of the displayed person list.
+* The meeting-index refers to the index number shown in the displayed meeting list.
+* The index **must be a positive integer** 1, 2, 3,…​ and tally within range index of the displayed meeting list.
+* The meeting from the person must exist before it can be deleted otherwise an error will be displayed.
+Examples:
+* The following commands assumes that meetings have been added prior to the command. Otherwise, an error will be thrown. <br> **(Refer to the section above on how to add a meeting)**
+  * `list` followed by `meeting-delete 1 i/1` deletes the 1st meeting from the 1st person in the contacts.
+  * `find Bernice Yu` followed by `meeting-delete 1 i/2` deletes the 1st meeting form the 1st person in the results of the `find` command.
+      
+<br>**Results for delete meeting:**<br>
+The following command was applied:  `find Bernice Yu` followed by `meeting-delete 1 i/2`.
+<br> __(Disclaimer: The content shown in the examples may not match what you have added to your own meetings within the contact book).__
+<br>
+<br> **Before:**<br>
+    ![result for before `find Bernice Yu` followed by `meeting-delete 1 i/2`](images/deleteMeetingResultBefore.png)
+<br>
+<br> **After:**<br>
+    ![result for after `find Bernice Yu` followed by `meeting-delete 1 i/2`](images/deleteMeetingResultAfter.png)
 
 ### Deleting a person : `delete`
 
@@ -221,7 +292,7 @@ Format: `delete INDEX`
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the contacts.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `find Bernice Yu` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
 ### Setting a person as favourite: `fav`
 
@@ -263,6 +334,25 @@ Format: `refresh`
 Examples:
 * If there is a meeting `French Revolution` that happened in `14/07/1789 12:00`, when the user types in `refresh`, it will be deleted.
 * If there is a meeting `Future Meeting` that will happen in `31/12/2999 12:00`, when the user types in `refresh`, it will not be deleted.
+ 
+**Known limitations:**
+Refresh is only used when the user decides to remove clutter in the staff book, and wants to remove outdated meetings. 
+This process is not done automatically as sometimes the user would like to retain old meetings for bookkeeping purposes.
+
+### Selecting the detailed contact to display: `select`
+
+Selects the person identified by the index number used in the displayed person list for display.
+
+Format: `select INDEX`
+
+* Select the person and loads its contact with meeting details for display at the specified **INDEX**
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `select 2`. <br> Selects the 2nd person in the staff book.
+* `filter t/tutor` followed by `select 1` <br> Selects the 1st person in the results of the `filter` command.
+
 
 ### Clearing all entries : `clear`
 
@@ -319,6 +409,8 @@ Furthermore, certain edits can cause the StaffConnect to behave in unexpected wa
    - Faculty of Science; Science; FoS
    - University Scholars Programme; USP
    - Yale-NUS College; Yale-NUS
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
@@ -331,9 +423,12 @@ Action | Format, Examples
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [m/MODULE] [f/FACULTY] [v/VENUE] [t/TAG]…​ [a/AVAILABILITY]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Filter** | `filter [m/MODULE] [f/FACULTY] [t/TAG]… [a/AVAILABILITY]…`<br> e.g., `filter m/CS2100 t/friends`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Sort** | `sort [ATTRIBUTE]`<br> e.g., `sort p/`
-**Add Meeting** | `meeting INDEX [d/DESCRIPTION] [s/DATETIME]`<br> e.g., `meeting 1 d/ Meet for finals preparation s/ 12/04/2024 18:00`
+**Sort** | `sort [n/] [p/] [m/] [f/] [v/] [s/] [meet/]...`<br> e.g., `sort n/ p/ m/`
+**Add Meeting** | `meeting-add INDEX d/DESCRIPTION s/DATETIME`<br> e.g., `meeting-add 1 d/Meet for finals preparation s/12/04/2024 18:00`
+**Delete Meeting** | `meeting-delete INDEX i/MEETING-INDEX`<br> e.g., `meeting-delete 1 i/1 `
 **Set as Favourite** | `fav INDEX`<br> e.g., `fav 3`
 **Remove as Favourite** | `unfav INDEX`<br> e.g., `unfav 3`
+**Refresh** | `refresh` <br> e.g., `refresh`
+**Select** | `select INDEX`<br> e.g., `select 3`
 **List** | `list`
 **Help** | `help`
