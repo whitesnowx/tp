@@ -360,6 +360,7 @@ Format: `select INDEX`
 
 Examples:
 * `list` followed by `select 2`. <br> Selects the 2nd person in the staff book.
+* `list` followed by `select 3`. <br> Selects the 3rd person in the staff book.
 * `filter t/tutor` followed by `select 1` <br> Selects the 1st person in the results of the `filter` command.
 
 
