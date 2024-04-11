@@ -278,12 +278,12 @@ Examples:
 <br>**Results for delete meeting:**<br>
 The following command was applied:  `find Bernice Yu` followed by `meeting-delete 1 i/2`.
 <br> __(Disclaimer: The content shown in the examples may not match what you have added to your own meetings within the contact book).__
-<br>
-<br> **Before:**<br>
-    ![result for before `find Bernice Yu` followed by `meeting-delete 1 i/2`](images/deleteMeetingResultBefore.png)
-<br>
-<br> **After:**<br>
-    ![result for after `find Bernice Yu` followed by `meeting-delete 1 i/2`](images/deleteMeetingResultAfter.png)
+<br><br> **After `find Bernice Yu`:**<br>
+    ![result for before `find Bernice Yu` followed by `meeting-delete 1 i/2`](images/meetingDeleteResultBefore.png)
+<br><br> **After `meeting-delete 1 i/2`:**<br>
+    ![result for after `find Bernice Yu` followed by `meeting-delete 1 i/2`](images/meetingDeleteResultAfter1.png)
+<br><br> **After `meeting-delete 1 i/1`:**<br>
+    ![result for after `find Bernice Yu` followed by `meeting-delete 1 i/2`](images/meetingDeleteResultAfter2.png)
 
 ### Deleting a person : `delete`
 
@@ -340,9 +340,9 @@ Format: `refresh`
 * If no meetings are deleted, there will no error thrown. Instead, a prompt will be given to user that no meeting is deleted.
 
 Examples:
+* If there is a meeting `Avengers Assemble` that happened in `31/08/1939 12:00`, when the user types in `refresh`, it will be deleted.
 * If there is a meeting `French Revolution` that happened in `14/07/1789 12:00`, when the user types in `refresh`, it will be deleted.
 * If there is a meeting `Future Meeting` that will happen in `31/12/2999 12:00`, when the user types in `refresh`, it will not be deleted.
-* If there is a meeting `Avengers Assemble` that will happen in `31/08/1939 12:00`, when the user types in `refresh`, it will be deleted.
  
 **Known limitations:**
 Refresh is only used when the user decides to remove clutter in the staff book, and wants to remove outdated meetings. 
@@ -360,9 +360,8 @@ Format: `select INDEX`
 
 Examples:
 * `list` followed by `select 2`. <br> Selects the 2nd person in the staff book.
-* `list` followed by `select 3`. <br> Selects the 3rd person in the staff book.
 * `filter t/tutor` followed by `select 1` <br> Selects the 1st person in the results of the `filter` command.
-
+* `sort p/` followed by `select 1` <br> Selects the 1st person in the results of the `sort` command, which should be the person with the smallest lowest phone number.
 
 ### Clearing all entries : `clear`
 
