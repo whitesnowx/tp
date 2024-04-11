@@ -172,6 +172,7 @@ format: `filter [m/MODULE] [f/FACULTY] [t/TAG]… [a/AVAILABILITY]…`
 
 Examples:
 * `filter m/CS1101S` returns `Alex Yeoh`
+* `filter f/Computing t/professor` returns `Alex Yeoh`, `Charlotte Oliveiro`, `David Li` and `Roy Balakrishman`
 * `filter t/tutor` returns `Bernice Yu`, `Irfan Ibrahim`<br>
   ![result for 'filter t/tutor'](images/filterTutorTagResult.png)
 
