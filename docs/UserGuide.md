@@ -298,6 +298,7 @@ Format: `delete INDEX`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the contacts.
 * `find Bernice Yu` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `sort p/` followed by `delete 1` deletes the 1st person in the contacts in the results of the `sort` command, which should be the person with the smallest lowest phone number.
 
 ### Setting a person as favourite: `fav`
 
@@ -312,6 +313,7 @@ Format: `fav INDEX`
 Examples:
 * `list` followed by `fav 2` sets the 2nd person as favourite in the contacts.
 * `find Betsy` followed by `fav 1` sets the 1st person as favourite in the results of the `find` command.
+* `sort p/` followed by `fav 1` sets the 1st person as favourite in the contacts in the results of the `sort` command, which should be the person with the smallest lowest phone number.
 
 ### Removes a person as favourite: `unfav`
 
@@ -326,6 +328,7 @@ Format: `unfav INDEX`
 Examples:
 * `list` followed by `unfav 2` removes the 2nd person as favourite in the contacts.
 * `find Betsy` followed by `unfav 1` removes the 1st person as favourite in the results of the `find` command.
+* `sort p/` followed by `fav 1` removes the 1st person as favourite in the contacts in the results of the `sort` command, which should be the person with the smallest lowest phone number.
 
 ### Refresh and clear all outdated meetings: `refresh`
 
