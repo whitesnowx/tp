@@ -322,9 +322,14 @@ Examples:
   ![Result of deletion](images/AfterDeleteCommand1.png)
   <br>**List all persons and Bernice is deleted:**<br>
   ![Result of deletion](images/AfterDeleteCommand2.png)
+
 ### Setting a person as favourite: `fav`
 
 Sets the specified person from the contacts as favourite.
+
+<div markdown="block" class="alert alert-info">:information_source: **Note:**
+The displayed view in StaffConnect will reset to the default view after the `fav` command is called.
+</div>
 
 Format: `fav INDEX`
 
@@ -336,11 +341,16 @@ Examples:
 * `list` followed by `fav 2` sets the 2nd person as favourite in the contacts.
 * `sort p/` followed by `fav 1` sets the 1st person as favourite in the contacts in the results of the `sort` command, which should be the person with the smallest phone number.
 * `find Betsy` followed by `fav 1` sets the 1st person as favourite in the results of the `find` command.
+
 ![Result of fav command](images/AfterFavCommand.png)
 
 ### Removes a person as favourite: `unfav`
 
 Removes the specified person from the contacts as favourite.
+
+<div markdown="block" class="alert alert-info">:information_source: **Note:**
+The displayed view in StaffConnect will reset to the default view after the `unfav` command is called.
+</div>
 
 Format: `unfav INDEX`
 
