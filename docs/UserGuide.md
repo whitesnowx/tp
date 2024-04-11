@@ -267,7 +267,11 @@ Examples:
 
 ### Deleting a meeting from a person: `meeting-delete`
 
-Deletes a meeting from  person based on specified meeting index.
+<div markdown="block" class="alert alert-danger">:warning: **Caution:**
+There will be no further prompt after entering the command to delete a meeting from a person. This action is irreversible and the meeting information to be deleted cannot be retrieved afterwards.
+</div>
+
+Deletes a meeting from a person based on specified meeting index.
 
 Format: `meeting-delete INDEX i/MEETING-INDEX `
 
@@ -293,6 +297,10 @@ The following command was applied:  `find Bernice Yu` followed by `meeting-delet
     ![result for after `find Bernice Yu` followed by `meeting-delete 1 i/2`](images/meetingDeleteResultAfter2.png)
 
 ### Deleting a person : `delete`
+
+<div markdown="block" class="alert alert-danger">:warning: **Caution:**
+There will be no further prompt after entering the command to delete a person in the staff book. This action is irreversible and the person to be deleted cannot be retrieved afterwards.
+</div>
 
 Deletes the specified person from the contacts.
 
@@ -347,6 +355,11 @@ Examples:
 
 ### Refresh and clear all outdated meetings: `refresh`
 
+<div markdown="block" class="alert alert-danger">:warning: **Caution:**
+This may result in possible data loss. e.g. Meetings of a person may be deleted.
+There will be no further prompt after entering the command to refresh meetings of all persons. This action is irreversible and the meeting information that may be deleted cannot be retrieved afterwards.
+</div>
+
 Deletes all meetings that start before the very moment the user types in the command and enters.
 
 Format: `refresh`
@@ -385,7 +398,11 @@ Examples:
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the contacts.
+<div markdown="block" class="alert alert-danger">:warning: **Caution:**
+There will be no further prompt after entering the command to clear all persons from the staff book. This action is irreversible and the staff book cannot be retrieved afterwards.
+</div>
+
+Clears all entries from the staff book.
 
 Format: `clear`
 
