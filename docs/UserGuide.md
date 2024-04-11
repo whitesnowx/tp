@@ -122,6 +122,7 @@ A person can have any number of tags and availabilities (including 0)
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com f/Computing v/John street, block 123, #01-01 m/CS2103`
+* `add n/Chihiro Ogino m/GEC1024 e/spirited@example.com f/FASS v/The Spirit Realm p/20122001 a/tues 21:00 22:00 a/wednesday 00:00 23:59`
 * `add n/Betsy Crowe t/friend m/CS2103T e/betsycrowe@example.com f/Computing v/Newgate Prison p/1234567 t/criminal a/monday 11:00 12:00 a/wednesday 14:00 16:00`
 
 ![Effects of an add command](images/AfterAddCommand.png)
@@ -150,7 +151,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [m/MODULE] [f/FACULTY] [v/VENUE
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit 3 m/GEA1000` Edits the module of the 3rd person to be `GEA1000`. 
+* `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
     <br>**Before editing the second person:** <br>
     ![Before editing the second person](images/BeforeEditCommand.png)
     <br>
@@ -177,6 +179,7 @@ format: `filter [m/MODULE] [f/FACULTY] [t/TAG]… [a/AVAILABILITY]…`
 
 Examples:
 * `filter m/CS1101S` returns `Alex Yeoh`
+* `filter f/Computing t/professor` returns `Alex Yeoh`, `Charlotte Oliveiro`, `David Li` and `Roy Balakrishman`
 * `filter t/tutor` returns `Bernice Yu`, `Irfan Ibrahim`<br>
   ![result for 'filter t/tutor'](images/filterTutorTagResult.png)
 
@@ -195,6 +198,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 * `find John` returns `john` and `John Doe`
+* `find li` returns `David Li`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
@@ -255,6 +259,7 @@ Format: `meeting-add INDEX d/DESCRIPTION s/DATETIME`
 
 Examples:
 * `meeting-add 1 d/Meet for finals preparation s/12/04/2024 18:00` adds a meeting to the first person with the description of `Meet for finals preparation` and the date and time of `12/04/2024 18:00`
+* `meeting-add 1 d/CS2100 Consultation s/11/06/2024 08:00` adds a meeting to the first person with the description of `CS2100 Consultation` and the date and time of `11/06/2024 08:00`
 * `meeting-add 2 d/Meet for practical exam s/20/04/2024 15:00` adds a meeting to the second person with the description of `Meet for practical exam` and the date and time of `20/04/2024 15:00`
 
 <br>**Result for add meeting:** <br> `meeting-add 1 d/Meet for finals preparation s/12/04/2024 18:00`<br>
@@ -280,12 +285,12 @@ Examples:
 <br>**Results for delete meeting:**<br>
 The following command was applied:  `find Bernice Yu` followed by `meeting-delete 1 i/2`.
 <br> __(Disclaimer: The content shown in the examples may not match what you have added to your own meetings within the contact book).__
-<br>
-<br> **Before:**<br>
-    ![result for before `find Bernice Yu` followed by `meeting-delete 1 i/2`](images/deleteMeetingResultBefore.png)
-<br>
-<br> **After:**<br>
-    ![result for after `find Bernice Yu` followed by `meeting-delete 1 i/2`](images/deleteMeetingResultAfter.png)
+<br><br> **After `find Bernice Yu`:**<br>
+    ![result for before `find Bernice Yu` followed by `meeting-delete 1 i/2`](images/meetingDeleteResultBefore.png)
+<br><br> **After `meeting-delete 1 i/2`:**<br>
+    ![result for after `find Bernice Yu` followed by `meeting-delete 1 i/2`](images/meetingDeleteResultAfter1.png)
+<br><br> **After `meeting-delete 1 i/1`:**<br>
+    ![result for after `find Bernice Yu` followed by `meeting-delete 1 i/2`](images/meetingDeleteResultAfter2.png)
 
 ### Deleting a person : `delete`
 
@@ -299,6 +304,7 @@ Format: `delete INDEX`
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the contacts.
+* `sort p/` followed by `delete 1` deletes the 1st person in the contacts in the results of the `sort` command, which should be the person with the smallest phone number.
 * `find Bernice Yu` followed by `delete 1` deletes the 1st person in the results of the `find` command.
   <br>**Before deletion:**<br>
   ![All persons listed](images/BeforeDeleteCommand1.png)
@@ -308,7 +314,6 @@ Examples:
   ![Result of deletion](images/AfterDeleteCommand1.png)
   <br>**List all persons and Bernice is deleted:**<br>
   ![Result of deletion](images/AfterDeleteCommand2.png)
-
 ### Setting a person as favourite: `fav`
 
 Sets the specified person from the contacts as favourite.
@@ -321,6 +326,7 @@ Format: `fav INDEX`
 
 Examples:
 * `list` followed by `fav 2` sets the 2nd person as favourite in the contacts.
+* `sort p/` followed by `fav 1` sets the 1st person as favourite in the contacts in the results of the `sort` command, which should be the person with the smallest phone number.
 * `find Betsy` followed by `fav 1` sets the 1st person as favourite in the results of the `find` command.
 ![Result of fav command](images/AfterFavCommand.png)
 
@@ -336,6 +342,7 @@ Format: `unfav INDEX`
 
 Examples:
 * `list` followed by `unfav 2` removes the 2nd person as favourite in the contacts.
+* `sort p/` followed by `fav 1` removes the 1st person as favourite in the contacts in the results of the `sort` command, which should be the person with the smallest phone number.
 * `find Betsy` followed by `unfav 1` removes the 1st person as favourite in the results of the `find` command.
 
 ### Refresh and clear all outdated meetings: `refresh`
@@ -348,6 +355,7 @@ Format: `refresh`
 * If no meetings are deleted, there will no error thrown. Instead, a prompt will be given to user that no meeting is deleted.
 
 Examples:
+* If there is a meeting `Avengers Assemble` that happened in `31/08/1939 12:00`, when the user types in `refresh`, it will be deleted.
 * If there is a meeting `French Revolution` that happened in `14/07/1789 12:00`, when the user types in `refresh`, it will be deleted.
 * If there is a meeting `Future Meeting` that will happen in `31/12/2999 12:00`, when the user types in `refresh`, it will not be deleted.
   <br>**Before:**<br>
@@ -373,7 +381,7 @@ Format: `select INDEX`
 Examples:
 * `list` followed by `select 2`. <br> Selects the 2nd person in the staff book.
 * `filter t/tutor` followed by `select 1` <br> Selects the 1st person in the results of the `filter` command.
-
+* `sort p/` followed by `select 1` <br> Selects the 1st person in the results of the `sort` command, which should be the person with the smallest phone number.
 
 ### Clearing all entries : `clear`
 
