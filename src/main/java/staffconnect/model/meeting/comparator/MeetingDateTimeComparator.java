@@ -7,9 +7,9 @@ import staffconnect.model.meeting.Meeting;
 /**
  * Represents a Comparator for a Meeting's Date in the staff book.
  */
-public class MeetingDateComparator implements Comparator<Meeting> {
+public class MeetingDateTimeComparator implements Comparator<Meeting> {
 
-    public static final MeetingDateComparator MEETING_DATE_COMPARATOR = new MeetingDateComparator();
+    public static final MeetingDateTimeComparator MEETING_DATE_COMPARATOR = new MeetingDateTimeComparator();
 
     @Override
     public int compare(Meeting meet, Meeting otherMeet) {
