@@ -304,7 +304,7 @@ Format: `delete INDEX`
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the contacts.
-* `sort p/` followed by `delete 1` deletes the 1st person in the contacts in the results of the `sort` command, which should be the person with the smallest lowest phone number.
+* `sort p/` followed by `delete 1` deletes the 1st person in the contacts in the results of the `sort` command, which should be the person with the smallest phone number.
 * `find Bernice Yu` followed by `delete 1` deletes the 1st person in the results of the `find` command.
   <br>**Before deletion:**<br>
   ![All persons listed](images/BeforeDeleteCommand1.png)
@@ -326,7 +326,7 @@ Format: `fav INDEX`
 
 Examples:
 * `list` followed by `fav 2` sets the 2nd person as favourite in the contacts.
-* `sort p/` followed by `fav 1` sets the 1st person as favourite in the contacts in the results of the `sort` command, which should be the person with the smallest lowest phone number.
+* `sort p/` followed by `fav 1` sets the 1st person as favourite in the contacts in the results of the `sort` command, which should be the person with the smallest phone number.
 * `find Betsy` followed by `fav 1` sets the 1st person as favourite in the results of the `find` command.
 ![Result of fav command](images/AfterFavCommand.png)
 
@@ -381,7 +381,7 @@ Format: `select INDEX`
 Examples:
 * `list` followed by `select 2`. <br> Selects the 2nd person in the staff book.
 * `filter t/tutor` followed by `select 1` <br> Selects the 1st person in the results of the `filter` command.
-* `sort p/` followed by `select 1` <br> Selects the 1st person in the results of the `sort` command, which should be the person with the smallest lowest phone number.
+* `sort p/` followed by `select 1` <br> Selects the 1st person in the results of the `sort` command, which should be the person with the smallest phone number.
 
 ### Clearing all entries : `clear`
 
