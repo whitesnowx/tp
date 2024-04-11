@@ -342,7 +342,7 @@ Format: `unfav INDEX`
 
 Examples:
 * `list` followed by `unfav 2` removes the 2nd person as favourite in the contacts.
-* `sort p/` followed by `fav 1` removes the 1st person as favourite in the contacts in the results of the `sort` command, which should be the person with the smallest lowest phone number.
+* `sort p/` followed by `fav 1` removes the 1st person as favourite in the contacts in the results of the `sort` command, which should be the person with the smallest phone number.
 * `find Betsy` followed by `unfav 1` removes the 1st person as favourite in the results of the `find` command.
 
 ### Refresh and clear all outdated meetings: `refresh`
