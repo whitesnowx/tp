@@ -1,0 +1,63 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":StaffConnectParser" as StaffConnectParser LOGIC_COLOR
+participant ":AddMeetingCommandParser" as AddMeetingCommandParser LOGIC_COLOR
+participant "<<class>>\nParserUtil" as ParserUtil LOGIC_COLOR
+participant ":MeetingDescription" as MeetingDescription LOGIC_COLOR
+participant ":MeetingDateTime" as MeetingDateTime LOGIC_COLOR
+participant "m:AddMeetingCommand" as AddMeetingCommand LOGIC_COLOR
+
+
+end box
+
+
+[-> LogicManager : execute(userInput)
+activate LogicManager
+
+LogicManager -> StaffConnectParser : parseCommand(userInput)
+activate StaffConnectParser
+
+create AddMeetingCommandParser
+StaffConnectParser -> AddMeetingCommandParser
+activate AddMeetingCommandParser
+
+AddMeetingCommandParser --> StaffConnectParser
+deactivate AddMeetingCommandParser
+
+StaffConnectParser -> AddMeetingCommandParser : parse(args)
+activate AddMeetingCommandParser
+
+
+AddMeetingCommandParser -> ParserUtil : parseIndex()
+activate ParserUtil
+return
+
+AddMeetingCommandParser -> ParserUtil : parseDescription()
+activate ParserUtil
+
+create MeetingDescription
+ParserUtil -> MeetingDescription++
+return
+return
+
+AddMeetingCommandParser -> ParserUtil : parseDateTime()
+activate ParserUtil
+create MeetingDateTime
+ParserUtil -> MeetingDateTime++
+return
+return
+
+create AddMeetingCommand
+AddMeetingCommandParser -> AddMeetingCommand++
+return
+
+return m
+destroy AddMeetingCommandParser
+return m
+return
+
+@enduml
