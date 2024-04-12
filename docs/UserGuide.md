@@ -137,10 +137,13 @@ Format: `list`
 
 Edits an existing person in the contacts.
 
-<div markdown="block" class="alert alert-info">:information_source: **Note:**
-The displayed view in StaffConnect will reset to the default view after the `edit` command is called.
+<div markdown="block" class="alert alert-info">
 
-The changes made are displayed in the result display above the command box.
+**:information_source: Notes:**<br>
+
+* The displayed view in StaffConnect will reset to the default view after the `edit` command is called.
+
+* The changes made are displayed in the result display above the command box.
 </div>
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [m/MODULE] [f/FACULTY] [v/VENUE] [t/TAG]…​ [a/AVAILABILITY]…​`
