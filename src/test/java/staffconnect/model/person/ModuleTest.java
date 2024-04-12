@@ -31,7 +31,7 @@ public class ModuleTest {
         assertFalse(Module.isValidModule("1234")); // numbers only
         assertFalse(Module.isValidModule("2103T")); // missing prefix
         assertFalse(Module.isValidModule("C2103T")); // only 1 prefix
-        assertFalse(Module.isValidModule("CS2103TT")); // too many suffix
+        assertFalse(Module.isValidModule("CS2103TTT")); // too many suffix
         assertFalse(Module.isValidModule("CSCSC2103T")); // too many prefix
         assertFalse(Module.isValidModule("CS210310101010T")); // too many numbers
         assertFalse(Module.isValidModule("CS21T")); // too little numbers
@@ -39,6 +39,7 @@ public class ModuleTest {
         // valid module code
         assertTrue(Module.isValidModule("CS2103")); // 2 prefix, 4 letters without 1 optional suffix
         assertTrue(Module.isValidModule("CS2103T")); // 2 prefix, 4 letters with 1 optional suffix
+        assertTrue(Module.isValidModule("CS2103TT")); // 2 prefix, 4 letters with 2 optional suffix
         assertTrue(Module.isValidModule("GEN2050")); // 3 prefix, 4 letters without  1 optional suffix
         assertTrue(Module.isValidModule("GEN2050Y")); // 3 prefix, 4 letters with  1 optional suffix
         assertTrue(Module.isValidModule("GESS1035")); // 4 prefix, 4 letters without 1 optional suffix
