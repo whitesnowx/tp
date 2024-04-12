@@ -168,7 +168,7 @@ Examples:
     <br>**After editing the second person:** <br>
     ![After editing the second person](images/AfterEditCommand.png)
 
-### Filtering persons by attribute: `filter`
+### Filtering persons: `filter`
 
 Filters persons whose module, faculty, tags or availabilities match the given filtering criteria.
 
@@ -458,25 +458,45 @@ Furthermore, certain edits can cause the StaffConnect to behave in unexpected wa
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **Restrictions on the valid user input of `Faculty` values**: For the current version, a valid user input for `Faculty` with prefix `f/` can only match exactly the same string as suggested below. Cases can be ignored though.
-   - Faculty of Arts of Social Sciences; Arts and Social Sciences; FASS
-   - Business School; Business; Biz School; Biz
-   - School of Computing; Computing; SoC
-   - School of Continuing and Lifelong Education; Continuing and Lifelong Education; SCALE
-   - Faculty of Dentistry; Dentistry
-   - School of Design and Environment; Design and Environment; SDE
-   - Duke-NUS Medical School; Duke-NUS
-   - Faculty of Engineering; Engineering; FoE
-   - Integrative Sciences and Engineering; ISEP
-   - Faculty of Law; Law
-   - Yong Loo Lin School of Medicine; Medicine
-   - Yong Siew Toh Conservatory of Music; Music; TST Conservatory of Music
-   - Saw Swee Hock School of Public Health; Public Health
-   - Lee Kuan Yew School of Public Policy; Public Policy; LKY School of Public Policy
-   - Faculty of Science; Science; FoS
-   - University Scholars Programme; USP
-   - Yale-NUS College; Yale-NUS
 
+--------------------------------------------------------------------------------------------------------------------
+
+## Attribute summary
+
+Attribute | Prefix | Restrictions | Examples
+----------|--------|--------------|---------------------
+Name | n/ | Case-sensitive.<br>Only alphanumeric characters allowed. Spaces are only allowed between alphanumeric characters. | `alex yeoh`, `Bernice Yu`, `test1`
+Phone Number | p/ | Numeric digits only, no special characters, at least 3 digits long. | `123`, `88888888, 12345678`
+Email | e/ | Valid email of the format `local-part@domain`.<br>1. `local-part` should only contain alphanumeric characters and the special characters `+_.-`<br>2. `local-part` may not start or end with any special characters.<br>3. `local-part` must be followed by exactly one `@` and then a `domain` name.<br>4. `domain` must be made up of at least 2 `domain` labels separated by periods.<br>5. Each `domain` name must be at least 2 alphanumeric characters long.<br>6. Each `domain` name must start and end with alphanumeric characters.<br>7. Each `domain` name can only consist of alphanumeric characters, separated by hyphens, if any. | `e@123.com`, `hello@h-h.com`, `one+two@h-h.hh`, `hello@e-h.e-hh`
+Module | m/ | Case-insensitive.<br>Valid module consisting of 2-4 letters, followed by exactly 4 numeric digits, with a suffix that is at most 1 character long. | `gess1025`, `hsi1000`, `cs2103t`
+Faculty | f/ | Case-insensitive.<br>Restricted set of values (refer to [valid faculty values](#valid-faculty-values) below). | `soc`, `biz`, `School of Business`
+Venue | v/ | Any characters allowed, cannot be empty. | `belobog avenue`, `COM4-02-33`, `LT21`, `Kent Ridge Vale, Tulip Street, #12-34`
+Tag | t/ | Case-sensitive.<br>Only alphanumeric characters allowed. | `tutor`, `professor`, `BestProf`, `Number1TA`
+Availability | a/ | Valid format of `day start-time end-time`.<br>1. `day` should be a valid day of week: `Monday`, `mon`, `Tuesday`, `tue`, `tues`, `Wednesday`, `wednes`, `wed`, `Thursday`, `thurs`, `thur`, `thu`, `Friday`, `fri`, `Saturday`, `satur`, `sat`, `Sunday`, `sun`.<br>2. `day` is case-insensitive.<br>3. `start-time` and `end-time` should be in the time format of `HH:mm` where `HH` is in 24 hours (00-23) and `mm` are valid minutes (00-59). | `mon 13:00 14:00`, `monday 13:00 14:00`, `tues 14:00 21:00`
+Meeting Description | d/ | Case-sensitive.<br>Only alphanumeric characters allowed. Spaces are only allowed between alphanumeric characters. | `Meet for finals`, `Midterm revision`
+Meeting Start Time | s/ | Valid date and time format.<br>1. Valid date formats: `yyyy-MM-dd`, `yyyy-M-d`, `dd-MM-yyyy`, `yyyy-MM-d`, `d-MM-yyyy`, `d-M-yyyy`, `dd-M-yyyy`, `d/MM/yyyy`, `d-M-yyyy`, `dd-M-yyyy`, `dd/MM/yyyy`, `yyyy/MM/dd`, `yyyy/MM/d`, `yyyy/M/dd`,  `yyyy/M/d`<br>where `yyyy` is a 4-digit year (0000-9999), `M` is a single digit month (1-9), `MM` is a valid month (01-12), `d` is a single digit day (1-9), `dd` is a valid day (01-31)<br>2. Valid time formats: `HH:mm`, `H:mm`, `HHmm`<br>where `H` is a single digit hour (1-9), `HH` is a valid 24-hour (00-23), `mm` are valid minutes (00-59). | `2002-11-02 19:00`, `1-12-2022 9:00`, `2024/1/1 0000`
+
+### Valid `Faculty` values
+
+Faculty | Other names
+--------|------
+Faculty of Arts of Social Sciences | Arts and Social Sciences, FASS
+Business School | Business, Biz School, Biz
+School of Computing | Computing, SoC
+School of Continuing and Lifelong Education | Continuing and Lifelong Education, SCALE
+Faculty of Dentistry | Dentistry
+School of Design and Environment | Design and Environment, SDE
+Duke-NUS Medical School | Duke-NUS
+Faculty of Engineering, Engineering | FoE
+Integrative Sciences and Engineering | ISEP
+Faculty of Law | Law
+Yong Loo Lin School of Medicine | Medicine
+Yong Siew Toh Conservatory of Music | Music, TST Conservatory of Music
+Saw Swee Hock School of Public Health | Public Health
+Lee Kuan Yew School of Public Policy | Public Policy, LKY School of Public Policy
+Faculty of Science | Science, FoS
+University Scholars Programme | USP
+Yale-NUS College | Yale-NUS
 
 --------------------------------------------------------------------------------------------------------------------
 
