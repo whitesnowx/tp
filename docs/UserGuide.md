@@ -52,7 +52,10 @@ Before we get started StaffConnect offers a unique suite of UI controls for user
 
 1. Clicking any items on the left contacts panel will allow you to select the person contact to display.
 <br>Alternatively, clicking anywhere in the contacts panel then using your arrow keys to navigate and hitting enter to select would give the same result.
+<br>**Intended Behaviour:** 
+<br> Hovering the selection with mouse or arrow keys would not cause the details panel to switch to the selected person. This is to allow users to browse the contacts panel without switching.
 <br>![Region to select the person](images/personPanelRegion.png)
+   
 
 2. There is a divider that is draggable up and down to hide and show details on the right side and to customise the look of your application.
 <br>![Region to select the divider](images/detailsDividerRegion.png)
@@ -68,12 +71,12 @@ Before we get started StaffConnect offers a unique suite of UI controls for user
     The scroll bars can only be scrolled by two ways:
       1. For mouse pad users, dragging around with two fingers the around would pan around the pane.
       2. For mouse users, __[Mouse Wheel]__ will scroll up and down while __[Shift + Mouse Wheel]__ will scroll left and right.
+      3. Simply dragging the scroll bar with a left mouse click. 
       <br>**Scrolling by arrow keys is not fully supported in the result display**
 
 5.  The Command box:<br>
     The input can only be scrolled by __[Holding Left Click + Drag Mouse]__  to the edge in the direction to scroll. This is to allow making adjustments on very long commands.
 
-    
 
 <Br><Br> 
 ### Alternative UI arrangements
@@ -83,7 +86,7 @@ Before we get started StaffConnect offers a unique suite of UI controls for user
 
 **Intended Limitations**
 1. The divider position is not controllable by keyboard input, hence the only way to customise the look is mostly by mouse input.
-2. Pane switching by keyboard input, like a terminal is not supported.
+2. Panel switching by keyboard input, like a terminal is not supported.
 3. Font sizes does not automatically resize in this application, scroll bars will appear in smaller window variants of this application to help with the viewing of details.
 4. The UI will do a soft reset on its divider position every time the application is relaunched, as this is to allow users who wish to fall back to the default layout settings.
 
