@@ -64,13 +64,13 @@ Before we get started StaffConnect offers a unique suite of UI controls for user
     - Keyboard arrow keys are able to pan around as well, but the scroll speed may differ on different systems.
     - There are scroll bars at the vertical and horizontal dividers of the window pane, dragging them in the respective direction will pan around as well.
    
-4.  The result display:
+4.  The Result display:<br>
     The scroll bars can only be scrolled by two ways:
       1. For mouse pad users, dragging around with two fingers the around would pan around the pane.
       2. For mouse users, __[Mouse Wheel]__ will scroll up and down while __[Shift + Mouse Wheel]__ will scroll left and right.
       <br>**Scrolling by arrow keys is not fully supported in the result display**
 
-5.  The command box:
+5.  The Command box:<br>
     The input can only be scrolled by __[Holding Left Click + Drag Mouse]__  to the edge in the direction to scroll. This is to allow making adjustments on very long commands.
 
     
