@@ -137,6 +137,12 @@ Format: `list`
 
 Edits an existing person in the contacts.
 
+<div markdown="block" class="alert alert-info">:information_source: **Note:**
+The displayed view in StaffConnect will reset to the default view after the `edit` command is called.
+
+The changes made are displayed in the result display above the command box.
+</div>
+
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [m/MODULE] [f/FACULTY] [v/VENUE] [t/TAG]…​ [a/AVAILABILITY]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
