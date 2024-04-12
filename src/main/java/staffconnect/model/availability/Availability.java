@@ -16,7 +16,7 @@ public class Availability {
 
 
     public static final String MESSAGE_CONSTRAINTS = "[DAY_OF_THE_WEEK] [START_TIME] [END_TIME] E.g. mon 09:00 13:00\n"
-            + "[DAY_OF_THE_WEEK] Should be a week of the day, the full word or the first syllable of the word\n"
+            + "[DAY_OF_THE_WEEK] Should be a day of the week, the full word or the first syllable of the word\n"
             + "[START_TIME], [END_TIME] Using a 24H digital time format HH:mm\n";
     public static final String VALIDATION_REGEX_DAY = "(?i)((mon|tue(s)?|wed(nes)?|thu(r)?(rs)?|fri|sat(ur)?|sun)"
             + "(day)?)";
