@@ -446,12 +446,12 @@ Furthermore, certain edits can cause the StaffConnect to behave in unexpected wa
 
 Attribute | Prefix | Restrictions | Examples
 ----------|--------|--------------|---------------------
-Name | n/ | Case-sensitive.<br>Only alphanumeric characters allowed. | `alex yeoh`, `Bernice Yu`, `test1`
+Name | n/ | Case-sensitive.<br>Only alphanumeric characters allowed. Spaces are only allowed between alphanumeric characters. | `alex yeoh`, `Bernice Yu`, `test1`
 Phone Number | p/ | Numeric digits only, no special characters, at least 3 digits long. | `123`, `88888888, 12345678`
 Email | e/ | Valid email of the format `local-part@domain`.<br>1. `local-part` should only contain alphanumeric characters and the special characters `+_.-`<br>2. `local-part` may not start or end with any special characters.<br>3. `local-part` must be followed by exactly one `@` and then a `domain` name.<br>4. `domain` must be made up of at least 2 `domain` labels separated by periods.<br>5. Each `domain` name must be at least 2 alphanumeric characters long.<br>6. Each `domain` name must start and end with alphanumeric characters.<br>7. Each `domain` name can only consist of alphanumeric characters, separated by hyphens, if any. | `e@123.com`, `hello@h-h.com`, `one+two@h-h.hh`, `hello@e-h.e-hh`
 Module | m/ | Case-insensitive.<br>Valid module consisting of 2-4 letters, followed by exactly 4 numeric digits, with a suffix that is at most 1 character long. | `gess1025`, `hsi1000`, `cs2103t`
 Faculty | f/ | Case-insensitive.<br>Restricted set of values (refer to [valid faculty values](#valid-faculty-values) below). | `soc`, `biz`, `School of Business`
-Venue | v/ | Only alphanumeric characters allowed. | `belobog avenue`, `COM4-02-33`, `LT21`, `Kent Ridge Vale, Tulip Street, #12-34`
+Venue | v/ | Any characters allowed, cannot be empty. | `belobog avenue`, `COM4-02-33`, `LT21`, `Kent Ridge Vale, Tulip Street, #12-34`
 Tag | t/ | Only alphanumeric characters allowed. | `tutor`, `professor`, `BestProf`, `Number1TA`
 Availability | a/ | Valid format of `day start-time end-time`.<br>1. `day` should be a valid day of week: `Monday`, `mon`, `Tuesday`, `tue`, `tues`, `Wednesday`, `wednes`, `wed`, `Thursday`, `thurs`, `thur`, `thu`, `Friday`, `fri`, `Saturday`, `satur`, `sat`, `Sunday`, `sun`.<br>2. `day` is case-insensitive.<br>3. `start-time` and `end-time` should be in the time format of `HH:mm` where `HH` is in 24 hours and `mm` are minutes 00-60. | `mon 13:00 14:00`, `monday 13:00 14:00`, `tues 14:00 21:00`
 Meeting Description | d/ | Only alphanumeric characters allowed. | `Meet for finals`, `Midterm revision`
