@@ -23,16 +23,16 @@ activate Model
 return
 
 
-AddMeetingCommand -> PersonUtil : copyPerson(Person selectedPerson)
+AddMeetingCommand -> PersonUtil : copyPerson(selectedPerson)
 activate PersonUtil
 
 create Person
 PersonUtil -> Person++
-return createdPerson
+return copiedPerson
 
 return copiedPerson
 
-AddMeetingCommand -> editedPerson : addMeeting(toAdd)
+AddMeetingCommand -> editedPerson : addMeeting()
 activate editedPerson
 return
 
