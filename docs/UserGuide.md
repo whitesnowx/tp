@@ -449,6 +449,7 @@ Furthermore, certain edits can cause the StaffConnect to behave in unexpected wa
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+2. **When adding phone number descriptors**, If you try to add a number with a descriptor such as 98731094 (home), the application rejects this input and prompts the user to only provide phone numbers with numerical values only. The phone number descriptor is not intended to be stored but users can consider using tags such as t/homePhone as a workaround phone number descriptor.
 2. **Restrictions on the valid user input of `Faculty` values**: For the current version, a valid user input for `Faculty` with prefix `f/` can only match exactly the same string as suggested below. Cases can be ignored though.
    - Faculty of Arts of Social Sciences; Arts and Social Sciences; FASS
    - Business School; Business; Biz School; Biz
