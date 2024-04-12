@@ -42,23 +42,37 @@ StaffConnect (SC) is a **desktop app for managing contacts of Professors and Tut
 
 ## Navigability
 
+### Overall UI layout
+<br>![Overall Layout](images/OverallLayout.png)
+
+
 ### Mouse and Keyboard controls
 
 Before we get started StaffConnect offers a unique suite of UI controls for users to customise their own unique experience!
 
-1. Clicking any items on the left panel will allow you to select the person contact to display.
-<br>Alternatively, clicking anywhere in the list panel then using your arrow keys to navigate and hitting enter to select would give the same result.
+1. Clicking any items on the left contacts panel will allow you to select the person contact to display.
+<br>Alternatively, clicking anywhere in the contacts panel then using your arrow keys to navigate and hitting enter to select would give the same result.
 <br>![Region to select the person](images/personPanelRegion.png)
 
 2. There is a divider that is draggable up and down to hide and show details on the right side and to customise the look of your application.
 <br>![Region to select the divider](images/detailsDividerRegion.png)
 
-3. Each of the 3 display panes of information they are able to pan in all four directions to view the content:
+3. Each of the 2 detail panels on the right are able to pan in all four directions to view the content:
     - For mouse pad users, dragging around with two fingers the around would pan around the pane.
-    - For mouse users, __[mouse wheel]__ will scroll up and down while __[shift + mouse wheel]__ will scroll left and right.
-    - __[Left click + drag]__ would pan around in the details pane as well.
+    - For mouse users, __[Mouse Wheel]__ will scroll up and down while __[Shift + Mouse wheel]__ will scroll left and right.
+    - __[Left click + Drag Mouse]__ would pan around in the details pane as well.
     - Keyboard arrow keys are able to pan around as well, but the scroll speed may differ on different systems.
     - There are scroll bars at the vertical and horizontal dividers of the window pane, dragging them in the respective direction will pan around as well.
+   
+4.  The result display:
+    The scroll bars can only be scrolled by two ways:
+      1. For mouse pad users, dragging around with two fingers the around would pan around the pane.
+      2. For mouse users, __[Mouse Wheel]__ will scroll up and down while __[Shift + Mouse Wheel]__ will scroll left and right.
+      <br>**Scrolling by arrow keys is not fully supported in the result display**
+
+5.  The command box:
+    The input can only be scrolled by __[Holding Left Click + Drag Mouse]__  to the edge in the direction to scroll. This is to allow making adjustments on very long commands.
+
     
 
 <Br><Br> 
