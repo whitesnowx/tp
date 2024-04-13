@@ -463,6 +463,75 @@ If your changes to the data file makes its format invalid, StaffConnect will dis
 Furthermore, certain edits can cause the StaffConnect to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
+#### Valid Data Values in `persons`
+
+Data Field | Valid Values
+--------|------
+`name` | `Alice`, `Ben10`
+`phone` | `123`, `98765432`
+`email` | `alice@example.com`,
+`module` | `GESS1025`, `HSI1000`, `CS2103T`
+`faculty` | Refer to only the `Faculty` column in [Valid Faculty Values](#Valid-Faculty-Values) table below
+`venue` | `COM4-02-33`, `LT21`, `Kent Ridge Vale, Tulip Street, #12-34`
+`tags` | `professor`, `Number1TA`
+`availabilities` | `TUESDAY 12:00 13:00`, `WEDNESDAY 12:00 13:00`
+`meetings` | Refer to the [Valid Data Values in meetings](#Valid-Data-Values-in-meetings) table
+`favourite` | `Favourite`, `Not favourite`
+
+#### Valid Data Values in `meetings`
+
+Meeting Data Fields | Valid Values
+--------|------
+description | `Meeting 1`, `Finals`
+date | `30/1/2024 12:12`, `2002-11-15 19:00`, `1-12-2022 9:00`, `2024/1/1 0000`
+
+<div markdown="span" class="alert alert-primary">:exclamation: **Important:**<br>
+Only `module`, `availabilities` and meeting `date` has additional constraints for their data values.<br>
+
+* The values of `module` and `availabilities` must be in capital letters.<br>
+  * For example, `CS2103T` is a valid value for `module` whereas `cs2103t` is invalid.
+* The day in `availabilities` must be in their full spelling.
+  * For example, `MONDAY` is valid and `MON` is invalid.
+* The value of `favourite` data field is case-sensitive.
+  * For example, `Not favourite` is valid and `not favourite` and `not FAVOURITE` is invalid.
+
+</div>
+
+Example:
+```json
+{
+  "persons" : [ {
+    "name" : "Alex Yeoh",
+    "phone" : "87438807",
+    "email" : "alexyeoh@example.com",
+    "module" : "CS1101S",
+    "faculty" : "School of Computing",
+    "venue" : "Blk 30 Geylang Street 29, #06-40",
+    "tags" : [ ],
+    "availabilities" : [ ],
+    "meetings" : [ ],
+    "favourite" : "Not favourite"
+  }, {
+    "name" : "John Smith",
+    "phone" : "99272758",
+    "email" : "johnsmith@example.com",
+    "module" : "CS2103S",
+    "faculty" : "School of Computing",
+    "venue" : "Blk 30 Lorong 3 Serangoon Gardens, #07-18",
+    "tags" : [ "friends", "tutor" ],
+    "availabilities" : [ "TUESDAY 12:00 13:00", "WEDNESDAY 12:00 13:00" ],
+    "meetings" : [ {
+      "description" : "test",
+      "date" : "12/12/2024 12:12"
+    }, {
+      "description" : "test2",
+      "date" : "10/10/2024 10:10"
+    } ],
+    "favourite" : "Favourite"
+  } ]
+}
+```
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -486,14 +555,14 @@ Name | n/ | Case-sensitive.<br>Only alphanumeric characters allowed. Spaces are 
 Phone Number | p/ | Numeric digits only, no special characters, at least 3 digits long. | `123`, `88888888, 12345678`
 Email | e/ | Valid email of the format `local-part@domain`.<br>1. `local-part` should only contain alphanumeric characters and the special characters `+_.-`<br>2. `local-part` may not start or end with any special characters.<br>3. `local-part` must be followed by exactly one `@` and then a `domain` name.<br>4. `domain` must be made up of at least 2 `domain` labels separated by periods.<br>5. Each `domain` name must be at least 2 alphanumeric characters long.<br>6. Each `domain` name must start and end with alphanumeric characters.<br>7. Each `domain` name can only consist of alphanumeric characters, separated by hyphens, if any. | `e@123.com`, `hello@h-h.com`, `one+two@h-h.hh`, `hello@e-h.e-hh`
 Module | m/ | Case-insensitive.<br>Valid module consisting of 2-4 letters, followed by exactly 4 numeric digits, with a suffix that is at most 1 character long. | `gess1025`, `hsi1000`, `cs2103t`
-Faculty | f/ | Case-insensitive.<br>Restricted set of values (refer to [valid faculty values](#valid-faculty-values) below). | `soc`, `biz`, `School of Business`
+Faculty | f/ | Case-insensitive.<br>Restricted set of values (refer to [Valid Faculty Values](#valid-faculty-values) below). | `soc`, `biz`, `School of Business`
 Venue | v/ | Any characters allowed, cannot be empty. | `belobog avenue`, `COM4-02-33`, `LT21`, `Kent Ridge Vale, Tulip Street, #12-34`
 Tag | t/ | Case-sensitive.<br>Only alphanumeric characters allowed. | `tutor`, `professor`, `BestProf`, `Number1TA`
 Availability | a/ | Valid format of `day start-time end-time`.<br>1. `day` should be a valid day of week: `Monday`, `mon`, `Tuesday`, `tue`, `tues`, `Wednesday`, `wednes`, `wed`, `Thursday`, `thurs`, `thur`, `thu`, `Friday`, `fri`, `Saturday`, `satur`, `sat`, `Sunday`, `sun`.<br>2. `day` is case-insensitive.<br>3. `start-time` and `end-time` should be in the time format of `HH:mm` where `HH` is in 24 hours (00-23) and `mm` are valid minutes (00-59). | `mon 13:00 14:00`, `monday 13:00 14:00`, `tues 14:00 21:00`
 Meeting Description | d/ | Case-sensitive.<br>Only alphanumeric characters allowed. Spaces are only allowed between alphanumeric characters. | `Meet for finals`, `Midterm revision`
 Meeting Start Time | s/ | Valid date and time format.<br>1. Valid date formats: `yyyy-MM-dd`, `yyyy-M-d`, `dd-MM-yyyy`, `yyyy-MM-d`, `d-MM-yyyy`, `d-M-yyyy`, `dd-M-yyyy`, `d/MM/yyyy`, `d-M-yyyy`, `dd-M-yyyy`, `dd/MM/yyyy`, `yyyy/MM/dd`, `yyyy/MM/d`, `yyyy/M/dd`,  `yyyy/M/d`<br>where `yyyy` is a 4-digit year (0000-9999), `M` is a single digit month (1-9), `MM` is a valid month (01-12), `d` is a single digit day (1-9), `dd` is a valid day (01-31)<br>2. Valid time formats: `HH:mm`, `H:mm`, `HHmm`<br>where `H` is a single digit hour (1-9), `HH` is a valid 24-hour (00-23), `mm` are valid minutes (00-59). | `2002-11-02 19:00`, `1-12-2022 9:00`, `2024/1/1 0000`
 
-### Valid `Faculty` values
+### Valid `Faculty` Values
 
 Faculty | Other names
 --------|------
