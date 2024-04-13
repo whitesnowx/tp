@@ -475,7 +475,8 @@ Furthermore, certain edits can cause the StaffConnect to behave in unexpected wa
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **When adding phone number descriptors**, If you try to add a number with a descriptor such as 98731094 (home), the application rejects this input and prompts the user to only provide phone numbers with numerical values only. The phone number descriptor is not intended to be stored but users can consider using tags such as t/homePhone as a workaround phone number descriptor.
+2. **When adding phone number descriptors**, If you try to add a number with a descriptor such as `98731094 (home)`, the application rejects this input and advise the user to only provide phone numbers with numerical values only. The phone number is not intended to store phone number descriptor but users can consider using tags such as t/homePhone as a workaround.
+3. **When adding name containing special characters**, If you try to add a name such as `Jason s/o William`, the application rejects this input and advise the user to only provide name with alphanumeric values only. The name is not intended to store special characters but users can consider using `so` or `son of` as a workaround.
 
 --------------------------------------------------------------------------------------------------------------------
 
