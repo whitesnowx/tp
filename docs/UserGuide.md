@@ -45,6 +45,8 @@ StaffConnect (SC) is a **desktop app for managing contacts of Professors and Tut
 ### Overall UI layout
 <br>![Overall Layout](images/OverallLayout.png)
 
+#### UI Annotations
+<br>![UI General](images/UiAnnotation.png)
 
 ### Mouse and Keyboard controls
 
