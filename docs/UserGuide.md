@@ -238,7 +238,7 @@ Examples:
 
 Sorts the list of persons based on specified attribute.
 
-Format: `sort [n/] [p/] [m/] [f/] [v/]`
+Format: `sort [n/] [p/] [m/] [f/] [v/] [s/] [meet/]`
 
 * By default, sorting is done in alphanumeric order.
 * The order of character priority would be letters (A-Z), numbers (0-9), special characters (!@#$%^&*).
