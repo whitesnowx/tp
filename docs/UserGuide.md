@@ -48,6 +48,9 @@ StaffConnect (SC) is a **desktop app for managing contacts of Professors and Tut
 #### [UI] Persons Info
 <br>![UI General](images/UiAnnotationsAttributes.png)
 *Note that the availability will not be displayed in sequential order.
+* The values of `Module` will be displayed and stored in capital letters.
+* The values of [`Faculty`](#valid-faculty-values) will be stored to their full names.
+* The values of `day` part of `Availability` will be stored as their full form such as `MONDAY`, `TUESDAY`, `WEDNESDAY`, `THURSDAY`, `FRIDAY`, `SATURDAY`, `SUNDAY`.
 
 #### [UI] Meeting List
 <br>![UI General](images/UiAnnotationsMeetingList.png)
