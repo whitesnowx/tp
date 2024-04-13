@@ -11,8 +11,8 @@ public class Module {
 
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Module code should contain 2-4 capital letters followed by 4 digits long and at most 1 capitalised suffix";
-    public static final String VALIDATION_REGEX = "[a-zA-Z]{2,4}\\d{4}[a-zA-Z]{0,1}";
+            "Module code should contain 2-4 letters followed by 4 digits long and at most 2 characters";
+    public static final String VALIDATION_REGEX = "[a-zA-Z]{2,4}\\d{4}[a-zA-Z]{0,2}";
 
     public final String value;
 
