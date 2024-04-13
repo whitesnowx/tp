@@ -493,7 +493,7 @@ Availability | a/ | Valid format of `day start-time end-time`.<br>Person can hav
 Meeting Description | d/ | Case-sensitive.<br>Only alphanumeric characters allowed. Spaces are only allowed between alphanumeric characters. | `Meet for finals`, `Midterm revision`
 Meeting Start Time | s/ | Valid date and time format.<br>1. Valid date formats: `yyyy-MM-dd`, `yyyy-M-d`, `dd-MM-yyyy`, `yyyy-MM-d`, `d-MM-yyyy`, `d-M-yyyy`, `dd-M-yyyy`, `d/MM/yyyy`, `d-M-yyyy`, `dd-M-yyyy`, `dd/MM/yyyy`, `yyyy/MM/dd`, `yyyy/MM/d`, `yyyy/M/dd`,  `yyyy/M/d`<br>where `yyyy` is a 4-digit year (0000-9999), `M` is a single digit month (1-9), `MM` is a valid month (01-12), `d` is a single digit day (1-9), `dd` is a valid day (01-31)<br>2. Valid time formats: `HH:mm`, `H:mm`, `HHmm`<br>where `H` is a single digit hour (1-9), `HH` is a valid 24-hour (00-23), `mm` are valid minutes (00-59). | `2002-11-02 19:00`, `1-12-2022 9:00`, `2024/1/1 0000`
 
-[^1]: Mandatory when adding a person into the staff book, as these are important information for students to know when/where to consult their professors/TAs.
+[^1]: These are mandatory attributes when adding a person into the staff book, as these are important information for students to know when/where to consult their professors/TAs.
 
 ### Valid `Faculty` values
 
