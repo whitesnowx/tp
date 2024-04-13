@@ -133,7 +133,7 @@ Adds a person to the contacts.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL m/MODULE f/FACULTY v/VENUE [t/TAG]…​ [a/AVAILABILITY]…​`
 
-* `NAME` has to be unique among contacts.
+* `NAME` is case-sensitive and has to be unique among contacts.
 * `PHONE_NUMBER`, `EMAIL`, `MODULE`, `FACULTY`, `VENUE` do not need to be unique and can be duplicated among contacts.
 * `TAG` and `AVAILABILITY` has to be unique within a single contact but can be duplicated among contacts.
 
@@ -176,7 +176,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [m/MODULE] [f/FACULTY] [v/VENUE
 * You can remove all the person’s tags by typing `t/` without specifying any tags after it.
 * When editing availabilities, the existing availabilities of the person will be removed i.e adding of availabilities is not cumulative.
 * You can remove all the person’s availabilities by typing `a/` without specifying any availabilities after it.
-* `NAME` has to be unique among contacts.
+* `NAME` is case-sensitive and has to be unique among contacts.
 * `PHONE_NUMBER`, `EMAIL`, `MODULE`, `FACULTY`, `VENUE` do not need to be unique and can be duplicated among contacts.
 * `TAG` and `AVAILABILITY` has to be unique within a single contact but can be duplicated among contacts.
 
