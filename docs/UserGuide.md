@@ -39,7 +39,6 @@ StaffConnect (SC) is a **desktop app for managing contacts of Professors and Tut
 
 --------------------------------------------------------------------------------------------------------------------
 
-
 ## Navigability
 
 ### Overall UI layout
@@ -58,7 +57,7 @@ StaffConnect (SC) is a **desktop app for managing contacts of Professors and Tut
 #### [UI] Scrollbars and Menu
 <br>![UI General](images/UiAnnotationsScrollbarsAndMenu.png)
 *Note that Persons List Scrollbar will open appear when the number of Persons in the list exceed the amount to be displayed by the view.
-
+*Note that the `Exit` button is in the dropdown of the `File` button.
 
 ### Mouse and Keyboard controls
 
