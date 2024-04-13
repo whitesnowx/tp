@@ -135,7 +135,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL m/MODULE f/FACULTY v/VENUE [t/TAG]…
 
 * `NAME` is case-sensitive and has to be unique among persons in staff book.
 * `PHONE_NUMBER`, `EMAIL`, `MODULE`, `FACULTY`, `VENUE` do not need to be unique and can be duplicated among persons to staff book.
-* `TAG` and `AVAILABILITY` has to be unique within a single person but can be duplicated among persons in staff book.
+* `TAG` and `AVAILABILITY` have to be unique within a single person but can be duplicated among persons in staff book.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags and availabilities (including 0)
@@ -178,7 +178,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [m/MODULE] [f/FACULTY] [v/VENUE
 * You can remove all the person’s availabilities by typing `a/` without specifying any availabilities after it.
 * `NAME` is case-sensitive and has to be unique among persons in staff book.
 * `PHONE_NUMBER`, `EMAIL`, `MODULE`, `FACULTY`, `VENUE` do not need to be unique and can be duplicated among persons in staff book.
-* `TAG` and `AVAILABILITY` has to be unique within a single person but can be duplicated among persons in staff book.
+* `TAG` and `AVAILABILITY` have to be unique within a single person but can be duplicated among persons in staff book.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
