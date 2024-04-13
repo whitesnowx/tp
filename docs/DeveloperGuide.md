@@ -195,6 +195,41 @@ This is to make sure at least one field is modified, or the command will not hav
 Call `model.updateFilteredPersonList())` with a `Predicate` that always evaluates to true:
 This is to refresh the list of `Person` in `Model`.
 
+### Find feature
+
+#### How the feature is implemented
+
+The sequence diagram below explains how the find command `find Alex` goes through the `Logic` component.
+
+![Interactions Inside the Logic Component for the `find Alex` Command](images/FindSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FindCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+</div>
+
+1. When user types in `find Alex`, it is passed to `StaffConnectParser`.
+2. `StaffconnectParser` then creates a `FindCommandParser` that will parse `Alex` to create a `FindCommand` which utilizes a predicate judge whether `Alex` is contained in the person's name.
+3. In `FindCommand`, `Model` executes `updateFilteredPersonList()` method using the predicate mentioned above.
+4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`, to show in the `UI` component the number of persons listed with `Alex` in the name.
+
+The below sequence diagram goes into more detail on how the command is parsed in `EditCommandParser`.
+
+![Interactions Inside FindCommandParser for the `parse("f/Computing")` Command](images/FindSequenceDiagram-Parser.png)
+
+1. Within `FindCommandParser`, the command string is first trimmed and checked whether it is empty, then splitted into an string array by space characters.
+2. `FindCommandParser` then constructs a predicate to test whether the names of `Person` contain any one of the strings in the array mentioned above. This predicate is passed as an argument for the constructor of `FindCommand`.
+
+The below activity diagram illustrates the process when a user executes a find command.
+
+<img src="images/FindActivityDiagram.png" width="250" />
+
+#### Why find is implemented this way
+
+The main operation for the find feature is the `updateFilteredPersonList(Predicate<Person> predicate)` method in the `Model` component.
+Below are some explanations for the special considerations in the implementation.
+
+`FindCommmandParser` parsing the `Predicate` objects:
+This is to prevent `FindCommand` from taking on more responsibilities (Separation of Concerns).
+
 ### Filter feature
 
 #### How the feature is implemented
@@ -284,41 +319,6 @@ The following activity diagram summarizes what happens when a user executes a ne
 * **Alternative 1:** Only 1 attribute per sort.
     * Pros: Easy to implement, controlled and less likely to be used incorrectly. This increase ease of use for users.
     * Cons: Limited sorting and lesser functionality.
-
-### Find feature
-
-#### How the feature is implemented
-
-The sequence diagram below explains how the find command `find Alex` goes through the `Logic` component.
-
-![Interactions Inside the Logic Component for the `find Alex` Command](images/FindSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FindCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
-</div>
-
-1. When user types in `find Alex`, it is passed to `StaffConnectParser`.
-2. `StaffconnectParser` then creates a `FindCommandParser` that will parse `Alex` to create a `FindCommand` which utilizes a predicate judge whether `Alex` is contained in the person's name. 
-3. In `FindCommand`, `Model` executes `updateFilteredPersonList()` method using the predicate mentioned above.
-4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`, to show in the `UI` component the number of persons listed with `Alex` in the name.
-
-The below sequence diagram goes into more detail on how the command is parsed in `EditCommandParser`.
-
-![Interactions Inside FindCommandParser for the `parse("f/Computing")` Command](images/FindSequenceDiagram-Parser.png)
-
-1. Within `FindCommandParser`, the command string is first trimmed and checked whether it is empty, then splitted into an string array by space characters.
-2. `FindCommandParser` then constructs a predicate to test whether the names of `Person` contain any one of the strings in the array mentioned above. This predicate is passed as an argument for the constructor of `FindCommand`.
-
-The below activity diagram illustrates the process when a user executes a find command.
-
-<img src="images/FindActivityDiagram.png" width="250" />
-
-#### Why find is implemented this way
-
-The main operation for the find feature is the `updateFilteredPersonList(Predicate<Person> predicate)` method in the `Model` component.
-Below are some explanations for the special considerations in the implementation.
-
-`FindCommmandParser` parsing the `Predicate` objects:
-This is to prevent `FindCommand` from taking on more responsibilities (Separation of Concerns).
 
 ### Meeting feature
 
