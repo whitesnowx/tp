@@ -475,8 +475,7 @@ Similarly, how the `unfav` command works is shown below:
 **Target user profile**:
 
 Bob is a 22 year old NUS SOC student who often struggles with finding details about his professors' and tutors' consultation hours.
-He has difficulty identifying his professors and changing tutors, and prefers certain professors and tutors but often misplaces their contact information
-as such information can be hard to find online.
+He has difficulty identifying his professors and changing tutors, and prefers certain professors and tutors but often misplaces their contact information as such information can be hard to find online.
 He also sometimes forgets that he has scheduled consultations with a professor or tutor, but this is not a big problem as he can always arrange for another consultation.
 
 **Value proposition**:
@@ -490,11 +489,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                     | I want to …​                    | So that I can…​                                                         |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | sociable user                              | save a professor's/tutor's name, email, phone number, title in one line | save time per entry                     |
+| `* * *`  | sociable user                              | save a professor's/tutor's name, email, phone number, tag(s) in one line | save time per entry                     |
 | `* * *`  | disorganised student                       | store a professor's/tutor's name       | recall how to address the professor/tutor                                    |
 | `* * *`  | forgetful user                             | store a professor's/tutor's faculty    | see the faculty that a professor/tutor belongs to                            |
-| `* * *`  | student who get lost easily                | view the locations of my meetings/classes | search the locations for my meetings easily                 |
-| `* * *`  | disorganised student                       | store a professor's/tutor's consultation hours | arrange times to meet my professor for consultation            |
+| `* * *`  | student who get lost easily                | view the consultation venues of my professors/TAs | search for their consultation venues easily                |
+| `* * *`  | disorganised student                       | store a professor's/tutor's consultation hours | schedule meetings to meet my professor/tutor for consultation            |
 | `* * *`  | slow reader                                | filter through staff book entries by their name | not waste time in finding a specific professor/tutor and access their information easily |
 | `* * *`  | slow reader                                | filter through staff book entries by their availability | not waste time in finding a specific professor/tutor and access their information easily |
 | `* * *`  | slow reader                                | filter through staff book entries by their module | not waste time in finding a specific professor/tutor and access their information easily |
@@ -610,15 +609,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3. The app should not exceed using 1GB of RAM while it is operating.
 4. The app should work on both 32-bit and 64-bit environments.
 5. The app should be able to store up to 1000 persons without affecting the response time of 2 seconds.
-6. The app should only be able to read and write in the generated `data/staffconnect.json` file.
-7. The app should be usable by a student who is familiar with CLI interfaces.
-8. The app should be up-to-date with the latest NUS faculty names.
-9. The data stored in the app should not change unless the user has modified the data through usage of the app with user-issued commands, or the `data/staffconnect.json` file has been modified with valid values.
+6. The app should be able to store up to a total of 1000 meetings across all persons without affecting the response time of 2 seconds.
+7. The app should only be able to read and write in the generated `[JAR file location]/data/staffconnect.json` file.
+8. The app should be usable by a student who is familiar with CLI interfaces.
+9. The app should be up-to-date with the latest NUS faculty names.
+10. The data stored in the app should not change unless the user has modified the data through usage of the app with user-issued commands, or the `[JAR file location]/data/staffconnect.json` file has been modified with valid values.
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS, with versions that support Java 11
-* **Person**: A professor/teaching assistant (TA)
+* **Person**: A professor or tutor (i.e. Teaching Assistant)
 * **Attribute**: A useful piece of information belonging to a `Person`. e.g `Venue` is the consultation venue to consult a `Person`
 * **Staff Book**: Name for the list containing `Person` objects
 * **Contacts' Information**: All `Persons` in the staff book
