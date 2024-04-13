@@ -247,13 +247,13 @@ The sort mechanism is facilitated by JavaFX's `SortedList` within ModelManager, 
 
 Given below is an example usage scenario and how the sort mechanism behaves at each step.
 
-Step 1. The user enters **“sort n/”** to sort the list by their name.
+1. The user enters **“sort n/”** to sort the list by their name.
 
-Step 2. The `LogicManager` takes this command text and calls `StaffBookParser.parseCommand("sort n/")` and identifies the sort command. It then creates a new instance of `SortCommandParser` to `parse(“n/”)` on the attribute.
+2. The `LogicManager` takes this command text and calls `StaffBookParser.parseCommand("sort n/")` and identifies the sort command. It then creates a new instance of `SortCommandParser` to `parse(“n/”)` on the attribute.
 
-Step 3. `SortCommandParser.parse(“n/”)` then constructs a SortCommand with the appropriate attribute comparator, `NameComparator`.
+3. `SortCommandParser.parse(“n/”)` then constructs a SortCommand with the appropriate attribute comparator, `NameComparator`.
 
-Step 4. The `SortCommand` is returned to Logic manager which calls on its `execute()` to return a `CommandResult()`. During its execution, `ModelManager.updateSortedPersonList(NameComparator)` is invoked which updates the model to show the list of persons being sorted by name.
+4. The `SortCommand` is returned to Logic manager which calls on its `execute()` to return a `CommandResult()`. During its execution, `ModelManager.updateSortedPersonList(NameComparator)` is invoked which updates the model to show the list of persons being sorted by name.
 
 The sequence diagram for executing a **"sort n/"** is shown below:
 
@@ -336,11 +336,11 @@ used to manage any operations that require viewing or sorting of meetings from t
 
 **Aspect: How the meetings are stored :**
 
-* **Alternative 1 (current choice):** Store meetings in an ObservableList.
+* **Current Design:** Store meetings in an ObservableList.
     * Pros: Better segregation of the OOP functionalities, and good integration with the UI ListView.
     * Cons: Larger code complexity.
 
-* **Alternative 2:** Store meetings in a Set.
+* **Alternative 1:** Store meetings in a Set.
     * Pros: Easier implementation.
     * Cons: There is an efficiency gap as each element has to be placed into a list before it can be shown to the UI ListView.
 
