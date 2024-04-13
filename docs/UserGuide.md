@@ -370,7 +370,7 @@ Examples:
 
 ![Result of fav command](images/AfterFavCommand.png)
 
-### Removes a person as favourite: `unfav`
+### Removing a person as favourite: `unfav`
 
 Removes the specified person from the contacts as favourite.
 
@@ -389,7 +389,7 @@ Examples:
 * `sort p/` followed by `fav 1` removes the 1st person as favourite in the contacts in the results of the `sort` command, which should be the person with the smallest phone number.
 * `find Betsy` followed by `unfav 1` removes the 1st person as favourite in the results of the `find` command.
 
-### Refresh and clear all outdated meetings: `refresh`
+### Refreshing and clearing all outdated meetings: `refresh`
 
 <div markdown="block" class="alert alert-danger">:warning: **Caution:**
 This may result in possible data loss. e.g. Meetings of a person may be deleted.
@@ -487,18 +487,25 @@ Meeting Data Fields | Valid Values
 
 <div markdown="block" class="alert alert-primary">
 
-**:exclamation: Important:**<br>
+**:exclamation: Important:**
 
 Only `module`, `availabilities` and meeting `date` has additional constraints for their data values.
-* The values of `module` and `availabilities` must be in capital letters.
-  * For example, `CS2103T` is a valid value for `module` whereas `cs2103t` is invalid.
-* The day in `availabilities` must be in their full spelling.
-  * For example, `MONDAY` is valid and `MON` is invalid.
+
+* The values of `module` must be in capital letters.
+  * :heavy_check_mark: `CS2103T`
+  * :x: `cs2103t`
+* The day in `availabilities` must be in their full spelling and in capital letters.
+  * :heavy_check_mark: `MONDAY`
+  * :x: `MON`
 * The value of `favourite` data field is case-sensitive.
-  * For example, `Not favourite` is valid and `not favourite` and `not FAVOURITE` is invalid.
+  * :heavy_check_mark: `Not favourite`
+  * :x: `not favourite`
+  * :x: `not FAVOURITE`
+
 </div>
 
 #### Example
+
 ```json
 {
   "persons" : [ {
