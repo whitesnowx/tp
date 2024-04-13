@@ -415,9 +415,8 @@ Examples:
 * If there is a meeting `Future Meeting` that will happen in `31/12/2999 12:00`, when the user types in `refresh`, it will not be deleted.
   <br>**Before:**<br>
   ![Before refreshing](images/BeforeRefreshCommand.png)
-  <br>
-  ![After refreshing](images/AfterRefreshCommand.png)
   <br>**After:**<br>
+  ![After refreshing](images/AfterRefreshCommand.png)
 
 **Known limitations:**
 Refresh is only used when the user decides to remove clutter in the staff book, and wants to remove outdated meetings. 
