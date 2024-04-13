@@ -42,24 +42,41 @@ StaffConnect (SC) is a **desktop app for managing contacts of Professors and Tut
 
 ## Navigability
 
+### Overall UI layout
+<br>![Overall Layout](images/OverallLayout.png)
+
+
 ### Mouse and Keyboard controls
 
 Before we get started StaffConnect offers a unique suite of UI controls for users to customise their own unique experience!
 
-1. Clicking any items on the left panel will allow you to select the person contact to display.
-<br>Alternatively, clicking anywhere in the list panel then using your arrow keys to navigate and hitting enter to select would give the same result.
+1. Clicking any items on the left contacts panel will allow you to select the person contact to display.
+<br>Alternatively, clicking anywhere in the contacts panel then using your arrow keys to navigate and hitting enter to select would give the same result.
+<br>**Intended Behaviour:** 
+<br> Hovering the selection with mouse or arrow keys would not cause the details panel to switch to the selected person. This is to allow users to browse the contacts panel without switching.
 <br>![Region to select the person](images/personPanelRegion.png)
+   
 
 2. There is a divider that is draggable up and down to hide and show details on the right side and to customise the look of your application.
 <br>![Region to select the divider](images/detailsDividerRegion.png)
 
-3. Each of the 3 display panes of information they are able to pan in all four directions to view the content:
+3. Each of the 2 detail panels on the right are able to pan in all four directions to view the content:
     - For mouse pad users, dragging around with two fingers the around would pan around the pane.
-    - For mouse users, __[mouse wheel]__ will scroll up and down while __[shift + mouse wheel]__ will scroll left and right.
-    - __[Left click + drag]__ would pan around in the details pane as well.
+    - For mouse users, __[Mouse Wheel]__ will scroll up and down while __[Shift + Mouse wheel]__ will scroll left and right.
+    - __[Left click + Drag Mouse]__ would pan around in the details pane as well.
     - Keyboard arrow keys are able to pan around as well, but the scroll speed may differ on different systems.
     - There are scroll bars at the vertical and horizontal dividers of the window pane, dragging them in the respective direction will pan around as well.
-    
+   
+4.  The Result display:<br>
+    The scroll bars can only be scrolled by two ways:
+      1. For mouse pad users, dragging around with two fingers the around would pan around the pane.
+      2. For mouse users, __[Mouse Wheel]__ will scroll up and down while __[Shift + Mouse Wheel]__ will scroll left and right.
+      3. Simply dragging the scroll bar with a left mouse click. 
+      <br>**Scrolling by arrow keys is not fully supported in the result display**
+
+5.  The Command box:<br>
+    The input can only be scrolled by __[Holding Left Click + Drag Mouse]__  to the edge in the direction to scroll. This is to allow making adjustments on very long commands.
+
 
 <Br><Br> 
 ### Alternative UI arrangements
@@ -69,7 +86,7 @@ Before we get started StaffConnect offers a unique suite of UI controls for user
 
 **Intended Limitations**
 1. The divider position is not controllable by keyboard input, hence the only way to customise the look is mostly by mouse input.
-2. Pane switching by keyboard input, like a terminal is not supported.
+2. Panel switching by keyboard input, like a terminal is not supported.
 3. Font sizes does not automatically resize in this application, scroll bars will appear in smaller window variants of this application to help with the viewing of details.
 4. The UI will do a soft reset on its divider position every time the application is relaunched, as this is to allow users who wish to fall back to the default layout settings.
 
@@ -122,7 +139,10 @@ A person can have any number of tags and availabilities (including 0)
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com f/Computing v/John street, block 123, #01-01 m/CS2103`
+* `add n/Chihiro Ogino m/GEC1024 e/spirited@example.com f/FASS v/The Spirit Realm p/20122001 a/tues 21:00 22:00 a/wednesday 00:00 23:59`
 * `add n/Betsy Crowe t/friend m/CS2103T e/betsycrowe@example.com f/Computing v/Newgate Prison p/1234567 t/criminal a/monday 11:00 12:00 a/wednesday 14:00 16:00`
+
+![Effects of an add command](images/AfterAddCommand.png)
 
 ### Listing all persons : `list`
 
@@ -133,6 +153,15 @@ Format: `list`
 ### Editing a person : `edit`
 
 Edits an existing person in the contacts.
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes:**<br>
+
+* The displayed view in StaffConnect will reset to the default view after the `edit` command is called.
+
+* The changes made are displayed in the result display above the command box.
+</div>
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [m/MODULE] [f/FACULTY] [v/VENUE] [t/TAG]…​ [a/AVAILABILITY]…​`
 
@@ -148,9 +177,15 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [m/MODULE] [f/FACULTY] [v/VENUE
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit 3 m/GEA1000` Edits the module of the 3rd person to be `GEA1000`. 
+* `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+    <br>**Before editing the second person:** <br>
+    ![Before editing the second person](images/BeforeEditCommand.png)
+    <br>
+    <br>**After editing the second person:** <br>
+    ![After editing the second person](images/AfterEditCommand.png)
 
-### Filtering persons by attribute: `filter`
+### Filtering persons: `filter`
 
 Filters persons whose module, faculty, tags or availabilities match the given filtering criteria.
 
@@ -170,6 +205,7 @@ format: `filter [m/MODULE] [f/FACULTY] [t/TAG]… [a/AVAILABILITY]…`
 
 Examples:
 * `filter m/CS1101S` returns `Alex Yeoh`
+* `filter f/Computing t/professor` returns `Alex Yeoh`, `Charlotte Oliveiro`, `David Li` and `Roy Balakrishman`
 * `filter t/tutor` returns `Bernice Yu`, `Irfan Ibrahim`<br>
   ![result for 'filter t/tutor'](images/filterTutorTagResult.png)
 
@@ -188,6 +224,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 * `find John` returns `john` and `John Doe`
+* `find li` returns `David Li`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
@@ -248,6 +285,7 @@ Format: `meeting-add INDEX d/DESCRIPTION s/DATETIME`
 
 Examples:
 * `meeting-add 1 d/Meet for finals preparation s/12/04/2024 18:00` adds a meeting to the first person with the description of `Meet for finals preparation` and the date and time of `12/04/2024 18:00`
+* `meeting-add 1 d/CS2100 Consultation s/11/06/2024 08:00` adds a meeting to the first person with the description of `CS2100 Consultation` and the date and time of `11/06/2024 08:00`
 * `meeting-add 2 d/Meet for practical exam s/20/04/2024 15:00` adds a meeting to the second person with the description of `Meet for practical exam` and the date and time of `20/04/2024 15:00`
 
 <br>**Result for add meeting:** <br> `meeting-add 1 d/Meet for finals preparation s/12/04/2024 18:00`<br>
@@ -255,7 +293,11 @@ Examples:
 
 ### Deleting a meeting from a person: `meeting-delete`
 
-Deletes a meeting from  person based on specified meeting index.
+<div markdown="block" class="alert alert-danger">:warning: **Caution:**
+There will be no further prompt after entering the command to delete a meeting from a person. This action is irreversible and the meeting information to be deleted cannot be retrieved afterwards.
+</div>
+
+Deletes a meeting from a person based on specified meeting index.
 
 Format: `meeting-delete INDEX i/MEETING-INDEX `
 
@@ -273,14 +315,18 @@ Examples:
 <br>**Results for delete meeting:**<br>
 The following command was applied:  `find Bernice Yu` followed by `meeting-delete 1 i/2`.
 <br> __(Disclaimer: The content shown in the examples may not match what you have added to your own meetings within the contact book).__
-<br>
-<br> **Before:**<br>
-    ![result for before `find Bernice Yu` followed by `meeting-delete 1 i/2`](images/deleteMeetingResultBefore.png)
-<br>
-<br> **After:**<br>
-    ![result for after `find Bernice Yu` followed by `meeting-delete 1 i/2`](images/deleteMeetingResultAfter.png)
+<br><br> **After `find Bernice Yu`:**<br>
+    ![result for before `find Bernice Yu` followed by `meeting-delete 1 i/2`](images/meetingDeleteResultBefore.png)
+<br><br> **After `meeting-delete 1 i/2`:**<br>
+    ![result for after `find Bernice Yu` followed by `meeting-delete 1 i/2`](images/meetingDeleteResultAfter1.png)
+<br><br> **After `meeting-delete 1 i/1`:**<br>
+    ![result for after `find Bernice Yu` followed by `meeting-delete 1 i/2`](images/meetingDeleteResultAfter2.png)
 
 ### Deleting a person : `delete`
+
+<div markdown="block" class="alert alert-danger">:warning: **Caution:**
+There will be no further prompt after entering the command to delete a person in the staff book. This action is irreversible and the person to be deleted cannot be retrieved afterwards.
+</div>
 
 Deletes the specified person from the contacts.
 
@@ -292,11 +338,24 @@ Format: `delete INDEX`
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the contacts.
+* `sort p/` followed by `delete 1` deletes the 1st person in the contacts in the results of the `sort` command, which should be the person with the smallest phone number.
 * `find Bernice Yu` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+  <br>**Before deletion:**<br>
+  ![All persons listed](images/BeforeDeleteCommand1.png)
+  <br>**First find Bernice:**<br>
+  ![Result of finding Bernice](images/BeforeDeleteCommand2.png)
+  <br>**Then delete Bernice:**<br>
+  ![Result of deletion](images/AfterDeleteCommand1.png)
+  <br>**List all persons and Bernice is deleted:**<br>
+  ![Result of deletion](images/AfterDeleteCommand2.png)
 
 ### Setting a person as favourite: `fav`
 
 Sets the specified person from the contacts as favourite.
+
+<div markdown="block" class="alert alert-info">:information_source: **Note:**
+The displayed view in StaffConnect will reset to the default view after the `fav` command is called.
+</div>
 
 Format: `fav INDEX`
 
@@ -306,11 +365,18 @@ Format: `fav INDEX`
 
 Examples:
 * `list` followed by `fav 2` sets the 2nd person as favourite in the contacts.
+* `sort p/` followed by `fav 1` sets the 1st person as favourite in the contacts in the results of the `sort` command, which should be the person with the smallest phone number.
 * `find Betsy` followed by `fav 1` sets the 1st person as favourite in the results of the `find` command.
+
+![Result of fav command](images/AfterFavCommand.png)
 
 ### Removes a person as favourite: `unfav`
 
 Removes the specified person from the contacts as favourite.
+
+<div markdown="block" class="alert alert-info">:information_source: **Note:**
+The displayed view in StaffConnect will reset to the default view after the `unfav` command is called.
+</div>
 
 Format: `unfav INDEX`
 
@@ -320,9 +386,15 @@ Format: `unfav INDEX`
 
 Examples:
 * `list` followed by `unfav 2` removes the 2nd person as favourite in the contacts.
+* `sort p/` followed by `fav 1` removes the 1st person as favourite in the contacts in the results of the `sort` command, which should be the person with the smallest phone number.
 * `find Betsy` followed by `unfav 1` removes the 1st person as favourite in the results of the `find` command.
 
 ### Refresh and clear all outdated meetings: `refresh`
+
+<div markdown="block" class="alert alert-danger">:warning: **Caution:**
+This may result in possible data loss. e.g. Meetings of a person may be deleted.
+There will be no further prompt after entering the command to refresh meetings of all persons. This action is irreversible and the meeting information that may be deleted cannot be retrieved afterwards.
+</div>
 
 Deletes all meetings that start before the very moment the user types in the command and enters.
 
@@ -332,9 +404,15 @@ Format: `refresh`
 * If no meetings are deleted, there will no error thrown. Instead, a prompt will be given to user that no meeting is deleted.
 
 Examples:
+* If there is a meeting `Avengers Assemble` that happened in `31/08/1939 12:00`, when the user types in `refresh`, it will be deleted.
 * If there is a meeting `French Revolution` that happened in `14/07/1789 12:00`, when the user types in `refresh`, it will be deleted.
 * If there is a meeting `Future Meeting` that will happen in `31/12/2999 12:00`, when the user types in `refresh`, it will not be deleted.
- 
+  <br>**Before:**<br>
+  ![Before refreshing](images/BeforeRefreshCommand.png)
+  <br>
+  ![After refreshing](images/AfterRefreshCommand.png)
+  <br>**After:**<br>
+
 **Known limitations:**
 Refresh is only used when the user decides to remove clutter in the staff book, and wants to remove outdated meetings. 
 This process is not done automatically as sometimes the user would like to retain old meetings for bookkeeping purposes.
@@ -352,13 +430,19 @@ Format: `select INDEX`
 Examples:
 * `list` followed by `select 2`. <br> Selects the 2nd person in the staff book.
 * `filter t/tutor` followed by `select 1` <br> Selects the 1st person in the results of the `filter` command.
-
+* `sort p/` followed by `select 1` <br> Selects the 1st person in the results of the `sort` command, which should be the person with the smallest phone number.
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the contacts.
+<div markdown="block" class="alert alert-danger">:warning: **Caution:**
+There will be no further prompt after entering the command to clear all persons from the staff book. This action is irreversible and the staff book cannot be retrieved afterwards.
+</div>
+
+Clears all entries from the staff book.
 
 Format: `clear`
+
+![Effects of clear command](images/AfterClearCommand.png)
 
 ### Exiting the program : `exit`
 
@@ -391,25 +475,47 @@ Furthermore, certain edits can cause the StaffConnect to behave in unexpected wa
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **Restrictions on the valid user input of `Faculty` values**: For the current version, a valid user input for `Faculty` with prefix `f/` can only match exactly the same string as suggested below. Cases can be ignored though.
-   - Faculty of Arts of Social Sciences; Arts and Social Sciences; FASS
-   - Business School; Business; Biz School; Biz
-   - School of Computing; Computing; SoC
-   - School of Continuing and Lifelong Education; Continuing and Lifelong Education; SCALE
-   - Faculty of Dentistry; Dentistry
-   - School of Design and Environment; Design and Environment; SDE
-   - Duke-NUS Medical School; Duke-NUS
-   - Faculty of Engineering; Engineering; FoE
-   - Integrative Sciences and Engineering; ISEP
-   - Faculty of Law; Law
-   - Yong Loo Lin School of Medicine; Medicine
-   - Yong Siew Toh Conservatory of Music; Music; TST Conservatory of Music
-   - Saw Swee Hock School of Public Health; Public Health
-   - Lee Kuan Yew School of Public Policy; Public Policy; LKY School of Public Policy
-   - Faculty of Science; Science; FoS
-   - University Scholars Programme; USP
-   - Yale-NUS College; Yale-NUS
 
+--------------------------------------------------------------------------------------------------------------------
+
+## Attribute summary
+
+Attribute | Prefix | Restrictions | Examples
+----------|--------|--------------|---------------------
+Name[^1] | n/ | Case-sensitive.<br>Only alphanumeric characters allowed. Spaces are only allowed between alphanumeric characters. | `alex yeoh`, `Bernice Yu`, `test1`
+Phone Number[^1] | p/ | Numeric digits only, no special characters, at least 3 digits long. | `123`, `88888888, 12345678`
+Email[^1] | e/ | Valid email of the format `local-part@domain`.<br>1. `local-part` should only contain alphanumeric characters and the special characters `+_.-`<br>2. `local-part` may not start or end with any special characters.<br>3. `local-part` must be followed by exactly one `@` and then a `domain` name.<br>4. `domain` must be made up of at least 2 `domain` labels separated by periods.<br>5. Each `domain` name must be at least 2 alphanumeric characters long.<br>6. Each `domain` name must start and end with alphanumeric characters.<br>7. Each `domain` name can only consist of alphanumeric characters, separated by hyphens, if any. | `e@123.com`, `hello@h-h.com`, `one+two@h-h.hh`, `hello@e-h.e-hh`
+Module[^1] | m/ | Case-insensitive.<br>Valid module consisting of 2-4 letters, followed by exactly 4 numeric digits, with a suffix that is at most 2 characters long. | `gess1025`, `hsi1000`, `cs2103t`
+Faculty[^1] | f/ | Case-insensitive.<br>Restricted set of values (refer to [valid faculty values](#valid-faculty-values) below). | `soc`, `biz`, `School of Business`
+Venue[^1] | v/ | Any characters allowed, cannot be empty. | `belobog avenue`, `COM4-02-33`, `LT21`, `Kent Ridge Vale, Tulip Street, #12-34`
+Tag | t/ | Case-sensitive.<br>Only alphanumeric characters allowed.<br>Person can have any number of tags. | `tutor`, `professor`, `BestProf`, `Number1TA`
+Availability | a/ | Valid format of `day start-time end-time`.<br>Person can have any number of availabilities.<br>1. `day` should be a valid day of week: `Monday`, `mon`, `Tuesday`, `tue`, `tues`, `Wednesday`, `wednes`, `wed`, `Thursday`, `thurs`, `thur`, `thu`, `Friday`, `fri`, `Saturday`, `satur`, `sat`, `Sunday`, `sun`.<br>2. `day` is case-insensitive.<br>3. `start-time` and `end-time` should be in the time format of `HH:mm` where `HH` is in 24 hours (00-23) and `mm` are valid minutes (00-59). | `mon 13:00 14:00`, `monday 13:00 14:00`, `tues 14:00 21:00`
+Meeting Description | d/ | Case-sensitive.<br>Only alphanumeric characters allowed. Spaces are only allowed between alphanumeric characters. | `Meet for finals`, `Midterm revision`
+Meeting Start Time | s/ | Valid date and time format.<br>1. Valid date formats: `yyyy-MM-dd`, `yyyy-M-d`, `dd-MM-yyyy`, `yyyy-MM-d`, `d-MM-yyyy`, `d-M-yyyy`, `dd-M-yyyy`, `d/MM/yyyy`, `d-M-yyyy`, `dd-M-yyyy`, `dd/MM/yyyy`, `yyyy/MM/dd`, `yyyy/MM/d`, `yyyy/M/dd`,  `yyyy/M/d`<br>where `yyyy` is a 4-digit year (0000-9999), `M` is a single digit month (1-9), `MM` is a valid month (01-12), `d` is a single digit day (1-9), `dd` is a valid day (01-31)<br>2. Valid time formats: `HH:mm`, `H:mm`, `HHmm`<br>where `H` is a single digit hour (1-9), `HH` is a valid 24-hour (00-23), `mm` are valid minutes (00-59). | `2002-11-02 19:00`, `1-12-2022 9:00`, `2024/1/1 0000`
+
+[^1]: Mandatory when adding a person into the staff book, as these are important information for students to know when/where to consult their professors/TAs.
+
+### Valid `Faculty` values
+
+Faculty | Other names
+--------|------
+Faculty of Arts of Social Sciences | Arts and Social Sciences, FASS
+Business School | Business, Biz School, Biz
+School of Computing | Computing, SoC
+School of Continuing and Lifelong Education | Continuing and Lifelong Education, SCALE
+Faculty of Dentistry | Dentistry
+School of Design and Environment | Design and Environment, SDE
+Duke-NUS Medical School | Duke-NUS
+Faculty of Engineering, Engineering | FoE
+Integrative Sciences and Engineering | ISEP
+Faculty of Law | Law
+Yong Loo Lin School of Medicine | Medicine
+Yong Siew Toh Conservatory of Music | Music, TST Conservatory of Music
+Saw Swee Hock School of Public Health | Public Health
+Lee Kuan Yew School of Public Policy | Public Policy, LKY School of Public Policy
+Faculty of Science | Science, FoS
+University Scholars Programme | USP
+Yale-NUS College | Yale-NUS
 
 --------------------------------------------------------------------------------------------------------------------
 
