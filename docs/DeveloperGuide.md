@@ -316,7 +316,7 @@ This is to prevent `SortCommand` from taking on more responsibilities (Separatio
 #### What designs were considered:
 **Aspect: Determining order of sorting of an attribute:**
 
-* **Current Design:** Get order of attributes sorting from user input.
+* **Current Design:** Get order of sorting attribute from user input.
     * Pros: More functionality and more suited to the user's needs.
     * Cons: Harder to implement and guide user to use, may have more leeway for error.
 
