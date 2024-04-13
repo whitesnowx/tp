@@ -309,7 +309,6 @@ This is to keep in view for when other commands or enhancements may need the sep
 
 Need for `MultiComparator` object:
 This is to map the 1 or more comparator objects and act as a layer of abstraction where `SortCommmand` does need to know how many attributes are used in sorting.
-This also w
 
 `SortCommmandParser` parsing the `Comparator` objects:
 This is to prevent `SortCommand` from taking on more responsibilities (Separation of Concerns).
