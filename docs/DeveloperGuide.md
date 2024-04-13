@@ -489,19 +489,31 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                     | I want to …​                    | So that I can…​                                                         |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | sociable user                              | save a professor's/tutor's name, email, phone number, tag(s) in one line | save time per entry                     |
+| `* * *`  | sociable user                              | save a professor's/tutor's name, phone number, faculty, consultation venue, module, email, tag(s) and availabilities in one line | save time when adding each professor/tutor                    |
+| `* * *`  | clumsy user                                | edit a professor's/tutor's name, phone number, faculty, consultation venue, module, email, tag(s) and availabilities in one line | save time when editing multiple attributes of a professor/tutor                    |
 | `* * *`  | disorganised student                       | store a professor's/tutor's name       | recall how to address the professor/tutor                                    |
+| `* * *`  | disorganised student                       | store the module a professor/tutor is teaching  | contact the professor/tutor who teach a module which I am currently taking       |
 | `* * *`  | forgetful user                             | store a professor's/tutor's faculty    | see the faculty that a professor/tutor belongs to                            |
-| `* * *`  | student who get lost easily                | view the consultation venues of my professors/TAs | search for their consultation venues easily                |
-| `* * *`  | disorganised student                       | store a professor's/tutor's consultation hours | schedule meetings to meet my professor/tutor for consultation            |
+| `* * *`  | student who get lost easily                | view the consultation venues of my professors/tutors | search for their consultation venues easily                |
+| `* * *`  | disorganised student                       | store a professor's/tutor's availabilities | schedule meetings to meet my professor/tutor for consultation            |
+| `* * *`  | organized user                             | delete a staff book entry | remove outdated or redundant entries of professors/tutors that I will not contact anymore                  |
 | `* * *`  | slow reader                                | filter through staff book entries by their name | not waste time in finding a specific professor/tutor and access their information easily |
 | `* * *`  | slow reader                                | filter through staff book entries by their availability | not waste time in finding a specific professor/tutor and access their information easily |
 | `* * *`  | slow reader                                | filter through staff book entries by their module | not waste time in finding a specific professor/tutor and access their information easily |
-| `* * *`  | disorganised student                       | store the modules a professor is teaching  | contact the professors who teach a module which I am currently taking       |
 | `* * *`  | slow reader                                | filter through staff book entries by their faculty | not waste time in finding a specific professor/tutor and access their information easily |
-| `* * *`  | forgetful user                             | filter the professors by their faculty | not waste time in finding a specific professor/tutor and access their information easily |
-| `* *` | time-conscious user | save a specific professor as "favourite" | have quick access to the professors/tutors I frequent the most |
-| `* *` | easily-distracted user | record my scheduled meetings and consultation times with professors/tutors | see which professor/tutor I have set up to meet with |
+| `* * *`  | slow reader                             | filter through staff book entries by their tag | not waste time in finding a specific professor/tutor and access their information easily |
+| `* * *`  | slow reader                             | sort staff book entries by name | not waste time in finding a specific professor/tutor and access their information easily |
+| `* * *`  | slow reader                             | sort staff book entries by phone number | not waste time in finding a specific professor/tutor and access their information easily |
+| `* * *`  | slow reader                             | sort staff book entries module | not waste time in finding a specific professor/tutor and access their information easily |
+| `* * *`  | slow reader                             | sort staff book entries faculty | not waste time in finding a specific professor/tutor and access their information easily |
+| `* * *`  | slow reader                             | sort staff book entries' consultation venues | not waste time in finding a specific professor/tutor and access their information easily |
+| `* *`  | slow reader                             | sort staff book entries' meeting times | not waste time in finding a specific meeting and access their information easily |
+| `* *` | time-conscious user | save a specific professor as "favourite" | have quick access to the professors/tutors I frequent the most for consultations |
+| `* *` | time-conscious user | remove a specific professor as "favourite" | remove outdated professors/tutors that I do not frequent for consultations anymore |
+| `* *` | easily-distracted user | record my scheduled meeting agenda and start time with professors/tutors | see which professor/tutor I have set up to meet with |
+| `* *` | organized user | delete my scheduled meeting agenda and start time with professors/tutors | remove outdated or redundant entries of meetings that have passed or cancelled                  |
+| `* *` | time-conscious user | clear my outdated meetings with professors/tutors | save time by removing outdated meetings with one command |
+| `* *` | proficient typer | select a professor/tutor to see their contact details with a command | use the app with my more proficient method of typing instead of using other input devices (i.e. mouse) |
 
 ### Use cases
 
