@@ -503,7 +503,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | forgetful user                             | store a professor's/tutor's faculty    | see the faculty that a professor/tutor belongs to                            |
 | `* * *`  | student who get lost easily                | view the consultation venues of my professors/tutors | search for their consultation venues easily                |
 | `* * *`  | disorganised student                       | store a professor's/tutor's availabilities | schedule meetings to meet my professor/tutor for consultation            |
-| `* * *`  | organized user                             | delete a staff book entry | remove outdated or redundant entries of professors/tutors that I will not contact anymore                  |
+| `* * *`  | organised user                             | delete a staff book entry | remove outdated or redundant entries of professors/tutors that I will not contact anymore                  |
 | `* * *`  | slow reader                                | filter through staff book entries by their name | not waste time in finding a specific professor/tutor and access their information easily |
 | `* * *`  | slow reader                                | filter through staff book entries by their availability | not waste time in finding a specific professor/tutor and access their information easily |
 | `* * *`  | slow reader                                | filter through staff book entries by their module | not waste time in finding a specific professor/tutor and access their information easily |
@@ -518,7 +518,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *` | time-conscious user | save a specific professor as "favourite" | have quick access to the professors/tutors I frequent the most for consultations |
 | `* *` | time-conscious user | remove a specific professor as "favourite" | remove outdated professors/tutors that I do not frequent for consultations anymore |
 | `* *` | easily-distracted user | record my scheduled meeting agenda and start time with professors/tutors | see which professor/tutor I have set up to meet with |
-| `* *` | organized user | delete my scheduled meeting agenda and start time with professors/tutors | remove outdated or redundant entries of meetings that have passed or cancelled                  |
+| `* *` | organised user | delete my scheduled meeting agenda and start time with professors/tutors | remove outdated or redundant entries of meetings that have passed or cancelled                  |
 | `* *` | time-conscious user | clear my outdated meetings with professors/tutors | save time by removing outdated meetings with one command |
 | `* *` | proficient typer | select a professor/tutor to see their contact details with a command | use the app with my more proficient method of typing instead of using other input devices (i.e. mouse) |
 
