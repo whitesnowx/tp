@@ -190,6 +190,25 @@ Examples:
     <br>**After editing the second person:** <br>
     ![After editing the second person](images/AfterEditCommand.png)
 
+### Locating persons by name: `find`
+
+Finds persons whose names contain any of the given keywords.
+
+Format: `find KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only the name is searched.
+* Only full words will be matched e.g. `Han` will not match `Hans`
+* Persons matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+
+Examples:
+* `find John` returns `john` and `John Doe`
+* `find li` returns `David Li`
+* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+  ![result for 'find alex david'](images/findAlexDavidResult.png)
+
 ### Filtering persons: `filter`
 
 Filters persons whose module, faculty, tags or availabilities match the given filtering criteria.
@@ -214,37 +233,18 @@ Examples:
 * `filter t/tutor` returns `Bernice Yu`, `Irfan Ibrahim`<br>
   ![result for 'filter t/tutor'](images/filterTutorTagResult.png)
 
-### Locating persons by name: `find`
 
-Finds persons whose names contain any of the given keywords.
-
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find li` returns `David Li`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
-
-### Sorting persons by attribute: `sort`
+### Sorting persons: `sort`
 
 Sorts the list of persons based on specified attribute.
 
-Format: `sort [ATTRIBUTE]`
+Format: `sort [n/] [p/] [m/] [f/] [v/]`
 
 * By default, sorting is done in alphanumeric order.
 * The order of character priority would be letters (A-Z), numbers (0-9), special characters (!@#$%^&*).
 * The capitalisation of the letters do not affect their priority such that `Aaron` will have same priority as `aaron`.
 * For attribute with exact same values, the tie-breaker is determined by their added order.
 * For sorting of multiple attributes, the weightage will be determined by the order in which it was entered. E.g `sort m/ p/ v/` will sort by contact by their module, among those with equal modules would then be sorted by their phone number and similarly for venue.
-* `[ATTRIBUTE]` is to be noted by their prefix. e.g `name` will be `n/`.
 * `s/` sorts contacts by person with the earliest meeting
 * `meet/` sorts contacts by person with the earliest meeting, followed by alphanumeric order of meeting description
 
