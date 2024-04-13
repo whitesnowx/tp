@@ -42,7 +42,7 @@ StaffConnect (SC) is a **desktop app for managing Professors' and Tutors' contac
 ## Navigability
 
 ### Overall UI layout
-<br>![UI General](images/UiAnnotationsGeneral.png)
+<br>![UI General](images/UiAnnotationsGeneraL.png)
 
 #### [UI] Persons Info
 <br>![UI General](images/UiAnnotationsAttributes.png)
