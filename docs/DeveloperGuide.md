@@ -197,7 +197,7 @@ This is to refresh the list of `Person` in `Model`.
 
 ### Filter feature
 
-#### How the filter is implemented
+#### How the feature is implemented
 
 The sequence diagram below shows how the filter command `filter f/Computing` goes through the `Logic` component.
 
