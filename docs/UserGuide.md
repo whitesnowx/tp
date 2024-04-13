@@ -545,7 +545,7 @@ Action | Format, Examples
 **Delete Meeting** | `meeting-delete INDEX i/MEETING-INDEX`<br> e.g., `meeting-delete 1 i/1 `
 **Set as Favourite** | `fav INDEX`<br> e.g., `fav 3`
 **Remove as Favourite** | `unfav INDEX`<br> e.g., `unfav 3`
-**Refresh** | `refresh` <br> e.g., `refresh`
+**Refresh** | `refresh`
 **Select** | `select INDEX`<br> e.g., `select 3`
 **List** | `list`
 **Help** | `help`
