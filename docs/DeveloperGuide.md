@@ -299,6 +299,20 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 <img src="images/SortActivityDiagram.png" width="450" />
 
+#### Why sort is implemented this way
+
+The main operation for the sort feature is the `updateSortedPersonList(Comparator<Person> comparator)` method in the `Model` component.
+The following are some explanations for decisions made in the implementation of the sort feature.
+
+Need for multiple `Comparator` objects:
+This is to keep in view for when other commands or enhancements may need the separate attribute predicates.
+
+`SortCommmandParser` parsing the `Predicate` objects:
+This is to prevent `SortCommand` from taking on more responsibilities (Separation of Concerns).
+
+`SortCommand` having `setPersonPredicate()` method:
+This is so that `SortCommand` has the required argument of type `Comparator<Person>` to be used in the `updateSortedPersonList()` method. Since the `Comparator<Person>` object is created by chaining the multiple predicates, no parsing is involved to create this `Predicate`.
+
 #### What designs were considered:
 **Aspect: Determining order of sorting of an attribute:**
 
