@@ -549,3 +549,4 @@ Action | Format, Examples
 **Select** | `select INDEX`<br> e.g., `select 3`
 **List** | `list`
 **Help** | `help`
+**Exit** | `exit`
