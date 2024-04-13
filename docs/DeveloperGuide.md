@@ -695,3 +695,4 @@ testers are expected to do more *exploratory* testing.
 
       Expected: The app should show `Alex Yeoh` with the module `CS2030S`:
       ![After Valid Modification To Data File Result](images/afterValidModificationToDataFileResult.png)
+      
