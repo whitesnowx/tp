@@ -14,7 +14,8 @@ if() then ([attributes are sortable])
             :compare with persons in sorted list;
             if () then ([person smaller])
                 :shift up;
-            else ([person bigger])
+            else if () then ([person same])
+            else (                             [person bigger])
                 :shift down;
             endif
         repeat while () is ([have next person to sort]) not ([no more person to sort])
