@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-StaffConnect (SC) is a **desktop app for managing contacts of Professors and Tutors, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, SC can get your contact management tasks done faster than traditional GUI apps.
+StaffConnect (SC) is a **desktop app for managing Professors' and Tutors' contact information and associated meetings, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, SC can get your contact management tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -25,13 +25,13 @@ StaffConnect (SC) is a **desktop app for managing contacts of Professors and Tut
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-    * `list` : Lists all contacts.
+    * `list` : Lists all persons.
 
-    * `add n/John Doe p/98765432 e/johnd@example.com m/CS2103 f/Computing v/John street, block 123, #01-01` : Adds a contact named `John Doe` to the contacts list.
+    * `add n/John Doe p/98765432 e/johnd@example.com m/CS2103 f/Computing v/John street, block 123, #01-01` : Adds a person named `John Doe` to the persons list.
 
-    * `delete 3` : Deletes the 3rd contact shown in the current list.
+    * `delete 3` : Deletes the 3rd person shown in the current list.
 
-    * `clear` : Deletes all contacts.
+    * `clear` : Deletes all persons.
 
     * `exit` : Exits the app.
 
@@ -50,7 +50,7 @@ StaffConnect (SC) is a **desktop app for managing contacts of Professors and Tut
 
 Before we get started StaffConnect offers a unique suite of UI controls for users to customise their own unique experience!
 
-1. Clicking any items on the left contacts panel will allow you to select the person contact to display.
+1. Clicking any items on the left contacts panel will allow you to select the person whose attributes and meeting list are to be display.
 <br>Alternatively, clicking anywhere in the contacts panel then using your arrow keys to navigate and hitting enter to select would give the same result.
 <br>**Intended Behaviour:** 
 <br> Hovering the selection with mouse or arrow keys would not cause the details panel to switch to the selected person. This is to allow users to browse the contacts panel without switching.
@@ -129,13 +129,13 @@ Format: `help`
 
 ### Adding a person: `add`
 
-Adds a person to the contacts.
+Adds a person to the staff book.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL m/MODULE f/FACULTY v/VENUE [t/TAG]…​ [a/AVAILABILITY]…​`
 
-* `NAME` is case-sensitive and has to be unique among contacts.
-* `PHONE_NUMBER`, `EMAIL`, `MODULE`, `FACULTY`, `VENUE` do not need to be unique and can be duplicated among contacts.
-* `TAG` and `AVAILABILITY` has to be unique within a single contact but can be duplicated among contacts.
+* `NAME` is case-sensitive and has to be unique among persons in staff book.
+* `PHONE_NUMBER`, `EMAIL`, `MODULE`, `FACULTY`, `VENUE` do not need to be unique and can be duplicated among persons to staff book.
+* `TAG` and `AVAILABILITY` has to be unique within a single person but can be duplicated among persons in staff book.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags and availabilities (including 0)
@@ -150,13 +150,13 @@ Examples:
 
 ### Listing all persons : `list`
 
-Shows a list of all persons in the contacts.
+Shows a list of all persons in the staff book.
 
 Format: `list`
 
 ### Editing a person : `edit`
 
-Edits an existing person in the contacts.
+Edits an existing person in the staff book.
 
 <div markdown="block" class="alert alert-info">
 
@@ -176,9 +176,9 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [m/MODULE] [f/FACULTY] [v/VENUE
 * You can remove all the person’s tags by typing `t/` without specifying any tags after it.
 * When editing availabilities, the existing availabilities of the person will be removed i.e adding of availabilities is not cumulative.
 * You can remove all the person’s availabilities by typing `a/` without specifying any availabilities after it.
-* `NAME` is case-sensitive and has to be unique among contacts.
-* `PHONE_NUMBER`, `EMAIL`, `MODULE`, `FACULTY`, `VENUE` do not need to be unique and can be duplicated among contacts.
-* `TAG` and `AVAILABILITY` has to be unique within a single contact but can be duplicated among contacts.
+* `NAME` is case-sensitive and has to be unique among persons in staff book.
+* `PHONE_NUMBER`, `EMAIL`, `MODULE`, `FACULTY`, `VENUE` do not need to be unique and can be duplicated among persons in staff book.
+* `TAG` and `AVAILABILITY` has to be unique within a single person but can be duplicated among persons in staff book.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
@@ -244,9 +244,9 @@ Format: `sort [n/] [p/] [m/] [f/] [v/] [s/] [meet/]`
 * The order of character priority would be letters (A-Z), numbers (0-9), special characters (!@#$%^&*).
 * The capitalisation of the letters do not affect their priority such that `Aaron` will have same priority as `aaron`.
 * For attribute with exact same values, the tie-breaker is determined by their added order.
-* For sorting of multiple attributes, the weightage will be determined by the order in which it was entered. E.g `sort m/ p/ v/` will sort by contact by their module, among those with equal modules would then be sorted by their phone number and similarly for venue.
-* `s/` sorts contacts by person with the earliest meeting
-* `meet/` sorts contacts by person with the earliest meeting, followed by alphanumeric order of meeting description
+* For sorting of multiple attributes, the weightage will be determined by the order in which it was entered. E.g `sort m/ p/ v/` will sort persons by their module, among those with equal modules would then be sorted by their phone number and similarly for venue.
+* `s/` sorts the list by person with the earliest meeting
+* `meet/` sorts the list by person with the earliest meeting, followed by alphanumeric order of meeting description
 
 Examples:
 * `sort m/ p/` returns person by ascending module codes followed by ascending phone numbers `CS2000 80000000`, `CS2000 90000000`, `CS3000 80000000`followed by `CS3000 90000000`
@@ -287,7 +287,7 @@ Format: `meeting-add INDEX d/DESCRIPTION s/DATETIME`
         2. `H:mm`
         3. `HHmm`
 * Duplicate meetings with the same `DESCRIPTION` and `DATETIME` in the same person is not allowed.
-* Meetings with the same `DESCRIPTION` and `DATETIME` does not need to be unique among contacts.
+* Meetings with the same `DESCRIPTION` and `DATETIME` does not need to be unique among persons in staff book.
 
 Examples:
 * `meeting-add 1 d/Meet for finals preparation s/12/04/2024 18:00` adds a meeting to the first person with the description of `Meet for finals preparation` and the date and time of `12/04/2024 18:00`
@@ -311,16 +311,16 @@ Format: `meeting-delete INDEX i/MEETING-INDEX `
 * The index refers to the index number shown in the displayed person list. 
 * The index **must be a positive integer** 1, 2, 3,…​ and tally within range index of the displayed person list.
 * The meeting-index refers to the index number shown in the displayed meeting list.
-* The index **must be a positive integer** 1, 2, 3,…​ and tally within range index of the displayed meeting list.
+* The meeting-index **must be a positive integer** 1, 2, 3,…​ and tally within range index of the displayed meeting list.
 * The meeting from the person must exist before it can be deleted otherwise an error will be displayed.
 Examples:
 * The following commands assumes that meetings have been added prior to the command. Otherwise, an error will be thrown. <br> **(Refer to the section above on how to add a meeting)**
-  * `list` followed by `meeting-delete 1 i/1` deletes the 1st meeting from the 1st person in the contacts.
+  * `list` followed by `meeting-delete 1 i/1` deletes the 1st meeting from the 1st person in the list.
   * `find Bernice Yu` followed by `meeting-delete 1 i/2` deletes the 1st meeting form the 1st person in the results of the `find` command.
       
 <br>**Results for delete meeting:**<br>
 The following command was applied:  `find Bernice Yu` followed by `meeting-delete 1 i/2`.
-<br> __(Disclaimer: The content shown in the examples may not match what you have added to your own meetings within the contact book).__
+<br> __(Disclaimer: The content shown in the examples may not match what you have added to your own meetings within the staff book).__
 <br><br> **After `find Bernice Yu`:**<br>
     ![result for before `find Bernice Yu` followed by `meeting-delete 1 i/2`](images/meetingDeleteResultBefore.png)
 <br><br> **After `meeting-delete 1 i/2`:**<br>
@@ -334,7 +334,7 @@ The following command was applied:  `find Bernice Yu` followed by `meeting-delet
 There will be no further prompt after entering the command to delete a person in the staff book. This action is irreversible and the person to be deleted cannot be retrieved afterwards.
 </div>
 
-Deletes the specified person from the contacts.
+Deletes the specified person from the staff book.
 
 Format: `delete INDEX`
 
@@ -343,8 +343,8 @@ Format: `delete INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the contacts.
-* `sort p/` followed by `delete 1` deletes the 1st person in the contacts in the results of the `sort` command, which should be the person with the smallest phone number.
+* `list` followed by `delete 2` deletes the 2nd person in the list.
+* `sort p/` followed by `delete 1` deletes the 1st person in the list in the results of the `sort` command, which should be the person with the smallest phone number.
 * `find Bernice Yu` followed by `delete 1` deletes the 1st person in the results of the `find` command.
   <br>**Before deletion:**<br>
   ![All persons listed](images/BeforeDeleteCommand1.png)
@@ -357,7 +357,7 @@ Examples:
 
 ### Setting a person as favourite: `fav`
 
-Sets the specified person from the contacts as favourite.
+Sets the specified person from the list as favourite.
 
 <div markdown="block" class="alert alert-info">:information_source: **Note:**
 The displayed view in StaffConnect will reset to the default view after the `fav` command is called.
@@ -370,15 +370,15 @@ Format: `fav INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `fav 2` sets the 2nd person as favourite in the contacts.
-* `sort p/` followed by `fav 1` sets the 1st person as favourite in the contacts in the results of the `sort` command, which should be the person with the smallest phone number.
+* `list` followed by `fav 2` sets the 2nd person as favourite in the staff book.
+* `sort p/` followed by `fav 1` sets the 1st person as favourite in the staff book in the results of the `sort` command, which should be the person with the smallest phone number.
 * `find Betsy` followed by `fav 1` sets the 1st person as favourite in the results of the `find` command.
 
 ![Result of fav command](images/AfterFavCommand.png)
 
 ### Removes a person as favourite: `unfav`
 
-Removes the specified person from the contacts as favourite.
+Removes the specified person from the staff book as favourite.
 
 <div markdown="block" class="alert alert-info">:information_source: **Note:**
 The displayed view in StaffConnect will reset to the default view after the `unfav` command is called.
@@ -391,8 +391,8 @@ Format: `unfav INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `unfav 2` removes the 2nd person as favourite in the contacts.
-* `sort p/` followed by `fav 1` removes the 1st person as favourite in the contacts in the results of the `sort` command, which should be the person with the smallest phone number.
+* `list` followed by `unfav 2` removes the 2nd person as favourite in the staff book.
+* `sort p/` followed by `fav 1` removes the 1st person as favourite in the staff book in the results of the `sort` command, which should be the person with the smallest phone number.
 * `find Betsy` followed by `unfav 1` removes the 1st person as favourite in the results of the `find` command.
 
 ### Refresh and clear all outdated meetings: `refresh`
@@ -423,13 +423,13 @@ Examples:
 Refresh is only used when the user decides to remove clutter in the staff book, and wants to remove outdated meetings. 
 This process is not done automatically as sometimes the user would like to retain old meetings for bookkeeping purposes.
 
-### Selecting the detailed contact to display: `select`
+### Selecting the person to display: `select`
 
-Selects the person identified by the index number used in the displayed person list for display.
+Selects the person identified by their current displayed index number to display their attributes and meeting list.
 
 Format: `select INDEX`
 
-* Select the person and loads its contact with meeting details for display at the specified **INDEX**
+* Select the person and loads its staff book with meeting details for display at the specified **INDEX**
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
@@ -483,7 +483,7 @@ Furthermore, certain edits can cause the StaffConnect to behave in unexpected wa
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **When adding/editing phone number with a descriptor**, If you try to add a number with a descriptor such as `98731094 (home)`, the application rejects this input and advise the user to only provide phone numbers with numerical values only. The phone number is not intended to store phone number descriptor but users can consider using tags such as t/homePhone as a workaround.
 3. **When adding/editing name containing special characters**, If you try to add a name such as `Jason s/o William`, the application rejects this input and advise the user to only provide name with alphanumeric values only. The name is not intended to store special characters but users can consider using `so` or `son of` as a workaround.
-4. **When adding/editing venues containing space with an attribute prefix**, If you try to add a venue such as `Room 12 t/r`, the application will add a contact with a venue `Room 12` and a tag `r` instead of the intended venue `Room 12 t/r`. The venue is not intended to store venues that contains a space followed by an attribute prefix but users can consider omitting the space or replace with a hyphen such as `Room 12t/r` or `Room 12-t/r` as a workaround.
+4. **When adding/editing venues containing space with an attribute prefix**, If you try to add a venue such as `Room 12 t/r`, the application will add a person with a venue `Room 12` and a tag `r` instead of the intended venue `Room 12 t/r`. The venue is not intended to store venues that contains a space followed by an attribute prefix but users can consider omitting the space or replace with a hyphen such as `Room 12t/r` or `Room 12-t/r` as a workaround.
 5. **When generating the default file and exiting via the `Exit` button**, If you try to generate the default JSON file `[JAR file location]/data/staffconnect.json` by running the JAR file, without manipulating any data and exiting via the `Exit` button, the JSON file would not be generated. You may consider using the `exit` command via the command line interface to generate the default JSON file instead.
 --------------------------------------------------------------------------------------------------------------------
 
