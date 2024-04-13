@@ -177,7 +177,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [m/MODULE] [f/FACULTY] [v/VENUE
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 3 m/GEA1000` Edits the module of the 3rd person to be `GEA1000`. 
+*  `edit 3 m/GEA1000` Edits the module of the 3rd person to be `GEA1000`.
 * `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
     <br>**Before editing the second person:** <br>
     ![Before editing the second person](images/BeforeEditCommand.png)
@@ -471,33 +471,34 @@ Data Field | Valid Values
 `phone` | `123`, `98765432`
 `email` | `alice@example.com`,
 `module` | `GESS1025`, `HSI1000`, `CS2103T`
-`faculty` | Refer to only the `Faculty` column in [Valid Faculty Values](#Valid-Faculty-Values) table below
+`faculty` | Refer to **only the `Faculty` column** in [Valid Faculty Values](#valid-faculty-values) table below
 `venue` | `COM4-02-33`, `LT21`, `Kent Ridge Vale, Tulip Street, #12-34`
 `tags` | `professor`, `Number1TA`
 `availabilities` | `TUESDAY 12:00 13:00`, `WEDNESDAY 12:00 13:00`
-`meetings` | Refer to the [Valid Data Values in meetings](#Valid-Data-Values-in-meetings) table
+`meetings` | Refer to the [Valid Data Values in meetings](#valid-data-values-in-meetings) table
 `favourite` | `Favourite`, `Not favourite`
 
 #### Valid Data Values in `meetings`
 
 Meeting Data Fields | Valid Values
 --------|------
-description | `Meeting 1`, `Finals`
-date | `30/1/2024 12:12`, `2002-11-15 19:00`, `1-12-2022 9:00`, `2024/1/1 0000`
+`description` | `Meeting 1`, `Finals`
+`date` | `30/1/2024 12:12`, `2002-11-15 19:00`, `1-12-2022 9:00`, `2024/1/1 0000`
 
-<div markdown="span" class="alert alert-primary">:exclamation: **Important:**<br>
-Only `module`, `availabilities` and meeting `date` has additional constraints for their data values.<br>
+<div markdown="block" class="alert alert-primary">
 
-* The values of `module` and `availabilities` must be in capital letters.<br>
+**:exclamation: Important:**<br>
+
+Only `module`, `availabilities` and meeting `date` has additional constraints for their data values.
+* The values of `module` and `availabilities` must be in capital letters.
   * For example, `CS2103T` is a valid value for `module` whereas `cs2103t` is invalid.
 * The day in `availabilities` must be in their full spelling.
   * For example, `MONDAY` is valid and `MON` is invalid.
 * The value of `favourite` data field is case-sensitive.
   * For example, `Not favourite` is valid and `not favourite` and `not FAVOURITE` is invalid.
-
 </div>
 
-Example:
+#### Example
 ```json
 {
   "persons" : [ {
