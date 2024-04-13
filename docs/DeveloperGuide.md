@@ -421,6 +421,24 @@ is used to handle any valid date time values. Each of this meeting are stored in
 contains each of the meetings related to each other stored in an ```ObservableList```. The ``` MeetingManager ``` is
 used to manage any operations that require viewing or sorting of meetings from the ```MeetingList``` class.
 
+The operations for adding and deleting meeting are handled by `AddMeetingCommand` and `DeleteMeetingCommand`, which are supported by `AddMeetingCommandParser` and `DeleteMeetingCommandParser` respectively.
+
+1. `Logic Manager` receives the user input which is parsed by `StaffConnectParser`
+2. After splitting the user input into `commandWord` and `arguments` based on the regex pattern of the user input, the `StaffConnectParser` invokes the `AddMeetingCommandParser`or`DeleteMeetingCommandParser` based on the `commandWord`, calling the method `parse` with `arguments` as the method arguments.
+3. `AddMeetingCommandParser` or `DeleteMeetingCommandParser` then parses the respective arguments with its methods from `ParserUtil` to create `AddMeetingCommand` or `DeleteMeetingCommand` with the parsed values.
+4. `Logic Manager` executes the `AddMeetingCommand` or `DeleteMeetingCommand`, which handles adding/removing from the `Person` and updates the model with the new information.
+
+Below is the sequence diagram for parsing inputs with  `AddMeetingCommandParser`:
+<br>![AddMeetingCommandParser Sequence Diagram](images/AddMeetingParserSequenceDiagram.png)
+<br> Similarly the sequence diagram for parsing inputs with `DeleteMeetingCommandParser`:
+<br>![DeleteMeetingCommandParser Sequence Diagram](images/DeleteMeetingParserSequenceDiagram.png)
+<br><br>
+After parsing the commands are executed by the logic manager as show below. (Execute in the diagrams below comes form the logic manager)
+<br> Below is the sequence diagram for adding meeting with  `AddMeetingCommand`:
+<br>![AddMeetingCommand Sequence Diagram](images/AddMeetingSequenceDiagram.png)
+<br> Similarly the sequence diagram for deleting meeting with `DeleteMeetingCommand`:
+<br>![DeleteMeetingCommand Sequence Diagram](images/DeleteMeetingSequenceDiagram.png)
+
 #### Design considerations:
 
 **Aspect: How the meetings are stored :**
