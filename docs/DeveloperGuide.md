@@ -620,7 +620,62 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
 
-*{More to be added}*
+**Use case: Add a meeting**
+
+**MSS**
+
+1. StaffConnect shows a list of persons
+2. User requests to add a meeting to the specific person in the list
+3. StaffConnect adds the meeting to the person with the provided details
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+  Use case ends.
+
+* 2a. The given index is invalid.
+
+    * 2a1. StaffConnect shows an error message.
+
+      Use case resumes at step 1.
+
+* 3a. the given details for meeting is invalid.
+    * 3a1. StaffConnect shows an error message.
+      Use case resumes at step 1.
+
+
+**Use case: Delete a meeting**
+
+**Precondition:** The intended meeting to delete exist and has been added before.
+
+**MSS**
+
+1. StaffConnect shows a list of persons
+2. User requests to delete a meeting to the specific person in the list
+3. StaffConnect delete the specified meeting
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+  Use case ends.
+
+* 2a. The given index for person is invalid.
+
+    * 2a1. StaffConnect shows an error message.
+
+      Use case resumes at step 1.
+
+* 2a. The given index for meeting is invalid.
+    * 2a1. StaffConnect shows an error message.
+      Use case resumes at step 1.
+
+    
 
 ### Non-Functional Requirements
 
