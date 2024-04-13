@@ -26,7 +26,7 @@ public class Faculty {
         CONTINUING_AND_LIFELONG_EDUCATION("School of Continuing and Lifelong Education",
                 "Continuing and Lifelong Education", "SCALE"),
         DENTISTRY("Faculty of Dentistry", "Dentistry"),
-        DESIGN_AND_ENGINEERING("College of Design and Environment", "Design and Engineering", "CDE"),
+        DESIGN_AND_ENGINEERING("College of Design and Engineering", "Design and Engineering", "CDE"),
         DUKE_NUS_MEDICAL_SCHOOL("Duke-NUS Medical School", "Duke-NUS"),
         INTEGRATIVE_SCIENCES_AND_ENGINEERING("Integrative Sciences and Engineering", "ISEP"),
         LAW("Faculty of Law", "Law"),
