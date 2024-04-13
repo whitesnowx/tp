@@ -236,9 +236,9 @@ This is to prevent `FilterCommand` from taking on more responsibilities (Separat
 `FilterCommand` having `setPersonPredicate()` method:
 This is so that `FilterCommand` has the required argument of type `Predicate<Person>` to be used in the `updateFilteredPersonList()` method. Since the `Predicate<Person>` object is created by chaining the multiple predicates, no parsing is involved to create this `Predicate`.
 
-### Sort Feature
+### Sort feature
 
-##### Implementation
+##### How the feature is implemented
 
 The sort mechanism is facilitated by JavaFX's `SortedList` within ModelManager, `SortCommand` and `SortCommandParser`. `SortCommandParser` extends the types of command parsers in StaffBookParser, and returns a `SortCommand` to be executed by the LogicManager. This execution also updates the `SortedList` in  Model via ModelManager. Additionally, it implements the following operations:
 
@@ -264,7 +264,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 <img src="images/SortActivityDiagram.png" width="450" />
 
-#### Design considerations:
+#### What designs were considered:
 **Aspect: Determining order of sorting of an attribute:**
 
 * **Current Design:** Get order of sorting from user, prompting for an input in the form of toCompare.
@@ -319,6 +319,53 @@ Below are some explanations for the special considerations in the implementation
 
 `FindCommmandParser` parsing the `Predicate` objects:
 This is to prevent `FindCommand` from taking on more responsibilities (Separation of Concerns).
+
+### Meeting feature
+
+Meeting is feature that allows the user to keep track of any events they may have with the particular contact. It contains the description of the meeting event with the date and time it would occur.
+
+#### How the feature is implemented
+
+Meeting contains two attributes ```MeetingDescription``` and ```MeetingDateTime``` class. ```MeetingDescription```
+is used to handle any valid description of the meeting with only alphanumeric values, while the ```MeetingDateTime```
+is used to handle any valid date time values. Each of this meeting are stored in a list data class ```MeetingList``` that
+contains each of the meetings related to each other stored in an ```ObservableList```. The ``` MeetingManager ``` is
+used to manage any operations that require viewing or sorting of meetings from the ```MeetingList``` class.
+
+#### What designs were considered:
+
+**Aspect: How the meetings are stored :**
+
+* **Alternative 1 (current choice):** Store meetings in an ObservableList.
+    * Pros: Better segregation of the OOP functionalities, and good integration with the UI ListView.
+    * Cons: Larger code complexity.
+
+* **Alternative 2:** Store meetings in a Set.
+    * Pros: Easier implementation.
+    * Cons: There is an efficiency gap as each element has to be placed into a list before it can be shown to the UI ListView.
+
+### Fav/unfav feature
+
+The feature enables us to sets/remove a particular contact using an index as favourite.
+
+#### How the feature is implemented
+
+The Fav/Unfav feature is implemented via the `FavCommand` and `UnfavCommand`, which is supported by the `FavCommandParser` and `UnfavCommandParser` respectively.
+The `FavCommandParser` and `UnfavCommandParser` implements the `Parser` interface.
+
+1. `LogicManager` receives the user input which is parsed by the `StaffConnectParser`.
+2. After splitting the user input into `commandWord` and `arguments` based on the regex pattern of the user input, the `StaffConnectParser` invokes the `FavCommandParser`/`UnfavCommandParser` based on the `commandWord`, calling the method `parse` with `arguments` as the method arguments
+3. `FavCommandParser`/`UnfavCommandParser` takes in the `args` string and parse it into with the static `ParserUtil#parseIndex(args)` function. If the `INDEX` format is invalid, a `ParseException` will be thrown.
+4. `FavCommandParser`/`UnfavCommandParser` then creates the `FavCommand`/`UnfavCommand` and returns it.
+5. The `LogicManager` executes the `FavCommand`/`UnfavCommand`, which creates a `Person` with the `Favourite` attribute set as `true`/`false` respectively and updates the model with this new `Person`.
+
+The following sequence diagram shows how the `fav` command works:
+
+![Fav Command Sequence Diagram](images/FavSequenceDiagram.png)
+
+Similarly, how the `unfav` command works is shown below:
+
+![Unfav Command Sequence Diagram](images/UnfavSequenceDiagram.png)
 
 ### \[Proposed\] Undo/redo feature
 
@@ -401,60 +448,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   itself.
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
-
-### Meeting
-
-Meeting is feature that allows the user to keep track of any events they may have with the particular contact. It contains the description of the meeting event with the date and time it would occur.
-
-#### Implementation
-
-Meeting contains two attributes ```MeetingDescription``` and ```MeetingDateTime``` class. ```MeetingDescription```
-is used to handle any valid description of the meeting with only alphanumeric values, while the ```MeetingDateTime```
-is used to handle any valid date time values. Each of this meeting are stored in a list data class ```MeetingList``` that
-contains each of the meetings related to each other stored in an ```ObservableList```. The ``` MeetingManager ``` is
-used to manage any operations that require viewing or sorting of meetings from the ```MeetingList``` class.
-
-#### Design considerations:
-
-**Aspect: How the meetings are stored :**
-
-* **Alternative 1 (current choice):** Store meetings in an ObservableList.
-    * Pros: Better segregation of the OOP functionalities, and good integration with the UI ListView.
-    * Cons: Larger code complexity.
-
-* **Alternative 2:** Store meetings in a Set.
-    * Pros: Easier implementation.
-    * Cons: There is an efficiency gap as each element has to be placed into a list before it can be shown to the UI ListView.
-
-### Fav/unfav feature
-
-The feature enables us to sets/remove a particular contact using an index as favourite.
-
-#### Implementation
-
-The Fav/Unfav feature is implemented via the `FavCommand` and `UnfavCommand`, which is supported by the `FavCommandParser` and `UnfavCommandParser` respectively.
-The `FavCommandParser` and `UnfavCommandParser` implements the `Parser` interface.
-
-1. `LogicManager` receives the user input which is parsed by the `StaffConnectParser`.
-2. After splitting the user input into `commandWord` and `arguments` based on the regex pattern of the user input, the `StaffConnectParser` invokes the `FavCommandParser`/`UnfavCommandParser` based on the `commandWord`, calling the method `parse` with `arguments` as the method arguments
-3. `FavCommandParser`/`UnfavCommandParser` takes in the `args` string and parse it into with the static `ParserUtil#parseIndex(args)` function. If the `INDEX` format is invalid, a `ParseException` will be thrown.
-4. `FavCommandParser`/`UnfavCommandParser` then creates the `FavCommand`/`UnfavCommand` and returns it. 
-5. The `LogicManager` executes the `FavCommand`/`UnfavCommand`, which creates a `Person` with the `Favourite` attribute set as `true`/`false` respectively and updates the model with this new `Person`.
-
-The following sequence diagram shows how the `fav` command works:
-
-![Fav Command Sequence Diagram](images/FavSequenceDiagram.png)
-
-Similarly, how the `unfav` command works is shown below:
-
-![Unfav Command Sequence Diagram](images/UnfavSequenceDiagram.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
