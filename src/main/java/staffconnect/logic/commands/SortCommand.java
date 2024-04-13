@@ -26,7 +26,7 @@ public class SortCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sort all persons by the attribute specified "
             + "and displays them as a list with index numbers.\n"
-            + "Parameters: [ATTRIBUTE]\n"
+            + "Parameters: "
             + "[" + PREFIX_NAME + "] "
             + "[" + PREFIX_PHONE + "] "
             + "[" + PREFIX_MODULE + "] "

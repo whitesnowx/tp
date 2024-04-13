@@ -195,9 +195,44 @@ This is to make sure at least one field is modified, or the command will not hav
 Call `model.updateFilteredPersonList())` with a `Predicate` that always evaluates to true:
 This is to refresh the list of `Person` in `Model`.
 
+### Find feature
+
+#### How the feature is implemented
+
+The sequence diagram below explains how the find command `find Alex` goes through the `Logic` component.
+
+![Interactions Inside the Logic Component for the `find Alex` Command](images/FindSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FindCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+</div>
+
+1. When user types in `find Alex`, it is passed to `StaffConnectParser`.
+2. `StaffconnectParser` then creates a `FindCommandParser` that will parse `Alex` to create a `FindCommand` which utilizes a predicate judge whether `Alex` is contained in the person's name.
+3. In `FindCommand`, `Model` executes `updateFilteredPersonList()` method using the predicate mentioned above.
+4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`, to show in the `UI` component the number of persons listed with `Alex` in the name.
+
+The below sequence diagram goes into more detail on how the command is parsed in `EditCommandParser`.
+
+![Interactions Inside FindCommandParser for the `parse("f/Computing")` Command](images/FindSequenceDiagram-Parser.png)
+
+1. Within `FindCommandParser`, the command string is first trimmed and checked whether it is empty, then splitted into an string array by space characters.
+2. `FindCommandParser` then constructs a predicate to test whether the names of `Person` contain any one of the strings in the array mentioned above. This predicate is passed as an argument for the constructor of `FindCommand`.
+
+The below activity diagram illustrates the process when a user executes a find command.
+
+<img src="images/FindActivityDiagram.png" width="250" />
+
+#### Why find is implemented this way
+
+The main operation for the find feature is the `updateFilteredPersonList(Predicate<Person> predicate)` method in the `Model` component.
+Below are some explanations for the special considerations in the implementation.
+
+`FindCommmandParser` parsing the `Predicate` objects:
+This is to prevent `FindCommand` from taking on more responsibilities (Separation of Concerns).
+
 ### Filter feature
 
-#### How the filter is implemented
+#### How the feature is implemented
 
 The sequence diagram below shows how the filter command `filter f/Computing` goes through the `Logic` component.
 
@@ -236,9 +271,9 @@ This is to prevent `FilterCommand` from taking on more responsibilities (Separat
 `FilterCommand` having `setPersonPredicate()` method:
 This is so that `FilterCommand` has the required argument of type `Predicate<Person>` to be used in the `updateFilteredPersonList()` method. Since the `Predicate<Person>` object is created by chaining the multiple predicates, no parsing is involved to create this `Predicate`.
 
-### Sort Feature
+### Sort feature
 
-##### Implementation
+##### How the feature is implemented
 
 The sort mechanism is facilitated by JavaFX's `SortedList` within ModelManager, `SortCommand` and `SortCommandParser`. `SortCommandParser` extends the types of command parsers in StaffBookParser, and returns a `SortCommand` to be executed by the LogicManager. This execution also updates the `SortedList` in  Model via ModelManager. Additionally, it implements the following operations:
 
@@ -247,13 +282,13 @@ The sort mechanism is facilitated by JavaFX's `SortedList` within ModelManager, 
 
 Given below is an example usage scenario and how the sort mechanism behaves at each step.
 
-Step 1. The user enters **“sort n/”** to sort the list by their name.
+1. The user enters **“sort n/”** to sort the list by their name.
 
-Step 2. The `LogicManager` takes this command text and calls `StaffBookParser.parseCommand("sort n/")` and identifies the sort command. It then creates a new instance of `SortCommandParser` to `parse(“n/”)` on the attribute.
+2. The `LogicManager` takes this command text and calls `StaffBookParser.parseCommand("sort n/")` and identifies the sort command. It then creates a new instance of `SortCommandParser` to `parse(“n/”)` on the attribute.
 
-Step 3. `SortCommandParser.parse(“n/”)` then constructs a SortCommand with the appropriate attribute comparator, `NameComparator`.
+3. `SortCommandParser.parse(“n/”)` then constructs a SortCommand with the appropriate attribute comparator, `NameComparator`.
 
-Step 4. The `SortCommand` is returned to Logic manager which calls on its `execute()` to return a `CommandResult()`. During its execution, `ModelManager.updateSortedPersonList(NameComparator)` is invoked which updates the model to show the list of persons being sorted by name.
+4. The `SortCommand` is returned to Logic manager which calls on its `execute()` to return a `CommandResult()`. During its execution, `ModelManager.updateSortedPersonList(NameComparator)` is invoked which updates the model to show the list of persons being sorted by name.
 
 The sequence diagram for executing a **"sort n/"** is shown below:
 
@@ -264,12 +299,26 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 <img src="images/SortActivityDiagram.png" width="450" />
 
-#### Design considerations:
-**Aspect: Determining order of sorting of an attribute:**
+#### Why sort is implemented this way
 
-* **Current Design:** Get order of sorting from user, prompting for an input in the form of toCompare.
+The main operation for the sort feature is the `updateSortedPersonList(Comparator<Person> comparator)` method in the `Model` component.
+The following are some explanations for decisions made in the implementation of the sort feature.
+
+Need for multiple `Comparator` objects:
+This is to keep in view for when other commands or enhancements may need the separate attribute predicates. 
+
+Need for `MultiComparator` object:
+This is to map the 1 or more comparator objects and act as a layer of abstraction where `SortCommmand` does need to know how many attributes are used in sorting.
+
+`SortCommmandParser` parsing the `Comparator` objects:
+This is to prevent `SortCommand` from taking on more responsibilities (Separation of Concerns).
+
+#### What designs were considered:
+**Aspect: Determining order of sorting of attribute(s):**
+
+* **Current Design:** Get sorting order of attribute(s) from user input.
     * Pros: More functionality and more suited to the user's needs.
-    * Cons: Harder to implement and guide user to use, may have more leeway for error. User unlikely to use this advancement.
+    * Cons: Harder to implement and guide user to use, may have more leeway for error.
 
 * **Alternative 1:** Use a configured comparator for each attribute in ascending order.
     * Pros: Controlled and more simple for user.
@@ -285,40 +334,52 @@ The following activity diagram summarizes what happens when a user executes a ne
     * Pros: Easy to implement, controlled and less likely to be used incorrectly. This increase ease of use for users.
     * Cons: Limited sorting and lesser functionality.
 
-### Find feature
+### Meeting feature
+
+Meeting is feature that allows the user to keep track of any events they may have with the particular contact. It contains the description of the meeting event with the date and time it would occur.
 
 #### How the feature is implemented
 
-The sequence diagram below explains how the find command `find Alex` goes through the `Logic` component.
+Meeting contains two attributes ```MeetingDescription``` and ```MeetingDateTime``` class. ```MeetingDescription```
+is used to handle any valid description of the meeting with only alphanumeric values, while the ```MeetingDateTime```
+is used to handle any valid date time values. Each of this meeting are stored in a list data class ```MeetingList``` that
+contains each of the meetings related to each other stored in an ```ObservableList```. The ``` MeetingManager ``` is
+used to manage any operations that require viewing or sorting of meetings from the ```MeetingList``` class.
 
-![Interactions Inside the Logic Component for the `find Alex` Command](images/FindSequenceDiagram.png)
+#### What designs were considered:
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FindCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
-</div>
+**Aspect: How the meetings are stored :**
 
-1. When user types in `find Alex`, it is passed to `StaffConnectParser`.
-2. `StaffconnectParser` then creates a `FindCommandParser` that will parse `Alex` to create a `FindCommand` which utilizes a predicate judge whether `Alex` is contained in the person's name. 
-3. In `FindCommand`, `Model` executes `updateFilteredPersonList()` method using the predicate mentioned above.
-4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`, to show in the `UI` component the number of persons listed with `Alex` in the name.
+* **Current Design:** Store meetings in an ObservableList.
+    * Pros: Better segregation of the OOP functionalities, and good integration with the UI ListView.
+    * Cons: Larger code complexity.
 
-The below sequence diagram goes into more detail on how the command is parsed in `EditCommandParser`.
+* **Alternative 1:** Store meetings in a Set.
+    * Pros: Easier implementation.
+    * Cons: There is an efficiency gap as each element has to be placed into a list before it can be shown to the UI ListView.
 
-![Interactions Inside FindCommandParser for the `parse("f/Computing")` Command](images/FindSequenceDiagram-Parser.png)
+### Fav/unfav feature
 
-1. Within `FindCommandParser`, the command string is first trimmed and checked whether it is empty, then splitted into an string array by space characters.
-2. `FindCommandParser` then constructs a predicate to test whether the names of `Person` contain any one of the strings in the array mentioned above. This predicate is passed as an argument for the constructor of `FindCommand`.
+The feature enables us to sets/remove a particular contact using an index as favourite.
 
-The below activity diagram illustrates the process when a user executes a find command.
+#### How the feature is implemented
 
-<img src="images/FindActivityDiagram.png" width="250" />
+The Fav/Unfav feature is implemented via the `FavCommand` and `UnfavCommand`, which is supported by the `FavCommandParser` and `UnfavCommandParser` respectively.
+The `FavCommandParser` and `UnfavCommandParser` implements the `Parser` interface.
 
-#### Why find is implemented this way
+1. `LogicManager` receives the user input which is parsed by the `StaffConnectParser`.
+2. After splitting the user input into `commandWord` and `arguments` based on the regex pattern of the user input, the `StaffConnectParser` invokes the `FavCommandParser`/`UnfavCommandParser` based on the `commandWord`, calling the method `parse` with `arguments` as the method arguments
+3. `FavCommandParser`/`UnfavCommandParser` takes in the `args` string and parse it into with the static `ParserUtil#parseIndex(args)` function. If the `INDEX` format is invalid, a `ParseException` will be thrown.
+4. `FavCommandParser`/`UnfavCommandParser` then creates the `FavCommand`/`UnfavCommand` and returns it.
+5. The `LogicManager` executes the `FavCommand`/`UnfavCommand`, which creates a `Person` with the `Favourite` attribute set as `true`/`false` respectively and updates the model with this new `Person`.
 
-The main operation for the find feature is the `updateFilteredPersonList(Predicate<Person> predicate)` method in the `Model` component.
-Below are some explanations for the special considerations in the implementation.
+The following sequence diagram shows how the `fav` command works:
 
-`FindCommmandParser` parsing the `Predicate` objects:
-This is to prevent `FindCommand` from taking on more responsibilities (Separation of Concerns).
+![Fav Command Sequence Diagram](images/FavSequenceDiagram.png)
+
+Similarly, how the `unfav` command works is shown below:
+
+![Unfav Command Sequence Diagram](images/UnfavSequenceDiagram.png)
 
 ### \[Proposed\] Undo/redo feature
 
@@ -401,60 +462,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   itself.
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
-
-### Meeting
-
-Meeting is feature that allows the user to keep track of any events they may have with the particular contact. It contains the description of the meeting event with the date and time it would occur.
-
-#### Implementation
-
-Meeting contains two attributes ```MeetingDescription``` and ```MeetingDateTime``` class. ```MeetingDescription```
-is used to handle any valid description of the meeting with only alphanumeric values, while the ```MeetingDateTime```
-is used to handle any valid date time values. Each of this meeting are stored in a list data class ```MeetingList``` that
-contains each of the meetings related to each other stored in an ```ObservableList```. The ``` MeetingManager ``` is
-used to manage any operations that require viewing or sorting of meetings from the ```MeetingList``` class.
-
-#### Design considerations:
-
-**Aspect: How the meetings are stored :**
-
-* **Alternative 1 (current choice):** Store meetings in an ObservableList.
-    * Pros: Better segregation of the OOP functionalities, and good integration with the UI ListView.
-    * Cons: Larger code complexity.
-
-* **Alternative 2:** Store meetings in a Set.
-    * Pros: Easier implementation.
-    * Cons: There is an efficiency gap as each element has to be placed into a list before it can be shown to the UI ListView.
-
-### Fav/unfav feature
-
-The feature enables us to sets/remove a particular contact using an index as favourite.
-
-#### Implementation
-
-The Fav/Unfav feature is implemented via the `FavCommand` and `UnfavCommand`, which is supported by the `FavCommandParser` and `UnfavCommandParser` respectively.
-The `FavCommandParser` and `UnfavCommandParser` implements the `Parser` interface.
-
-1. `LogicManager` receives the user input which is parsed by the `StaffConnectParser`.
-2. After splitting the user input into `commandWord` and `arguments` based on the regex pattern of the user input, the `StaffConnectParser` invokes the `FavCommandParser`/`UnfavCommandParser` based on the `commandWord`, calling the method `parse` with `arguments` as the method arguments
-3. `FavCommandParser`/`UnfavCommandParser` takes in the `args` string and parse it into with the static `ParserUtil#parseIndex(args)` function. If the `INDEX` format is invalid, a `ParseException` will be thrown.
-4. `FavCommandParser`/`UnfavCommandParser` then creates the `FavCommand`/`UnfavCommand` and returns it. 
-5. The `LogicManager` executes the `FavCommand`/`UnfavCommand`, which creates a `Person` with the `Favourite` attribute set as `true`/`false` respectively and updates the model with this new `Person`.
-
-The following sequence diagram shows how the `fav` command works:
-
-![Fav Command Sequence Diagram](images/FavSequenceDiagram.png)
-
-Similarly, how the `unfav` command works is shown below:
-
-![Unfav Command Sequence Diagram](images/UnfavSequenceDiagram.png)
 
 --------------------------------------------------------------------------------------------------------------------
 

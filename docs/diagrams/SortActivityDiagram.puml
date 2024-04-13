@@ -6,18 +6,22 @@ start
 :User enters a sort command;
 
 
-if() then ([attributes are not sortable])
-    :get person from list;
-        while (have person to compare)
-            while(attribute value with the next person in the list are equal or no more attributes)
-                :use next attribute to check;
-            endwhile
-            if() then ([person smaller])
-                :shift front;
-            else([person bigger])
-                :shift back;
+if() then ([attributes are sortable])
+    if () then ([list is not empty])
+        repeat
+            :get next person in list
+            and adds to sorted list;
+            :compare with persons in sorted list;
+            if () then ([person smaller])
+                :shift up;
+            else if () then ([person same])
+            else (                             [person bigger])
+                :shift down;
             endif
-        endwhile
+        repeat while () is ([have next person to sort]) not ([no more person to sort])
+
+    else ([list is empty])
+    endif
     :Shows sorted person list;
 else([any attribute is not sortable])
     :displays Sort Usage message;
