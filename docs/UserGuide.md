@@ -43,10 +43,19 @@ StaffConnect (SC) is a **desktop app for managing contacts of Professors and Tut
 ## Navigability
 
 ### Overall UI layout
-<br>![Overall Layout](images/OverallLayout.png)
+<br>![UI General](images/UiAnnotationsGeneral.png)
 
-#### UI Annotations
-<br>![UI General](images/UiAnnotation.png)
+#### [UI] Persons Info
+<br>![UI General](images/UiAnnotationsAttributes.png)
+*Note that the availability will not be displayed in sequential order.
+
+#### [UI] Meeting List
+<br>![UI General](images/UiAnnotationsMeetingList.png)
+
+#### [UI] Scrollbars and Menu
+<br>![UI General](images/UiAnnotationsScrollbarsAndMenu.png)
+*Note that Persons List Scrollbar will open appear when the number of Persons in the list exceed the amount to be displayed by the view.
+
 
 ### Mouse and Keyboard controls
 
