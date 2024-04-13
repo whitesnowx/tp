@@ -429,7 +429,7 @@ Selects the person identified by their current displayed index number to display
 
 Format: `select INDEX`
 
-* Select the person at the specified **INDEX** to display its attribute and meeting list.
+* Select the person at the specified **INDEX** to display its attributes and meeting list.
 * The index refers to the index number shown in the current displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
