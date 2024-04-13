@@ -133,6 +133,10 @@ Adds a person to the contacts.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL m/MODULE f/FACULTY v/VENUE [t/TAG]…​ [a/AVAILABILITY]…​`
 
+* `NAME` has to be unique among contacts.
+* `PHONE_NUMBER`, `EMAIL`, `MODULE`, `FACULTY`, `VENUE` do not need to be unique and can be duplicated among contacts.
+* `TAG` and `AVAILABILITY` has to be unique within a single contact but can be duplicated among contacts.
+
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags and availabilities (including 0)
 </div>
@@ -169,11 +173,12 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [m/MODULE] [f/FACULTY] [v/VENUE
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-  specifying any tags after it.
+* You can remove all the person’s tags by typing `t/` without specifying any tags after it.
 * When editing availabilities, the existing availabilities of the person will be removed i.e adding of availabilities is not cumulative.
-* You can remove all the person’s availabilities by typing `a/` without
-  specifying any availabilities after it.
+* You can remove all the person’s availabilities by typing `a/` without specifying any availabilities after it.
+* `NAME` has to be unique among contacts.
+* `PHONE_NUMBER`, `EMAIL`, `MODULE`, `FACULTY`, `VENUE` do not need to be unique and can be duplicated among contacts.
+* `TAG` and `AVAILABILITY` has to be unique within a single contact but can be duplicated among contacts.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
@@ -282,6 +287,7 @@ Format: `meeting-add INDEX d/DESCRIPTION s/DATETIME`
         2. `H:mm`
         3. `HHmm`
 * Duplicate meetings with the same `DESCRIPTION` and `DATETIME` in the same person is not allowed.
+* Meetings with the same `DESCRIPTION` and `DATETIME` does not need to be unique among contacts.
 
 Examples:
 * `meeting-add 1 d/Meet for finals preparation s/12/04/2024 18:00` adds a meeting to the first person with the description of `Meet for finals preparation` and the date and time of `12/04/2024 18:00`
