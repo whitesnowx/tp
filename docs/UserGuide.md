@@ -135,7 +135,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL m/MODULE f/FACULTY v/VENUE [t/TAG]…
 
 * `NAME` is case-sensitive and has to be unique among persons in staff book.
 * `PHONE_NUMBER`, `EMAIL`, `MODULE`, `FACULTY`, `VENUE` do not need to be unique and can be duplicated among persons to staff book.
-* `TAG` and `AVAILABILITY` have to be unique within a single person but can be duplicated among persons in staff book.
+* `TAG` and `AVAILABILITY` have to be unique for a person but can be duplicated among persons in staff book.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags and availabilities (including 0)
@@ -178,7 +178,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [m/MODULE] [f/FACULTY] [v/VENUE
 * You can remove all the person’s availabilities by typing `a/` without specifying any availabilities after it.
 * `NAME` is case-sensitive and has to be unique among persons in staff book.
 * `PHONE_NUMBER`, `EMAIL`, `MODULE`, `FACULTY`, `VENUE` do not need to be unique and can be duplicated among persons in staff book.
-* `TAG` and `AVAILABILITY` have to be unique within a single person but can be duplicated among persons in staff book.
+* `TAG` and `AVAILABILITY` have to be unique for a person but can be duplicated among persons in staff book.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
@@ -429,8 +429,8 @@ Selects the person identified by their current displayed index number to display
 
 Format: `select INDEX`
 
-* Select the person and loads its staff book with meeting details for display at the specified **INDEX**
-* The index refers to the index number shown in the displayed person list.
+* Select the person at the specified **INDEX** to display its attribute and meeting list.
+* The index refers to the index number shown in the current displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
