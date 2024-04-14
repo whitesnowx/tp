@@ -415,9 +415,8 @@ Examples:
 * If there is a meeting `Future Meeting` that will happen in `31/12/2999 12:00`, when the user types in `refresh`, it will not be deleted.
   <br>**Before:**<br>
   ![Before refreshing](images/BeforeRefreshCommand.png)
-  <br>
-  ![After refreshing](images/AfterRefreshCommand.png)
   <br>**After:**<br>
+  ![After refreshing](images/AfterRefreshCommand.png)
 
 **Known limitations:**
 Refresh is only used when the user decides to remove clutter in the staff book, and wants to remove outdated meetings. 
@@ -485,9 +484,10 @@ Therefore, edit the data file only if you are confident that you can update it c
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **When adding/editing phone number with a descriptor**, If you try to add a number with a descriptor such as `98731094 (home)`, the application rejects this input and advise the user to only provide phone numbers with numerical values only. The phone number is not intended to store phone number descriptor but users can consider using tags such as t/homePhone as a workaround.
-3. **When adding/editing name containing special characters**, If you try to add a name such as `Jason s/o William`, the application rejects this input and advise the user to only provide name with alphanumeric values only. The name is not intended to store special characters but users can consider using `so` or `son of` as a workaround.
-4. **When adding/editing venues containing space with an attribute prefix**, If you try to add a venue such as `Room 12 t/r`, the application will add a person with a venue `Room 12` and a tag `r` instead of the intended venue `Room 12 t/r`. The venue is not intended to store venues that contains a space followed by an attribute prefix but users can consider omitting the space or replace with a hyphen such as `Room 12t/r` or `Room 12-t/r` as a workaround.
-5. **When generating the default file and exiting via the `Exit` button**, If you try to generate the default JSON file `[JAR file location]/data/staffconnect.json` by running the JAR file, without manipulating any data and exiting via the `Exit` button, the JSON file would not be generated. You may consider using the `exit` command via the command line interface to generate the default JSON file instead.
+3. **When adding/editing name containing special characters**, If you try to add a name such as `Jason s/o William`, the application rejects this input and advise the user to only provide name with alphanumeric values only. The name is not intended to store special characters but users can consider using `so` or `son of` as a workaround. If a person's name includes special characters (characters not included in modern English) like arabic characters (such as أ, ب, ت, etc.), it should be latinized first.
+4. **When adding/editing name that already exists in the staff book**, if you try to do so, an error message will be prompted, as two persons are considered the same person as long as they have the same name. It is inplausible to has two persons with the same name but other different attributes.
+5. **When adding/editing venues containing space with an attribute prefix**, If you try to add a venue such as `Room 12 t/r`, the application will add a person with a venue `Room 12` and a tag `r` instead of the intended venue `Room 12 t/r`. The venue is not intended to store venues that contains a space followed by an attribute prefix but users can consider omitting the space or replace with a hyphen such as `Room 12t/r` or `Room 12-t/r` as a workaround.
+6. **When generating the default file and exiting via the `Exit` button**, If you try to generate the default JSON file `[JAR file location]/data/staffconnect.json` by running the JAR file, without manipulating any data and exiting via the `Exit` button, the JSON file would not be generated. You may consider using the `exit` command via the command line interface to generate the default JSON file instead.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Attribute summary
@@ -498,14 +498,14 @@ Name[^1] | n/ | Case-sensitive.<br>Only alphanumeric characters allowed. Spaces 
 Phone Number[^1] | p/ | Numeric digits only, no special characters, at least 3 digits long. | `123`, `88888888, 12345678`
 Email[^1] | e/ | Valid email of the format `local-part@domain`.<br>1. `local-part` should only contain alphanumeric characters and the special characters `+_.-`<br>2. `local-part` may not start or end with any special characters.<br>3. `local-part` must be followed by exactly one `@` and then a `domain` name.<br>4. `domain` must be made up of at least 2 `domain` labels separated by periods.<br>5. Each `domain` name must be at least 2 alphanumeric characters long.<br>6. Each `domain` name must start and end with alphanumeric characters.<br>7. Each `domain` name can only consist of alphanumeric characters, separated by hyphens, if any. | `e@123.com`, `hello@h-h.com`, `one+two@h-h.hh`, `hello@e-h.e-hh`
 Module[^1] | m/ | Case-insensitive.<br>Valid module consisting of 2-4 letters, followed by exactly 4 numeric digits, with a suffix that is at most 2 characters long. | `gess1025`, `hsi1000`, `cs2103t`
-Faculty[^1] | f/ | Case-insensitive.<br>Restricted set of values (refer to [valid faculty values](#valid-faculty-values) below). | `soc`, `biz`, `School of Business`
-Venue[^1] | v/ | Any characters allowed, cannot be empty. | `belobog avenue`, `COM4-02-33`, `LT21`, `Kent Ridge Vale, Tulip Street, #12-34`
+Faculty[^1] | f/ | Case-insensitive.<br>Restricted set of values (refer to [valid faculty values](#valid-faculty-values) below).<br>A valid faculty name and its variations (other names) all refer to the same faculty. | `soc`, `biz`, `School of Business`
+Venue[^1] | v/ | Any characters allowed.<br>Cannot be empty. | `belobog avenue`, `COM4-02-33`, `LT21`, `Kent Ridge Vale, Tulip Street, #12-34`
 Tag | t/ | Case-sensitive.<br>Only alphanumeric characters allowed.<br>Person can have any number of tags. | `tutor`, `professor`, `BestProf`, `Number1TA`
 Availability | a/ | Valid format of `day start-time end-time`.<br>Person can have any number of availabilities.<br>1. `day` should be a valid day of week: `Monday`, `mon`, `Tuesday`, `tue`, `tues`, `Wednesday`, `wednes`, `wed`, `Thursday`, `thurs`, `thur`, `thu`, `Friday`, `fri`, `Saturday`, `satur`, `sat`, `Sunday`, `sun`.<br>2. `day` is case-insensitive.<br>3. `start-time` and `end-time` should be in the time format of `HH:mm` where `HH` is in 24 hours (00-23) and `mm` are valid minutes (00-59). | `mon 13:00 14:00`, `monday 13:00 14:00`, `tues 14:00 21:00`
 Meeting Description | d/ | Case-sensitive.<br>Only alphanumeric characters allowed. Spaces are only allowed between alphanumeric characters. | `Meet for finals`, `Midterm revision`
 Meeting Start Time | s/ | Valid date and time format.<br>1. Valid date formats: `yyyy-MM-dd`, `yyyy-M-d`, `dd-MM-yyyy`, `yyyy-MM-d`, `d-MM-yyyy`, `d-M-yyyy`, `dd-M-yyyy`, `d/MM/yyyy`, `d-M-yyyy`, `dd-M-yyyy`, `dd/MM/yyyy`, `yyyy/MM/dd`, `yyyy/MM/d`, `yyyy/M/dd`,  `yyyy/M/d`<br>where `yyyy` is a 4-digit year (0000-9999), `M` is a single digit month (1-9), `MM` is a valid month (01-12), `d` is a single digit day (1-9), `dd` is a valid day (01-31)<br>2. Valid time formats: `HH:mm`, `H:mm`, `HHmm`<br>where `H` is a single digit hour (1-9), `HH` is a valid 24-hour (00-23), `mm` are valid minutes (00-59). | `2002-11-02 19:00`, `1-12-2022 9:00`, `2024/1/1 0000`
 
-[^1]: Mandatory when adding a person into the staff book, as these are important information for students to know when/where to consult their professors/TAs.
+[^1]: These are mandatory attributes when adding a person into the staff book, as these are important information for students to know when/where to consult their professors/TAs.
 
 ### Valid `Faculty` values
 
@@ -516,9 +516,8 @@ Business School | Business, Biz School, Biz
 School of Computing | Computing, SoC
 School of Continuing and Lifelong Education | Continuing and Lifelong Education, SCALE
 Faculty of Dentistry | Dentistry
-School of Design and Environment | Design and Environment, SDE
+College of Design and Engineering | Design and Engineering, CDE
 Duke-NUS Medical School | Duke-NUS
-Faculty of Engineering, Engineering | FoE
 Integrative Sciences and Engineering | ISEP
 Faculty of Law | Law
 Yong Loo Lin School of Medicine | Medicine
@@ -536,7 +535,6 @@ Yale-NUS College | Yale-NUS
 Action | Format, Examples
 --------|------------------
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL m/MODULE f/FACULTY v/VENUE [t/TAG]…​ [a/AVAILABILITY]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com m/CS2103 f/Computing v/123, Clementi Rd, 1234665 t/friend t/colleague a/monday 14:00 16:00`
-**Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [m/MODULE] [f/FACULTY] [v/VENUE] [t/TAG]…​ [a/AVAILABILITY]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Filter** | `filter [m/MODULE] [f/FACULTY] [t/TAG]… [a/AVAILABILITY]…`<br> e.g., `filter m/CS2100 t/friends`
@@ -546,7 +544,9 @@ Action | Format, Examples
 **Delete Meeting** | `meeting-delete INDEX i/MEETING-INDEX`<br> e.g., `meeting-delete 1 i/1 `
 **Set as Favourite** | `fav INDEX`<br> e.g., `fav 3`
 **Remove as Favourite** | `unfav INDEX`<br> e.g., `unfav 3`
-**Refresh** | `refresh` <br> e.g., `refresh`
 **Select** | `select INDEX`<br> e.g., `select 3`
+**Clear** | `clear`
+**Refresh** | `refresh`
 **List** | `list`
 **Help** | `help`
+**Exit** | `exit`
