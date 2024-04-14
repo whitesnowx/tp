@@ -3,7 +3,7 @@
 skinparam ArrowFontStyle plain
 skinparam ParticipantPadding 20
 
-mainframe **sd** create unfavourite person
+mainframe **sd** create an unfavourite person
 
 box Logic LOGIC_COLOR_T1
 participant "u:UnfavCommand" as UnfavCommand LOGIC_COLOR

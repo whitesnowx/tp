@@ -6,7 +6,6 @@ box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":StaffConnectParser" as StaffConnectParser LOGIC_COLOR
 participant ":UnfavCommandParser" as UnfavCommandParser LOGIC_COLOR
-participant "<<class>>\nParserUtil" as ParserUtil LOGIC_COLOR
 participant "u:UnfavCommand" as UnfavCommand LOGIC_COLOR
 participant "r:CommandResult" as CommandResult LOGIC_COLOR
 end box
@@ -31,10 +30,6 @@ deactivate UnfavCommandParser
 StaffConnectParser -> UnfavCommandParser : parse("1")
 activate UnfavCommandParser
 
-UnfavCommandParser -> ParserUtil : parseIndex("1")
-activate ParserUtil
-return
-
 create UnfavCommand
 UnfavCommandParser -> UnfavCommand++
 return
@@ -50,7 +45,7 @@ UnfavCommand -> Model : getSortedFilteredPersonList()
 activate Model
 return
 
-ref over UnfavCommand : create unfavourtie person
+ref over UnfavCommand : create an unfavourite person
 
 UnfavCommand -> Model : setPerson(personToUnfav, unfavPerson)
 activate Model
