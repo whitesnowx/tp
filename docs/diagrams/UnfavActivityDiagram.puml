@@ -1,0 +1,23 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User executes unfav command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([index is valid])
+    if () then ([Person has favourite as true])
+        :Construct a new Person object with favourite as false;
+        :Replace the original Person with the new one;
+        :Refresh the list of Person;
+    else ([else])
+        :Throws CommandException that Person has favourite as false;
+    endif
+else ([else])
+    :Throw CommandException that index is is invalid;
+endif
+stop
+@enduml
