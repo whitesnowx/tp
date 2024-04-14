@@ -364,12 +364,6 @@ The feature enables us to sets/remove a particular contact using an index as fav
 The Fav/Unfav feature is implemented via the `FavCommand` and `UnfavCommand`, which is supported by the `FavCommandParser` and `UnfavCommandParser` respectively.
 The `FavCommandParser` and `UnfavCommandParser` implements the `Parser` interface.
 
-1. `LogicManager` receives the user input which is parsed by the `StaffConnectParser`.
-2. After splitting the user input into `commandWord` and `arguments` based on the regex pattern of the user input, the `StaffConnectParser` invokes the `FavCommandParser`/`UnfavCommandParser` based on the `commandWord`, calling the method `parse` with `arguments` as the method arguments
-3. `FavCommandParser`/`UnfavCommandParser` takes in the `args` string and parse it into with the static `ParserUtil#parseIndex(args)` function. If the `INDEX` format is invalid, a `ParseException` will be thrown.
-4. `FavCommandParser`/`UnfavCommandParser` then creates the `FavCommand`/`UnfavCommand` and returns it.
-5. The `LogicManager` executes the `FavCommand`/`UnfavCommand`, which creates a `Person` with the `Favourite` attribute set as `true`/`false` respectively and updates the model with this new `Person`.
-
 The following sequence diagram shows how the `fav 1` command works:
 
 ![Fav Command Sequence Diagram](images/FavSequenceDiagram.png)
