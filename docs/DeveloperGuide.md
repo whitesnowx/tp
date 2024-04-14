@@ -376,10 +376,12 @@ The `FavCommandParser` and `UnfavCommandParser` implements the `Parser` interfac
 The following sequence diagram shows how the `fav` command works:
 
 ![Fav Command Sequence Diagram](images/FavSequenceDiagram.png)
+![Fav Ref Sequence Diagram](images/FavRefSequenceDiagram.png)
 
 Similarly, how the `unfav` command works is shown below:
 
 ![Unfav Command Sequence Diagram](images/UnfavSequenceDiagram.png)
+![Unfav Ref Sequence Diagram](images/UnfavRefSequenceDiagram.png)
 
 ### \[Proposed\] Undo/redo feature
 
