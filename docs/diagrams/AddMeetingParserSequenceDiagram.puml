@@ -28,7 +28,7 @@ activate AddMeetingCommandParser
 AddMeetingCommandParser --> StaffConnectParser
 deactivate AddMeetingCommandParser
 
-StaffConnectParser -> AddMeetingCommandParser : parse(args)
+StaffConnectParser -> AddMeetingCommandParser : parse(arguments)
 activate AddMeetingCommandParser
 
 

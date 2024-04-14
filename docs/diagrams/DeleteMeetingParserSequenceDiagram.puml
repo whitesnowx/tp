@@ -11,10 +11,10 @@ participant "d:DeleteMeetingCommand" as AddMeetingCommand LOGIC_COLOR
 end box
 
 
-[-> LogicManager : execute(userInput)
+[-> LogicManager : execute("meeting-delete 1 i/1")
 activate LogicManager
 
-LogicManager -> StaffConnectParser : parseCommand(userInput)
+LogicManager -> StaffConnectParser : parseCommand("meeting-delete 1 i/1")
 activate StaffConnectParser
 
 create deleteMeetingCommandParser
@@ -24,7 +24,7 @@ activate deleteMeetingCommandParser
 deleteMeetingCommandParser --> StaffConnectParser
 deactivate deleteMeetingCommandParser
 
-StaffConnectParser -> deleteMeetingCommandParser : parse(args)
+StaffConnectParser -> deleteMeetingCommandParser : parse("1 i/1")
 activate deleteMeetingCommandParser
 
 

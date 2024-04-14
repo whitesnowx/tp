@@ -349,17 +349,21 @@ used to manage any operations that require viewing or sorting of meetings from t
 
 The operations for adding and deleting meeting are handled by `AddMeetingCommand` and `DeleteMeetingCommand`, which are supported by `AddMeetingCommandParser` and `DeleteMeetingCommandParser` respectively.
 
-1. `Logic Manager` receives the user input which is parsed by `StaffConnectParser`
-2. After splitting the user input into `commandWord` and `arguments` based on the regex pattern of the user input, the `StaffConnectParser` invokes the `AddMeetingCommandParser`or`DeleteMeetingCommandParser` based on the `commandWord`, calling the method `parse` with `arguments` as the method arguments.
-3. `AddMeetingCommandParser` or `DeleteMeetingCommandParser` then parses the respective arguments with its methods from `ParserUtil` to create `AddMeetingCommand` or `DeleteMeetingCommand` with the parsed values.
-4. `Logic Manager` executes the `AddMeetingCommand` or `DeleteMeetingCommand`, which handles adding/removing from the `Person` and updates the model with the new information.
+1. The user enters `meeting-add 2 d/Meet for practical exam s/20/04/2024 15:00` to add a meeting or `meeting-delete 1 i/1` to delete a meeting.
+2. `Logic Manager` receives the user input which is parsed by `StaffConnectParser`.
+3. After splitting the user input into `commandWord` and `arguments` based on the regex pattern of the user input, the `StaffConnectParser` invokes the `AddMeetingCommandParser`or`DeleteMeetingCommandParser` based on the `commandWord`. Calling the method `parse` with `arguments` as the method arguments, and getting supported by parsing methods from `ParsedUtil`. 
+4. `AddMeetingCommand` or `DeleteMeetingCommand` is created with the parsed values.
+5. `Logic Manager` executes the `AddMeetingCommand` or `DeleteMeetingCommand`, which handles adding/removing meeting from the `Person` respectively and updates the model with the new information.
 
-Below is the sequence diagram for parsing inputs with  `AddMeetingCommandParser`:
+Below is the sequence diagram for parsing inputs with  `AddMeetingCommandParser` executing `meeting-add 2 d/Meet for practical exam s/20/04/2024 15:00`:
+<br>**Note:**<br> 
+`userInput` represents the value of <br>`meeting-add 2 d/Meet for practical exam s/20/04/2024 15:00`.
+<br> While `arguments` represents the value `2 d/Meet for practical exam s/20/04/2024 15:00`.
 <br>![AddMeetingCommandParser Sequence Diagram](images/AddMeetingParserSequenceDiagram.png)
-<br> Similarly the sequence diagram for parsing inputs with `DeleteMeetingCommandParser`:
+<br> Similarly the sequence diagram for parsing inputs with `DeleteMeetingCommandParser` executing `meeting-delete 1 i/1`:
 <br>![DeleteMeetingCommandParser Sequence Diagram](images/DeleteMeetingParserSequenceDiagram.png)
 <br><br>
-After parsing the commands are executed by the logic manager as show below. (Execute in the diagrams below comes form the logic manager)
+After parsing, the commands are executed by the logic manager as show below. (Execute in the diagrams below comes form the logic manager)
 <br> Below is the sequence diagram for adding meeting with  `AddMeetingCommand`:
 <br>![AddMeetingCommand Sequence Diagram](images/AddMeetingSequenceDiagram.png)
 <br> Similarly the sequence diagram for deleting meeting with `DeleteMeetingCommand`:
@@ -664,20 +668,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
 
-* 3a. the given details for meeting is invalid.
+* 3a. The given details for meeting is invalid.
     * 3a1. StaffConnect shows an error message.
       Use case resumes at step 1.
 
 
 **Use case: Delete a meeting**
 
-**Precondition:** The intended meeting to delete exist and has been added before.
+**Precondition:** The intended meeting to delete exists and has been added before.
 
 **MSS**
 
 1. StaffConnect shows a list of persons
-2. User requests to delete a meeting to the specific person in the list
-3. StaffConnect delete the specified meeting
+2. User requests to delete a meeting of a specific person in the list
+3. StaffConnect deletes the specified meeting
 
    Use case ends.
 
@@ -696,8 +700,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The given index for meeting is invalid.
     * 2a1. StaffConnect shows an error message.
       Use case resumes at step 1.
-
-    
 
 
 ### Non-Functional Requirements
