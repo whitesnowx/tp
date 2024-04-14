@@ -58,7 +58,7 @@ public class PersonHasFacultyPredicateTest {
 
     @Test
     public void toStringMethod() {
-        Faculty faculty = new Faculty("Engineering");
+        Faculty faculty = new Faculty("CDE");
         PersonHasFacultyPredicate predicate = new PersonHasFacultyPredicate(faculty);
 
         String expected = PersonHasFacultyPredicate.class.getCanonicalName() + "{faculty=" + faculty + "}";
