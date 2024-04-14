@@ -7,11 +7,6 @@ participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":StaffConnectParser" as StaffConnectParser LOGIC_COLOR
 participant ":FavCommandParser" as FavCommandParser LOGIC_COLOR
 participant "f:FavCommand" as FavCommand LOGIC_COLOR
-participant "r:CommandResult" as CommandResult LOGIC_COLOR
-end box
-
-box Model MODEL_COLOR_T1
-participant ":ModelManager" as Model MODEL_COLOR
 end box
 
 [-> LogicManager : execute("fav 1")
@@ -37,29 +32,5 @@ return
 return f
 destroy FavCommandParser
 return f
-
-LogicManager -> FavCommand : execute(model)
-activate FavCommand
-
-FavCommand -> Model : getSortedFilteredPersonList()
-activate Model
-return
-
-ref over FavCommand : create a favourite person
-
-FavCommand -> Model : setPerson(personToFav, favPerson)
-activate Model
-return
-
-FavCommand -> Model : updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS)
-activate Model
-return
-
-create CommandResult
-FavCommand -> CommandResult++
-return
-
-return r
-return
 
 @enduml
