@@ -182,7 +182,7 @@ The below sequence diagram goes into more detail on how the command is parsed in
 
 The below activity diagram illustrates the process when a user executes a edit command.
 
-<img src="images/EditActivityDiagram.png" width="250" />
+<img src="images/EditActivityDiagram.png" width="740" />
 
 #### Why edit is implemented this way
 
@@ -220,7 +220,7 @@ The below sequence diagram goes into more detail on how the command is parsed in
 
 The below activity diagram illustrates the process when a user executes a find command.
 
-<img src="images/FindActivityDiagram.png" width="250" />
+<img src="images/FindActivityDiagram.png" width="450" />
 
 #### Why find is implemented this way
 
@@ -297,7 +297,7 @@ The sequence diagram for executing a **"sort n/"** is shown below:
 
 The following activity diagram summarizes what happens when a user executes a new sort command:
 
-<img src="images/SortActivityDiagram.png" width="450" />
+<img src="images/SortActivityDiagram.png" width="600" />
 
 #### Why sort is implemented this way
 
