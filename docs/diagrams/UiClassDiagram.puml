@@ -36,7 +36,7 @@ MainWindow *-down-> "1" ResultDisplay
 MainWindow *-down-> "1" PersonListPanel
 MainWindow *-down-> "1" StatusBarFooter
 MainWindow --> "0..1" HelpWindow
-MainWindow *-down-> "0..1" PersonCard
+MainWindow *-down-> "1" PersonCard
 
 PersonListPanel -down-> "*" NameCard
 

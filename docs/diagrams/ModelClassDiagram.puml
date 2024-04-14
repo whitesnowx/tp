@@ -46,7 +46,7 @@ UserPrefs .up.|> ReadOnlyUserPrefs
 
 MeetingManager -right-> "1" MeetingBook
 MeetingBook .up.|> ReadOnlyMeetingBook
-MeetingBook -down-> UniqueMeetingList
+MeetingBook -down->"1" UniqueMeetingList
 
 
 
@@ -73,8 +73,9 @@ Module -[hidden]right-> Faculty
 Faculty -[hidden]right-> Venue
 Venue -[hidden]right-> Tag
 Tag -[hidden]right-> Availability
-Availability -[hidden]right> MeetingManager
-UniqueMeetingList -[hidden]left> Meeting
+
+Person -[hidden]right> MeetingManager
+
 
 ModelManager --> "~* filtered" Person
 @enduml
