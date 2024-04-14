@@ -357,7 +357,13 @@ used to manage any operations that require viewing or sorting of meetings from t
 
 ### Fav/unfav feature
 
-The feature enables us to sets/remove a particular contact using an index as favourite.
+This feature enables us to sets/remove a particular contact using an index as favourite.
+
+<div markdown="span" class="alert alert-info">
+
+:information_source: **Note:** Upon creating a new `person` using the `add` command, the `favourite` attribute of the `person` is set to `false` by default.
+
+</div>
 
 #### How the feature is implemented
 
