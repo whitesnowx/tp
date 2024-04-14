@@ -288,6 +288,7 @@ Format: `meeting-add INDEX d/DESCRIPTION s/DATETIME`
         3. `HHmm`
 * Duplicate meetings with the same `DESCRIPTION` and `DATETIME` in the same person is not allowed.
 * Meetings with the same `DESCRIPTION` and `DATETIME` does not need to be unique among persons in staff book.
+* StaffConnect does not limit the creativity of users, hence the user is able to add any meeting at any point of time and even meetings of different topics at the same time.
 
 Examples:
 * `meeting-add 1 d/Meet for finals preparation s/12/04/2024 18:00` adds a meeting to the first person with the description of `Meet for finals preparation` and the date and time of `12/04/2024 18:00`
@@ -313,10 +314,12 @@ Format: `meeting-delete INDEX i/MEETING-INDEX `
 * The meeting-index refers to the index number shown in the displayed meeting list.
 * The meeting-index **must be a positive integer** 1, 2, 3,…​ and tally within range index of the displayed meeting list.
 * The meeting from the person must exist before it can be deleted otherwise an error will be displayed.
+
 Examples:
-* The following commands assumes that meetings have been added prior to the command. Otherwise, an error will be thrown. <br> **(Refer to the section above on how to add a meeting)**
-  * `list` followed by `meeting-delete 1 i/1` deletes the 1st meeting from the 1st person in the list.
-  * `find Bernice Yu` followed by `meeting-delete 1 i/2` deletes the 1st meeting form the 1st person in the results of the `find` command.
+<br>The following commands assumes that meetings have been added prior to the command. Otherwise, an error will be thrown. <br> **(Refer to the section above on how to add a meeting)**
+* `list` followed by `meeting-delete 1 i/1` deletes the 1st meeting from the 1st person in the list.
+* `meeting-delete 1 i/3` deletes the 3rd meeting form the 1st person in the current displayed contacts list.
+* `find Bernice Yu` followed by `meeting-delete 1 i/2` deletes the 1st meeting form the 1st person in the results of the `find` command.
       
 <br>**Results for delete meeting:**<br>
 The following command was applied:  `find Bernice Yu` followed by `meeting-delete 1 i/2`.
@@ -477,7 +480,9 @@ Therefore, edit the data file only if you are confident that you can update it c
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous StaffConnect home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous StaffConnect home folder.<br>
+**Q**: Why are concurrent or past meetings allowed? <br>
+**A**: This is to allow greater flexibility for users who wish to segregate meetings of different topics happening concurrently or users who wish to store meetings in the past for bookkeeping purposes etc..
 
 --------------------------------------------------------------------------------------------------------------------
 
