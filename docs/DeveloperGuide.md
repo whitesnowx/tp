@@ -305,7 +305,7 @@ The main operation for the sort feature is the `updateSortedPersonList(Comparato
 The following are some explanations for decisions made in the implementation of the sort feature.
 
 Need for multiple `Comparator` objects:
-This is to keep in view for when other commands or enhancements may need the separate attribute predicates. 
+This is to keep in view for when other commands or enhancements may need the separate attribute predicates.
 
 Need for `MultiComparator` object:
 This is to map the 1 or more comparator objects and act as a layer of abstraction where `SortCommmand` does need to know how many attributes are used in sorting.

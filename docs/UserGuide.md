@@ -52,10 +52,9 @@ Before we get started StaffConnect offers a unique suite of UI controls for user
 
 1. Clicking any items on the left contacts panel will allow you to select the person whose attributes and meeting list are to be display.
 <br>Alternatively, clicking anywhere in the contacts panel then using your arrow keys to navigate and hitting enter to select would give the same result.
-<br>**Intended Behaviour:** 
+<br>**Intended Behaviour:**
 <br> Hovering the selection with mouse or arrow keys would not cause the details panel to switch to the selected person. This is to allow users to browse the contacts panel without switching.
 <br>![Region to select the person](images/personPanelRegion.png)
-   
 
 2. There is a divider that is draggable up and down to hide and show details on the right side and to customise the look of your application.
 <br>![Region to select the divider](images/detailsDividerRegion.png)
@@ -66,19 +65,19 @@ Before we get started StaffConnect offers a unique suite of UI controls for user
     - __[Left click + Drag Mouse]__ would pan around in the details pane as well.
     - Keyboard arrow keys are able to pan around as well, but the scroll speed may differ on different systems.
     - There are scroll bars at the vertical and horizontal dividers of the window pane, dragging them in the respective direction will pan around as well.
-   
+
 4.  The Result display:<br>
     The scroll bars can only be scrolled by two ways:
       1. For mouse pad users, dragging around with two fingers the around would pan around the pane.
       2. For mouse users, __[Mouse Wheel]__ will scroll up and down while __[Shift + Mouse Wheel]__ will scroll left and right.
-      3. Simply dragging the scroll bar with a left mouse click. 
+      3. Simply dragging the scroll bar with a left mouse click.
       <br>**Scrolling by arrow keys is not fully supported in the result display**
 
 5.  The Command box:<br>
     The input can only be scrolled by __[Holding Left Click + Drag Mouse]__  to the edge in the direction to scroll. This is to allow making adjustments on very long commands.
 
 
-<Br><Br> 
+<Br><Br>
 ### Alternative UI arrangements
 <br>![first alternative ui](images/firstAlternative.png)
 <br>
@@ -307,8 +306,8 @@ Deletes a meeting from a person based on specified meeting index.
 
 Format: `meeting-delete INDEX i/MEETING-INDEX `
 
-* Deletes the  meeting at specified `MEETING-INDEX` from the person at specified `INDEX`. 
-* The index refers to the index number shown in the displayed person list. 
+* Deletes the  meeting at specified `MEETING-INDEX` from the person at specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3,…​ and tally within range index of the displayed person list.
 * The meeting-index refers to the index number shown in the displayed meeting list.
 * The meeting-index **must be a positive integer** 1, 2, 3,…​ and tally within range index of the displayed meeting list.
@@ -317,7 +316,7 @@ Examples:
 * The following commands assumes that meetings have been added prior to the command. Otherwise, an error will be thrown. <br> **(Refer to the section above on how to add a meeting)**
   * `list` followed by `meeting-delete 1 i/1` deletes the 1st meeting from the 1st person in the list.
   * `find Bernice Yu` followed by `meeting-delete 1 i/2` deletes the 1st meeting form the 1st person in the results of the `find` command.
-      
+
 <br>**Results for delete meeting:**<br>
 The following command was applied:  `find Bernice Yu` followed by `meeting-delete 1 i/2`.
 <br> __(Disclaimer: The content shown in the examples may not match what you have added to your own meetings within the staff book).__
@@ -420,7 +419,7 @@ Examples:
   ![After refreshing](images/AfterRefreshCommand.png)
 
 **Known limitations:**
-Refresh is only used when the user decides to remove clutter in the staff book, and wants to remove outdated meetings. 
+Refresh is only used when the user decides to remove clutter in the staff book, and wants to remove outdated meetings.
 This process is not done automatically as sometimes the user would like to retain old meetings for bookkeeping purposes.
 
 ### Selecting the person to display: `select`
@@ -466,7 +465,7 @@ StaffConnect data are saved automatically as a JSON file `[JAR file location]/da
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, StaffConnect will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause StaffConnect to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). 
+Furthermore, certain edits can cause StaffConnect to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range).
 The application will not prompt the user if the format of the data file is incorrect, but instead provide the user with an empty staff book.
 Therefore, edit the data file only if you are confident that you can update it correctly.
 
