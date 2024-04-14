@@ -474,9 +474,9 @@ The application will not prompt the user if the format of the data file is incor
 
 #### Valid Data Values in `persons`
 
-All attributes' restrictions except Favourite can be found in the [Attribute Summary](#attribute-summary) table.
+All attributes' restrictions except **Favourite** can be found in the [Attribute Summary](#attribute-summary) table.
 
-Attribute | Data Field | Valid Values
+Attribute | Data Field | Valid Data Values
 ----------|--------|-------------
 Name | `name` | `Alice`, `Ben10`
 Phone | `phone` | `123`, `98765432`
@@ -487,7 +487,7 @@ Venue | `venue` | `COM4-02-33`, `LT21`, `Kent Ridge Vale, Tulip Street, #12-34`
 Tag | `tags` | `professor`, `Number1TA`
 Availabilitity | `availabilities` | `TUESDAY 12:00 13:00`, `WEDNESDAY 12:00 13:00`
 Meeting | `meetings` | Refer to the [Valid Data Values in meetings](#valid-data-values-in-meetings) table.
-Favourite | `favourite` | `Favourite`, `Not favourite`
+Favourite | `favourite` | `Favourite` or `Not favourite`
 
 #### Valid Data Values in `meetings`
 
