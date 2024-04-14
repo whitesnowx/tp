@@ -335,11 +335,11 @@ This is to prevent `SortCommand` from taking on more responsibilities (Separatio
     * Cons: Limited sorting and lesser functionality.
 
 
-### Meeting
+### Meeting Feature
 
 Meeting is feature that allows the user to keep track of any events they may have with the particular contact. It contains the description of the meeting event with the date and time it would occur.
 
-#### Implementation
+#### How the feature is implemented
 
 Meeting contains two attributes ```MeetingDescription``` and ```MeetingDateTime``` class. ```MeetingDescription```
 is used to handle any valid description of the meeting with only alphanumeric values, while the ```MeetingDateTime```
@@ -369,15 +369,15 @@ After parsing, the commands are executed by the logic manager as show below. (Ex
 <br> Similarly the sequence diagram for deleting meeting with `DeleteMeetingCommand`:
 <br>![DeleteMeetingCommand Sequence Diagram](images/DeleteMeetingSequenceDiagram.png)
 
-#### Design considerations:
+#### What are the design considered:
 
 **Aspect: How the meetings are stored :**
 
-* **Alternative 1 (current choice):** Store meetings in an ObservableList.
+* **Current Design:** Store meetings in an ObservableList.
     * Pros: Better segregation of the OOP functionalities, and good integration with the UI ListView.
     * Cons: Larger code complexity.
 
-* **Alternative 2:** Store meetings in a Set.
+* **Alternative 1:** Store meetings in a Set.
     * Pros: Easier implementation.
     * Cons: There is an efficiency gap as each element has to be placed into a list before it can be shown to the UI ListView.
 
