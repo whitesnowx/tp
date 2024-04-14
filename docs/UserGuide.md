@@ -465,16 +465,16 @@ StaffConnect data are saved in the hard disk automatically after any command tha
 StaffConnect data are saved automatically as a JSON file `[JAR file location]/data/staffconnect.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, StaffConnect will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+If your changes to the data file makes its format invalid, StaffConnect will discard all data and start with an empty data file at the next run. Hence, it is **recommended to take a backup** of the file before editing it.<br>
 Furthermore, certain edits can cause StaffConnect to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). 
-The application will not prompt the user if the format of the data file is incorrect, but instead provide the user with an empty staff book.
-Therefore, edit the data file only if you are confident that you can update it correctly.
+The application will not prompt the user if the format of the data file is incorrect, but instead provide the user with an empty staff book.<br>
+**Therefore, edit the data file only if you are confident that you can update it correctly.**
 
 </div>
 
-All attributes' restrictions except Favourite can be found in the [Attribute Summary](#attribute-summary) table below.
-
 #### Valid Data Values in `persons`
+
+All attributes' restrictions except Favourite can be found in the [Attribute Summary](#attribute-summary) table.
 
 Attribute | Data Field | Valid Values
 ----------|--------|-------------
@@ -482,11 +482,11 @@ Name | `name` | `Alice`, `Ben10`
 Phone | `phone` | `123`, `98765432`
 Email | `email` | `e@123.com`, `hello@h-h.com`, `one+two@h-h.hh`, `hello@e-h.e-hh`
 Module | `module` | `gess1025`, `hsi1000`, `CS2103T`
-Faculty | `faculty` | Refer to the [Valid Faculty Values](#valid-faculty-values) table below
+Faculty | `faculty` | Refer to the [Valid Faculty Values](#valid-faculty-values) table.
 Venue | `venue` | `COM4-02-33`, `LT21`, `Kent Ridge Vale, Tulip Street, #12-34`
 Tag | `tags` | `professor`, `Number1TA`
 Availabilitity | `availabilities` | `TUESDAY 12:00 13:00`, `WEDNESDAY 12:00 13:00`
-Meeting | `meetings` | Refer to the [Valid Data Values in meetings](#valid-data-values-in-meetings) table below
+Meeting | `meetings` | Refer to the [Valid Data Values in meetings](#valid-data-values-in-meetings) table.
 Favourite | `favourite` | `Favourite`, `Not favourite`
 
 #### Valid Data Values in `meetings`
@@ -510,7 +510,7 @@ Meeting Start Time | `date` | `30/1/2024 12:12`, `2002-11-15 19:00`, `1-12-2022 
 
 </div>
 
-#### Example
+#### Sample Data File Content
 
 ```json
 {
@@ -563,6 +563,7 @@ Meeting Start Time | `date` | `30/1/2024 12:12`, `2002-11-15 19:00`, `1-12-2022 
 4. **When adding/editing name that already exists in the staff book**, if you try to do so, an error message will be prompted, as two persons are considered the same person as long as they have the same name. It is inplausible to has two persons with the same name but other different attributes.
 5. **When adding/editing venues containing space with an attribute prefix**, If you try to add a venue such as `Room 12 t/r`, the application will add a person with a venue `Room 12` and a tag `r` instead of the intended venue `Room 12 t/r`. The venue is not intended to store venues that contains a space followed by an attribute prefix but users can consider omitting the space or replace with a hyphen such as `Room 12t/r` or `Room 12-t/r` as a workaround.
 6. **When generating the default file and exiting via the `Exit` button**, If you try to generate the default JSON file `[JAR file location]/data/staffconnect.json` by running the JAR file, without manipulating any data and exiting via the `Exit` button, the JSON file would not be generated. You may consider using the `exit` command via the command line interface to generate the default JSON file instead.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Attribute summary
