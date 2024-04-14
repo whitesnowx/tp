@@ -388,6 +388,9 @@ The below sequence diagram goes into more details on how the execution of the co
 
 ![Fav Ref Sequence Diagram](images/FavRefSequenceDiagram.png)
 
+1. `FavCommand` calls the static `FavCommand#createFavPerson(personToFav)` function which calls for the static `PersonUtil#createPersonWithFavouriteStatus(Person selectedPerson, Favourite favourite)` using the `selectedPerson` and a new `Favourite` with the value `true`.
+2. This static `PersonUtil#createPersonWithFavouriteStatus(Person selectedPerson, Favourite favourite)` function creates a new `Person` with the given `Favourite` and returns back to `FavCommand`.
+
 Similarly, how the `unfav 1` command works is shown below:
 
 ![Unfav Command Sequence Diagram](images/UnfavSequenceDiagram.png)
@@ -405,6 +408,9 @@ Similarly, how the `unfav 1` command works is shown below:
 The below sequence diagram goes into more details on how the execution of the command creates an unfavourite person:
 
 ![Unfav Ref Sequence Diagram](images/UnfavRefSequenceDiagram.png)
+
+1. `UnfavCommand` calls the static `UnfavCommand#createUnfavPerson(personToUnfav)` function which calls for the static `PersonUtil#createPersonWithFavouriteStatus(Person selectedPerson, Favourite favourite)` using the `selectedPerson` and a new `Favourite` with the value `false`.
+2. This static `PersonUtil#createPersonWithFavouriteStatus(Person selectedPerson, Favourite favourite)` function creates a new `Person` with the given `Favourite` attribute and returns back to `UnfavCommand`.
 
 ### \[Proposed\] Undo/redo feature
 
