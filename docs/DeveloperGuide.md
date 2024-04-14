@@ -482,8 +482,8 @@ The following activity diagram summarizes what happens when a user executes a ne
 **Target user profile**:
 
 Bob is a 22 year old NUS SOC student who often struggles with finding details about his professors' and tutors' consultation hours.
-He prefers certain professors and tutors but often misplaces their contact information
-as such information can be hard to find online. He also has difficulty identifying his professors and changing tutors.
+He has difficulty identifying his professors and changing tutors, and prefers certain professors and tutors but often misplaces their contact information as such information can be hard to find online.
+He also sometimes forgets that he has scheduled consultations with a professor or tutor, but this is not a big problem as he can always arrange for another consultation.
 
 **Value proposition**:
 
@@ -496,19 +496,31 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                     | I want to …​                    | So that I can…​                                                         |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | sociable user                              | save a contact's name, email, phone number, title in one line | save time per entry                     |
-| `* * *`  | disorganised student                       | store a professor's name       | recall how to address the professor                                    |
-| `* * *`  | forgetful user                             | store a professor's faculty    | see the faculty that a professor belongs to                            |
-| `* * *`  | student who get lost easily                | view the locations of my meetings/classes | search the locations for my meetings easily                 |
-| `* * *`  | disorganised student                       | store a professor's consultation hours | arrange times to meet my professor for consultation            |
-| `* * *`  | slow reader                                | filter through contact entry by their name | not waste time in finding a specific contact/s and access their info easily |
-| `* * *`  | slow reader                                | filter through contact entry by their availability | not waste time in finding a specific contact/s and access their info easily |
-| `* * *`  | slow reader                                | filter through contact entry by their module | not waste time in finding a specific contact/s and access their info easily |
-| `* * *`  | disorganised student                       | store the modules a professor is teaching  | contact the professors who teach a module which I am currently taking       |
-| `* * *`  | slow reader                                | filter through contact entry by their module | not waste time in finding a specific contact/s and access their info easily |
-| `* * *`  | forgetful user                             | filter the professors by their faculty or the course they teach | not waste time in finding a specific contact/s and access their info easily |
-
-*{More to be added}*
+| `* * *`  | sociable user                              | save a professor's/tutor's name, phone number, faculty, consultation venue, module, email, tag(s) and availabilities in one line | save time when adding each professor/tutor                    |
+| `* * *`  | clumsy user                                | edit a professor's/tutor's name, phone number, faculty, consultation venue, module, email, tag(s) and availabilities in one line | save time when editing multiple attributes of a professor/tutor                    |
+| `* * *`  | disorganised student                       | store a professor's/tutor's name       | recall how to address the professor/tutor                                    |
+| `* * *`  | disorganised student                       | store the module a professor/tutor is teaching  | contact the professor/tutor who teach a module which I am currently taking       |
+| `* * *`  | forgetful user                             | store a professor's/tutor's faculty    | see the faculty that a professor/tutor belongs to                            |
+| `* * *`  | student who get lost easily                | view the consultation venues of my professors/tutors | search for their consultation venues easily                |
+| `* * *`  | disorganised student                       | store a professor's/tutor's availabilities | schedule meetings to meet my professor/tutor for consultation            |
+| `* * *`  | organised user                             | delete a staff book entry | remove outdated or redundant entries of professors/tutors that I will not contact anymore                  |
+| `* * *`  | slow reader                                | filter through staff book entries by their name | not waste time in finding a specific professor/tutor and access their information easily |
+| `* * *`  | slow reader                                | filter through staff book entries by their availability | not waste time in finding a specific professor/tutor and access their information easily |
+| `* * *`  | slow reader                                | filter through staff book entries by their module | not waste time in finding a specific professor/tutor and access their information easily |
+| `* * *`  | slow reader                                | filter through staff book entries by their faculty | not waste time in finding a specific professor/tutor and access their information easily |
+| `* * *`  | slow reader                             | filter through staff book entries by their tag | not waste time in finding a specific professor/tutor and access their information easily |
+| `* * *`  | slow reader                             | sort staff book entries by name | not waste time in finding a specific professor/tutor and access their information easily |
+| `* * *`  | slow reader                             | sort staff book entries by phone number | not waste time in finding a specific professor/tutor and access their information easily |
+| `* * *`  | slow reader                             | sort staff book entries module | not waste time in finding a specific professor/tutor and access their information easily |
+| `* * *`  | slow reader                             | sort staff book entries faculty | not waste time in finding a specific professor/tutor and access their information easily |
+| `* * *`  | slow reader                             | sort staff book entries' consultation venues | not waste time in finding a specific professor/tutor and access their information easily |
+| `* *`  | slow reader                             | sort staff book entries' meeting times | not waste time in finding a specific meeting and access their information easily |
+| `* *` | time-conscious user | save a specific professor as "favourite" | have quick access to the professors/tutors I frequent the most for consultations |
+| `* *` | time-conscious user | remove a specific professor as "favourite" | remove outdated professors/tutors that I do not frequent for consultations anymore |
+| `* *` | easily-distracted user | record my scheduled meeting agenda and start time with professors/tutors | see which professor/tutor I have set up to meet with |
+| `* *` | organised user | delete my scheduled meeting agenda and start time with professors/tutors | remove outdated or redundant entries of meetings that have passed or cancelled                  |
+| `* *` | time-conscious user | clear my outdated meetings with professors/tutors | save time by removing outdated meetings with one command |
+| `* *` | proficient typer | select a professor/tutor to see their contact details with a command | use the app with my more proficient method of typing instead of using other input devices (i.e. mouse) |
 
 ### Use cases
 
@@ -609,29 +621,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
 
-*{More to be added}*
-
 ### Non-Functional Requirements
 
-1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2. Should be able to answer a user's prompt within 1 second.
-3. Should require less computational resources to allow users with older hardware can use the app without trouble.
-4. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-5. Should be able to provide error messages when a user does not type in expected prompts.
-6. Should be able to store the users' information securely without leakage.
-7. Should provide understandable and informative responses whenever a user provides a prompt.
-8. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-9. A user without much experience in admin commands should be able to handle the usage in rather short time.
-
-*{More to be added}*
+1. The app should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+2. The app should be able to respond to a user's prompt within 2 seconds.
+3. The app should not exceed using 1GB of RAM while it is operating.
+4. The app should work on both 32-bit and 64-bit environments.
+5. The app should be able to store up to 1000 persons without affecting the response time of 2 seconds.
+6. The app should be able to store up to a total of 1000 meetings across all persons without affecting the response time of 2 seconds.
+7. The app should only be able to read and write in the generated `[JAR file location]/data/staffconnect.json` file.
+8. The app should be usable by a student who is familiar with CLI interfaces.
+9. The app should be up-to-date with the latest NUS faculty names.
+10. The data stored in the app should not change unless the user has modified the data through usage of the app with user-issued commands, or the `[JAR file location]/data/staffconnect.json` file has been modified with valid values.
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS, with versions that support Java 11
-* **Private contact detail**: A contact detail that is not meant to be shared with others
-* **Users' Information**: Same as above
+* **Person**: A professor or tutor (i.e. Teaching Assistant)
+* **Attribute**: A useful piece of information belonging to a `Person`. e.g `Venue` is the consultation venue to consult a `Person`
+* **Staff Book**: Name for the list containing `Person` objects
+* **Contacts' Information**: All `Persons` in the staff book
 * **Error Message**: A prompt printed to the user that the program execution cannot run normally and specifies the most possible cause
-* **MSS**: Main Success Scenario
+* **MSS**: Main Success Scenario, a sequence of steps to reach the end of a use case
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -659,8 +670,6 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
-
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
@@ -676,12 +685,31 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
-
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Prerequisites: Ensure that the `[JAR file location]/data/staffconnect.json` file is generated by running the JAR file of the app at least once.
 
-1. _{ more test cases …​ }_
+   1. Test case: No modifications to data file after it has been generated.<br>
+      In the image below shows the contents of the untouched data file:
+      ![Before Corrupt Data File](images/beforeCorruptDataFile.png)
+
+      Expected: The app should show a list of 6 persons
+      ![Before Corrupt Data File Result](images/beforeCorruptDataFileResult.png)
+
+   1. Test case: Invalid modification to data file.<br>
+      Modify the `Favourite` attribute value to `Not avourite` (an invalid value) in the data file:
+      ![After Corrupt Data File](images/afterCorruptDataFile.png)
+
+      Expected: The app should show an empty list (no persons)
+      ![After Corrupt Data File Result](images/afterCorruptDataFileResult.png)
+
+   1. Test case: Valid modification to data file.<br>
+      Before, `Alex Yeoh` has the module `CS1101S` in the untouched data file as seen in `Test case: No modifications to data file after it has been generated`.
+
+      Modify the `Module` attribute value to `CS2030S` (a valid value) in the data file:
+      ![After Valid Modification To Data File](images/afterValidModificationToDataFile.png)
+
+      Expected: The app should show `Alex Yeoh` with the module `CS2030S`:
+      ![After Valid Modification To Data File Result](images/afterValidModificationToDataFileResult.png)
