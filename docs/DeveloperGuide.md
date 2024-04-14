@@ -370,7 +370,7 @@ This feature enables us to sets/remove a particular contact using an index as fa
 The Fav/Unfav feature is implemented via the `FavCommand` and `UnfavCommand`, which is supported by the `FavCommandParser` and `UnfavCommandParser` respectively.
 The `FavCommandParser` and `UnfavCommandParser` implements the `Parser` interface.
 
-The following sequence diagram shows how the `fav 1` command works:
+The following sequence diagrams shows how the `fav 1` command works:
 
 ![Fav Command Sequence Diagram](images/FavSequenceDiagram.png)
 
@@ -379,6 +379,9 @@ The following sequence diagram shows how the `fav 1` command works:
 
 1. When the user issues the command `fav 1`, `LogicManager` is called upon to execute the command, it is passed to the `StaffCommandParser` object which creates a `FavCommandParser` to parse the arguments for the `fav` command.
 2. The parsing of `FavCommandParser` results in a new `FavCommand` initialized by an index `Index`.
+
+![Execute Fav Command Sequence Diagram](images/ExecuteFavCommandSequenceDiagram.png)
+
 3. When the `FavCommand` is executed, it retrieves the last shown list using `getSortedFilteredPersonList()` and creates a favourite person. This portions' details has been separated from the main sequence diagram into the reference sequence diagram below.
 4. After creating a new `Person` object, `FavCommand` replaces the old `Person` object with the new one.
 5. The command communicates with the `Model` when it is executed. More specifically, it calls `updateFilteredPersonList()` method using `PREDICATE_SHOW_ALL_PERSONS` which resets the view to default.
@@ -391,7 +394,7 @@ The below sequence diagram goes into more details on how the execution of the co
 1. `FavCommand` calls the static `FavCommand#createFavPerson(personToFav)` function which calls for the static `PersonUtil#createPersonWithFavouriteStatus(Person selectedPerson, Favourite favourite)` using the `selectedPerson` and a new `Favourite` with the value `true`.
 2. This static `PersonUtil#createPersonWithFavouriteStatus(Person selectedPerson, Favourite favourite)` function creates a new `Person` with the given `Favourite` and returns back to `FavCommand`.
 
-Similarly, how the `unfav 1` command works is shown below:
+Similarly, the following diagrams shows how the `unfav 1` command works:
 
 ![Unfav Command Sequence Diagram](images/UnfavSequenceDiagram.png)
 
@@ -400,6 +403,9 @@ Similarly, how the `unfav 1` command works is shown below:
 
 1. When the user issues the command `unfav 1`, `LogicManager` is called upon to execute the command, it is passed to the `StaffCommandParser` object which creates a `UnfavCommandParser` to parse the arguments for the `unfav` command.
 2. The parsing of `UnfavCommandParser` results in a new `UnfavCommand` initialized by an index `Index`.
+
+![ExecuteUnfavCommandSequenceDiagram.png](images/ExecuteUnfavCommandSequenceDiagram.png)
+
 3. When the `UnfavCommand` is executed, it retrieves the last shown list using `getSortedFilteredPersonList()` and creates an unfavourite person. This portions' details has been separated from the main sequence diagram into the reference sequence diagram below.
 4. After creating a new `Person` object, `UnfavCommand` replaces the old `Person` object with the new one.
 5. The command communicates with the `Model` when it is executed. More specifically, it calls `updateFilteredPersonList()` method using `PREDICATE_SHOW_ALL_PERSONS` which resets the view to default.
