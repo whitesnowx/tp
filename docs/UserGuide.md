@@ -402,12 +402,13 @@ This may result in possible data loss. e.g. Meetings of a person may be deleted.
 There will be no further prompt after entering the command to refresh meetings of all persons. This action is irreversible and the meeting information that may be deleted cannot be retrieved afterwards.
 </div>
 
-Deletes all meetings that start before the very moment the user types in the command and enters.
+Deletes all meetings that start before the very moment the user types in the command and enters. Notice that only persons currently filtered in the list will be affected.
 
 Format: `refresh`
 
 * The deleted meetings will be explicitly printed again to the use, specifying content of the meeting and who "owns" the meeting.
 * If no meetings are deleted, there will no error thrown. Instead, a prompt will be given to user that no meeting is deleted.
+* The command will not delete meetings for persons not currently shown in the list due to filter command or find command. If the user wants to execute the command for all persons, type in `list` first to show all persons.
 
 Examples:
 * If there is a meeting `Avengers Assemble` that happened in `31/08/1939 12:00`, when the user types in `refresh`, it will be deleted.
