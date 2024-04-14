@@ -195,9 +195,44 @@ This is to make sure at least one field is modified, or the command will not hav
 Call `model.updateFilteredPersonList())` with a `Predicate` that always evaluates to true:
 This is to refresh the list of `Person` in `Model`.
 
+### Find feature
+
+#### How the feature is implemented
+
+The sequence diagram below explains how the find command `find Alex` goes through the `Logic` component.
+
+![Interactions Inside the Logic Component for the `find Alex` Command](images/FindSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FindCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+</div>
+
+1. When user types in `find Alex`, it is passed to `StaffConnectParser`.
+2. `StaffconnectParser` then creates a `FindCommandParser` that will parse `Alex` to create a `FindCommand` which utilizes a predicate judge whether `Alex` is contained in the person's name.
+3. In `FindCommand`, `Model` executes `updateFilteredPersonList()` method using the predicate mentioned above.
+4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`, to show in the `UI` component the number of persons listed with `Alex` in the name.
+
+The below sequence diagram goes into more detail on how the command is parsed in `EditCommandParser`.
+
+![Interactions Inside FindCommandParser for the `parse("f/Computing")` Command](images/FindSequenceDiagram-Parser.png)
+
+1. Within `FindCommandParser`, the command string is first trimmed and checked whether it is empty, then splitted into an string array by space characters.
+2. `FindCommandParser` then constructs a predicate to test whether the names of `Person` contain any one of the strings in the array mentioned above. This predicate is passed as an argument for the constructor of `FindCommand`.
+
+The below activity diagram illustrates the process when a user executes a find command.
+
+<img src="images/FindActivityDiagram.png" width="250" />
+
+#### Why find is implemented this way
+
+The main operation for the find feature is the `updateFilteredPersonList(Predicate<Person> predicate)` method in the `Model` component.
+Below are some explanations for the special considerations in the implementation.
+
+`FindCommmandParser` parsing the `Predicate` objects:
+This is to prevent `FindCommand` from taking on more responsibilities (Separation of Concerns).
+
 ### Filter feature
 
-#### How the filter is implemented
+#### How the feature is implemented
 
 The sequence diagram below shows how the filter command `filter f/Computing` goes through the `Logic` component.
 
@@ -236,9 +271,9 @@ This is to prevent `FilterCommand` from taking on more responsibilities (Separat
 `FilterCommand` having `setPersonPredicate()` method:
 This is so that `FilterCommand` has the required argument of type `Predicate<Person>` to be used in the `updateFilteredPersonList()` method. Since the `Predicate<Person>` object is created by chaining the multiple predicates, no parsing is involved to create this `Predicate`.
 
-### Sort Feature
+### Sort feature
 
-##### Implementation
+##### How the feature is implemented
 
 The sort mechanism is facilitated by JavaFX's `SortedList` within ModelManager, `SortCommand` and `SortCommandParser`. `SortCommandParser` extends the types of command parsers in StaffBookParser, and returns a `SortCommand` to be executed by the LogicManager. This execution also updates the `SortedList` in  Model via ModelManager. Additionally, it implements the following operations:
 
@@ -247,13 +282,13 @@ The sort mechanism is facilitated by JavaFX's `SortedList` within ModelManager, 
 
 Given below is an example usage scenario and how the sort mechanism behaves at each step.
 
-Step 1. The user enters **“sort n/”** to sort the list by their name.
+1. The user enters **“sort n/”** to sort the list by their name.
 
-Step 2. The `LogicManager` takes this command text and calls `StaffBookParser.parseCommand("sort n/")` and identifies the sort command. It then creates a new instance of `SortCommandParser` to `parse(“n/”)` on the attribute.
+2. The `LogicManager` takes this command text and calls `StaffBookParser.parseCommand("sort n/")` and identifies the sort command. It then creates a new instance of `SortCommandParser` to `parse(“n/”)` on the attribute.
 
-Step 3. `SortCommandParser.parse(“n/”)` then constructs a SortCommand with the appropriate attribute comparator, `NameComparator`.
+3. `SortCommandParser.parse(“n/”)` then constructs a SortCommand with the appropriate attribute comparator, `NameComparator`.
 
-Step 4. The `SortCommand` is returned to Logic manager which calls on its `execute()` to return a `CommandResult()`. During its execution, `ModelManager.updateSortedPersonList(NameComparator)` is invoked which updates the model to show the list of persons being sorted by name.
+4. The `SortCommand` is returned to Logic manager which calls on its `execute()` to return a `CommandResult()`. During its execution, `ModelManager.updateSortedPersonList(NameComparator)` is invoked which updates the model to show the list of persons being sorted by name.
 
 The sequence diagram for executing a **"sort n/"** is shown below:
 
@@ -264,12 +299,26 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 <img src="images/SortActivityDiagram.png" width="450" />
 
-#### Design considerations:
-**Aspect: Determining order of sorting of an attribute:**
+#### Why sort is implemented this way
 
-* **Current Design:** Get order of sorting from user, prompting for an input in the form of toCompare.
+The main operation for the sort feature is the `updateSortedPersonList(Comparator<Person> comparator)` method in the `Model` component.
+The following are some explanations for decisions made in the implementation of the sort feature.
+
+Need for multiple `Comparator` objects:
+This is to keep in view for when other commands or enhancements may need the separate attribute predicates. 
+
+Need for `MultiComparator` object:
+This is to map the 1 or more comparator objects and act as a layer of abstraction where `SortCommmand` does need to know how many attributes are used in sorting.
+
+`SortCommmandParser` parsing the `Comparator` objects:
+This is to prevent `SortCommand` from taking on more responsibilities (Separation of Concerns).
+
+#### What designs were considered:
+**Aspect: Determining order of sorting of attribute(s):**
+
+* **Current Design:** Get sorting order of attribute(s) from user input.
     * Pros: More functionality and more suited to the user's needs.
-    * Cons: Harder to implement and guide user to use, may have more leeway for error. User unlikely to use this advancement.
+    * Cons: Harder to implement and guide user to use, may have more leeway for error.
 
 * **Alternative 1:** Use a configured comparator for each attribute in ascending order.
     * Pros: Controlled and more simple for user.
@@ -285,40 +334,71 @@ The following activity diagram summarizes what happens when a user executes a ne
     * Pros: Easy to implement, controlled and less likely to be used incorrectly. This increase ease of use for users.
     * Cons: Limited sorting and lesser functionality.
 
-### Find feature
+
+### Meeting
+
+Meeting is feature that allows the user to keep track of any events they may have with the particular contact. It contains the description of the meeting event with the date and time it would occur.
+
+#### Implementation
+
+Meeting contains two attributes ```MeetingDescription``` and ```MeetingDateTime``` class. ```MeetingDescription```
+is used to handle any valid description of the meeting with only alphanumeric values, while the ```MeetingDateTime```
+is used to handle any valid date time values. Each of this meeting are stored in a list data class ```MeetingList``` that
+contains each of the meetings related to each other stored in an ```ObservableList```. The ``` MeetingManager ``` is
+used to manage any operations that require viewing or sorting of meetings from the ```MeetingList``` class.
+
+The operations for adding and deleting meeting are handled by `AddMeetingCommand` and `DeleteMeetingCommand`, which are supported by `AddMeetingCommandParser` and `DeleteMeetingCommandParser` respectively.
+
+1. `Logic Manager` receives the user input which is parsed by `StaffConnectParser`
+2. After splitting the user input into `commandWord` and `arguments` based on the regex pattern of the user input, the `StaffConnectParser` invokes the `AddMeetingCommandParser`or`DeleteMeetingCommandParser` based on the `commandWord`, calling the method `parse` with `arguments` as the method arguments.
+3. `AddMeetingCommandParser` or `DeleteMeetingCommandParser` then parses the respective arguments with its methods from `ParserUtil` to create `AddMeetingCommand` or `DeleteMeetingCommand` with the parsed values.
+4. `Logic Manager` executes the `AddMeetingCommand` or `DeleteMeetingCommand`, which handles adding/removing from the `Person` and updates the model with the new information.
+
+Below is the sequence diagram for parsing inputs with  `AddMeetingCommandParser`:
+<br>![AddMeetingCommandParser Sequence Diagram](images/AddMeetingParserSequenceDiagram.png)
+<br> Similarly the sequence diagram for parsing inputs with `DeleteMeetingCommandParser`:
+<br>![DeleteMeetingCommandParser Sequence Diagram](images/DeleteMeetingParserSequenceDiagram.png)
+<br><br>
+After parsing the commands are executed by the logic manager as show below. (Execute in the diagrams below comes form the logic manager)
+<br> Below is the sequence diagram for adding meeting with  `AddMeetingCommand`:
+<br>![AddMeetingCommand Sequence Diagram](images/AddMeetingSequenceDiagram.png)
+<br> Similarly the sequence diagram for deleting meeting with `DeleteMeetingCommand`:
+<br>![DeleteMeetingCommand Sequence Diagram](images/DeleteMeetingSequenceDiagram.png)
+
+#### Design considerations:
+
+**Aspect: How the meetings are stored :**
+
+* **Alternative 1 (current choice):** Store meetings in an ObservableList.
+    * Pros: Better segregation of the OOP functionalities, and good integration with the UI ListView.
+    * Cons: Larger code complexity.
+
+* **Alternative 2:** Store meetings in a Set.
+    * Pros: Easier implementation.
+    * Cons: There is an efficiency gap as each element has to be placed into a list before it can be shown to the UI ListView.
+
+### Fav/unfav feature
+
+The feature enables us to sets/remove a particular contact using an index as favourite.
 
 #### How the feature is implemented
 
-The sequence diagram below explains how the find command `find Alex` goes through the `Logic` component.
+The Fav/Unfav feature is implemented via the `FavCommand` and `UnfavCommand`, which is supported by the `FavCommandParser` and `UnfavCommandParser` respectively.
+The `FavCommandParser` and `UnfavCommandParser` implements the `Parser` interface.
 
-![Interactions Inside the Logic Component for the `find Alex` Command](images/FindSequenceDiagram.png)
+1. `LogicManager` receives the user input which is parsed by the `StaffConnectParser`.
+2. After splitting the user input into `commandWord` and `arguments` based on the regex pattern of the user input, the `StaffConnectParser` invokes the `FavCommandParser`/`UnfavCommandParser` based on the `commandWord`, calling the method `parse` with `arguments` as the method arguments
+3. `FavCommandParser`/`UnfavCommandParser` takes in the `args` string and parse it into with the static `ParserUtil#parseIndex(args)` function. If the `INDEX` format is invalid, a `ParseException` will be thrown.
+4. `FavCommandParser`/`UnfavCommandParser` then creates the `FavCommand`/`UnfavCommand` and returns it.
+5. The `LogicManager` executes the `FavCommand`/`UnfavCommand`, which creates a `Person` with the `Favourite` attribute set as `true`/`false` respectively and updates the model with this new `Person`.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FindCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
-</div>
+The following sequence diagram shows how the `fav` command works:
 
-1. When user types in `find Alex`, it is passed to `StaffConnectParser`.
-2. `StaffconnectParser` then creates a `FindCommandParser` that will parse `Alex` to create a `FindCommand` which utilizes a predicate judge whether `Alex` is contained in the person's name. 
-3. In `FindCommand`, `Model` executes `updateFilteredPersonList()` method using the predicate mentioned above.
-4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`, to show in the `UI` component the number of persons listed with `Alex` in the name.
+![Fav Command Sequence Diagram](images/FavSequenceDiagram.png)
 
-The below sequence diagram goes into more detail on how the command is parsed in `EditCommandParser`.
+Similarly, how the `unfav` command works is shown below:
 
-![Interactions Inside FindCommandParser for the `parse("f/Computing")` Command](images/FindSequenceDiagram-Parser.png)
-
-1. Within `FindCommandParser`, the command string is first trimmed and checked whether it is empty, then splitted into an string array by space characters.
-2. `FindCommandParser` then constructs a predicate to test whether the names of `Person` contain any one of the strings in the array mentioned above. This predicate is passed as an argument for the constructor of `FindCommand`.
-
-The below activity diagram illustrates the process when a user executes a find command.
-
-<img src="images/FindActivityDiagram.png" width="250" />
-
-#### Why find is implemented this way
-
-The main operation for the find feature is the `updateFilteredPersonList(Predicate<Person> predicate)` method in the `Model` component.
-Below are some explanations for the special considerations in the implementation.
-
-`FindCommmandParser` parsing the `Predicate` objects:
-This is to prevent `FindCommand` from taking on more responsibilities (Separation of Concerns).
+![Unfav Command Sequence Diagram](images/UnfavSequenceDiagram.png)
 
 ### \[Proposed\] Undo/redo feature
 
@@ -402,77 +482,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
-
-### Meeting
-
-Meeting is feature that allows the user to keep track of any events they may have with the particular contact. It contains the description of the meeting event with the date and time it would occur.
-
-#### Implementation
-
-Meeting contains two attributes ```MeetingDescription``` and ```MeetingDateTime``` class. ```MeetingDescription```
-is used to handle any valid description of the meeting with only alphanumeric values, while the ```MeetingDateTime```
-is used to handle any valid date time values. Each of this meeting are stored in a list data class ```MeetingList``` that
-contains each of the meetings related to each other stored in an ```ObservableList```. The ``` MeetingManager ``` is
-used to manage any operations that require viewing or sorting of meetings from the ```MeetingList``` class.
-
-The operations for adding and deleting meeting are handled by `AddMeetingCommand` and `DeleteMeetingCommand`, which are supported by `AddMeetingCommandParser` and `DeleteMeetingCommandParser` respectively.
-
-1. `Logic Manager` receives the user input which is parsed by `StaffConnectParser`
-2. After splitting the user input into `commandWord` and `arguments` based on the regex pattern of the user input, the `StaffConnectParser` invokes the `AddMeetingCommandParser`or`DeleteMeetingCommandParser` based on the `commandWord`, calling the method `parse` with `arguments` as the method arguments.
-3. `AddMeetingCommandParser` or `DeleteMeetingCommandParser` then parses the respective arguments with its methods from `ParserUtil` to create `AddMeetingCommand` or `DeleteMeetingCommand` with the parsed values.
-4. `Logic Manager` executes the `AddMeetingCommand` or `DeleteMeetingCommand`, which handles adding/removing from the `Person` and updates the model with the new information.
-
-Below is the sequence diagram for parsing inputs with  `AddMeetingCommandParser`:
-<br>![AddMeetingCommandParser Sequence Diagram](images/AddMeetingParserSequenceDiagram.png)
-<br> Similarly the sequence diagram for parsing inputs with `DeleteMeetingCommandParser`:
-<br>![DeleteMeetingCommandParser Sequence Diagram](images/DeleteMeetingParserSequenceDiagram.png)
-<br><br>
-After parsing the commands are executed by the logic manager as show below. (Execute in the diagrams below comes form the logic manager)
-<br> Below is the sequence diagram for adding meeting with  `AddMeetingCommand`:
-<br>![AddMeetingCommand Sequence Diagram](images/AddMeetingSequenceDiagram.png)
-<br> Similarly the sequence diagram for deleting meeting with `DeleteMeetingCommand`:
-<br>![DeleteMeetingCommand Sequence Diagram](images/DeleteMeetingSequenceDiagram.png)
-
-#### Design considerations:
-
-**Aspect: How the meetings are stored :**
-
-* **Alternative 1 (current choice):** Store meetings in an ObservableList.
-    * Pros: Better segregation of the OOP functionalities, and good integration with the UI ListView.
-    * Cons: Larger code complexity.
-
-* **Alternative 2:** Store meetings in a Set.
-    * Pros: Easier implementation.
-    * Cons: There is an efficiency gap as each element has to be placed into a list before it can be shown to the UI ListView.
-
-### Fav/unfav feature
-
-The feature enables us to sets/remove a particular contact using an index as favourite.
-
-#### Implementation
-
-The Fav/Unfav feature is implemented via the `FavCommand` and `UnfavCommand`, which is supported by the `FavCommandParser` and `UnfavCommandParser` respectively.
-The `FavCommandParser` and `UnfavCommandParser` implements the `Parser` interface.
-
-1. `LogicManager` receives the user input which is parsed by the `StaffConnectParser`.
-2. After splitting the user input into `commandWord` and `arguments` based on the regex pattern of the user input, the `StaffConnectParser` invokes the `FavCommandParser`/`UnfavCommandParser` based on the `commandWord`, calling the method `parse` with `arguments` as the method arguments
-3. `FavCommandParser`/`UnfavCommandParser` takes in the `args` string and parse it into with the static `ParserUtil#parseIndex(args)` function. If the `INDEX` format is invalid, a `ParseException` will be thrown.
-4. `FavCommandParser`/`UnfavCommandParser` then creates the `FavCommand`/`UnfavCommand` and returns it. 
-5. The `LogicManager` executes the `FavCommand`/`UnfavCommand`, which creates a `Person` with the `Favourite` attribute set as `true`/`false` respectively and updates the model with this new `Person`.
-
-The following sequence diagram shows how the `fav` command works:
-
-![Fav Command Sequence Diagram](images/FavSequenceDiagram.png)
-
-Similarly, how the `unfav` command works is shown below:
-
-![Unfav Command Sequence Diagram](images/UnfavSequenceDiagram.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -493,8 +502,8 @@ Similarly, how the `unfav` command works is shown below:
 **Target user profile**:
 
 Bob is a 22 year old NUS SOC student who often struggles with finding details about his professors' and tutors' consultation hours.
-He prefers certain professors and tutors but often misplaces their contact information
-as such information can be hard to find online. He also has difficulty identifying his professors and changing tutors.
+He has difficulty identifying his professors and changing tutors, and prefers certain professors and tutors but often misplaces their contact information as such information can be hard to find online.
+He also sometimes forgets that he has scheduled consultations with a professor or tutor, but this is not a big problem as he can always arrange for another consultation.
 
 **Value proposition**:
 
@@ -507,19 +516,31 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                     | I want to …​                    | So that I can…​                                                         |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | sociable user                              | save a contact's name, email, phone number, title in one line | save time per entry                     |
-| `* * *`  | disorganised student                       | store a professor's name       | recall how to address the professor                                    |
-| `* * *`  | forgetful user                             | store a professor's faculty    | see the faculty that a professor belongs to                            |
-| `* * *`  | student who get lost easily                | view the locations of my meetings/classes | search the locations for my meetings easily                 |
-| `* * *`  | disorganised student                       | store a professor's consultation hours | arrange times to meet my professor for consultation            |
-| `* * *`  | slow reader                                | filter through contact entry by their name | not waste time in finding a specific contact/s and access their info easily |
-| `* * *`  | slow reader                                | filter through contact entry by their availability | not waste time in finding a specific contact/s and access their info easily |
-| `* * *`  | slow reader                                | filter through contact entry by their module | not waste time in finding a specific contact/s and access their info easily |
-| `* * *`  | disorganised student                       | store the modules a professor is teaching  | contact the professors who teach a module which I am currently taking       |
-| `* * *`  | slow reader                                | filter through contact entry by their module | not waste time in finding a specific contact/s and access their info easily |
-| `* * *`  | forgetful user                             | filter the professors by their faculty or the course they teach | not waste time in finding a specific contact/s and access their info easily |
-
-*{More to be added}*
+| `* * *`  | sociable user                              | save a professor's/tutor's name, phone number, faculty, consultation venue, module, email, tag(s) and availabilities in one line | save time when adding each professor/tutor                    |
+| `* * *`  | clumsy user                                | edit a professor's/tutor's name, phone number, faculty, consultation venue, module, email, tag(s) and availabilities in one line | save time when editing multiple attributes of a professor/tutor                    |
+| `* * *`  | disorganised student                       | store a professor's/tutor's name       | recall how to address the professor/tutor                                    |
+| `* * *`  | disorganised student                       | store the module a professor/tutor is teaching  | contact the professor/tutor who teach a module which I am currently taking       |
+| `* * *`  | forgetful user                             | store a professor's/tutor's faculty    | see the faculty that a professor/tutor belongs to                            |
+| `* * *`  | student who get lost easily                | view the consultation venues of my professors/tutors | search for their consultation venues easily                |
+| `* * *`  | disorganised student                       | store a professor's/tutor's availabilities | schedule meetings to meet my professor/tutor for consultation            |
+| `* * *`  | organised user                             | delete a staff book entry | remove outdated or redundant entries of professors/tutors that I will not contact anymore                  |
+| `* * *`  | slow reader                                | filter through staff book entries by their name | not waste time in finding a specific professor/tutor and access their information easily |
+| `* * *`  | slow reader                                | filter through staff book entries by their availability | not waste time in finding a specific professor/tutor and access their information easily |
+| `* * *`  | slow reader                                | filter through staff book entries by their module | not waste time in finding a specific professor/tutor and access their information easily |
+| `* * *`  | slow reader                                | filter through staff book entries by their faculty | not waste time in finding a specific professor/tutor and access their information easily |
+| `* * *`  | slow reader                             | filter through staff book entries by their tag | not waste time in finding a specific professor/tutor and access their information easily |
+| `* * *`  | slow reader                             | sort staff book entries by name | not waste time in finding a specific professor/tutor and access their information easily |
+| `* * *`  | slow reader                             | sort staff book entries by phone number | not waste time in finding a specific professor/tutor and access their information easily |
+| `* * *`  | slow reader                             | sort staff book entries module | not waste time in finding a specific professor/tutor and access their information easily |
+| `* * *`  | slow reader                             | sort staff book entries faculty | not waste time in finding a specific professor/tutor and access their information easily |
+| `* * *`  | slow reader                             | sort staff book entries' consultation venues | not waste time in finding a specific professor/tutor and access their information easily |
+| `* *`  | slow reader                             | sort staff book entries' meeting times | not waste time in finding a specific meeting and access their information easily |
+| `* *` | time-conscious user | save a specific professor as "favourite" | have quick access to the professors/tutors I frequent the most for consultations |
+| `* *` | time-conscious user | remove a specific professor as "favourite" | remove outdated professors/tutors that I do not frequent for consultations anymore |
+| `* *` | easily-distracted user | record my scheduled meeting agenda and start time with professors/tutors | see which professor/tutor I have set up to meet with |
+| `* *` | organised user | delete my scheduled meeting agenda and start time with professors/tutors | remove outdated or redundant entries of meetings that have passed or cancelled                  |
+| `* *` | time-conscious user | clear my outdated meetings with professors/tutors | save time by removing outdated meetings with one command |
+| `* *` | proficient typer | select a professor/tutor to see their contact details with a command | use the app with my more proficient method of typing instead of using other input devices (i.e. mouse) |
 
 ### Use cases
 
@@ -620,6 +641,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
 
+
 **Use case: Add a meeting**
 
 **MSS**
@@ -677,27 +699,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     
 
+
 ### Non-Functional Requirements
 
-1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2. Should be able to answer a user's prompt within 1 second.
-3. Should require less computational resources to allow users with older hardware can use the app without trouble.
-4. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-5. Should be able to provide error messages when a user does not type in expected prompts.
-6. Should be able to store the users' information securely without leakage.
-7. Should provide understandable and informative responses whenever a user provides a prompt.
-8. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-9. A user without much experience in admin commands should be able to handle the usage in rather short time.
-
-*{More to be added}*
+1. The app should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+2. The app should be able to respond to a user's prompt within 2 seconds.
+3. The app should not exceed using 1GB of RAM while it is operating.
+4. The app should work on both 32-bit and 64-bit environments.
+5. The app should be able to store up to 1000 persons without affecting the response time of 2 seconds.
+6. The app should be able to store up to a total of 1000 meetings across all persons without affecting the response time of 2 seconds.
+7. The app should only be able to read and write in the generated `[JAR file location]/data/staffconnect.json` file.
+8. The app should be usable by a student who is familiar with CLI interfaces.
+9. The app should be up-to-date with the latest NUS faculty names.
+10. The data stored in the app should not change unless the user has modified the data through usage of the app with user-issued commands, or the `[JAR file location]/data/staffconnect.json` file has been modified with valid values.
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS, with versions that support Java 11
-* **Private contact detail**: A contact detail that is not meant to be shared with others
-* **Users' Information**: Same as above
+* **Person**: A professor or tutor (i.e. Teaching Assistant)
+* **Attribute**: A useful piece of information belonging to a `Person`. e.g `Venue` is the consultation venue to consult a `Person`
+* **Staff Book**: Name for the list containing `Person` objects
+* **Contacts' Information**: All `Persons` in the staff book
 * **Error Message**: A prompt printed to the user that the program execution cannot run normally and specifies the most possible cause
-* **MSS**: Main Success Scenario
+* **MSS**: Main Success Scenario, a sequence of steps to reach the end of a use case
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -725,8 +749,6 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
-
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
@@ -742,12 +764,31 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
-
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Prerequisites: Ensure that the `[JAR file location]/data/staffconnect.json` file is generated by running the JAR file of the app at least once.
 
-1. _{ more test cases …​ }_
+   1. Test case: No modifications to data file after it has been generated.<br>
+      In the image below shows the contents of the untouched data file:
+      ![Before Corrupt Data File](images/beforeCorruptDataFile.png)
+
+      Expected: The app should show a list of 6 persons
+      ![Before Corrupt Data File Result](images/beforeCorruptDataFileResult.png)
+
+   1. Test case: Invalid modification to data file.<br>
+      Modify the `Favourite` attribute value to `Not avourite` (an invalid value) in the data file:
+      ![After Corrupt Data File](images/afterCorruptDataFile.png)
+
+      Expected: The app should show an empty list (no persons)
+      ![After Corrupt Data File Result](images/afterCorruptDataFileResult.png)
+
+   1. Test case: Valid modification to data file.<br>
+      Before, `Alex Yeoh` has the module `CS1101S` in the untouched data file as seen in `Test case: No modifications to data file after it has been generated`.
+
+      Modify the `Module` attribute value to `CS2030S` (a valid value) in the data file:
+      ![After Valid Modification To Data File](images/afterValidModificationToDataFile.png)
+
+      Expected: The app should show `Alex Yeoh` with the module `CS2030S`:
+      ![After Valid Modification To Data File Result](images/afterValidModificationToDataFileResult.png)
