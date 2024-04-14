@@ -463,44 +463,41 @@ If your changes to the data file makes its format invalid, StaffConnect will dis
 Furthermore, certain edits can cause the StaffConnect to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
+All attributes' restrictions except Favourite can be found in the [Attribute Summary](#attribute-summary) table below.
+
 #### Valid Data Values in `persons`
 
-Data Field | Valid Values
---------|------
-`name` | `Alice`, `Ben10`
-`phone` | `123`, `98765432`
-`email` | `alice@example.com`,
-`module` | `GESS1025`, `HSI1000`, `CS2103T`
-`faculty` | Refer to **only the `Faculty` column** in [Valid Faculty Values](#valid-faculty-values) table below
-`venue` | `COM4-02-33`, `LT21`, `Kent Ridge Vale, Tulip Street, #12-34`
-`tags` | `professor`, `Number1TA`
-`availabilities` | `TUESDAY 12:00 13:00`, `WEDNESDAY 12:00 13:00`
-`meetings` | Refer to the [Valid Data Values in meetings](#valid-data-values-in-meetings) table
-`favourite` | `Favourite`, `Not favourite`
+Attribute | Data Field | Valid Values
+----------|--------|-------------
+Name | `name` | `Alice`, `Ben10`
+Phone | `phone` | `123`, `98765432`
+Email | `email` | `e@123.com`, `hello@h-h.com`, `one+two@h-h.hh`, `hello@e-h.e-hh`
+Module | `module` | `gess1025`, `hsi1000`, `CS2103T`
+Faculty | `faculty` | Refer to the [Valid Faculty Values](#valid-faculty-values) table below
+Venue | `venue` | `COM4-02-33`, `LT21`, `Kent Ridge Vale, Tulip Street, #12-34`
+Tag | `tags` | `professor`, `Number1TA`
+Availabilitity | `availabilities` | `TUESDAY 12:00 13:00`, `WEDNESDAY 12:00 13:00`
+Meeting | `meetings` | Refer to the [Valid Data Values in meetings](#valid-data-values-in-meetings) table below
+Favourite | `favourite` | `Favourite`, `Not favourite`
 
 #### Valid Data Values in `meetings`
 
-Meeting Data Fields | Valid Values
---------|------
-`description` | `Meeting 1`, `Finals`
-`date` | `30/1/2024 12:12`, `2002-11-15 19:00`, `1-12-2022 9:00`, `2024/1/1 0000`
+Attribute | Meeting Data Fields | Valid Values
+----------|--------|-------------
+Meeting Description | `description` | `Meeting 1`, `Finals`
+Meeting Start Time | `date` | `30/1/2024 12:12`, `2002-11-15 19:00`, `1-12-2022 9:00`, `2024/1/1 0000`
 
 <div markdown="block" class="alert alert-primary">
 
 **:exclamation: Important:**
 
-Only `module`, `availabilities` and meeting `date` has additional constraints for their data values.
-
-* The values of `module` must be in capital letters.
-  * :heavy_check_mark: `CS2103T`
-  * :x: `cs2103t`
-* The day in `availabilities` must be in their full spelling and in capital letters.
-  * :heavy_check_mark: `MONDAY`
-  * :x: `MON`
 * The value of `favourite` data field is case-sensitive.
   * :heavy_check_mark: `Not favourite`
   * :x: `not favourite`
   * :x: `not FAVOURITE`
+* There cannot be duplicates of
+  * `meeting` (exact same pair of `description` and `date`) in each `person`.
+  * `name` in the staff book.
 
 </div>
 
