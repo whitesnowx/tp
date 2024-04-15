@@ -356,12 +356,9 @@ The operations for adding and deleting meeting are handled by `AddMeetingCommand
 5. `Logic Manager` executes the `AddMeetingCommand` or `DeleteMeetingCommand`, which handles adding/removing meeting from the `Person` respectively and updates the model with the new information.
 
 Below is the sequence diagram for parsing inputs with  `AddMeetingCommandParser` executing `meeting-add 2 d/Finals s/20/04/2024 15:00`:
-
 <br>![AddMeetingCommandParser Sequence Diagram](images/AddMeetingParserSequenceDiagram.png)
-
 <br>Below in the in-depth reference of how `AddMeetingCommandParser` utilise `ParseUtil` to parse the arguments:
 <br>![Add Parser Reference Diagram](images/AddParserRefrenceDiagram.png)
-
 <br> Similarly, the sequence diagram for parsing inputs with `DeleteMeetingCommandParser` executing `meeting-delete 1 i/1`:
 <br>![DeleteMeetingCommandParser Sequence Diagram](images/DeleteMeetingParserSequenceDiagram.png)
 <br><br>
@@ -370,6 +367,8 @@ After parsing, the commands are executed by the logic manager as show below. (Ex
 <br>![AddMeetingCommand Sequence Diagram](images/AddMeetingSequenceDiagram.png)
 <br> Similarly the sequence diagram for deleting meeting with `DeleteMeetingCommand`:
 <br>![DeleteMeetingCommand Sequence Diagram](images/DeleteMeetingSequenceDiagram.png)
+<br> Below is the sequence diagram of how both `AddMeetingCommand` and `DeleteMeetingCommand` copies the selected person from the model for editing:
+<br>![Copy selectedPerson](images/MeetingCopyPerson.png)
 
 #### What are the design considered:
 

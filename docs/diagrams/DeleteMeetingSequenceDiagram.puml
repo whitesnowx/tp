@@ -5,13 +5,11 @@ skinparam ArrowFontStyle plain
 box Logic LOGIC_COLOR_T1
 participant "d:DeleteMeetingCommand" as DeleteMeetingCommand LOGIC_COLOR
 participant "r:CommandResult" as CommandResult LOGIC_COLOR
-participant "<<class>>\nPersonUtil" as PersonUtil LOGIC_COLOR
 participant "editedPerson:Person " as editedPerson LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
 participant ":ModelManager" as Model MODEL_COLOR
-participant ":Person" as Person MODEL_COLOR
 end box
 
 [-> DeleteMeetingCommand : execute(model)
@@ -21,14 +19,7 @@ DeleteMeetingCommand -> Model : getSortedFilteredPersonList()
 activate Model
 return
 
-DeleteMeetingCommand -> PersonUtil : copyPerson(selectedPerson)
-activate PersonUtil
-
-create Person
-PersonUtil -> Person++
-return copiedPerson
-
-return copiedPerson
+ref over DeleteMeetingCommand : copy selectedPerson
 
 DeleteMeetingCommand -> editedPerson : removeMeeting()
 activate editedPerson
