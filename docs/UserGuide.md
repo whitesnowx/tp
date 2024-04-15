@@ -5,6 +5,8 @@ title: User Guide
 
 StaffConnect (SC) is a **desktop app for managing Professors' and Tutors' contact information and associated meetings, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, SC can get your contact management tasks done faster than traditional GUI apps.
 
+<div style="page-break-after: always;"></div>
+
 * Table of Contents
 {:toc}
 
@@ -48,6 +50,8 @@ StaffConnect (SC) is a **desktop app for managing Professors' and Tutors' contac
 ### Overall UI layout
 <br>![UI General](images/UiAnnotationsLayout.png)
 
+<div style="page-break-after: always;"></div>
+
 #### [UI] Persons Info
 <br>![UI General](images/UiAnnotationsAttributes.png)
 *Note that the availability will not be displayed in sequential order.
@@ -55,8 +59,12 @@ StaffConnect (SC) is a **desktop app for managing Professors' and Tutors' contac
 * The values of [`Faculty`](#valid-faculty-values) will be stored to their full names.
 * The values of `day` part of `Availability` will be stored as their full form such as `MONDAY`, `TUESDAY`, `WEDNESDAY`, `THURSDAY`, `FRIDAY`, `SATURDAY`, `SUNDAY`.
 
+<div style="page-break-after: always;"></div>
+
 #### [UI] Meeting List
 <br>![UI General](images/UiAnnotationsMeetingList.png)
+
+<div style="page-break-after: always;"></div>
 
 #### [UI] Scrollbars and Menu
 <br>![UI General](images/UiAnnotationsScrollbarsAndMenu.png)
@@ -147,6 +155,8 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
+<div style="page-break-after: always;"></div>
+
 ### Adding a person: `add`
 
 Adds a person to the staff book.
@@ -167,6 +177,8 @@ Examples:
 * `add n/Betsy Crowe t/friend m/CS2103T e/betsycrowe@example.com f/Computing v/Newgate Prison p/1234567 t/criminal a/monday 11:00 12:00 a/wednesday 14:00 16:00`
 
 ![Effects of an add command](images/AfterAddCommand.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Listing all persons : `list`
 
@@ -210,6 +222,8 @@ Examples:
     <br>**After editing the second person:** <br>
     ![After editing the second person](images/AfterEditCommand.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Locating persons by name: `find`
 
 Finds persons whose names contain any of the given keywords.
@@ -228,6 +242,8 @@ Examples:
 * `find li` returns `David Li`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Filtering persons: `filter`
 
@@ -253,6 +269,7 @@ Examples:
 * `filter t/tutor` returns `Bernice Yu`, `Irfan Ibrahim`<br>
   ![result for 'filter t/tutor'](images/filterTutorTagResult.png)
 
+<div style="page-break-after: always;"></div>
 
 ### Sorting persons: `sort`
 
@@ -355,6 +372,8 @@ The following command was applied:  `find Bernice Yu` followed by `meeting-delet
 <br><br> **After `meeting-delete 1 i/1`:**<br>
     ![result for after `find Bernice Yu` followed by `meeting-delete 1 i/2`](images/meetingDeleteResultAfter2.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Deleting a person : `delete`
 
 <div markdown="block" class="alert alert-danger">:warning: **Caution:**
@@ -382,6 +401,8 @@ Examples:
   <br>**List all persons and Bernice is deleted:**<br>
   ![Result of deletion](images/AfterDeleteCommand2.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Setting a person as favourite: `fav`
 
 Sets the specified person from the list as favourite.
@@ -403,6 +424,8 @@ Examples:
 
 ![Result of fav command](images/AfterFavCommand.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Removing a person as favourite: `unfav`
 
 Removes the specified person from the staff book as favourite.
@@ -421,6 +444,8 @@ Examples:
 * `list` followed by `unfav 2` removes the 2nd person as favourite in the staff book.
 * `sort p/` followed by `fav 1` removes the 1st person as favourite in the staff book in the results of the `sort` command, which should be the person with the smallest phone number.
 * `find Betsy` followed by `unfav 1` removes the 1st person as favourite in the results of the `find` command.
+
+<div style="page-break-after: always;"></div>
 
 ### Refreshing and clearing all outdated meetings: `refresh`
 
@@ -449,6 +474,8 @@ Examples:
 Refresh is only used when the user decides to remove clutter in the staff book, and wants to remove outdated meetings. 
 This process is not done automatically as sometimes the user would like to retain old meetings for bookkeeping purposes.
 
+<div style="page-break-after: always;"></div>
+
 ### Selecting the person to display: `select`
 
 Selects the person identified by their current displayed index number to display their attributes and meeting list.
@@ -464,6 +491,8 @@ Examples:
 * `filter t/tutor` followed by `select 1` <br> Selects the 1st person in the results of the `filter` command.
 * `sort p/` followed by `select 1` <br> Selects the 1st person in the results of the `sort` command, which should be the person with the smallest phone number.
 
+<div style="page-break-after: always;"></div>
+
 ### Clearing all entries : `clear`
 
 <div markdown="block" class="alert alert-danger">:warning: **Caution:**
@@ -475,6 +504,8 @@ Clears all entries from the staff book.
 Format: `clear`
 
 ![Effects of clear command](images/AfterClearCommand.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Exiting the program : `exit`
 
