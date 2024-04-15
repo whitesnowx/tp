@@ -1,0 +1,37 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+mainframe **sd** parse arguments for meeting-add
+
+box Logic LOGIC_COLOR_T1
+participant ":AddMeetingCommandParser" as AddMeetingCommandParser LOGIC_COLOR
+participant "<<class>>\nParserUtil" as ParserUtil LOGIC_COLOR
+participant ":MeetingDescription" as MeetingDescription LOGIC_COLOR
+participant ":MeetingDateTime" as MeetingDateTime LOGIC_COLOR
+end box
+
+
+
+AddMeetingCommandParser -> ParserUtil : parseIndex()
+activate AddMeetingCommandParser
+activate ParserUtil
+return
+
+AddMeetingCommandParser -> ParserUtil : parseDescription()
+activate ParserUtil
+
+create MeetingDescription
+ParserUtil -> MeetingDescription++
+return
+return
+
+AddMeetingCommandParser -> ParserUtil : parseDateTime()
+activate ParserUtil
+create MeetingDateTime
+ParserUtil -> MeetingDateTime++
+return
+return
+
+
+@enduml

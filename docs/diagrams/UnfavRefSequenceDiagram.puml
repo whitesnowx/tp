@@ -1,0 +1,33 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+skinparam ParticipantPadding 20
+
+mainframe **sd** create an unfavourite person
+
+box Logic LOGIC_COLOR_T1
+participant "u:UnfavCommand" as UnfavCommand LOGIC_COLOR
+participant UnfavCommand as UnfavCommand1 <<class>> LOGIC_COLOR
+participant "<<class>>\nPersonUtil" as PersonUtil LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Person" as Person MODEL_COLOR
+end box
+
+
+UnfavCommand -> UnfavCommand1 : createUnfavPerson(personToUnfav)
+activate UnfavCommand1
+
+UnfavCommand1 -> PersonUtil : createPersonWithFavouriteStatus(selectedPerson, favourite)
+activate PersonUtil
+
+create Person
+PersonUtil -> Person++
+return createdPerson
+
+return unfavPerson
+return unfavPerson
+
+
+@enduml

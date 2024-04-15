@@ -46,12 +46,12 @@ StaffConnect (SC) is a **desktop app for managing Professors' and Tutors' contac
 ## Navigability
 
 ### Overall UI layout
-<br>![UI General](images/UiAnnotationsLayout.png)
+<br>![UI Annotations Layout](images/UiAnnotationsLayout.png)
 
 <div style="page-break-after: always;"></div>
 
 #### [UI] Persons Info
-<br>![UI General](images/UiAnnotationsAttributes.png)
+<br>![UI Annotations Attribute](images/UiAnnotationsAttributes.png)
 *Note that the availability will not be displayed in sequential order.
 * The values of `Module` will be displayed and stored in capital letters.
 * The values of [`Faculty`](#valid-faculty-values) will be stored to their full names.
@@ -60,12 +60,12 @@ StaffConnect (SC) is a **desktop app for managing Professors' and Tutors' contac
 <div style="page-break-after: always;"></div>
 
 #### [UI] Meeting List
-<br>![UI General](images/UiAnnotationsMeetingList.png)
+<br>![UI Annotations MeetingList](images/UiAnnotationsMeetingList.png)
 
 <div style="page-break-after: always;"></div>
 
 #### [UI] Scrollbars and Menu
-<br>![UI General](images/UiAnnotationsScrollbarsAndMenu.png)
+<br>![UI Annotations ScrollBars](images/UiAnnotationsScrollbarsAndMenu.png)
 *Note that Persons List Scrollbar will open appear when the number of Persons in the list exceed the amount to be displayed by the view.
 *Note that the `Exit` button is in the dropdown of the `File` button.
 
@@ -78,32 +78,32 @@ Before we get started StaffConnect offers a unique suite of UI controls for user
 1. Clicking any items on the left persons list panel will allow you to select the person's attributes and meeting list to display.
 <br>Alternatively, clicking anywhere in the persons list panel then using your arrow keys to navigate and hitting enter to select would give the same result.
 <br>**Intended Behaviour:** 
-<br> Hovering the selection with mouse or arrow keys would not cause the details panel to switch to the selected person. This is to allow users to browse the persons list panel without switching.
+<br> Hovering the selection with mouse or arrow keys would not cause the person information and meeting list panels to switch to the selected person. This is to allow users to browse the persons list panel without switching.
 <br>![Region to select the person](images/personPanelRegion.png)
-   
+
 2. There is a divider that is draggable up and down to hide and show details on the right side and to customise the look of your application.
 <br>![Region to select the divider](images/detailsDividerRegion.png)
 
-3. Each of the 2 detail panels on the right are able to pan in all four directions to view the content:
+3. The person information and meeting list panels on the right are able to pan in all four directions to view the content:
     - For mouse pad users, dragging around with two fingers the around would pan around the pane.
     - For mouse users, __[Mouse Wheel]__ will scroll up and down while __[Shift + Mouse wheel]__ will scroll left and right.
     - __[Left click + Drag Mouse]__ would pan around in the details pane as well.
     - Keyboard arrow keys are able to pan around as well, but the scroll speed may differ on different systems.
     - There are scroll bars at the vertical and horizontal dividers of the window pane, dragging them in the respective direction will pan around as well.
-   
-4.  The Result display:<br>
+
+4.  Command Output:<br>
     The scroll bars can only be scrolled by two ways:
       1. For mouse pad users, dragging around with two fingers the around would pan around the pane.
       2. For mouse users, __[Mouse Wheel]__ will scroll up and down while __[Shift + Mouse Wheel]__ will scroll left and right.
       3. Simply dragging the scroll bar with a left mouse click. 
-      <br>**Scrolling by arrow keys is not fully supported in the result display**
+      <br>**Scrolling by arrow keys is not fully supported in the Command Output panel**
 
-5.  The Command box:<br>
+5.  Command Line Interface:<br>
     The input can only be scrolled by __[Holding Left Click + Drag Mouse]__  to the edge in the direction to scroll. This is to allow making adjustments on very long commands.
 
 <div style="page-break-after: always;"></div>
 
-<Br><Br> 
+<Br><Br>
 ### Alternative UI arrangements
 <br>![first alternative ui](images/firstAlternative.png)
 <br>
@@ -265,10 +265,17 @@ format: `filter [m/MODULE] [f/FACULTY] [t/TAG]… [a/AVAILABILITY]…`
 
 Examples:
 * `filter m/CS1101S` returns `Alex Yeoh`
+  <br>![result of `filter m/CS1101S`](images/AfterFilterCommand1.png)
 * `filter f/Computing t/professor` returns `Alex Yeoh`, `Charlotte Oliveiro`, `David Li` and `Roy Balakrishman`
+  <br>![result of `filter f/Computing t/professor`](images/AfterFilterCommand2.png)
 * `filter t/tutor` returns `Bernice Yu`, `Irfan Ibrahim`<br>
-  ![result for 'filter t/tutor'](images/filterTutorTagResult.png)
-
+  ![result for 'filter t/tutor'](images/AfterFilterCommand3.png)
+* To illustrate the next example, the sample data are edited first to let `Alex Yeoh`, `Charlotte Oliveiro` and `Irfan Ibrahim` have tags `friend`, `professor` and `youtuber`. They are available on `Monday 12:00 13:00` and `Thursday 12:00 13:00`.
+  <br>![results of the above-mentioned edits](images/BeforeFilterCommand1.png)
+  <br>You can see that for `Roy Balakrishnan`, while he is available on `Monday 12:00 13:00` and `Thursday 12:00 13:00`, he does not have tags `friend` and `youtuber`.
+  <br>![Roy Balakrishnan not having other tags](images/BeforeFilterCommand2.png)
+  <br>`filter f/soc t/professor t/friend t/youtuber a/mon 12:00 13:00 a/thurs 12:00 13:00` returns `Alex Yeoh`, `Charlotte Oliveiro` and `Irfan Ibrahim`.
+  <br>![result of the command](images/AfterFilterCommand4.png)
 <div style="page-break-after: always;"></div>
 
 ### Sorting persons: `sort`
@@ -350,19 +357,20 @@ Deletes a meeting from a person based on specified meeting index.
 
 Format: `meeting-delete INDEX i/MEETING-INDEX `
 
-* Deletes the  meeting at specified `MEETING-INDEX` from the person at specified `INDEX`. 
-* The index refers to the index number shown in the displayed person list. 
+* Deletes the  meeting at specified `MEETING-INDEX` from the person at specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3,…​ and tally within range index of the displayed person list.
 * The meeting-index refers to the index number shown in the displayed meeting list.
 * The meeting-index **must be a positive integer** 1, 2, 3,…​ and tally within range index of the displayed meeting list.
 * The meeting from the person must exist before it can be deleted otherwise an error will be displayed.
 
 Examples:
+
 <br>The following commands assumes that meetings have been added prior to the command. Otherwise, an error will be thrown. <br> **(Refer to the section above on how to add a meeting)**
 * `list` followed by `meeting-delete 1 i/1` deletes the 1st meeting from the 1st person in the list.
 * `meeting-delete 1 i/3` deletes the 3rd meeting from the 1st person in the current displayed contacts list.
 * `find Bernice Yu` followed by `meeting-delete 1 i/2` deletes the 1st meeting from the 1st person in the results of the `find` command.
-      
+
 <br>**Results for delete meeting:**<br>
 The following command was applied:  `find Bernice Yu` followed by `meeting-delete 1 i/2`.
 <br> __(Disclaimer: The content shown in the examples may not match what you have added to your own meetings within the staff book).__
@@ -462,12 +470,13 @@ This may result in possible data loss. e.g. Meetings of a person may be deleted.
 There will be no further prompt after entering the command to refresh meetings of all persons. This action is irreversible and the meeting information that may be deleted cannot be retrieved afterwards.
 </div>
 
-Deletes all meetings that start before the very moment the user types in the command and enters.
+Deletes all meetings that start before the very moment the user types in the command and enters. Notice that only persons currently filtered in the list will be affected.
 
 Format: `refresh`
 
 * The deleted meetings will be explicitly printed again to the use, specifying content of the meeting and who "owns" the meeting.
 * If no meetings are deleted, there will no error thrown. Instead, a prompt will be given to user that no meeting is deleted.
+* The command will not delete meetings for persons not currently shown in the list due to filter command or find command. If the user wants to execute the command for all persons, type in `list` first to show all persons.
 
 Examples:
 * If there is a meeting `Avengers Assemble` that happened in `31/08/1939 12:00`, when the user types in `refresh`, it will be deleted.
@@ -480,7 +489,7 @@ Examples:
 ![After refreshing](images/AfterRefreshCommand.png)
 
 **Known limitations:**
-Refresh is only used when the user decides to remove clutter in the staff book, and wants to remove outdated meetings. 
+Refresh is only used when the user decides to remove clutter in the staff book, and wants to remove outdated meetings.
 This process is not done automatically as sometimes the user would like to retain old meetings for bookkeeping purposes.
 
 <div style="page-break-after: always;"></div>
@@ -531,6 +540,7 @@ StaffConnect data are saved in the hard disk automatically after any command tha
 StaffConnect data are saved automatically as a JSON file `[JAR file location]/data/staffconnect.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+
 If your changes to the data file makes its format invalid, StaffConnect will discard all data and start with an empty data file at the next run. Hence, it is **recommended to take a backup** of the file before editing it.<br>
 Furthermore, certain edits can cause StaffConnect to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). 
 The application will not prompt the user if the format of the data file is incorrect, but instead provide the user with an empty staff book.<br>
@@ -627,8 +637,8 @@ Meeting Start Time | `date` | `30/1/2024 12:12`, `2002-11-15 19:00`, `1-12-2022 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the generated data file with the file that contains the data from your current StaffConnect device.<br>
 **Q**: Why are concurrent or past meetings allowed? <br>
-**A**: This is to allow greater flexibility for users who wish to segregate meetings of different topics happening concurrently or users who wish to store meetings in the past for bookkeeping purposes etc..
-**Q**: Why are meeting's description with the same content but different case-sensitivity allowed?
+**A**: This is to allow greater flexibility for users who wish to segregate meetings of different topics happening concurrently or users who wish to store meetings in the past for bookkeeping purposes etc..<br>
+**Q**: Why are meeting's description with the same content but different case-sensitivity allowed?<br>
 **A**: Sometimes the user would like to have finer control over how they want to differentiate between topics, and a single capital letter could make that difference.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -638,12 +648,12 @@ Meeting Start Time | `date` | `30/1/2024 12:12`, `2002-11-15 19:00`, `1-12-2022 
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **When adding/editing phone number with a descriptor**, If you try to add a number with a descriptor such as `98731094 (home)`, the application rejects this input and advise the user to only provide phone numbers with numerical values only. The phone number is not intended to store phone number descriptor but users can consider using tags such as t/homePhone as a workaround.
-3. **When adding/editing name containing special characters**, If you try to add a name such as `Jason s/o William`, the application rejects this input and advise the user to only provide name with alphanumeric values only. The name is not intended to store special characters but users can consider using `so` or `son of` as a workaround. If a person's name includes special characters (characters not included in modern English) like arabic characters (such as أ, ب, ت, etc.), it should be latinized first.
-4. **When adding/editing name that already exists in the staff book**, if you try to do so, an error message will be prompted, as two persons are considered the same person as long as they have the same name. It is inplausible to has two persons with the same name but other different attributes.
-5. **When adding/editing venues containing space with an attribute prefix**, If you try to add a venue such as `Room 12 t/r`, the application will add a person with a venue `Room 12` and a tag `r` instead of the intended venue `Room 12 t/r`. The venue is not intended to store venues that contains a space followed by an attribute prefix but users can consider omitting the space or replace with a hyphen such as `Room 12t/r` or `Room 12-t/r` as a workaround.
-6. **When generating the default file and exiting via the `Exit` button**, If you try to generate the default JSON file `[JAR file location]/data/staffconnect.json` by running the JAR file, without manipulating any data and exiting via the `Exit` button, the JSON file would not be generated. You may consider using the `exit` command via the command line interface to generate the default JSON file instead.
-
+2. **When adding/editing an availability to a person**, the allowed formats for time is not as flexible as typing in a meeting start date. The only allowed format is `HH:mm`. `HH` is a valid 24-hour (00-23), `mm` are valid minutes (00-59).
+3. **When adding/editing phone number with a descriptor**, If you try to add a number with a descriptor such as `98731094 (home)`, the application rejects this input and advise the user to only provide phone numbers with numerical values only. The phone number is not intended to store phone number descriptor but users can consider using tags such as t/homePhone as a workaround.
+4. **When adding/editing name containing special characters**, If you try to add a name such as `Jason s/o William`, the application rejects this input and advise the user to only provide name with alphanumeric values only. The name is not intended to store special characters but users can consider using `so` or `son of` as a workaround. If a person's name includes special characters (characters not included in modern English) like arabic characters (such as أ, ب, ت, etc.), it should be latinized first.
+5. **When adding/editing name that already exists in the staff book**, if you try to do so, an error message will be prompted, as two persons are considered the same person as long as they have the same name. It is inplausible to has two persons with the same name but other different attributes.
+6. **When adding/editing venues containing space with an attribute prefix**, If you try to add a venue such as `Room 12 t/r`, the application will add a person with a venue `Room 12` and a tag `r` instead of the intended venue `Room 12 t/r`. The venue is not intended to store venues that contains a space followed by an attribute prefix but users can consider omitting the space or replace with a hyphen such as `Room 12t/r` or `Room 12-t/r` as a workaround.
+7. **When generating the default file and exiting via the `Exit` button**, If you try to generate the default JSON file `[JAR file location]/data/staffconnect.json` by running the JAR file, without manipulating any data and exiting via the `Exit` button, the JSON file would not be generated. You may consider using the `exit` command via the command line interface to generate the default JSON file instead.
 
 --------------------------------------------------------------------------------------------------------------------
 
