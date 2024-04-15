@@ -42,20 +42,20 @@ StaffConnect (SC) is a **desktop app for managing Professors' and Tutors' contac
 ## Navigability
 
 ### Overall UI layout
-<br>![UI General](images/UiAnnotationsLayout.png)
+<br>![UI Annotations Layout](images/UiAnnotationsLayout.png)
 
 #### [UI] Persons Info
-<br>![UI General](images/UiAnnotationsAttributes.png)
+<br>![UI Annotations Attribute](images/UiAnnotationsAttributes.png)
 *Note that the availability will not be displayed in sequential order.
 * The values of `Module` will be displayed and stored in capital letters.
 * The values of [`Faculty`](#valid-faculty-values) will be stored to their full names.
 * The values of `day` part of `Availability` will be stored as their full form such as `MONDAY`, `TUESDAY`, `WEDNESDAY`, `THURSDAY`, `FRIDAY`, `SATURDAY`, `SUNDAY`.
 
 #### [UI] Meeting List
-<br>![UI General](images/UiAnnotationsMeetingList.png)
+<br>![UI Annotations MeetingList](images/UiAnnotationsMeetingList.png)
 
 #### [UI] Scrollbars and Menu
-<br>![UI General](images/UiAnnotationsScrollbarsAndMenu.png)
+<br>![UI Annotations ScrollBars](images/UiAnnotationsScrollbarsAndMenu.png)
 *Note that Persons List Scrollbar will open appear when the number of Persons in the list exceed the amount to be displayed by the view.
 *Note that the `Exit` button is in the dropdown of the `File` button.
 
@@ -66,28 +66,28 @@ Before we get started StaffConnect offers a unique suite of UI controls for user
 1. Clicking any items on the left persons list panel will allow you to select the person's attributes and meeting list to display.
 <br>Alternatively, clicking anywhere in the persons list panel then using your arrow keys to navigate and hitting enter to select would give the same result.
 <br>**Intended Behaviour:** 
-<br> Hovering the selection with mouse or arrow keys would not cause the details panel to switch to the selected person. This is to allow users to browse the persons list panel without switching.
+<br> Hovering the selection with mouse or arrow keys would not cause the person information and meeting list panels to switch to the selected person. This is to allow users to browse the persons list panel without switching.
 <br>![Region to select the person](images/personPanelRegion.png)
    
 
 2. There is a divider that is draggable up and down to hide and show details on the right side and to customise the look of your application.
 <br>![Region to select the divider](images/detailsDividerRegion.png)
 
-3. Each of the 2 detail panels on the right are able to pan in all four directions to view the content:
+3. The person information and meeting list panels on the right are able to pan in all four directions to view the content:
     - For mouse pad users, dragging around with two fingers the around would pan around the pane.
     - For mouse users, __[Mouse Wheel]__ will scroll up and down while __[Shift + Mouse wheel]__ will scroll left and right.
     - __[Left click + Drag Mouse]__ would pan around in the details pane as well.
     - Keyboard arrow keys are able to pan around as well, but the scroll speed may differ on different systems.
     - There are scroll bars at the vertical and horizontal dividers of the window pane, dragging them in the respective direction will pan around as well.
    
-4.  The Result display:<br>
+4.  Command Output:<br>
     The scroll bars can only be scrolled by two ways:
       1. For mouse pad users, dragging around with two fingers the around would pan around the pane.
       2. For mouse users, __[Mouse Wheel]__ will scroll up and down while __[Shift + Mouse Wheel]__ will scroll left and right.
       3. Simply dragging the scroll bar with a left mouse click. 
-      <br>**Scrolling by arrow keys is not fully supported in the result display**
+      <br>**Scrolling by arrow keys is not fully supported in the Command Output panel**
 
-5.  The Command box:<br>
+5.  Command Line Interface:<br>
     The input can only be scrolled by __[Holding Left Click + Drag Mouse]__  to the edge in the direction to scroll. This is to allow making adjustments on very long commands.
 
 
@@ -575,8 +575,8 @@ Meeting Start Time | `date` | `30/1/2024 12:12`, `2002-11-15 19:00`, `1-12-2022 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the generated data file with the file that contains the data from your current StaffConnect device.<br>
 **Q**: Why are concurrent or past meetings allowed? <br>
-**A**: This is to allow greater flexibility for users who wish to segregate meetings of different topics happening concurrently or users who wish to store meetings in the past for bookkeeping purposes etc..
-**Q**: Why are meeting's description with the same content but different case-sensitivity allowed?
+**A**: This is to allow greater flexibility for users who wish to segregate meetings of different topics happening concurrently or users who wish to store meetings in the past for bookkeeping purposes etc..<br>
+**Q**: Why are meeting's description with the same content but different case-sensitivity allowed?<br>
 **A**: Sometimes the user would like to have finer control over how they want to differentiate between topics, and a single capital letter could make that difference.
 
 --------------------------------------------------------------------------------------------------------------------
