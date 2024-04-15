@@ -18,7 +18,7 @@ FavCommand -> FavCommand1 : createFavPerson(personToFav)
 activate FavCommand
 activate FavCommand1
 
-FavCommand1 -> PersonUtil : createPersonWithFavouriteStatus(Person selectedPerson, Favourite favourite)
+FavCommand1 -> PersonUtil : createPersonWithFavouriteStatus(selectedPerson, favourite)
 activate PersonUtil
 
 create Person

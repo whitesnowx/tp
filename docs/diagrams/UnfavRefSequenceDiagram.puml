@@ -19,7 +19,7 @@ end box
 UnfavCommand -> UnfavCommand1 : createUnfavPerson(personToUnfav)
 activate UnfavCommand1
 
-UnfavCommand1 -> PersonUtil : createPersonWithFavouriteStatus(Person selectedPerson, Favourite favourite)
+UnfavCommand1 -> PersonUtil : createPersonWithFavouriteStatus(selectedPerson, favourite)
 activate PersonUtil
 
 create Person
