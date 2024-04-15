@@ -472,7 +472,7 @@ The application will not prompt the user if the format of the data file is incor
 
 </div>
 
-#### Valid Data Values in `persons`
+#### Valid Data Values for `Person` in JSON file
 
 All attributes' restrictions except **Favourite** can be found in the [Attribute Summary](#attribute-summary) table.
 
@@ -486,10 +486,10 @@ Faculty | `faculty` | Refer to the [Valid Faculty Values](#valid-faculty-values)
 Venue | `venue` | `COM4-02-33`, `LT21`, `Kent Ridge Vale, Tulip Street, #12-34`
 Tag | `tags` | `professor`, `Number1TA`
 Availabilitity | `availabilities` | `TUESDAY 12:00 13:00`, `WEDNESDAY 12:00 13:00`
-Meeting | `meetings` | Refer to the [Valid Data Values in meetings](#valid-data-values-in-meetings) table.
+Meeting | `meetings` | Refer to the [Valid Data Values in meetings](#valid-data-values-for-meetings-for-each-person-in-json-file) table.
 Favourite | `favourite` | `Favourite` or `Not favourite`
 
-#### Valid Data Values in `meetings`
+#### Valid Data Values for `Meetings` (for each `Person`) in JSON file
 
 Attribute | Meeting Data Fields | Valid Values
 ----------|--------|-------------
