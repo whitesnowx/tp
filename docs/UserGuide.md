@@ -171,6 +171,8 @@ A person can have any number of tags and availabilities (including 0)
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com f/Computing v/John street, block 123, #01-01 m/CS2103`
 * `add n/Chihiro Ogino m/GEC1024 e/spirited@example.com f/FASS v/The Spirit Realm p/20122001 a/tues 21:00 22:00 a/wednesday 00:00 23:59`
+
+<div style="page-break-after: always;"></div>
 * `add n/Betsy Crowe t/friend m/CS2103T e/betsycrowe@example.com f/Computing v/Newgate Prison p/1234567 t/criminal a/monday 11:00 12:00 a/wednesday 14:00 16:00`
 
 ![Effects of an add command](images/AfterAddCommand.png)
