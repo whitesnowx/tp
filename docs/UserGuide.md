@@ -39,21 +39,34 @@ StaffConnect (SC) is a **desktop app for managing Professors' and Tutors' contac
 
 --------------------------------------------------------------------------------------------------------------------
 
-
 ## Navigability
 
 ### Overall UI layout
-<br>![Overall Layout](images/OverallLayout.png)
+<br>![UI General](images/UiAnnotationsLayout.png)
 
+#### [UI] Persons Info
+<br>![UI General](images/UiAnnotationsAttributes.png)
+*Note that the availability will not be displayed in sequential order.
+* The values of `Module` will be displayed and stored in capital letters.
+* The values of [`Faculty`](#valid-faculty-values) will be stored to their full names.
+* The values of `day` part of `Availability` will be stored as their full form such as `MONDAY`, `TUESDAY`, `WEDNESDAY`, `THURSDAY`, `FRIDAY`, `SATURDAY`, `SUNDAY`.
+
+#### [UI] Meeting List
+<br>![UI General](images/UiAnnotationsMeetingList.png)
+
+#### [UI] Scrollbars and Menu
+<br>![UI General](images/UiAnnotationsScrollbarsAndMenu.png)
+*Note that Persons List Scrollbar will open appear when the number of Persons in the list exceed the amount to be displayed by the view.
+*Note that the `Exit` button is in the dropdown of the `File` button.
 
 ### Mouse and Keyboard controls
 
 Before we get started StaffConnect offers a unique suite of UI controls for users to customise their own unique experience!
 
-1. Clicking any items on the left contacts panel will allow you to select the person whose attributes and meeting list are to be display.
-<br>Alternatively, clicking anywhere in the contacts panel then using your arrow keys to navigate and hitting enter to select would give the same result.
+1. Clicking any items on the left persons list panel will allow you to select the person's attributes and meeting list to display.
+<br>Alternatively, clicking anywhere in the persons list panel then using your arrow keys to navigate and hitting enter to select would give the same result.
 <br>**Intended Behaviour:** 
-<br> Hovering the selection with mouse or arrow keys would not cause the details panel to switch to the selected person. This is to allow users to browse the contacts panel without switching.
+<br> Hovering the selection with mouse or arrow keys would not cause the details panel to switch to the selected person. This is to allow users to browse the persons list panel without switching.
 <br>![Region to select the person](images/personPanelRegion.png)
    
 
