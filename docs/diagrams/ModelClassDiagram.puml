@@ -26,6 +26,7 @@ Class Faculty
 Class Venue
 Class Tag
 Class Availability
+Class Favourite
 Class Meeting
 
 Class I #FFFFFF
@@ -51,7 +52,7 @@ MeetingBook -down->"1" UniqueMeetingList
 
 
 StaffBook *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
+UniquePersonList --> "                       ~* all" Person
 Person *--> Name
 Person *--> Phone
 Person *--> Email
@@ -60,6 +61,7 @@ Person *--> Faculty
 Person *--> Venue
 Person *--> "*" Tag
 Person *--> "*" Availability
+Person *--> Favourite
 Person *--> "1" MeetingManager
 UniqueMeetingList *--> "*" Meeting
 
@@ -73,9 +75,9 @@ Module -[hidden]right-> Faculty
 Faculty -[hidden]right-> Venue
 Venue -[hidden]right-> Tag
 Tag -[hidden]right-> Availability
+Availability -[hidden]right-> Favourite
 
 Person -[hidden]right> MeetingManager
 
-
-ModelManager --> "~* filtered" Person
+ModelManager "\n\n\n\n\n\n\n\n\n\n\n\n ~*filtered" <-down-  Person
 @enduml
