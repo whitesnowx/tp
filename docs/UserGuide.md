@@ -23,9 +23,8 @@ StaffConnect (SC) is a **desktop app for managing Professors' and Tutors' contac
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar StaffConnect.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>__(The data in preview image below may not match with the sample data provided)__<br>
    ![Ui](images/Ui.png)
-    
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the Command Line Interface (CLI) and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
     * `list` : Lists all persons.
@@ -196,7 +195,7 @@ Edits an existing person in the staff book.
 
 * The displayed view in StaffConnect will reset to the default view after the `edit` command is called.
 
-* The changes made are displayed in the result display above the command box.
+* The changes made are displayed in the result display above the Command Line Interface (CLI).
 </div>
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [m/MODULE] [f/FACULTY] [v/VENUE] [t/TAG]…​ [a/AVAILABILITY]…​`
