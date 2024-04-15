@@ -24,7 +24,7 @@ StaffConnect (SC) is a **desktop app for managing Professors' and Tutors' contac
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>__(The data in preview image below may not match with the sample data provided)__<br>
    ![Ui](images/Ui.png)
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the Command Line Interface (CLI) and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
     * `list` : Lists all persons.
@@ -195,7 +195,7 @@ Edits an existing person in the staff book.
 
 * The displayed view in StaffConnect will reset to the default view after the `edit` command is called.
 
-* The changes made are displayed in the result display above the command box.
+* The changes made are displayed in the Command Output above the Command Line Interface (CLI).
 </div>
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [m/MODULE] [f/FACULTY] [v/VENUE] [t/TAG]…​ [a/AVAILABILITY]…​`
@@ -263,17 +263,23 @@ format: `filter [m/MODULE] [f/FACULTY] [t/TAG]… [a/AVAILABILITY]…`
 * Persons matching all fields will be returned (i.e. `AND` search).
   e.g. `filter m/CS2030S f/Computing` will return `Charlotte Oliveiro`
 
+<div style="page-break-after: always;"></div>
 Examples:
 * `filter m/CS1101S` returns `Alex Yeoh`
   <br>![result of `filter m/CS1101S`](images/AfterFilterCommand1.png)
+<div style="page-break-after: always;"></div>
 * `filter f/Computing t/professor` returns `Alex Yeoh`, `Charlotte Oliveiro`, `David Li` and `Roy Balakrishman`
   <br>![result of `filter f/Computing t/professor`](images/AfterFilterCommand2.png)
+<div style="page-break-after: always;"></div>
 * `filter t/tutor` returns `Bernice Yu`, `Irfan Ibrahim`<br>
   ![result for 'filter t/tutor'](images/AfterFilterCommand3.png)
+<div style="page-break-after: always;"></div>
 * To illustrate the next example, the sample data are edited first to let `Alex Yeoh`, `Charlotte Oliveiro` and `Irfan Ibrahim` have tags `friend`, `professor` and `youtuber`. They are available on `Monday 12:00 13:00` and `Thursday 12:00 13:00`.
   <br>![results of the above-mentioned edits](images/BeforeFilterCommand1.png)
+<div style="page-break-after: always;"></div>
   <br>You can see that for `Roy Balakrishnan`, while he is available on `Monday 12:00 13:00` and `Thursday 12:00 13:00`, he does not have tags `friend` and `youtuber`.
   <br>![Roy Balakrishnan not having other tags](images/BeforeFilterCommand2.png)
+<div style="page-break-after: always;"></div>
   <br>`filter f/soc t/professor t/friend t/youtuber a/mon 12:00 13:00 a/thurs 12:00 13:00` returns `Alex Yeoh`, `Charlotte Oliveiro` and `Irfan Ibrahim`.
   <br>![result of the command](images/AfterFilterCommand4.png)
 <div style="page-break-after: always;"></div>
