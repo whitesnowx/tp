@@ -2,6 +2,8 @@
 skin rose
 skinparam ActivityFontSize 15
 skinparam ArrowFontSize 12
+skinparam DefaultTextAlignment center
+
 start
 :User executes unfav command;
 
@@ -10,14 +12,14 @@ start
 
 if () then ([index is valid])
     if () then ([Person is favourite])
-        :Create new Person with same values but is not a favourite;
-        :Replace the original Person with the new one;
+        :Create new Person with same\n values but is not a favourite;
+        :Replace the original Person\n with the new one;
         :Refresh the list of Persons;
     else ([else])
-        :Show error message to user that person is already not a favourite;
+        :Show error message to user\n that person is already not a favourite;
     endif
 else ([else])
-    :Show error message to user that index is invalid;
+    :Show error message to user\n that index is invalid;
 endif
 stop
 @enduml
