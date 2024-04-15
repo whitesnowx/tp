@@ -322,6 +322,8 @@ The sequence diagram for executing a **"sort n/"** is shown below:
 
 <img src="images/SortSequenceDiagram.png" width="850" />
 
+<div style="page-break-after: always;"></div>
+
 The following activity diagram summarizes what happens when a user executes a new sort command:
 
 <img src="images/SortActivityDiagram.png" width="600" />
