@@ -195,7 +195,7 @@ Edits an existing person in the staff book.
 
 * The displayed view in StaffConnect will reset to the default view after the `edit` command is called.
 
-* The changes made are displayed in the result display above the Command Line Interface (CLI).
+* The changes made are displayed in the Command Output above the Command Line Interface (CLI).
 </div>
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [m/MODULE] [f/FACULTY] [v/VENUE] [t/TAG]…​ [a/AVAILABILITY]…​`
