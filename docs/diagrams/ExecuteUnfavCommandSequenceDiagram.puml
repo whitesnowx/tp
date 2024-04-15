@@ -1,0 +1,42 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant "u:UnfavCommand" as UnfavCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":ModelManager" as Model MODEL_COLOR
+end box
+
+activate LogicManager
+
+LogicManager -> UnfavCommand : execute(model)
+activate UnfavCommand
+
+UnfavCommand -> Model : getSortedFilteredPersonList()
+activate Model
+return
+
+ref over UnfavCommand : create an unfavourite person
+
+UnfavCommand -> Model : setPerson(personToUnfav, unfavPerson)
+activate Model
+return
+
+UnfavCommand -> Model : updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS)
+activate Model
+return
+
+create CommandResult
+UnfavCommand -> CommandResult++
+return
+
+return r
+[<- LogicManager
+deactivate LogicManager
+
+@enduml

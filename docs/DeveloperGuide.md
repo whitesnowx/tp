@@ -24,6 +24,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 <div markdown="span" class="alert alert-primary">
 
 :bulb: **Tip:** The `.puml` files used to create diagrams in this document `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+
 </div>
 
 ### Architecture
@@ -101,10 +102,10 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `StaffConnectParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
+3. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
@@ -115,10 +116,10 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
+
 **API** : [`Model.java`](https://github.com/AY2324S2-CS2103-F08-3/tp/blob/master/src/main/java/staffconnect/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
-
 
 The `Model` component,
 
@@ -132,7 +133,6 @@ The `Model` component,
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
 </div>
-
 
 ### Storage component
 
@@ -170,7 +170,7 @@ The sequence diagram below shows how the edit command `edit 1 p/ 12345678` goes 
 2. The parsing of `EditCommandParser` results in a new `EditCommand` initialized by an index `int` and a `EditPersonDescriptor`. The datails will be explained later.
 3. When the `EditCommand` is executed, it creates a new `Person` object according to the `EditPersonDescriptor` passed to it, and replaces the old `Person` object with the new one.
 4. The command communicates with the `Model` when it is executed. More specifically, it calls the `updateFilteredPersonList()` method using a `Predicate` object which simply evaluates to true for all `Person`. The intension is that no `Person` will be filtered out in an edit command.
-5.  The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`, to show in the `UI` component the success message that the `Person` at the given index is updated with the new information.
+5. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`, to show in the `UI` component the success message that the `Person` at the given index is updated with the new information.
 
 The below sequence diagram goes into more detail on how the command is parsed in `EditCommandParser`.
 
@@ -294,7 +294,6 @@ The sequence diagram for executing a **"sort n/"** is shown below:
 
 <img src="images/SortSequenceDiagram.png" width="850" />
 
-
 The following activity diagram summarizes what happens when a user executes a new sort command:
 
 <img src="images/SortActivityDiagram.png" width="450" />
@@ -305,7 +304,7 @@ The main operation for the sort feature is the `updateSortedPersonList(Comparato
 The following are some explanations for decisions made in the implementation of the sort feature.
 
 Need for multiple `Comparator` objects:
-This is to keep in view for when other commands or enhancements may need the separate attribute predicates. 
+This is to keep in view for when other commands or enhancements may need the separate attribute predicates.
 
 Need for `MultiComparator` object:
 This is to map the 1 or more comparator objects and act as a layer of abstraction where `SortCommmand` does need to know how many attributes are used in sorting.
@@ -314,6 +313,7 @@ This is to map the 1 or more comparator objects and act as a layer of abstractio
 This is to prevent `SortCommand` from taking on more responsibilities (Separation of Concerns).
 
 #### What designs were considered:
+
 **Aspect: Determining order of sorting of attribute(s):**
 
 * **Current Design:** Get sorting order of attribute(s) from user input.
@@ -344,7 +344,7 @@ Meeting is feature that allows the user to keep track of any events they may hav
 Meeting contains two attributes ```MeetingDescription``` and ```MeetingDateTime``` class. ```MeetingDescription```
 is used to handle any valid description of the meeting with only alphanumeric values, while the ```MeetingDateTime```
 is used to handle any valid date time values. Each of this meeting are stored in a list data class ```MeetingList``` that
-contains each of the meetings related to each other stored in an ```ObservableList```. The ``` MeetingManager ``` is
+contains each of the meetings related to each other stored in an ```ObservableList```. The ```MeetingManager``` is
 used to manage any operations that require viewing or sorting of meetings from the ```MeetingList``` class.
 
 The operations for adding and deleting meeting are handled by `AddMeetingCommand` and `DeleteMeetingCommand`, which are supported by `AddMeetingCommandParser` and `DeleteMeetingCommandParser` respectively.
@@ -384,26 +384,74 @@ After parsing, the commands are executed by the logic manager as show below. (Ex
 
 ### Fav/unfav feature
 
-The feature enables us to sets/remove a particular contact using an index as favourite.
+This feature enables us to sets/remove a particular contact using an index as favourite.
+
+<div markdown="span" class="alert alert-info">
+
+:information_source: **Note:** Upon creating a new `person` using the `add` command, the `favourite` attribute of the `person` is set to `false` by default.
+
+</div>
 
 #### How the feature is implemented
 
 The Fav/Unfav feature is implemented via the `FavCommand` and `UnfavCommand`, which is supported by the `FavCommandParser` and `UnfavCommandParser` respectively.
 The `FavCommandParser` and `UnfavCommandParser` implements the `Parser` interface.
 
-1. `LogicManager` receives the user input which is parsed by the `StaffConnectParser`.
-2. After splitting the user input into `commandWord` and `arguments` based on the regex pattern of the user input, the `StaffConnectParser` invokes the `FavCommandParser`/`UnfavCommandParser` based on the `commandWord`, calling the method `parse` with `arguments` as the method arguments
-3. `FavCommandParser`/`UnfavCommandParser` takes in the `args` string and parse it into with the static `ParserUtil#parseIndex(args)` function. If the `INDEX` format is invalid, a `ParseException` will be thrown.
-4. `FavCommandParser`/`UnfavCommandParser` then creates the `FavCommand`/`UnfavCommand` and returns it.
-5. The `LogicManager` executes the `FavCommand`/`UnfavCommand`, which creates a `Person` with the `Favourite` attribute set as `true`/`false` respectively and updates the model with this new `Person`.
-
-The following sequence diagram shows how the `fav` command works:
+The following sequence diagrams shows how the `fav 1` command works:
 
 ![Fav Command Sequence Diagram](images/FavSequenceDiagram.png)
 
-Similarly, how the `unfav` command works is shown below:
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FavCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+</div>
+
+1. When the user issues the command `fav 1`, `LogicManager` is called upon to execute the command, it is passed to the `StaffCommandParser` object which creates a `FavCommandParser` to parse the arguments for the `fav` command.
+2. The parsing of `FavCommandParser` results in a new `FavCommand` initialized by an index `Index`.
+
+![Execute Fav Command Sequence Diagram](images/ExecuteFavCommandSequenceDiagram.png)
+
+3. When the `FavCommand` is executed, it retrieves the last shown list using `getSortedFilteredPersonList()` and creates a favourite person. This portions' details has been separated from the main sequence diagram into the reference sequence diagram below.
+4. After creating a new `Person` object, `FavCommand` replaces the old `Person` object with the new one.
+5. The command communicates with the `Model` when it is executed. More specifically, it calls `updateFilteredPersonList()` method using `PREDICATE_SHOW_ALL_PERSONS` which resets the view to default.
+6. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `LogicManager`, to show in the `UI` component the success message that the `Person` at the given index is set as favourite.
+
+The below sequence diagram goes into more details on how the execution of the command creates a favourite person:
+
+![Fav Ref Sequence Diagram](images/FavRefSequenceDiagram.png)
+
+7. `FavCommand` calls the static `FavCommand#createFavPerson(personToFav)` function which calls for the static `PersonUtil#createPersonWithFavouriteStatus(Person selectedPerson, Favourite favourite)` using the `selectedPerson` and a new `Favourite` with the value `true`.
+8. This static `PersonUtil#createPersonWithFavouriteStatus(Person selectedPerson, Favourite favourite)` function creates a new `Person` with the given `Favourite` and returns back to `FavCommand`.
+
+The following activity diagram summarizes what happens when a user executes a new `fav` command:
+
+![Fav Activity Diagram](images/FavActivityDiagram.png)
+
+Similarly, the following diagrams shows how the `unfav 1` command works:
 
 ![Unfav Command Sequence Diagram](images/UnfavSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UnfavCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+</div>
+
+1. When the user issues the command `unfav 1`, `LogicManager` is called upon to execute the command, it is passed to the `StaffCommandParser` object which creates a `UnfavCommandParser` to parse the arguments for the `unfav` command.
+2. The parsing of `UnfavCommandParser` results in a new `UnfavCommand` initialized by an index `Index`.
+
+![ExecuteUnfavCommandSequenceDiagram.png](images/ExecuteUnfavCommandSequenceDiagram.png)
+
+3. When the `UnfavCommand` is executed, it retrieves the last shown list using `getSortedFilteredPersonList()` and creates an unfavourite person. This portions' details has been separated from the main sequence diagram into the reference sequence diagram below.
+4. After creating a new `Person` object, `UnfavCommand` replaces the old `Person` object with the new one.
+5. The command communicates with the `Model` when it is executed. More specifically, it calls `updateFilteredPersonList()` method using `PREDICATE_SHOW_ALL_PERSONS` which resets the view to default.
+6. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `LogicManager`, to show in the `UI` component the success message that the `Person` at the given index is remove as favourite.
+
+The below sequence diagram goes into more details on how the execution of the command creates an unfavourite person:
+
+![Unfav Ref Sequence Diagram](images/UnfavRefSequenceDiagram.png)
+
+7. `UnfavCommand` calls the static `UnfavCommand#createUnfavPerson(personToUnfav)` function which calls for the static `PersonUtil#createPersonWithFavouriteStatus(Person selectedPerson, Favourite favourite)` using the `selectedPerson` and a new `Favourite` with the value `false`.
+8. This static `PersonUtil#createPersonWithFavouriteStatus(Person selectedPerson, Favourite favourite)` function creates a new `Person` with the given `Favourite` attribute and returns back to `UnfavCommand`.
+
+The following activity diagram summarizes what happens when a user executes a new `unfav` command:
+
+![Unfav Activity Diagram](images/UnfavActivityDiagram.png)
 
 ### \[Proposed\] Undo/redo feature
 
@@ -743,14 +791,14 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+   2. Re-launch the app by double-clicking the jar file.<br>
+      Expected: The most recent window size and location is retained.
 
 ### Deleting a person
 
@@ -758,13 +806,13 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
+   2. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
+   3. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
 ### Saving data
@@ -773,21 +821,21 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: Ensure that the `[JAR file location]/data/staffconnect.json` file is generated by running the JAR file of the app at least once.
 
-   1. Test case: No modifications to data file after it has been generated.<br>
+   2. Test case: No modifications to data file after it has been generated.<br>
       In the image below shows the contents of the untouched data file:
       ![Before Corrupt Data File](images/beforeCorruptDataFile.png)
 
       Expected: The app should show a list of 6 persons
       ![Before Corrupt Data File Result](images/beforeCorruptDataFileResult.png)
 
-   1. Test case: Invalid modification to data file.<br>
+   3. Test case: Invalid modification to data file.<br>
       Modify the `Favourite` attribute value to `Not avourite` (an invalid value) in the data file:
       ![After Corrupt Data File](images/afterCorruptDataFile.png)
 
       Expected: The app should show an empty list (no persons)
       ![After Corrupt Data File Result](images/afterCorruptDataFileResult.png)
 
-   1. Test case: Valid modification to data file.<br>
+   4. Test case: Valid modification to data file.<br>
       Before, `Alex Yeoh` has the module `CS1101S` in the untouched data file as seen in `Test case: No modifications to data file after it has been generated`.
 
       Modify the `Module` attribute value to `CS2030S` (a valid value) in the data file:
