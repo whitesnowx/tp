@@ -73,6 +73,8 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
+The UI interface is implemented by `UiManager`.
+
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2324S2-CS2103-F08-3/tp/blob/master/src/main/java/staffconnect/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2324S2-CS2103-F08-3/tp/blob/master/src/main/resources/view/MainWindow.fxml)
@@ -80,9 +82,9 @@ The `UI` component uses the JavaFx UI framework. The layout of these UI parts ar
 The `UI` component,
 
 * executes user commands using the `Logic` component.
-* listens for changes to `Model` data so that the UI can be updated with the modified data.
-* keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* listens for changes to data in `Model` component so that the UI can be updated with the modified data.
+* keeps a reference to the `Logic` component, because the `UIManager` relies on the `Logic` component to execute commands.
+* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model` component.
 
 ### Logic component
 
@@ -101,11 +103,11 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `StaffConnectParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
+1. When `LogicManager` is called upon to execute a command, it is passed to an `StaffConnectParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-3. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+3. The command can communicate with the `Model` component when it is executed (e.g. to delete a person).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
-4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `LogicManger`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
@@ -126,7 +128,7 @@ The `Model` component,
 * stores the staff book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
-* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+* does not depend on any of the other three components (as the `Model` component represents data entities of the domain, they should make sense on their own without depending on other components)
 * stores the meeting book data i.e., all `Meeting` objects (which are contained in a `UniqueMeetingList` object) in each `Person` object.
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `StaffBook`, which `Person` references. This allows `StaffBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
@@ -166,11 +168,11 @@ The sequence diagram below shows how the edit command `edit 1 p/ 12345678` goes 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `EditCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </div>
 
-1. When the user issues the command `edit 1 p/ 12345678`, `Logic` is called upon to execute the command, it is passed to the `StaffConnectParser` object which creates a `EditCommandParser` to parse the arguments for the edit command.
-2. The parsing of `EditCommandParser` results in a new `EditCommand` initialized by an index `int` and a `EditPersonDescriptor`. The datails will be explained later.
+1. When the user issues the command `edit 1 p/ 12345678`, `LogicManager` is called upon to execute the command, it is passed to the `StaffConnectParser` object which creates a `EditCommandParser` to parse the arguments for the edit command.
+2. The parsing of `EditCommandParser` results in a new `EditCommand` initialized by an integer `index` and a `EditPersonDescriptor`. The datails will be explained later.
 3. When the `EditCommand` is executed, it creates a new `Person` object according to the `EditPersonDescriptor` passed to it, and replaces the old `Person` object with the new one.
-4. The command communicates with the `Model` when it is executed. More specifically, it calls the `updateFilteredPersonList()` method using a `Predicate` object which simply evaluates to true for all `Person`. The intension is that no `Person` will be filtered out in an edit command.
-5. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`, to show in the `UI` component the success message that the `Person` at the given index is updated with the new information.
+4. The command communicates with the `Model` component when it is executed. More specifically, it calls the `updateFilteredPersonList()` method using a `Predicate` object which simply evaluates to true for all `Person`. The intension is that no `Person` will be filtered out in an edit command.
+5.  The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `LogicManager`, to show in the `UI` component the success message that the `Person` at the given index is updated with the new information.
 
 The below sequence diagram goes into more detail on how the command is parsed in `EditCommandParser`.
 
@@ -186,14 +188,14 @@ The below activity diagram illustrates the process when a user executes a edit c
 
 #### Why edit is implemented this way
 
-The command calls `SetPerson()` method in `Model` and then refresh the list of `Person` objects.
+The command calls `SetPerson()` method in `Model` component and then refresh the list of `Person` objects.
 Below are some explanations for some implementation details.
 
 Check if `editPersonDescriptor.isAnyFieldEdited()`:
-This is to make sure at least one field is modified, or the command will not have any impact on the `Model`.
+This is to make sure at least one field is modified, or the command will not have any impact on the `Model` component.
 
 Call `model.updateFilteredPersonList())` with a `Predicate` that always evaluates to true:
-This is to refresh the list of `Person` in `Model`.
+This is to refresh the list of `Person` in `Model` component.
 
 ### Find feature
 
@@ -208,8 +210,8 @@ The sequence diagram below explains how the find command `find Alex` goes throug
 
 1. When user types in `find Alex`, it is passed to `StaffConnectParser`.
 2. `StaffconnectParser` then creates a `FindCommandParser` that will parse `Alex` to create a `FindCommand` which utilizes a predicate judge whether `Alex` is contained in the person's name.
-3. In `FindCommand`, `Model` executes `updateFilteredPersonList()` method using the predicate mentioned above.
-4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`, to show in the `UI` component the number of persons listed with `Alex` in the name.
+3. In `FindCommand`, `ModelManager` executes `updateFilteredPersonList()` method using the predicate mentioned above.
+4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `LogicManager`, to show in the `UI` component the number of persons listed with `Alex` in the name.
 
 The below sequence diagram goes into more detail on how the command is parsed in `EditCommandParser`.
 
@@ -241,10 +243,10 @@ The sequence diagram below shows how the filter command `filter f/Computing` goe
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FilterCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </div>
 
-1. When the user issues the command `filter f/Computing`, `Logic` is called upon to execute the command, it is passed to the `StaffConnectParser` object which creates a `FilterCommandParser` to parse the arguments for the filter command.
+1. When the user issues the command `filter f/Computing`, `LogicManager` is called upon to execute the command, it is passed to the `StaffConnectParser` object which creates a `FilterCommandParser` to parse the arguments for the filter command.
 2. This results in a `FilterCommand` object, which then creates a `Predicate` object.
-3. The command communicates with the `Model` when it is executed. More specifically, it calls the `updateFilteredPersonList()` method using the `Predicate` object created earlier as the argument. Note that although it is shown as a single step in the diagram (for simplicity), in the code it takes several.
-4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`, to show in the `UI` component the number of persons listed with the `Faculty` value of "Computing".
+3. The command communicates with the `Model` component when it is executed. More specifically, it calls the `updateFilteredPersonList()` method using the `Predicate` object created earlier as the argument. Note that although it is shown as a single step in the diagram (for simplicity), in the code it takes several.
+4. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `LogicManager`, to show in the `UI` component the number of persons listed with the `Faculty` value of "Computing".
 
 The below sequence diagram goes into more detail on how the command is parsed in `FilterCommandParser`.
 

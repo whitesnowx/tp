@@ -68,7 +68,6 @@ Before we get started StaffConnect offers a unique suite of UI controls for user
 <br>**Intended Behaviour:** 
 <br> Hovering the selection with mouse or arrow keys would not cause the person information and meeting list panels to switch to the selected person. This is to allow users to browse the persons list panel without switching.
 <br>![Region to select the person](images/personPanelRegion.png)
-   
 
 2. There is a divider that is draggable up and down to hide and show details on the right side and to customise the look of your application.
 <br>![Region to select the divider](images/detailsDividerRegion.png)
@@ -79,7 +78,7 @@ Before we get started StaffConnect offers a unique suite of UI controls for user
     - __[Left click + Drag Mouse]__ would pan around in the details pane as well.
     - Keyboard arrow keys are able to pan around as well, but the scroll speed may differ on different systems.
     - There are scroll bars at the vertical and horizontal dividers of the window pane, dragging them in the respective direction will pan around as well.
-   
+
 4.  Command Output:<br>
     The scroll bars can only be scrolled by two ways:
       1. For mouse pad users, dragging around with two fingers the around would pan around the pane.
@@ -91,7 +90,7 @@ Before we get started StaffConnect offers a unique suite of UI controls for user
     The input can only be scrolled by __[Holding Left Click + Drag Mouse]__  to the edge in the direction to scroll. This is to allow making adjustments on very long commands.
 
 
-<Br><Br> 
+<Br><Br>
 ### Alternative UI arrangements
 <br>![first alternative ui](images/firstAlternative.png)
 <br>
@@ -328,19 +327,20 @@ Deletes a meeting from a person based on specified meeting index.
 
 Format: `meeting-delete INDEX i/MEETING-INDEX `
 
-* Deletes the  meeting at specified `MEETING-INDEX` from the person at specified `INDEX`. 
-* The index refers to the index number shown in the displayed person list. 
+* Deletes the  meeting at specified `MEETING-INDEX` from the person at specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3,…​ and tally within range index of the displayed person list.
 * The meeting-index refers to the index number shown in the displayed meeting list.
 * The meeting-index **must be a positive integer** 1, 2, 3,…​ and tally within range index of the displayed meeting list.
 * The meeting from the person must exist before it can be deleted otherwise an error will be displayed.
 
 Examples:
+
 <br>The following commands assumes that meetings have been added prior to the command. Otherwise, an error will be thrown. <br> **(Refer to the section above on how to add a meeting)**
 * `list` followed by `meeting-delete 1 i/1` deletes the 1st meeting from the 1st person in the list.
 * `meeting-delete 1 i/3` deletes the 3rd meeting from the 1st person in the current displayed contacts list.
 * `find Bernice Yu` followed by `meeting-delete 1 i/2` deletes the 1st meeting from the 1st person in the results of the `find` command.
-      
+
 <br>**Results for delete meeting:**<br>
 The following command was applied:  `find Bernice Yu` followed by `meeting-delete 1 i/2`.
 <br> __(Disclaimer: The content shown in the examples may not match what you have added to your own meetings within the staff book).__
@@ -425,12 +425,13 @@ This may result in possible data loss. e.g. Meetings of a person may be deleted.
 There will be no further prompt after entering the command to refresh meetings of all persons. This action is irreversible and the meeting information that may be deleted cannot be retrieved afterwards.
 </div>
 
-Deletes all meetings that start before the very moment the user types in the command and enters.
+Deletes all meetings that start before the very moment the user types in the command and enters. Notice that only persons currently filtered in the list will be affected.
 
 Format: `refresh`
 
 * The deleted meetings will be explicitly printed again to the use, specifying content of the meeting and who "owns" the meeting.
 * If no meetings are deleted, there will no error thrown. Instead, a prompt will be given to user that no meeting is deleted.
+* The command will not delete meetings for persons not currently shown in the list due to filter command or find command. If the user wants to execute the command for all persons, type in `list` first to show all persons.
 
 Examples:
 * If there is a meeting `Avengers Assemble` that happened in `31/08/1939 12:00`, when the user types in `refresh`, it will be deleted.
@@ -442,7 +443,7 @@ Examples:
   ![After refreshing](images/AfterRefreshCommand.png)
 
 **Known limitations:**
-Refresh is only used when the user decides to remove clutter in the staff book, and wants to remove outdated meetings. 
+Refresh is only used when the user decides to remove clutter in the staff book, and wants to remove outdated meetings.
 This process is not done automatically as sometimes the user would like to retain old meetings for bookkeeping purposes.
 
 ### Selecting the person to display: `select`
@@ -487,6 +488,7 @@ StaffConnect data are saved in the hard disk automatically after any command tha
 StaffConnect data are saved automatically as a JSON file `[JAR file location]/data/staffconnect.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+
 If your changes to the data file makes its format invalid, StaffConnect will discard all data and start with an empty data file at the next run. Hence, it is **recommended to take a backup** of the file before editing it.<br>
 Furthermore, certain edits can cause StaffConnect to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). 
 The application will not prompt the user if the format of the data file is incorrect, but instead provide the user with an empty staff book.<br>
@@ -584,12 +586,12 @@ Meeting Start Time | `date` | `30/1/2024 12:12`, `2002-11-15 19:00`, `1-12-2022 
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **When adding/editing phone number with a descriptor**, If you try to add a number with a descriptor such as `98731094 (home)`, the application rejects this input and advise the user to only provide phone numbers with numerical values only. The phone number is not intended to store phone number descriptor but users can consider using tags such as t/homePhone as a workaround.
-3. **When adding/editing name containing special characters**, If you try to add a name such as `Jason s/o William`, the application rejects this input and advise the user to only provide name with alphanumeric values only. The name is not intended to store special characters but users can consider using `so` or `son of` as a workaround. If a person's name includes special characters (characters not included in modern English) like arabic characters (such as أ, ب, ت, etc.), it should be latinized first.
-4. **When adding/editing name that already exists in the staff book**, if you try to do so, an error message will be prompted, as two persons are considered the same person as long as they have the same name. It is inplausible to has two persons with the same name but other different attributes.
-5. **When adding/editing venues containing space with an attribute prefix**, If you try to add a venue such as `Room 12 t/r`, the application will add a person with a venue `Room 12` and a tag `r` instead of the intended venue `Room 12 t/r`. The venue is not intended to store venues that contains a space followed by an attribute prefix but users can consider omitting the space or replace with a hyphen such as `Room 12t/r` or `Room 12-t/r` as a workaround.
-6. **When generating the default file and exiting via the `Exit` button**, If you try to generate the default JSON file `[JAR file location]/data/staffconnect.json` by running the JAR file, without manipulating any data and exiting via the `Exit` button, the JSON file would not be generated. You may consider using the `exit` command via the command line interface to generate the default JSON file instead.
-
+2. **When adding/editing an availability to a person**, the allowed formats for time is not as flexible as typing in a meeting start date. The only allowed format is `HH:mm`. `HH` is a valid 24-hour (00-23), `mm` are valid minutes (00-59).
+3. **When adding/editing phone number with a descriptor**, If you try to add a number with a descriptor such as `98731094 (home)`, the application rejects this input and advise the user to only provide phone numbers with numerical values only. The phone number is not intended to store phone number descriptor but users can consider using tags such as t/homePhone as a workaround.
+4. **When adding/editing name containing special characters**, If you try to add a name such as `Jason s/o William`, the application rejects this input and advise the user to only provide name with alphanumeric values only. The name is not intended to store special characters but users can consider using `so` or `son of` as a workaround. If a person's name includes special characters (characters not included in modern English) like arabic characters (such as أ, ب, ت, etc.), it should be latinized first.
+5. **When adding/editing name that already exists in the staff book**, if you try to do so, an error message will be prompted, as two persons are considered the same person as long as they have the same name. It is inplausible to has two persons with the same name but other different attributes.
+6. **When adding/editing venues containing space with an attribute prefix**, If you try to add a venue such as `Room 12 t/r`, the application will add a person with a venue `Room 12` and a tag `r` instead of the intended venue `Room 12 t/r`. The venue is not intended to store venues that contains a space followed by an attribute prefix but users can consider omitting the space or replace with a hyphen such as `Room 12t/r` or `Room 12-t/r` as a workaround.
+7. **When generating the default file and exiting via the `Exit` button**, If you try to generate the default JSON file `[JAR file location]/data/staffconnect.json` by running the JAR file, without manipulating any data and exiting via the `Exit` button, the JSON file would not be generated. You may consider using the `exit` command via the command line interface to generate the default JSON file instead.
 
 --------------------------------------------------------------------------------------------------------------------
 
