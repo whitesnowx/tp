@@ -6,19 +6,16 @@ box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":StaffConnectParser" as StaffConnectParser LOGIC_COLOR
 participant ":AddMeetingCommandParser" as AddMeetingCommandParser LOGIC_COLOR
-participant "<<class>>\nParserUtil" as ParserUtil LOGIC_COLOR
-participant ":MeetingDescription" as MeetingDescription LOGIC_COLOR
-participant ":MeetingDateTime" as MeetingDateTime LOGIC_COLOR
 participant "m:AddMeetingCommand" as AddMeetingCommand LOGIC_COLOR
 
 
 end box
 
 
-[-> LogicManager : execute(userInput)
+[-> LogicManager : execute("meeting-add 2 d/Finals/20/04/2024 15:00")
 activate LogicManager
 
-LogicManager -> StaffConnectParser : parseCommand(userInput)
+LogicManager -> StaffConnectParser : parseCommand("2 d/Finals s/20/04/2024 15:00")
 activate StaffConnectParser
 
 create AddMeetingCommandParser
@@ -28,28 +25,11 @@ activate AddMeetingCommandParser
 AddMeetingCommandParser --> StaffConnectParser
 deactivate AddMeetingCommandParser
 
+
 StaffConnectParser -> AddMeetingCommandParser : parse(arguments)
 activate AddMeetingCommandParser
+ref over AddMeetingCommandParser : parse arguments for meeting-add
 
-
-AddMeetingCommandParser -> ParserUtil : parseIndex()
-activate ParserUtil
-return
-
-AddMeetingCommandParser -> ParserUtil : parseDescription()
-activate ParserUtil
-
-create MeetingDescription
-ParserUtil -> MeetingDescription++
-return
-return
-
-AddMeetingCommandParser -> ParserUtil : parseDateTime()
-activate ParserUtil
-create MeetingDateTime
-ParserUtil -> MeetingDateTime++
-return
-return
 
 create AddMeetingCommand
 AddMeetingCommandParser -> AddMeetingCommand++
