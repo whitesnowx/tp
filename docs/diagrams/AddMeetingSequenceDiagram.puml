@@ -1,0 +1,44 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant "m:AddMeetingCommand" as AddMeetingCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+participant "editedPerson:Person " as editedPerson LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":ModelManager" as Model MODEL_COLOR
+end box
+
+
+[-> AddMeetingCommand : execute(model)
+activate AddMeetingCommand
+
+AddMeetingCommand -> Model : getSortedFilteredPersonList()
+activate Model
+return
+
+ref over AddMeetingCommand : copy selectedPerson
+
+AddMeetingCommand -> editedPerson : addMeeting()
+activate editedPerson
+return
+
+AddMeetingCommand -> editedPerson : updateSortedMeetingList(MEETING_DATE_THEN_DESCRIPTION_COMPARATOR);
+activate editedPerson
+return
+
+AddMeetingCommand -> Model : setPerson(selectedPerson, editedPerson)
+activate Model
+return
+
+create CommandResult
+AddMeetingCommand -> CommandResult++
+return
+
+return r
+
+
+@enduml
