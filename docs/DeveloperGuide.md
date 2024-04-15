@@ -342,7 +342,7 @@ This is to map the 1 or more comparator objects and act as a layer of abstractio
 `SortCommmandParser` parsing the `Comparator` objects:
 This is to prevent `SortCommand` from taking on more responsibilities (Separation of Concerns).
 
-#### What designs were considered:
+#### What designs were considered
 
 **Aspect: Determining order of sorting of attribute(s):**
 
@@ -366,7 +366,7 @@ This is to prevent `SortCommand` from taking on more responsibilities (Separatio
 
 <div style="page-break-after: always;"></div>
 
-### Meeting Feature
+### Meeting feature
 
 Meeting is feature that allows the user to keep track of any events they may have with the particular contact. It contains the description of the meeting event with the date and time it would occur.
 
@@ -404,7 +404,7 @@ After parsing, the commands are executed by the logic manager as show below. (Ex
 <br> Below is the sequence diagram of how both `AddMeetingCommand` and `DeleteMeetingCommand` copies the selected person from the model for editing:
 <br>![Copy selectedPerson](images/MeetingCopyPerson.png)
 
-#### What are the design considered:
+#### What designs were considered
 
 **Aspect: How the meetings are stored :**
 
