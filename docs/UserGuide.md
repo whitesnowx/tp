@@ -267,7 +267,7 @@ format: `filter [m/MODULE] [f/FACULTY] [t/TAG]… [a/AVAILABILITY]…`
 <div style="page-break-after: always;"></div>
 Examples:
 * `filter m/CS1101S` returns `Alex Yeoh`
-  <br>![result of `filter m/CS1101S`](images/AfterFilterCommand1.png)
+  <br>![result of `filter m/CS1101S`](images/AfterFilterCommand1.png){: width="550": text-align: "center"}
 * `filter f/Computing t/professor` returns `Alex Yeoh`, `Charlotte Oliveiro`, `David Li` and `Roy Balakrishman`
   <br>![result of `filter f/Computing t/professor`](images/AfterFilterCommand2.png)
 * `filter t/tutor` returns `Bernice Yu`, `Irfan Ibrahim`<br>
