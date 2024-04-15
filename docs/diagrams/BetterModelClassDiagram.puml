@@ -24,4 +24,5 @@ Person *--> Module
 Person *--> Faculty
 Person *--> Venue
 Person *--> "*" Availability
+Person *--> Favourite
 @enduml
