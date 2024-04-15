@@ -5,10 +5,12 @@ title: User Guide
 
 StaffConnect (SC) is a **desktop app for managing Professors' and Tutors' contact information and associated meetings, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, SC can get your contact management tasks done faster than traditional GUI apps.
 
+<div style="page-break-after: always;"></div>
+
 * Table of Contents
 {:toc}
 
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Quick start
 
@@ -39,10 +41,14 @@ StaffConnect (SC) is a **desktop app for managing Professors' and Tutors' contac
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## Navigability
 
 ### Overall UI layout
 <br>![UI Annotations Layout](images/UiAnnotationsLayout.png)
+
+<div style="page-break-after: always;"></div>
 
 #### [UI] Persons Info
 <br>![UI Annotations Attribute](images/UiAnnotationsAttributes.png)
@@ -51,13 +57,19 @@ StaffConnect (SC) is a **desktop app for managing Professors' and Tutors' contac
 * The values of [`Faculty`](#valid-faculty-values) will be stored to their full names.
 * The values of `day` part of `Availability` will be stored as their full form such as `MONDAY`, `TUESDAY`, `WEDNESDAY`, `THURSDAY`, `FRIDAY`, `SATURDAY`, `SUNDAY`.
 
+<div style="page-break-after: always;"></div>
+
 #### [UI] Meeting List
 <br>![UI Annotations MeetingList](images/UiAnnotationsMeetingList.png)
+
+<div style="page-break-after: always;"></div>
 
 #### [UI] Scrollbars and Menu
 <br>![UI Annotations ScrollBars](images/UiAnnotationsScrollbarsAndMenu.png)
 *Note that Persons List Scrollbar will open appear when the number of Persons in the list exceed the amount to be displayed by the view.
 *Note that the `Exit` button is in the dropdown of the `File` button.
+
+<div style="page-break-after: always;"></div>
 
 ### Mouse and Keyboard controls
 
@@ -89,6 +101,7 @@ Before we get started StaffConnect offers a unique suite of UI controls for user
 5.  Command Line Interface:<br>
     The input can only be scrolled by __[Holding Left Click + Drag Mouse]__  to the edge in the direction to scroll. This is to allow making adjustments on very long commands.
 
+<div style="page-break-after: always;"></div>
 
 <Br><Br>
 ### Alternative UI arrangements
@@ -105,6 +118,7 @@ Before we get started StaffConnect offers a unique suite of UI controls for user
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
 
 ## Features
 
@@ -138,6 +152,7 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
+<div style="page-break-after: always;"></div>
 
 ### Adding a person: `add`
 
@@ -156,9 +171,13 @@ A person can have any number of tags and availabilities (including 0)
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com f/Computing v/John street, block 123, #01-01 m/CS2103`
 * `add n/Chihiro Ogino m/GEC1024 e/spirited@example.com f/FASS v/The Spirit Realm p/20122001 a/tues 21:00 22:00 a/wednesday 00:00 23:59`
+
+<div style="page-break-after: always;"></div>
 * `add n/Betsy Crowe t/friend m/CS2103T e/betsycrowe@example.com f/Computing v/Newgate Prison p/1234567 t/criminal a/monday 11:00 12:00 a/wednesday 14:00 16:00`
 
 ![Effects of an add command](images/AfterAddCommand.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Listing all persons : `list`
 
@@ -192,6 +211,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [m/MODULE] [f/FACULTY] [v/VENUE
 * `PHONE_NUMBER`, `EMAIL`, `MODULE`, `FACULTY`, `VENUE` do not need to be unique and can be duplicated among persons in staff book.
 * `TAG` and `AVAILABILITY` have to be unique for a person but can be duplicated among persons in staff book.
 
+<div style="page-break-after: always;"></div>
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 3 m/GEA1000` Edits the module of the 3rd person to be `GEA1000`.
@@ -201,6 +221,8 @@ Examples:
     <br>
     <br>**After editing the second person:** <br>
     ![After editing the second person](images/AfterEditCommand.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Locating persons by name: `find`
 
@@ -220,6 +242,8 @@ Examples:
 * `find li` returns `David Li`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Filtering persons: `filter`
 
@@ -252,6 +276,7 @@ Examples:
   <br>![Roy Balakrishnan not having other tags](images/BeforeFilterCommand2.png)
   <br>`filter f/soc t/professor t/friend t/youtuber a/mon 12:00 13:00 a/thurs 12:00 13:00` returns `Alex Yeoh`, `Charlotte Oliveiro` and `Irfan Ibrahim`.
   <br>![result of the command](images/AfterFilterCommand4.png)
+<div style="page-break-after: always;"></div>
 
 ### Sorting persons: `sort`
 
@@ -270,8 +295,11 @@ Format: `sort [n/] [p/] [m/] [f/] [v/] [s/] [meet/]`
 Examples:
 * `sort m/ p/` returns person by ascending module codes followed by ascending phone numbers `CS2000 80000000`, `CS2000 90000000`, `CS3000 80000000`followed by `CS3000 90000000`
 * `sort n/` returns person by ascending names `Alex`, `Bernice` followed by `Charlotte`
+<div style="page-break-after: always;"></div>
 * `sort p/` returns person by ascending phone numbers `87438807`, `91031282` followed by `92492021`<br>
   ![result for 'sort p/'](images/sortByPhoneNumberResult.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Adding a meeting to a person: `meeting-add`
 
@@ -317,6 +345,8 @@ Examples:
 <br>**Result for add meeting:** <br> `meeting-add 1 d/Meet for finals preparation s/12/04/2024 18:00`<br>
   ![result for 'meeting-add 1 d/Meet for finals preparation s/12/04/2024 18:00'](images/addMeetingResult.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Deleting a meeting from a person: `meeting-delete`
 
 <div markdown="block" class="alert alert-danger">:warning: **Caution:**
@@ -344,12 +374,15 @@ Examples:
 <br>**Results for delete meeting:**<br>
 The following command was applied:  `find Bernice Yu` followed by `meeting-delete 1 i/2`.
 <br> __(Disclaimer: The content shown in the examples may not match what you have added to your own meetings within the staff book).__
+<div style="page-break-after: always;"></div>
 <br><br> **After `find Bernice Yu`:**<br>
     ![result for before `find Bernice Yu` followed by `meeting-delete 1 i/2`](images/meetingDeleteResultBefore.png)
 <br><br> **After `meeting-delete 1 i/2`:**<br>
     ![result for after `find Bernice Yu` followed by `meeting-delete 1 i/2`](images/meetingDeleteResultAfter1.png)
 <br><br> **After `meeting-delete 1 i/1`:**<br>
     ![result for after `find Bernice Yu` followed by `meeting-delete 1 i/2`](images/meetingDeleteResultAfter2.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Deleting a person : `delete`
 
@@ -369,14 +402,20 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the list.
 * `sort p/` followed by `delete 1` deletes the 1st person in the list in the results of the `sort` command, which should be the person with the smallest phone number.
 * `find Bernice Yu` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+<div style="page-break-after: always;"></div>
   <br>**Before deletion:**<br>
   ![All persons listed](images/BeforeDeleteCommand1.png)
+  <div style="page-break-after: always;"></div>
   <br>**First find Bernice:**<br>
   ![Result of finding Bernice](images/BeforeDeleteCommand2.png)
+  <div style="page-break-after: always;"></div>
   <br>**Then delete Bernice:**<br>
   ![Result of deletion](images/AfterDeleteCommand1.png)
+  <div style="page-break-after: always;"></div>
   <br>**List all persons and Bernice is deleted:**<br>
   ![Result of deletion](images/AfterDeleteCommand2.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Setting a person as favourite: `fav`
 
@@ -395,9 +434,13 @@ Format: `fav INDEX`
 Examples:
 * `list` followed by `fav 2` sets the 2nd person as favourite in the staff book.
 * `sort p/` followed by `fav 1` sets the 1st person as favourite in the staff book in the results of the `sort` command, which should be the person with the smallest phone number.
+
+<div style="page-break-after: always;"></div>
 * `find Betsy` followed by `fav 1` sets the 1st person as favourite in the results of the `find` command.
 
 ![Result of fav command](images/AfterFavCommand.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Removing a person as favourite: `unfav`
 
@@ -418,6 +461,8 @@ Examples:
 * `sort p/` followed by `fav 1` removes the 1st person as favourite in the staff book in the results of the `sort` command, which should be the person with the smallest phone number.
 * `find Betsy` followed by `unfav 1` removes the 1st person as favourite in the results of the `find` command.
 
+<div style="page-break-after: always;"></div>
+
 ### Refreshing and clearing all outdated meetings: `refresh`
 
 <div markdown="block" class="alert alert-danger">:warning: **Caution:**
@@ -437,14 +482,17 @@ Examples:
 * If there is a meeting `Avengers Assemble` that happened in `31/08/1939 12:00`, when the user types in `refresh`, it will be deleted.
 * If there is a meeting `French Revolution` that happened in `14/07/1789 12:00`, when the user types in `refresh`, it will be deleted.
 * If there is a meeting `Future Meeting` that will happen in `31/12/2999 12:00`, when the user types in `refresh`, it will not be deleted.
-  <br>**Before:**<br>
-  ![Before refreshing](images/BeforeRefreshCommand.png)
-  <br>**After:**<br>
-  ![After refreshing](images/AfterRefreshCommand.png)
+<div style="page-break-after: always;"></div>
+<br>**Before:**<br>
+![Before refreshing](images/BeforeRefreshCommand.png)
+<br>**After:**<br>
+![After refreshing](images/AfterRefreshCommand.png)
 
 **Known limitations:**
 Refresh is only used when the user decides to remove clutter in the staff book, and wants to remove outdated meetings.
 This process is not done automatically as sometimes the user would like to retain old meetings for bookkeeping purposes.
+
+<div style="page-break-after: always;"></div>
 
 ### Selecting the person to display: `select`
 
@@ -461,6 +509,8 @@ Examples:
 * `filter t/tutor` followed by `select 1` <br> Selects the 1st person in the results of the `filter` command.
 * `sort p/` followed by `select 1` <br> Selects the 1st person in the results of the `sort` command, which should be the person with the smallest phone number.
 
+<div style="page-break-after: always;"></div>
+
 ### Clearing all entries : `clear`
 
 <div markdown="block" class="alert alert-danger">:warning: **Caution:**
@@ -472,6 +522,8 @@ Clears all entries from the staff book.
 Format: `clear`
 
 ![Effects of clear command](images/AfterClearCommand.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Exiting the program : `exit`
 
@@ -496,6 +548,8 @@ The application will not prompt the user if the format of the data file is incor
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 #### Valid Data Values for `Person` in JSON file
 
 All attributes' restrictions except **Favourite** can be found in the [Attribute Summary](#attribute-summary) table.
@@ -512,6 +566,8 @@ Tag | `tags` | `professor`, `Number1TA`
 Availabilitity | `availabilities` | `TUESDAY 12:00 13:00`, `WEDNESDAY 12:00 13:00`
 Meeting | `meetings` | Refer to the [Valid Data Values in meetings](#valid-data-values-for-meetings-for-each-person-in-json-file) table.
 Favourite | `favourite` | `Favourite` or `Not favourite`
+
+<div style="page-break-after: always;"></div>
 
 #### Valid Data Values for `Meetings` (for each `Person`) in JSON file
 
@@ -533,6 +589,8 @@ Meeting Start Time | `date` | `30/1/2024 12:12`, `2002-11-15 19:00`, `1-12-2022 
   * `name` in the staff book.
 
 </div>
+
+<div style="page-break-after: always;"></div>
 
 #### Sample Data File Content
 
@@ -572,6 +630,8 @@ Meeting Start Time | `date` | `30/1/2024 12:12`, `2002-11-15 19:00`, `1-12-2022 
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
@@ -582,6 +642,8 @@ Meeting Start Time | `date` | `30/1/2024 12:12`, `2002-11-15 19:00`, `1-12-2022 
 **A**: Sometimes the user would like to have finer control over how they want to differentiate between topics, and a single capital letter could make that difference.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Known issues
 
@@ -594,6 +656,8 @@ Meeting Start Time | `date` | `30/1/2024 12:12`, `2002-11-15 19:00`, `1-12-2022 
 7. **When generating the default file and exiting via the `Exit` button**, If you try to generate the default JSON file `[JAR file location]/data/staffconnect.json` by running the JAR file, without manipulating any data and exiting via the `Exit` button, the JSON file would not be generated. You may consider using the `exit` command via the command line interface to generate the default JSON file instead.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Attribute summary
 
@@ -611,6 +675,8 @@ Meeting Description | d/ | Case-sensitive.<br>Only alphanumeric characters allow
 Meeting Start Time | s/ | Valid date and time format.<br>1. Valid date formats: `yyyy-MM-dd`, `yyyy-M-d`, `dd-MM-yyyy`, `yyyy-MM-d`, `d-MM-yyyy`, `d-M-yyyy`, `dd-M-yyyy`, `d/MM/yyyy`, `d-M-yyyy`, `dd-M-yyyy`, `dd/MM/yyyy`, `yyyy/MM/dd`, `yyyy/MM/d`, `yyyy/M/dd`,  `yyyy/M/d`<br>where `yyyy` is a 4-digit year (0000-9999), `M` is a single digit month (1-9), `MM` is a valid month (01-12), `d` is a single digit day (1-9), `dd` is a valid day (01-31)<br>2. Valid time formats: `HH:mm`, `H:mm`, `HHmm`<br>where `H` is a single digit hour (1-9), `HH` is a valid 24-hour (00-23), `mm` are valid minutes (00-59). | `2002-11-02 19:00`, `1-12-2022 9:00`, `2024/1/1 0000`
 
 [^1]: These are mandatory attributes when adding a person into the staff book, as these are important information for students to know when/where to consult their professors/TAs.
+
+<div style="page-break-after: always;"></div>
 
 ### Valid `Faculty` Values
 
@@ -634,6 +700,8 @@ University Scholars Programme | USP
 Yale-NUS College | Yale-NUS
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Command summary
 
