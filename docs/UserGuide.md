@@ -10,6 +10,8 @@ StaffConnect (SC) is a **desktop app for managing Professors' and Tutors' contac
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer.
@@ -39,6 +41,8 @@ StaffConnect (SC) is a **desktop app for managing Professors' and Tutors' contac
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## Navigability
 
 ### Overall UI layout
@@ -58,6 +62,8 @@ StaffConnect (SC) is a **desktop app for managing Professors' and Tutors' contac
 <br>![UI General](images/UiAnnotationsScrollbarsAndMenu.png)
 *Note that Persons List Scrollbar will open appear when the number of Persons in the list exceed the amount to be displayed by the view.
 *Note that the `Exit` button is in the dropdown of the `File` button.
+
+<div style="page-break-after: always;"></div>
 
 ### Mouse and Keyboard controls
 
@@ -90,6 +96,7 @@ Before we get started StaffConnect offers a unique suite of UI controls for user
 5.  The Command box:<br>
     The input can only be scrolled by __[Holding Left Click + Drag Mouse]__  to the edge in the direction to scroll. This is to allow making adjustments on very long commands.
 
+<div style="page-break-after: always;"></div>
 
 <Br><Br> 
 ### Alternative UI arrangements
@@ -106,6 +113,7 @@ Before we get started StaffConnect offers a unique suite of UI controls for user
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
 
 ## Features
 
@@ -138,7 +146,6 @@ Shows a message explaining how to access the help page.
 ![help message](images/helpMessage.png)
 
 Format: `help`
-
 
 ### Adding a person: `add`
 
@@ -267,6 +274,8 @@ Examples:
 * `sort p/` returns person by ascending phone numbers `87438807`, `91031282` followed by `92492021`<br>
   ![result for 'sort p/'](images/sortByPhoneNumberResult.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Adding a meeting to a person: `meeting-add`
 
 Add a meeting to a person based on specified description and date.
@@ -310,6 +319,8 @@ Examples:
 
 <br>**Result for add meeting:** <br> `meeting-add 1 d/Meet for finals preparation s/12/04/2024 18:00`<br>
   ![result for 'meeting-add 1 d/Meet for finals preparation s/12/04/2024 18:00'](images/addMeetingResult.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Deleting a meeting from a person: `meeting-delete`
 
@@ -487,6 +498,8 @@ The application will not prompt the user if the format of the data file is incor
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 #### Valid Data Values for `Person` in JSON file
 
 All attributes' restrictions except **Favourite** can be found in the [Attribute Summary](#attribute-summary) table.
@@ -503,6 +516,8 @@ Tag | `tags` | `professor`, `Number1TA`
 Availabilitity | `availabilities` | `TUESDAY 12:00 13:00`, `WEDNESDAY 12:00 13:00`
 Meeting | `meetings` | Refer to the [Valid Data Values in meetings](#valid-data-values-for-meetings-for-each-person-in-json-file) table.
 Favourite | `favourite` | `Favourite` or `Not favourite`
+
+<div style="page-break-after: always;"></div>
 
 #### Valid Data Values for `Meetings` (for each `Person`) in JSON file
 
@@ -524,6 +539,8 @@ Meeting Start Time | `date` | `30/1/2024 12:12`, `2002-11-15 19:00`, `1-12-2022 
   * `name` in the staff book.
 
 </div>
+
+<div style="page-break-after: always;"></div>
 
 #### Sample Data File Content
 
@@ -563,6 +580,8 @@ Meeting Start Time | `date` | `30/1/2024 12:12`, `2002-11-15 19:00`, `1-12-2022 
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
@@ -573,6 +592,8 @@ Meeting Start Time | `date` | `30/1/2024 12:12`, `2002-11-15 19:00`, `1-12-2022 
 **A**: Sometimes the user would like to have finer control over how they want to differentiate between topics, and a single capital letter could make that difference.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Known issues
 
@@ -585,6 +606,8 @@ Meeting Start Time | `date` | `30/1/2024 12:12`, `2002-11-15 19:00`, `1-12-2022 
 
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Attribute summary
 
@@ -602,6 +625,8 @@ Meeting Description | d/ | Case-sensitive.<br>Only alphanumeric characters allow
 Meeting Start Time | s/ | Valid date and time format.<br>1. Valid date formats: `yyyy-MM-dd`, `yyyy-M-d`, `dd-MM-yyyy`, `yyyy-MM-d`, `d-MM-yyyy`, `d-M-yyyy`, `dd-M-yyyy`, `d/MM/yyyy`, `d-M-yyyy`, `dd-M-yyyy`, `dd/MM/yyyy`, `yyyy/MM/dd`, `yyyy/MM/d`, `yyyy/M/dd`,  `yyyy/M/d`<br>where `yyyy` is a 4-digit year (0000-9999), `M` is a single digit month (1-9), `MM` is a valid month (01-12), `d` is a single digit day (1-9), `dd` is a valid day (01-31)<br>2. Valid time formats: `HH:mm`, `H:mm`, `HHmm`<br>where `H` is a single digit hour (1-9), `HH` is a valid 24-hour (00-23), `mm` are valid minutes (00-59). | `2002-11-02 19:00`, `1-12-2022 9:00`, `2024/1/1 0000`
 
 [^1]: These are mandatory attributes when adding a person into the staff book, as these are important information for students to know when/where to consult their professors/TAs.
+
+<div style="page-break-after: always;"></div>
 
 ### Valid `Faculty` Values
 
@@ -625,6 +650,8 @@ University Scholars Programme | USP
 Yale-NUS College | Yale-NUS
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Command summary
 
