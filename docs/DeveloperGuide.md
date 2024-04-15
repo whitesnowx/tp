@@ -395,7 +395,6 @@ Below is the sequence diagram for parsing inputs with  `AddMeetingCommandParser`
 <br> Similarly, the sequence diagram for parsing inputs with `DeleteMeetingCommandParser` executing `meeting-delete 1 i/1`:
 <br>![DeleteMeetingCommandParser Sequence Diagram](images/DeleteMeetingParserSequenceDiagram.png)
 <br><br>
-<div style="page-break-after: always;"></div>
 After parsing, the commands are executed by the logic manager as show below. (Execute in the diagrams below comes form the logic manager)
 <br> Below is the sequence diagram for adding meeting with  `AddMeetingCommand`:
 <br>![AddMeetingCommand Sequence Diagram](images/AddMeetingSequenceDiagram.png)
