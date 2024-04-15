@@ -81,6 +81,7 @@ Before we get started StaffConnect offers a unique suite of UI controls for user
 <br> Hovering the selection with mouse or arrow keys would not cause the details panel to switch to the selected person. This is to allow users to browse the persons list panel without switching.
 <br>![Region to select the person](images/personPanelRegion.png)
    
+<div style="page-break-after: always;"></div>
 
 2. There is a divider that is draggable up and down to hide and show details on the right side and to customise the look of your application.
 <br>![Region to select the divider](images/detailsDividerRegion.png)
@@ -363,6 +364,7 @@ Examples:
 <br>**Results for delete meeting:**<br>
 The following command was applied:  `find Bernice Yu` followed by `meeting-delete 1 i/2`.
 <br> __(Disclaimer: The content shown in the examples may not match what you have added to your own meetings within the staff book).__
+<div style="page-break-after: always;"></div>
 <br><br> **After `find Bernice Yu`:**<br>
     ![result for before `find Bernice Yu` followed by `meeting-delete 1 i/2`](images/meetingDeleteResultBefore.png)
 <br><br> **After `meeting-delete 1 i/2`:**<br>
@@ -390,12 +392,16 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the list.
 * `sort p/` followed by `delete 1` deletes the 1st person in the list in the results of the `sort` command, which should be the person with the smallest phone number.
 * `find Bernice Yu` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+<div style="page-break-after: always;"></div>
   <br>**Before deletion:**<br>
   ![All persons listed](images/BeforeDeleteCommand1.png)
+  <div style="page-break-after: always;"></div>
   <br>**First find Bernice:**<br>
   ![Result of finding Bernice](images/BeforeDeleteCommand2.png)
+  <div style="page-break-after: always;"></div>
   <br>**Then delete Bernice:**<br>
   ![Result of deletion](images/AfterDeleteCommand1.png)
+  <div style="page-break-after: always;"></div>
   <br>**List all persons and Bernice is deleted:**<br>
   ![Result of deletion](images/AfterDeleteCommand2.png)
 
@@ -463,10 +469,11 @@ Examples:
 * If there is a meeting `Avengers Assemble` that happened in `31/08/1939 12:00`, when the user types in `refresh`, it will be deleted.
 * If there is a meeting `French Revolution` that happened in `14/07/1789 12:00`, when the user types in `refresh`, it will be deleted.
 * If there is a meeting `Future Meeting` that will happen in `31/12/2999 12:00`, when the user types in `refresh`, it will not be deleted.
-  <br>**Before:**<br>
-  ![Before refreshing](images/BeforeRefreshCommand.png)
-  <br>**After:**<br>
-  ![After refreshing](images/AfterRefreshCommand.png)
+<div style="page-break-after: always;"></div>
+<br>**Before:**<br>
+![Before refreshing](images/BeforeRefreshCommand.png)
+<br>**After:**<br>
+![After refreshing](images/AfterRefreshCommand.png)
 
 **Known limitations:**
 Refresh is only used when the user decides to remove clutter in the staff book, and wants to remove outdated meetings. 
