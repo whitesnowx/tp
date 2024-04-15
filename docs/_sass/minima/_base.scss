@@ -68,7 +68,7 @@ img {
   vertical-align: middle;
 }
 
-img:not(.emoji) {
+img:not([class^="emoji"]) {
   margin-left: auto;
   margin-right: auto;
   display: block;
