@@ -128,7 +128,7 @@ The `Model` component,
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` component represents data entities of the domain, they should make sense on their own without depending on other components)
-
+* stores the meeting book data i.e., all `Meeting` objects (which are contained in a `UniqueMeetingList` object) in each `Person` object.
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `StaffBook`, which `Person` references. This allows `StaffBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
@@ -315,7 +315,7 @@ This is to map the 1 or more comparator objects and act as a layer of abstractio
 `SortCommmandParser` parsing the `Comparator` objects:
 This is to prevent `SortCommand` from taking on more responsibilities (Separation of Concerns).
 
-#### What designs were considered:
+#### What designs were considered
 **Aspect: Determining order of sorting of attribute(s):**
 
 * **Current Design:** Get sorting order of attribute(s) from user input.
@@ -348,7 +348,30 @@ is used to handle any valid date time values. Each of this meeting are stored in
 contains each of the meetings related to each other stored in an ```ObservableList```. The ``` MeetingManager ``` is
 used to manage any operations that require viewing or sorting of meetings from the ```MeetingList``` class.
 
-#### What designs were considered:
+The operations for adding and deleting meeting are handled by `AddMeetingCommand` and `DeleteMeetingCommand`, which are supported by `AddMeetingCommandParser` and `DeleteMeetingCommandParser` respectively.
+
+1. The user enters `meeting-add 2 d/Finals s/20/04/2024 15:00` to add a meeting or `meeting-delete 1 i/1` to delete a meeting.
+2. `Logic Manager` receives the user input which is parsed by `StaffConnectParser`.
+3. After splitting the user input into `commandWord` and `arguments` based on the regex pattern of the user input, the `StaffConnectParser` invokes the `AddMeetingCommandParser`or`DeleteMeetingCommandParser` based on the `commandWord`. Calling the method `parse` with `arguments` as the method arguments, and getting supported by parsing methods from `ParsedUtil`. 
+4. `AddMeetingCommand` or `DeleteMeetingCommand` is created with the parsed values.
+5. `Logic Manager` executes the `AddMeetingCommand` or `DeleteMeetingCommand`, which handles adding/removing meeting from the `Person` respectively and updates the model with the new information.
+
+Below is the sequence diagram for parsing inputs with  `AddMeetingCommandParser` executing `meeting-add 2 d/Finals s/20/04/2024 15:00`:
+<br>![AddMeetingCommandParser Sequence Diagram](images/AddMeetingParserSequenceDiagram.png)
+<br>Below in the in-depth reference of how `AddMeetingCommandParser` utilise `ParseUtil` to parse the arguments:
+<br>![Add Parser Reference Diagram](images/AddParserRefrenceDiagram.png)
+<br> Similarly, the sequence diagram for parsing inputs with `DeleteMeetingCommandParser` executing `meeting-delete 1 i/1`:
+<br>![DeleteMeetingCommandParser Sequence Diagram](images/DeleteMeetingParserSequenceDiagram.png)
+<br><br>
+After parsing, the commands are executed by the logic manager as show below. (Execute in the diagrams below comes form the logic manager)
+<br> Below is the sequence diagram for adding meeting with  `AddMeetingCommand`:
+<br>![AddMeetingCommand Sequence Diagram](images/AddMeetingSequenceDiagram.png)
+<br> Similarly the sequence diagram for deleting meeting with `DeleteMeetingCommand`:
+<br>![DeleteMeetingCommand Sequence Diagram](images/DeleteMeetingSequenceDiagram.png)
+<br> Below is the sequence diagram of how both `AddMeetingCommand` and `DeleteMeetingCommand` copies the selected person from the model for editing:
+<br>![Copy selectedPerson](images/MeetingCopyPerson.png)
+
+#### What designs were considered
 
 **Aspect: How the meetings are stored :**
 
@@ -464,6 +487,7 @@ The following activity diagram summarizes what happens when a user executes a ne
   itself.
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -622,6 +646,63 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. StaffConnect shows an error message.
 
       Use case resumes at step 1.
+
+
+**Use case: Add a meeting**
+
+**MSS**
+
+1. StaffConnect shows a list of persons
+2. User requests to add a meeting to the specific person in the list
+3. StaffConnect adds the meeting to the person with the provided details
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+  Use case ends.
+
+* 2a. The given index is invalid.
+
+    * 2a1. StaffConnect shows an error message.
+
+      Use case resumes at step 1.
+
+* 3a. The given details for meeting is invalid.
+    * 3a1. StaffConnect shows an error message.
+      Use case resumes at step 1.
+
+
+**Use case: Delete a meeting**
+
+**Precondition:** The intended meeting to delete exists and has been added before.
+
+**MSS**
+
+1. StaffConnect shows a list of persons
+2. User requests to delete a meeting of a specific person in the list
+3. StaffConnect deletes the specified meeting
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+  Use case ends.
+
+* 2a. The given index for person is invalid.
+
+    * 2a1. StaffConnect shows an error message.
+
+      Use case resumes at step 1.
+
+* 2a. The given index for meeting is invalid.
+    * 2a1. StaffConnect shows an error message.
+      Use case resumes at step 1.
+
 
 ### Non-Functional Requirements
 
