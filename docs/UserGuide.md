@@ -235,8 +235,8 @@ Examples:
 * `filter t/tutor` returns `Bernice Yu`, `Irfan Ibrahim`<br>
   ![result for 'filter t/tutor'](images/AfterFilterCommand3.png)
 * To illustrate the next example, the sample data are edited first to let `Alex Yeoh`, `Charlotte Oliveiro` and `Irfan Ibrahim` have tags `friend`, `professor` and `youtuber`. They are available on `Monday 12:00 13:00` and `Thursday 12:00 13:00`.
-  <br>![results of the abovementioned edits](images/BeforeFilterCommand1.png)
-  <br>You can see that for `Roy Balakrishnan`, while he is avaiable on `Monday 12:00 13:00` and `Thursday 12:00 13:00`, he does not have tags `friend` and `youtuber`.
+  <br>![results of the above-mentioned edits](images/BeforeFilterCommand1.png)
+  <br>You can see that for `Roy Balakrishnan`, while he is available on `Monday 12:00 13:00` and `Thursday 12:00 13:00`, he does not have tags `friend` and `youtuber`.
   <br>![Roy Balakrishnan not having other tags](images/BeforeFilterCommand2.png)
   <br>`filter f/soc t/professor t/friend t/youtuber a/mon 12:00 13:00 a/thurs 12:00 13:00` returns `Alex Yeoh`, `Charlotte Oliveiro` and `Irfan Ibrahim`.
   <br>![result of the command](images/AfterFilterCommand4.png)
