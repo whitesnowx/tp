@@ -9,15 +9,15 @@ start
 'diamond we place it as the true branch instead.
 
 if () then ([index is valid])
-    if () then ([Person has favourite as true])
-        :Construct a new Person object with favourite as false;
+    if () then ([Person is favourite])
+        :Create new Person with same values but is not a favourite;
         :Replace the original Person with the new one;
-        :Refresh the list of Person;
+        :Refresh the list of Persons;
     else ([else])
-        :Throws CommandException that Person has favourite as false;
+        :Show error message to user that person is already not a favourite;
     endif
 else ([else])
-    :Throw CommandException that index is is invalid;
+    :Show error message to user that index is invalid;
 endif
 stop
 @enduml
