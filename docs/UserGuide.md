@@ -13,7 +13,6 @@ StaffConnect (SC) is a **desktop app for managing Professors' and Tutors' contac
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
-
 <div style="page-break-after: always;"></div>
 
 ## Quick start
