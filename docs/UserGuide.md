@@ -24,6 +24,7 @@ StaffConnect (SC) is a **desktop app for managing Professors' and Tutors' contac
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>__(The data in preview image below may not match with the sample data provided)__<br>
    ![Ui](images/Ui.png)
 
+<div style="page-break-after: always;"></div>
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
@@ -93,6 +94,8 @@ Before we get started StaffConnect offers a unique suite of UI controls for user
     - Keyboard arrow keys are able to pan around as well, but the scroll speed may differ on different systems.
     - There are scroll bars at the vertical and horizontal dividers of the window pane, dragging them in the respective direction will pan around as well.
    
+<div style="page-break-after: always;"></div>
+
 4.  The Result display:<br>
     The scroll bars can only be scrolled by two ways:
       1. For mouse pad users, dragging around with two fingers the around would pan around the pane.
@@ -211,6 +214,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [m/MODULE] [f/FACULTY] [v/VENUE
 * `PHONE_NUMBER`, `EMAIL`, `MODULE`, `FACULTY`, `VENUE` do not need to be unique and can be duplicated among persons in staff book.
 * `TAG` and `AVAILABILITY` have to be unique for a person but can be duplicated among persons in staff book.
 
+<div style="page-break-after: always;"></div>
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 3 m/GEA1000` Edits the module of the 3rd person to be `GEA1000`.
@@ -287,6 +291,7 @@ Format: `sort [n/] [p/] [m/] [f/] [v/] [s/] [meet/]`
 Examples:
 * `sort m/ p/` returns person by ascending module codes followed by ascending phone numbers `CS2000 80000000`, `CS2000 90000000`, `CS3000 80000000`followed by `CS3000 90000000`
 * `sort n/` returns person by ascending names `Alex`, `Bernice` followed by `Charlotte`
+<div style="page-break-after: always;"></div>
 * `sort p/` returns person by ascending phone numbers `87438807`, `91031282` followed by `92492021`<br>
   ![result for 'sort p/'](images/sortByPhoneNumberResult.png)
 
@@ -424,6 +429,8 @@ Format: `fav INDEX`
 Examples:
 * `list` followed by `fav 2` sets the 2nd person as favourite in the staff book.
 * `sort p/` followed by `fav 1` sets the 1st person as favourite in the staff book in the results of the `sort` command, which should be the person with the smallest phone number.
+
+<div style="page-break-after: always;"></div>
 * `find Betsy` followed by `fav 1` sets the 1st person as favourite in the results of the `find` command.
 
 ![Result of fav command](images/AfterFavCommand.png)
