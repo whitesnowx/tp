@@ -182,7 +182,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [m/MODULE] [f/FACULTY] [v/VENUE
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 3 m/GEA1000` Edits the module of the 3rd person to be `GEA1000`. 
+*  `edit 3 m/GEA1000` Edits the module of the 3rd person to be `GEA1000`.
 * `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
     <br>**Before editing the second person:** <br>
     ![Before editing the second person](images/BeforeEditCommand.png)
@@ -379,7 +379,7 @@ Examples:
 
 ![Result of fav command](images/AfterFavCommand.png)
 
-### Removes a person as favourite: `unfav`
+### Removing a person as favourite: `unfav`
 
 Removes the specified person from the staff book as favourite.
 
@@ -398,7 +398,7 @@ Examples:
 * `sort p/` followed by `fav 1` removes the 1st person as favourite in the staff book in the results of the `sort` command, which should be the person with the smallest phone number.
 * `find Betsy` followed by `unfav 1` removes the 1st person as favourite in the results of the `find` command.
 
-### Refresh and clear all outdated meetings: `refresh`
+### Refreshing and clearing all outdated meetings: `refresh`
 
 <div markdown="block" class="alert alert-danger">:warning: **Caution:**
 This may result in possible data loss. e.g. Meetings of a person may be deleted.
@@ -418,9 +418,8 @@ Examples:
 * If there is a meeting `Future Meeting` that will happen in `31/12/2999 12:00`, when the user types in `refresh`, it will not be deleted.
   <br>**Before:**<br>
   ![Before refreshing](images/BeforeRefreshCommand.png)
-  <br>
-  ![After refreshing](images/AfterRefreshCommand.png)
   <br>**After:**<br>
+  ![After refreshing](images/AfterRefreshCommand.png)
 
 **Known limitations:**
 Refresh is only used when the user decides to remove clutter in the staff book, and wants to remove outdated meetings. 
@@ -468,12 +467,86 @@ StaffConnect data are saved in the hard disk automatically after any command tha
 StaffConnect data are saved automatically as a JSON file `[JAR file location]/data/staffconnect.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, StaffConnect will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+If your changes to the data file makes its format invalid, StaffConnect will discard all data and start with an empty data file at the next run. Hence, it is **recommended to take a backup** of the file before editing it.<br>
 Furthermore, certain edits can cause StaffConnect to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). 
-The application will not prompt the user if the format of the data file is incorrect, but instead provide the user with an empty staff book.
-Therefore, edit the data file only if you are confident that you can update it correctly.
+The application will not prompt the user if the format of the data file is incorrect, but instead provide the user with an empty staff book.<br>
+**Therefore, edit the data file only if you are confident that you can update it correctly.**
 
 </div>
+
+#### Valid Data Values for `Person` in JSON file
+
+All attributes' restrictions except **Favourite** can be found in the [Attribute Summary](#attribute-summary) table.
+
+Attribute | Data Field | Valid Data Values
+----------|--------|-------------
+Name | `name` | `Alice`, `Ben10`
+Phone | `phone` | `123`, `98765432`
+Email | `email` | `e@123.com`, `hello@h-h.com`, `one+two@h-h.hh`, `hello@e-h.e-hh`
+Module | `module` | `gess1025`, `hsi1000`, `CS2103T`
+Faculty | `faculty` | Refer to the [Valid Faculty Values](#valid-faculty-values) table.
+Venue | `venue` | `COM4-02-33`, `LT21`, `Kent Ridge Vale, Tulip Street, #12-34`
+Tag | `tags` | `professor`, `Number1TA`
+Availabilitity | `availabilities` | `TUESDAY 12:00 13:00`, `WEDNESDAY 12:00 13:00`
+Meeting | `meetings` | Refer to the [Valid Data Values in meetings](#valid-data-values-for-meetings-for-each-person-in-json-file) table.
+Favourite | `favourite` | `Favourite` or `Not favourite`
+
+#### Valid Data Values for `Meetings` (for each `Person`) in JSON file
+
+Attribute | Meeting Data Fields | Valid Values
+----------|--------|-------------
+Meeting Description | `description` | `Meeting 1`, `Finals`
+Meeting Start Time | `date` | `30/1/2024 12:12`, `2002-11-15 19:00`, `1-12-2022 9:00`, `2024/1/1 0000`
+
+<div markdown="block" class="alert alert-primary">
+
+**:exclamation: Important:**
+
+* The value of `favourite` data field is case-sensitive.
+  * :heavy_check_mark: `Not favourite`
+  * :x: `not favourite`
+  * :x: `not FAVOURITE`
+* There cannot be duplicates of
+  * `meeting` (exact same pair of `description` and `date`) in each `person`.
+  * `name` in the staff book.
+
+</div>
+
+#### Sample Data File Content
+
+```json
+{
+  "persons" : [ {
+    "name" : "Alex Yeoh",
+    "phone" : "87438807",
+    "email" : "alexyeoh@example.com",
+    "module" : "CS1101S",
+    "faculty" : "School of Computing",
+    "venue" : "Blk 30 Geylang Street 29, #06-40",
+    "tags" : [ ],
+    "availabilities" : [ ],
+    "meetings" : [ ],
+    "favourite" : "Not favourite"
+  }, {
+    "name" : "John Smith",
+    "phone" : "99272758",
+    "email" : "johnsmith@example.com",
+    "module" : "CS2103S",
+    "faculty" : "School of Computing",
+    "venue" : "Blk 30 Lorong 3 Serangoon Gardens, #07-18",
+    "tags" : [ "friends", "tutor" ],
+    "availabilities" : [ "TUESDAY 12:00 13:00", "WEDNESDAY 12:00 13:00" ],
+    "meetings" : [ {
+      "description" : "test",
+      "date" : "12/12/2024 12:12"
+    }, {
+      "description" : "test2",
+      "date" : "10/10/2024 10:10"
+    } ],
+    "favourite" : "Favourite"
+  } ]
+}
+```
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -508,7 +581,7 @@ Name[^1] | n/ | Case-sensitive.<br>Only alphanumeric characters allowed. Spaces 
 Phone Number[^1] | p/ | Numeric digits only, no special characters, at least 3 digits long. | `123`, `88888888, 12345678`
 Email[^1] | e/ | Valid email of the format `local-part@domain`.<br>1. `local-part` should only contain alphanumeric characters and the special characters `+_.-`<br>2. `local-part` may not start or end with any special characters.<br>3. `local-part` must be followed by exactly one `@` and then a `domain` name.<br>4. `domain` must be made up of at least 2 `domain` labels separated by periods.<br>5. Each `domain` name must be at least 2 alphanumeric characters long.<br>6. Each `domain` name must start and end with alphanumeric characters.<br>7. Each `domain` name can only consist of alphanumeric characters, separated by hyphens, if any. | `e@123.com`, `hello@h-h.com`, `one+two@h-h.hh`, `hello@e-h.e-hh`
 Module[^1] | m/ | Case-insensitive.<br>Valid module consisting of 2-4 letters, followed by exactly 4 numeric digits, with a suffix that is at most 2 characters long. | `gess1025`, `hsi1000`, `cs2103t`
-Faculty[^1] | f/ | Case-insensitive.<br>Restricted set of values (refer to [valid faculty values](#valid-faculty-values) below).<br>A valid faculty name and its variations (other names) all refer to the same faculty. | `soc`, `biz`, `School of Business`
+Faculty[^1] | f/ | Case-insensitive.<br>Restricted set of values (refer to [Valid Faculty Values](#valid-faculty-values) below).<br>A valid faculty name and its variations (other names) all refer to the same faculty. | `soc`, `biz`, `School of Business`
 Venue[^1] | v/ | Any characters allowed.<br>Cannot be empty. | `belobog avenue`, `COM4-02-33`, `LT21`, `Kent Ridge Vale, Tulip Street, #12-34`
 Tag | t/ | Case-sensitive.<br>Only alphanumeric characters allowed.<br>Person can have any number of tags. | `tutor`, `professor`, `BestProf`, `Number1TA`
 Availability | a/ | Valid format of `day start-time end-time`.<br>Person can have any number of availabilities.<br>1. `day` should be a valid day of week: `Monday`, `mon`, `Tuesday`, `tue`, `tues`, `Wednesday`, `wednes`, `wed`, `Thursday`, `thurs`, `thur`, `thu`, `Friday`, `fri`, `Saturday`, `satur`, `sat`, `Sunday`, `sun`.<br>2. `day` is case-insensitive.<br>3. `start-time` and `end-time` should be in the time format of `HH:mm` where `HH` is in 24 hours (00-23) and `mm` are valid minutes (00-59). | `mon 13:00 14:00`, `monday 13:00 14:00`, `tues 14:00 21:00`
@@ -517,7 +590,7 @@ Meeting Start Time | s/ | Valid date and time format.<br>1. Valid date formats: 
 
 [^1]: These are mandatory attributes when adding a person into the staff book, as these are important information for students to know when/where to consult their professors/TAs.
 
-### Valid `Faculty` values
+### Valid `Faculty` Values
 
 Faculty | Other names
 --------|------
@@ -545,7 +618,6 @@ Yale-NUS College | Yale-NUS
 Action | Format, Examples
 --------|------------------
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL m/MODULE f/FACULTY v/VENUE [t/TAG]…​ [a/AVAILABILITY]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com m/CS2103 f/Computing v/123, Clementi Rd, 1234665 t/friend t/colleague a/monday 14:00 16:00`
-**Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [m/MODULE] [f/FACULTY] [v/VENUE] [t/TAG]…​ [a/AVAILABILITY]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Filter** | `filter [m/MODULE] [f/FACULTY] [t/TAG]… [a/AVAILABILITY]…`<br> e.g., `filter m/CS2100 t/friends`
@@ -555,7 +627,9 @@ Action | Format, Examples
 **Delete Meeting** | `meeting-delete INDEX i/MEETING-INDEX`<br> e.g., `meeting-delete 1 i/1 `
 **Set as Favourite** | `fav INDEX`<br> e.g., `fav 3`
 **Remove as Favourite** | `unfav INDEX`<br> e.g., `unfav 3`
-**Refresh** | `refresh` <br> e.g., `refresh`
 **Select** | `select INDEX`<br> e.g., `select 3`
+**Clear** | `clear`
+**Refresh** | `refresh`
 **List** | `list`
 **Help** | `help`
+**Exit** | `exit`
