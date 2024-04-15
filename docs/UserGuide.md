@@ -264,6 +264,7 @@ format: `filter [m/MODULE] [f/FACULTY] [t/TAG]… [a/AVAILABILITY]…`
 * Persons matching all fields will be returned (i.e. `AND` search).
   e.g. `filter m/CS2030S f/Computing` will return `Charlotte Oliveiro`
 
+<div style="page-break-after: always;"></div>
 Examples:
 * `filter m/CS1101S` returns `Alex Yeoh`
   <br>![result of `filter m/CS1101S`](images/AfterFilterCommand1.png)
@@ -439,7 +440,7 @@ Examples:
 <div style="page-break-after: always;"></div>
 * `find Betsy` followed by `fav 1` sets the 1st person as favourite in the results of the `find` command.
 
-![Result of fav command](images/AfterFavCommand.png){: width="550": style="text-align: center;"}
+![Result of fav command](images/AfterFavCommand.png)
 
 <div style="page-break-after: always;"></div>
 
