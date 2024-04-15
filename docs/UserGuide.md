@@ -24,7 +24,6 @@ StaffConnect (SC) is a **desktop app for managing Professors' and Tutors' contac
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>__(The data in preview image below may not match with the sample data provided)__<br>
    ![Ui](images/Ui.png)
 
-<div style="page-break-after: always;"></div>
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
@@ -82,8 +81,6 @@ Before we get started StaffConnect offers a unique suite of UI controls for user
 <br> Hovering the selection with mouse or arrow keys would not cause the details panel to switch to the selected person. This is to allow users to browse the persons list panel without switching.
 <br>![Region to select the person](images/personPanelRegion.png)
    
-<div style="page-break-after: always;"></div>
-
 2. There is a divider that is draggable up and down to hide and show details on the right side and to customise the look of your application.
 <br>![Region to select the divider](images/detailsDividerRegion.png)
 
@@ -94,8 +91,6 @@ Before we get started StaffConnect offers a unique suite of UI controls for user
     - Keyboard arrow keys are able to pan around as well, but the scroll speed may differ on different systems.
     - There are scroll bars at the vertical and horizontal dividers of the window pane, dragging them in the respective direction will pan around as well.
    
-<div style="page-break-after: always;"></div>
-
 4.  The Result display:<br>
     The scroll bars can only be scrolled by two ways:
       1. For mouse pad users, dragging around with two fingers the around would pan around the pane.
