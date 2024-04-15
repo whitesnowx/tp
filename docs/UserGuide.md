@@ -319,7 +319,7 @@ Examples:
 <br>The following commands assumes that meetings have been added prior to the command. Otherwise, an error will be thrown. <br> **(Refer to the section above on how to add a meeting)**
 * `list` followed by `meeting-delete 1 i/1` deletes the 1st meeting from the 1st person in the list.
 * `meeting-delete 1 i/3` deletes the 3rd meeting from the 1st person in the current displayed contacts list.
-* `find Bernice Yu` followed by `meeting-delete 1 i/2` deletes the 1st meeting form the 1st person in the results of the `find` command.
+* `find Bernice Yu` followed by `meeting-delete 1 i/2` deletes the 1st meeting from the 1st person in the results of the `find` command.
       
 <br>**Results for delete meeting:**<br>
 The following command was applied:  `find Bernice Yu` followed by `meeting-delete 1 i/2`.
