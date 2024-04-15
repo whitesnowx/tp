@@ -568,8 +568,8 @@ Meeting Start Time | `date` | `30/1/2024 12:12`, `2002-11-15 19:00`, `1-12-2022 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the generated data file with the file that contains the data from your current StaffConnect device.<br>
 **Q**: Why are concurrent or past meetings allowed? <br>
-**A**: This is to allow greater flexibility for users who wish to segregate meetings of different topics happening concurrently or users who wish to store meetings in the past for bookkeeping purposes etc..
-**Q**: Why are meeting's description with the same content but different case-sensitivity allowed?
+**A**: This is to allow greater flexibility for users who wish to segregate meetings of different topics happening concurrently or users who wish to store meetings in the past for bookkeeping purposes etc..<br>
+**Q**: Why are meeting's description with the same content but different case-sensitivity allowed?<br>
 **A**: Sometimes the user would like to have finer control over how they want to differentiate between topics, and a single capital letter could make that difference.
 
 --------------------------------------------------------------------------------------------------------------------
