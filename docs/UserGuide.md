@@ -344,9 +344,9 @@ Examples:
 <br>**Results for delete meeting:**<br>
 The following command was applied:  `find Bernice Yu` followed by `meeting-delete 1 i/2`.
 <br> __(Disclaimer: The content shown in the examples may not match what you have added to your own meetings within the staff book).__
-<br><br> **After `find Bernice Yu`:**<br>![result for before `find Bernice Yu` followed by `meeting-delete 1 i/2`](images/meetingDeleteResultBefore.png)
-<br><br> **After `meeting-delete 1 i/2`:**<br>![result for after `find Bernice Yu` followed by `meeting-delete 1 i/2`](images/meetingDeleteResultAfter1.png)
-<br><br> **After `meeting-delete 1 i/1`:**<br>![result for after `find Bernice Yu` followed by `meeting-delete 1 i/2`](images/meetingDeleteResultAfter2.png)
+<br><br> **After `find Bernice Yu`:**![result for before `find Bernice Yu` followed by `meeting-delete 1 i/2`](images/meetingDeleteResultBefore.png)
+<br><br> **After `meeting-delete 1 i/2`:**![result for after `find Bernice Yu` followed by `meeting-delete 1 i/2`](images/meetingDeleteResultAfter1.png)
+<br><br> **After `meeting-delete 1 i/1`:**![result for after `find Bernice Yu` followed by `meeting-delete 1 i/2`](images/meetingDeleteResultAfter2.png)
 
 ### Deleting a person : `delete`
 
