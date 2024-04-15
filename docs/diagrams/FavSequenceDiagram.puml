@@ -6,22 +6,13 @@ box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":StaffConnectParser" as StaffConnectParser LOGIC_COLOR
 participant ":FavCommandParser" as FavCommandParser LOGIC_COLOR
-participant "<<class>>\nParserUtil" as ParserUtil LOGIC_COLOR
 participant "f:FavCommand" as FavCommand LOGIC_COLOR
-participant "r:CommandResult" as CommandResult LOGIC_COLOR
-participant FavCommand as FavCommand1 <<class>> LOGIC_COLOR
-participant "<<class>>\nPersonUtil" as PersonUtil LOGIC_COLOR
 end box
 
-box Model MODEL_COLOR_T1
-participant ":ModelManager" as Model MODEL_COLOR
-participant ":Person" as Person MODEL_COLOR
-end box
-
-[-> LogicManager : execute(userInput)
+[-> LogicManager : execute("fav 1")
 activate LogicManager
 
-LogicManager -> StaffConnectParser : parseCommand(userInput)
+LogicManager -> StaffConnectParser : parseCommand("fav 1")
 activate StaffConnectParser
 
 create FavCommandParser
@@ -31,12 +22,8 @@ activate FavCommandParser
 FavCommandParser --> StaffConnectParser
 deactivate FavCommandParser
 
-StaffConnectParser -> FavCommandParser : parse(args)
+StaffConnectParser -> FavCommandParser : parse("1")
 activate FavCommandParser
-
-FavCommandParser -> ParserUtil : parseIndex(oneBasedIndex)
-activate ParserUtil
-return
 
 create FavCommand
 FavCommandParser -> FavCommand++
@@ -45,40 +32,5 @@ return
 return f
 destroy FavCommandParser
 return f
-
-LogicManager -> FavCommand : execute(model)
-activate FavCommand
-
-FavCommand -> Model : getSortedFilteredPersonList()
-activate Model
-return
-
-FavCommand -> FavCommand1 : createFavPerson(personToFav)
-activate FavCommand1
-
-FavCommand1 -> PersonUtil : createPersonWithFavouriteStatus(Person selectedPerson, Favourite favourite)
-activate PersonUtil
-
-create Person
-PersonUtil -> Person++
-return createdPerson
-
-return favPerson
-return favPerson
-
-FavCommand -> Model : setPerson(personToFav, favPerson)
-activate Model
-return
-
-FavCommand -> Model : updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS)
-activate Model
-return
-
-create CommandResult
-FavCommand -> CommandResult++
-return
-
-return r
-return
 
 @enduml

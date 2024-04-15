@@ -3,15 +3,20 @@
 skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
+skinparam Padding 3
 
 Package Model as ModelPackage <<Rectangle>>{
 Class "<<interface>>\nReadOnlyStaffBook" as ReadOnlyStaffBook
+Class "<<interface>>\nReadOnlyMeetingBook" as ReadOnlyMeetingBook
 Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
 Class "<<interface>>\nModel" as Model
 Class StaffBook
 Class ModelManager
+Class MeetingBook
+Class MeetingManager
 Class UserPrefs
 
+Class UniqueMeetingList
 Class UniquePersonList
 Class Person
 Class Name
@@ -22,6 +27,7 @@ Class Faculty
 Class Venue
 Class Tag
 Class Availability
+Class Favourite
 Class Meeting
 
 Class I #FFFFFF
@@ -30,14 +36,19 @@ Class I #FFFFFF
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
-StaffBook .up.|> ReadOnlyStaffBook
 
+
+StaffBook .up.|> ReadOnlyStaffBook
 ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
 Model .left.> ReadOnlyStaffBook
 ModelManager -left-> "1" StaffBook
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
+
+MeetingManager -right-> "1" MeetingBook
+MeetingBook .up.|> ReadOnlyMeetingBook
+MeetingBook -down->"1" UniqueMeetingList
 
 StaffBook *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
@@ -49,7 +60,9 @@ Person *--> Faculty
 Person *--> Venue
 Person *--> "*" Tag
 Person *--> "*" Availability
-Person *--> "*" Meeting
+Person *--> "1" MeetingManager
+UniqueMeetingList *--> "*" Meeting
+Person *--> Favourite
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
@@ -61,7 +74,9 @@ Module -[hidden]right-> Faculty
 Faculty -[hidden]right-> Venue
 Venue -[hidden]right-> Tag
 Tag -[hidden]right-> Availability
-Availability -[hidden]right-> Meeting
+Availability -[hidden]right-> Favourite
+
+Person -[hidden]right> MeetingManager
 
 ModelManager --> "~* filtered" Person
 @enduml

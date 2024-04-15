@@ -1,0 +1,48 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":StaffConnectParser" as StaffConnectParser LOGIC_COLOR
+participant ":DeleteMeetingCommandParser" as deleteMeetingCommandParser LOGIC_COLOR
+participant "<<class>>\nParserUtil" as ParserUtil LOGIC_COLOR
+participant "d:DeleteMeetingCommand" as AddMeetingCommand LOGIC_COLOR
+end box
+
+
+[-> LogicManager : execute("meeting-delete 1 i/1")
+activate LogicManager
+
+LogicManager -> StaffConnectParser : parseCommand("meeting-delete 1 i/1")
+activate StaffConnectParser
+
+create deleteMeetingCommandParser
+StaffConnectParser -> deleteMeetingCommandParser
+activate deleteMeetingCommandParser
+
+deleteMeetingCommandParser --> StaffConnectParser
+deactivate deleteMeetingCommandParser
+
+StaffConnectParser -> deleteMeetingCommandParser : parse("1 i/1")
+activate deleteMeetingCommandParser
+
+
+deleteMeetingCommandParser -> ParserUtil : parse person index
+activate ParserUtil
+return
+
+deleteMeetingCommandParser -> ParserUtil : parse meeting index
+activate ParserUtil
+return
+
+create AddMeetingCommand
+deleteMeetingCommandParser -> AddMeetingCommand++
+return
+
+return d
+destroy deleteMeetingCommandParser
+return d
+return
+
+@enduml

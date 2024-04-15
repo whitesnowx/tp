@@ -1,0 +1,31 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+mainframe **sd** create a favourite person
+
+box Logic LOGIC_COLOR_T1
+participant "f:FavCommand" as FavCommand LOGIC_COLOR
+participant FavCommand as FavCommand1 <<class>> LOGIC_COLOR
+participant "<<class>>\nPersonUtil" as PersonUtil LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Person" as Person MODEL_COLOR
+end box
+
+FavCommand -> FavCommand1 : createFavPerson(personToFav)
+activate FavCommand
+activate FavCommand1
+
+FavCommand1 -> PersonUtil : createPersonWithFavouriteStatus(selectedPerson, favourite)
+activate PersonUtil
+
+create Person
+PersonUtil -> Person++
+return createdPerson
+
+return favPerson
+return favPerson
+
+@enduml

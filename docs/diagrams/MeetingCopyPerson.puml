@@ -1,0 +1,26 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+mainframe **sd** copy selectedPerson
+
+box Logic LOGIC_COLOR_T1
+participant ":[Add/Delete]MeetingCommand" as MeetingCommand LOGIC_COLOR
+participant "<<class>>\nPersonUtil" as PersonUtil LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Person" as Person MODEL_COLOR
+end box
+
+activate MeetingCommand
+MeetingCommand -> PersonUtil : copyPerson(selectedPerson)
+activate PersonUtil
+
+create Person
+PersonUtil -> Person++
+return copiedPerson
+
+return copiedPerson
+
+@enduml
