@@ -22,7 +22,7 @@ StaffConnect (SC) is a **desktop app for managing Professors' and Tutors' contac
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar StaffConnect.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>__(The data in preview image below may not match with the sample data provided)__<br>
-   ![Ui](images/Ui.png)
+   ![Ui](images/Ui.png) <img src="images/Ui.png" alt="Ui" width="500">
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
