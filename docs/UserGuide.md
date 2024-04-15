@@ -242,10 +242,17 @@ format: `filter [m/MODULE] [f/FACULTY] [t/TAG]… [a/AVAILABILITY]…`
 
 Examples:
 * `filter m/CS1101S` returns `Alex Yeoh`
+  <br>![result of `filter m/CS1101S`](images/AfterFilterCommand1.png)
 * `filter f/Computing t/professor` returns `Alex Yeoh`, `Charlotte Oliveiro`, `David Li` and `Roy Balakrishman`
+  <br>![result of `filter f/Computing t/professor`](images/AfterFilterCommand2.png)
 * `filter t/tutor` returns `Bernice Yu`, `Irfan Ibrahim`<br>
-  ![result for 'filter t/tutor'](images/filterTutorTagResult.png)
-
+  ![result for 'filter t/tutor'](images/AfterFilterCommand3.png)
+* To illustrate the next example, the sample data are edited first to let `Alex Yeoh`, `Charlotte Oliveiro` and `Irfan Ibrahim` have tags `friend`, `professor` and `youtuber`. They are available on `Monday 12:00 13:00` and `Thursday 12:00 13:00`.
+  <br>![results of the above-mentioned edits](images/BeforeFilterCommand1.png)
+  <br>You can see that for `Roy Balakrishnan`, while he is available on `Monday 12:00 13:00` and `Thursday 12:00 13:00`, he does not have tags `friend` and `youtuber`.
+  <br>![Roy Balakrishnan not having other tags](images/BeforeFilterCommand2.png)
+  <br>`filter f/soc t/professor t/friend t/youtuber a/mon 12:00 13:00 a/thurs 12:00 13:00` returns `Alex Yeoh`, `Charlotte Oliveiro` and `Irfan Ibrahim`.
+  <br>![result of the command](images/AfterFilterCommand4.png)
 
 ### Sorting persons: `sort`
 
