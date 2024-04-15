@@ -121,7 +121,7 @@ How the parsing works:
 
 **API** : [`Model.java`](https://github.com/AY2324S2-CS2103-F08-3/tp/blob/master/src/main/java/staffconnect/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/ModelClassDiagram.png" width="740" />
 
 The `Model` component,
 
@@ -132,7 +132,7 @@ The `Model` component,
 * stores the meeting book data i.e., all `Meeting` objects (which are contained in a `UniqueMeetingList` object) in each `Person` object.
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `StaffBook`, which `Person` references. This allows `StaffBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
+<img src="images/BetterModelClassDiagram.png" width="600" />
 
 </div>
 
@@ -140,7 +140,7 @@ The `Model` component,
 
 **API** : [`Storage.java`](https://github.com/AY2324S2-CS2103-F08-3/tp/blob/master/src/main/java/staffconnect/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="550" />
+<img src="images/StorageClassDiagram.png" width="740" />
 
 The `Storage` component,
 * can save both staff book data and user preference data in JSON format, and read them back into corresponding objects.
@@ -294,7 +294,7 @@ Given below is an example usage scenario and how the sort mechanism behaves at e
 
 The sequence diagram for executing a **"sort n/"** is shown below:
 
-<img src="images/SortSequenceDiagram.png" width="850" />
+<img src="images/SortSequenceDiagram.png" width="740" />
 
 The following activity diagram summarizes what happens when a user executes a new sort command:
 
