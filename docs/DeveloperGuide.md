@@ -19,6 +19,8 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Design**
 
 <div markdown="span" class="alert alert-primary">
@@ -67,6 +69,8 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
+<div style="page-break-after: always;"></div>
+
 ### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2324S2-CS2103-F08-3/tp/blob/master/src/main/java/staffconnect/ui/Ui.java)
@@ -85,6 +89,8 @@ The `UI` component,
 * listens for changes to data in `Model` component so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UIManager` relies on the `Logic` component to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model` component.
+
+<div style="page-break-after: always;"></div>
 
 ### Logic component
 
@@ -117,6 +123,8 @@ How the parsing works:
 * When called upon to parse a user command, the `StaffConnectParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `StaffConnectParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+<div style="page-break-after: always;"></div>
+
 ### Model component
 
 **API** : [`Model.java`](https://github.com/AY2324S2-CS2103-F08-3/tp/blob/master/src/main/java/staffconnect/model/Model.java)
@@ -136,6 +144,8 @@ The `Model` component,
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/AY2324S2-CS2103-F08-3/tp/blob/master/src/main/java/staffconnect/storage/Storage.java)
@@ -147,15 +157,21 @@ The `Storage` component,
 * inherits from both `StaffBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
+<div style="page-break-after: always;"></div>
+
 ### Common classes
 
 Classes used by multiple components are in the `staffconnect.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+<div style="page-break-after: always;"></div>
 
 ### Edit feature
 
@@ -197,6 +213,8 @@ This is to make sure at least one field is modified, or the command will not hav
 Call `model.updateFilteredPersonList())` with a `Predicate` that always evaluates to true:
 This is to refresh the list of `Person` in `Model` component.
 
+<div style="page-break-after: always;"></div>
+
 ### Find feature
 
 #### How the feature is implemented
@@ -231,6 +249,8 @@ Below are some explanations for the special considerations in the implementation
 
 `FindCommmandParser` parsing the `Predicate` objects:
 This is to prevent `FindCommand` from taking on more responsibilities (Separation of Concerns).
+
+<div style="page-break-after: always;"></div>
 
 ### Filter feature
 
@@ -272,6 +292,8 @@ This is to prevent `FilterCommand` from taking on more responsibilities (Separat
 
 `FilterCommand` having `setPersonPredicate()` method:
 This is so that `FilterCommand` has the required argument of type `Predicate<Person>` to be used in the `updateFilteredPersonList()` method. Since the `Predicate<Person>` object is created by chaining the multiple predicates, no parsing is involved to create this `Predicate`.
+
+<div style="page-break-after: always;"></div>
 
 ### Sort feature
 
@@ -336,6 +358,7 @@ This is to prevent `SortCommand` from taking on more responsibilities (Separatio
     * Pros: Easy to implement, controlled and less likely to be used incorrectly. This increase ease of use for users.
     * Cons: Limited sorting and lesser functionality.
 
+<div style="page-break-after: always;"></div>
 
 ### Meeting Feature
 
@@ -383,6 +406,8 @@ After parsing, the commands are executed by the logic manager as show below. (Ex
 * **Alternative 1:** Store meetings in a Set.
     * Pros: Easier implementation.
     * Cons: There is an efficiency gap as each element has to be placed into a list before it can be shown to the UI ListView.
+
+<div style="page-break-after: always;"></div>
 
 ### Fav/unfav feature
 
@@ -454,6 +479,8 @@ The below sequence diagram goes into more details on how the execution of the co
 The following activity diagram summarizes what happens when a user executes a new `unfav` command:
 
 ![Unfav Activity Diagram](images/UnfavActivityDiagram.png)
+
+<div style="page-break-after: always;"></div>
 
 ### \[Proposed\] Undo/redo feature
 
@@ -540,6 +567,8 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Documentation, logging, testing, configuration, dev-ops**
 
 * [Documentation guide](Documentation.md)
@@ -549,6 +578,8 @@ The following activity diagram summarizes what happens when a user executes a ne
 * [DevOps guide](DevOps.md)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Requirements**
 
@@ -596,6 +627,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *` | organised user | delete my scheduled meeting agenda and start time with professors/tutors | remove outdated or redundant entries of meetings that have passed or cancelled                  |
 | `* *` | time-conscious user | clear my outdated meetings with professors/tutors | save time by removing outdated meetings with one command |
 | `* *` | proficient typer | select a professor/tutor to see their contact details with a command | use the app with my more proficient method of typing instead of using other input devices (i.e. mouse) |
+
+<div style="page-break-after: always;"></div>
 
 ### Use cases
 
@@ -752,6 +785,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. StaffConnect shows an error message.
       Use case resumes at step 1.
 
+<div style="page-break-after: always;"></div>
 
 ### Non-Functional Requirements
 
@@ -766,6 +800,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 9. The app should be up-to-date with the latest NUS faculty names.
 10. The data stored in the app should not change unless the user has modified the data through usage of the app with user-issued commands, or the `[JAR file location]/data/staffconnect.json` file has been modified with valid values.
 
+<div style="page-break-after: always;"></div>
+
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS, with versions that support Java 11
@@ -777,6 +813,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **MSS**: Main Success Scenario, a sequence of steps to reach the end of a use case
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Instructions for manual testing**
 
@@ -802,6 +840,8 @@ testers are expected to do more *exploratory* testing.
    2. Re-launch the app by double-clicking the jar file.<br>
       Expected: The most recent window size and location is retained.
 
+<div style="page-break-after: always;"></div>
+
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
@@ -816,6 +856,8 @@ testers are expected to do more *exploratory* testing.
 
    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
+
+<div style="page-break-after: always;"></div>
 
 ### Saving data
 
