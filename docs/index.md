@@ -3,8 +3,8 @@ layout: page
 title: StaffConnect
 ---
 
-[![CI Status](https://github.com/AY2324S2-CS2103-F08-3/tp/actions/workflows/gradle.yml/badge.svg)](https://github.com/AY2324S2-CS2103-F08-3/tp/actions)
-[![codecov](https://codecov.io/gh/AY2324S2-CS2103-F08-3/tp/graph/badge.svg?token=WLNT3ZUBO6)](https://codecov.io/gh/AY2324S2-CS2103-F08-3/tp)
+<a href="https://github.com/AY2324S2-CS2103-F08-3/tp/actions"><img src="https://github.com/AY2324S2-CS2103-F08-3/tp/actions/workflows/gradle.yml/badge.svg" alt="CI Status" class="badge"></a>
+<a href="https://codecov.io/gh/AY2324S2-CS2103-F08-3/tp"><img src="https://codecov.io/gh/AY2324S2-CS2103-F08-3/tp/graph/badge.svg?token=WLNT3ZUBO6" alt="codecov" class="badge"></a>
 
 ![Ui](images/Ui.png)
 

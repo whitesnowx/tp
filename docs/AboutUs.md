@@ -11,7 +11,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Lim Xiu Jia
 
-<img src="images/tsulim.png" width="200px">
+<img src="images/tsulim.png" class="profilepic" width="200px">
 
 [[github](https://github.com/tsulim)]
 [[portfolio](team/tsulim.md)]
@@ -21,7 +21,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Calista Wong
 
-<img src="images/whitesnowx.png" width="200px">
+<img src="images/whitesnowx.png" class="profilepic" width="200px">
 
 [[github](https://github.com/whitesnowx)]
 [[portfolio](team/whitesnowx)]
@@ -31,7 +31,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Li Xinyi
 
-<img src="images/iynixil.png" width="200px">
+<img src="images/iynixil.png" class="profilepic" width="200px">
 
 [[github](http://github.com/iynixil)] [[portfolio](team/iynixil.md)]
 
@@ -40,7 +40,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Jerry Wang
 
-<img src="images/jerrywang0000.png" width="200px">
+<img src="images/jerrywang0000.png" class="profilepic" width="200px">
 
 [[github](http://github.com/JerryWang0000)]
 [[portfolio](team/jerrywang0000)]
@@ -50,7 +50,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Norton Ng
 
-<img src="images/pluiexo.png" width="200px">
+<img src="images/pluiexo.png" class="profilepic" width="200px">
 
 [[github](http://github.com/Pluiexo)]
 [[portfolio](team/pluiexo.md)]
