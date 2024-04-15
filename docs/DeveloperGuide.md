@@ -7,6 +7,8 @@ title: Developer Guide
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Acknowledgements**
 
 * This developer guide is adapted from [AB-3 Developer Guide](https://se-education.org/addressbook-level3/DeveloperGuide.html).
