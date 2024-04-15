@@ -117,6 +117,8 @@ How the `Logic` component works:
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `LogicManger`.
 
+<div style="page-break-after: always;"></div>
+
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
 <img src="images/ParserClasses.png" width="600"/>
@@ -172,8 +174,6 @@ Classes used by multiple components are in the `staffconnect.commons` package.
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
-
-<div style="page-break-after: always;"></div>
 
 ### Edit feature
 
@@ -316,6 +316,8 @@ Given below is an example usage scenario and how the sort mechanism behaves at e
 
 4. The `SortCommand` is returned to Logic manager which calls on its `execute()` to return a `CommandResult()`. During its execution, `ModelManager.updateSortedPersonList(NameComparator)` is invoked which updates the model to show the list of persons being sorted by name.
 
+<div style="page-break-after: always;"></div>
+
 The sequence diagram for executing a **"sort n/"** is shown below:
 
 <img src="images/SortSequenceDiagram.png" width="850" />
@@ -382,6 +384,8 @@ The operations for adding and deleting meeting are handled by `AddMeetingCommand
 4. `AddMeetingCommand` or `DeleteMeetingCommand` is created with the parsed values.
 5. `Logic Manager` executes the `AddMeetingCommand` or `DeleteMeetingCommand`, which handles adding/removing meeting from the `Person` respectively and updates the model with the new information.
 
+<div style="page-break-after: always;"></div>
+
 Below is the sequence diagram for parsing inputs with  `AddMeetingCommandParser` executing `meeting-add 2 d/Finals s/20/04/2024 15:00`:
 <br>![AddMeetingCommandParser Sequence Diagram](images/AddMeetingParserSequenceDiagram.png)
 <br>Below in the in-depth reference of how `AddMeetingCommandParser` utilise `ParseUtil` to parse the arguments:
@@ -389,6 +393,7 @@ Below is the sequence diagram for parsing inputs with  `AddMeetingCommandParser`
 <br> Similarly, the sequence diagram for parsing inputs with `DeleteMeetingCommandParser` executing `meeting-delete 1 i/1`:
 <br>![DeleteMeetingCommandParser Sequence Diagram](images/DeleteMeetingParserSequenceDiagram.png)
 <br><br>
+<div style="page-break-after: always;"></div>
 After parsing, the commands are executed by the logic manager as show below. (Execute in the diagrams below comes form the logic manager)
 <br> Below is the sequence diagram for adding meeting with  `AddMeetingCommand`:
 <br>![AddMeetingCommand Sequence Diagram](images/AddMeetingSequenceDiagram.png)
@@ -434,14 +439,14 @@ The following sequence diagrams shows how the `fav 1` command works:
 </div>
 
 1. When the user issues the command `fav 1`, `LogicManager` is called upon to execute the command, it is passed to the `StaffCommandParser` object which creates a `FavCommandParser` to parse the arguments for the `fav` command.
-2. The parsing of `FavCommandParser` results in a new `FavCommand` initialized by an index `Index`.
-
-![Execute Fav Command Sequence Diagram](images/ExecuteFavCommandSequenceDiagram.png)
+2. The parsing of `FavCommandParser` results in a new `FavCommand` initialized by an index `Index`. ![Execute Fav Command Sequence Diagram](images/ExecuteFavCommandSequenceDiagram.png)
 
 3. When the `FavCommand` is executed, it retrieves the last shown list using `getSortedFilteredPersonList()` and creates a favourite person. This portions' details has been separated from the main sequence diagram into the reference sequence diagram below.
 4. After creating a new `Person` object, `FavCommand` replaces the old `Person` object with the new one.
 5. The command communicates with the `Model` when it is executed. More specifically, it calls `updateFilteredPersonList()` method using `PREDICATE_SHOW_ALL_PERSONS` which resets the view to default.
 6. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `LogicManager`, to show in the `UI` component the success message that the `Person` at the given index is set as favourite.
+
+<div style="page-break-after: always;"></div>
 
 The below sequence diagram goes into more details on how the execution of the command creates a favourite person:
 
@@ -454,6 +459,8 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ![Fav Activity Diagram](images/FavActivityDiagram.png)
 
+<div style="page-break-after: always;"></div>
+
 Similarly, the following diagrams shows how the `unfav 1` command works:
 
 ![Unfav Command Sequence Diagram](images/UnfavSequenceDiagram.png)
@@ -462,9 +469,7 @@ Similarly, the following diagrams shows how the `unfav 1` command works:
 </div>
 
 1. When the user issues the command `unfav 1`, `LogicManager` is called upon to execute the command, it is passed to the `StaffCommandParser` object which creates a `UnfavCommandParser` to parse the arguments for the `unfav` command.
-2. The parsing of `UnfavCommandParser` results in a new `UnfavCommand` initialized by an index `Index`.
-
-![ExecuteUnfavCommandSequenceDiagram.png](images/ExecuteUnfavCommandSequenceDiagram.png)
+2. The parsing of `UnfavCommandParser` results in a new `UnfavCommand` initialized by an index `Index`. ![ExecuteUnfavCommandSequenceDiagram.png](images/ExecuteUnfavCommandSequenceDiagram.png)
 
 3. When the `UnfavCommand` is executed, it retrieves the last shown list using `getSortedFilteredPersonList()` and creates an unfavourite person. This portions' details has been separated from the main sequence diagram into the reference sequence diagram below.
 4. After creating a new `Person` object, `UnfavCommand` replaces the old `Person` object with the new one.
@@ -477,6 +482,8 @@ The below sequence diagram goes into more details on how the execution of the co
 
 7. `UnfavCommand` calls the static `UnfavCommand#createUnfavPerson(personToUnfav)` function which calls for the static `PersonUtil#createPersonWithFavouriteStatus(Person selectedPerson, Favourite favourite)` using the `selectedPerson` and a new `Favourite` with the value `false`.
 8. This static `PersonUtil#createPersonWithFavouriteStatus(Person selectedPerson, Favourite favourite)` function creates a new `Person` with the given `Favourite` attribute and returns back to `UnfavCommand`.
+
+<div style="page-break-after: always;"></div>
 
 The following activity diagram summarizes what happens when a user executes a new `unfav` command:
 
@@ -597,6 +604,8 @@ He also sometimes forgets that he has scheduled consultations with a professor o
 
 StaffConnect offers convenience and efficiency for a forgetful tech-savvy student.
 StaffConnect allows users to easily identify and connect with educators by providing visual cues alongside their contact details, supported by an easy-to-use filtering system.
+
+<div style="page-break-after: always;"></div>
 
 ### User stories
 
