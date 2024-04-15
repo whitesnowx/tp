@@ -385,7 +385,7 @@ The following sequence diagrams shows how the `fav 1` command works:
 3. When the `FavCommand` is executed, it retrieves the last shown list using `getSortedFilteredPersonList()` and creates a favourite person. This portions' details has been separated from the main sequence diagram into the reference sequence diagram below.
 4. After creating a new `Person` object, `FavCommand` replaces the old `Person` object with the new one.
 5. The command communicates with the `Model` when it is executed. More specifically, it calls `updateFilteredPersonList()` method using `PREDICATE_SHOW_ALL_PERSONS` which resets the view to default.
-6. The result of the command execution is encapsulated as a `CommandResult` object which is returned back to `LogicManager`, to show in the `UI` component the success message that the `Person` at the given index is set as favourite.
+6. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `LogicManager`, to show in the `UI` component the success message that the `Person` at the given index is set as favourite.
 
 The below sequence diagram goes into more details on how the execution of the command creates a favourite person:
 
@@ -413,7 +413,7 @@ Similarly, the following diagrams shows how the `unfav 1` command works:
 3. When the `UnfavCommand` is executed, it retrieves the last shown list using `getSortedFilteredPersonList()` and creates an unfavourite person. This portions' details has been separated from the main sequence diagram into the reference sequence diagram below.
 4. After creating a new `Person` object, `UnfavCommand` replaces the old `Person` object with the new one.
 5. The command communicates with the `Model` when it is executed. More specifically, it calls `updateFilteredPersonList()` method using `PREDICATE_SHOW_ALL_PERSONS` which resets the view to default.
-6. The result of the command execution is encapsulated as a `CommandResult` object which is returned back to `LogicManager`, to show in the `UI` component the success message that the `Person` at the given index is remove as favourite.
+6. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `LogicManager`, to show in the `UI` component the success message that the `Person` at the given index is remove as favourite.
 
 The below sequence diagram goes into more details on how the execution of the command creates an unfavourite person:
 
