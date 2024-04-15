@@ -3,6 +3,7 @@
 skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
+skinparam Padding 3
 
 Package Model as ModelPackage <<Rectangle>>{
 Class "<<interface>>\nReadOnlyStaffBook" as ReadOnlyStaffBook
@@ -49,10 +50,8 @@ MeetingManager -right-> "1" MeetingBook
 MeetingBook .up.|> ReadOnlyMeetingBook
 MeetingBook -down->"1" UniqueMeetingList
 
-
-
 StaffBook *--> "1" UniquePersonList
-UniquePersonList --> "                       ~* all" Person
+UniquePersonList --> "~* all" Person
 Person *--> Name
 Person *--> Phone
 Person *--> Email
@@ -61,9 +60,9 @@ Person *--> Faculty
 Person *--> Venue
 Person *--> "*" Tag
 Person *--> "*" Availability
-Person *--> Favourite
 Person *--> "1" MeetingManager
 UniqueMeetingList *--> "*" Meeting
+Person *--> Favourite
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
@@ -79,5 +78,5 @@ Availability -[hidden]right-> Favourite
 
 Person -[hidden]right> MeetingManager
 
-ModelManager "\n\n\n\n\n\n\n\n\n\n\n\n ~*filtered" <-down-  Person
+ModelManager --> "~* filtered" Person
 @enduml
