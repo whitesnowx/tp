@@ -439,7 +439,7 @@ Examples:
 <div style="page-break-after: always;"></div>
 * `find Betsy` followed by `fav 1` sets the 1st person as favourite in the results of the `find` command.
 
-![Result of fav command](images/AfterFavCommand.png)
+![Result of fav command](images/AfterFavCommand.png){: width="550": style="text-align: center;"}
 
 <div style="page-break-after: always;"></div>
 
