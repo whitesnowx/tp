@@ -17,16 +17,19 @@ Given below are my contributions to the project.
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s2.github.io/tp-dashboard/?search=whitesnowx&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2024-02-23&tabOpen=true&tabType=authorship&tabAuthor=whitesnowx&tabRepo=AY2324S2-CS2103-F08-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false)
 
 * **Project management**:
-  * Managed releases `v1.1` - `v1.5rc` (3 releases) on GitHub
+  * Managed releases `v1.2` - `v1.4` (4 releases) on GitHub
+  * Help to generate minutes and agenda to facilitate weekly meetings
 
 * **Documentation**:
   * User Guide:
-    * Added documentation for the features `sort` [\#149](https://github.com/AY2324S2-CS2103-F08-3/tp/pull/149)
+    * Added documentation for the features `sort` [\#149](https://github.com/AY2324S2-CS2103-F08-3/tp/pull/149), [\#164](https://github.com/AY2324S2-CS2103-F08-3/tp/pull/164), [\#244](https://github.com/AY2324S2-CS2103-F08-3/tp/pull/244)
+    * Added more examples for each command [\#228](https://github.com/AY2324S2-CS2103-F08-3/tp/pull/228)
+    * Added UI Annotations demonstrating layout [\#258](https://github.com/AY2324S2-CS2103-F08-3/tp/pull/258)
   * Developer Guide:
-    * Added implementation details the `sort` feature. [\#149](https://github.com/AY2324S2-CS2103-F08-3/tp/pull/149)
+    * Added implementation details the `sort` feature. [\#149](https://github.com/AY2324S2-CS2103-F08-3/tp/pull/149), [\#164](https://github.com/AY2324S2-CS2103-F08-3/tp/pull/164), [\#256](https://github.com/AY2324S2-CS2103-F08-3/tp/pull/256),
+    * Updated some diagrams [\#64](https://github.com/AY2324S2-CS2103-F08-3/tp/pull/64), [\#126](https://github.com/AY2324S2-CS2103-F08-3/tp/pull/126)
 
 * **Community**:
-  * PRs reviewed (with non-trivial review comments): [\#130](https://github.com/AY2324S2-CS2103-F08-3/tp/pull/130),
-  * Reported bugs and suggestions for other teams in the class (examples: [1](https://github.com/AY2324S2-CS2103T-T11-3/tp/issues/119))
+  * PRs reviewed (with non-trivial review comments): [[\#86](https://github.com/AY2324S2-CS2103-F08-3/tp/pull/86), [\#104](https://github.com/AY2324S2-CS2103-F08-3/tp/pull/104), [\#130](https://github.com/AY2324S2-CS2103-F08-3/tp/pull/130), [\#171](https://github.com/AY2324S2-CS2103-F08-3/tp/pull/171)
 
-* _{you can add/remove categories in the list above}_
+
