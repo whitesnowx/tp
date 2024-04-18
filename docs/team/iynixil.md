@@ -14,8 +14,6 @@ Given below are my contributions to the project.
   * Justification: This feature improves the product significantly because a user can efficiently view the staff they want to see that possess certain characteristics (e.g. They teach a certain module)
   * Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was relatively simple as it refers to the existing `find` command feature.
 
-* **New Feature**: Added a history command that allows the user to navigate to previous commands using up/down keys.
-
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s2.github.io/tp-dashboard/?search=iynixil&breakdown=true&sort=groupTitle%20dsc&sortWithin=title&since=2024-02-23&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other)
 
 * **Project management**:
