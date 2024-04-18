@@ -26,7 +26,7 @@ Given below are my contributions to the project.
     * Added more examples for each command [\#228](https://github.com/AY2324S2-CS2103-F08-3/tp/pull/228)
     * Added UI Annotations demonstrating layout [\#258](https://github.com/AY2324S2-CS2103-F08-3/tp/pull/258)
   * Developer Guide:
-    * Added implementation details the `sort` feature. [\#149](https://github.com/AY2324S2-CS2103-F08-3/tp/pull/149), [\#164](https://github.com/AY2324S2-CS2103-F08-3/tp/pull/164), [\#256](https://github.com/AY2324S2-CS2103-F08-3/tp/pull/256),
+    * Added implementation details for the `sort` feature. [\#149](https://github.com/AY2324S2-CS2103-F08-3/tp/pull/149), [\#164](https://github.com/AY2324S2-CS2103-F08-3/tp/pull/164), [\#256](https://github.com/AY2324S2-CS2103-F08-3/tp/pull/256),
     * Updated some diagrams [\#64](https://github.com/AY2324S2-CS2103-F08-3/tp/pull/64), [\#126](https://github.com/AY2324S2-CS2103-F08-3/tp/pull/126)
 
 * **Community**:
