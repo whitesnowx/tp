@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Xin Yi's Project Portfolio Page
+title: Xinyi's Project Portfolio Page
 ---
 
 ### Project: StaffConnect
@@ -17,7 +17,7 @@ Given below are my contributions to the project.
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s2.github.io/tp-dashboard/?search=iynixil&breakdown=true&sort=groupTitle%20dsc&sortWithin=title&since=2024-02-23&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other)
 
 * **Project management**:
-  * Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
+  * Managed release `v1.2` (1 release) on GitHub
 
 * **Documentation**:
   * User Guide:
