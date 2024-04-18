@@ -31,5 +31,6 @@ Given below are my contributions to the project.
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments): [[\#86](https://github.com/AY2324S2-CS2103-F08-3/tp/pull/86), [\#104](https://github.com/AY2324S2-CS2103-F08-3/tp/pull/104), [\#130](https://github.com/AY2324S2-CS2103-F08-3/tp/pull/130), [\#171](https://github.com/AY2324S2-CS2103-F08-3/tp/pull/171)
+  * Reported bugs and suggestions for other teams in the module [1](https://github.com/AY2324S2-CS2103T-T11-3/tp/issues/115), [2](https://github.com/AY2324S2-CS2103T-T11-3/tp/issues/119), [3](https://github.com/AY2324S2-CS2103T-T11-3/tp/issues/123), [4](https://github.com/AY2324S2-CS2103T-T11-3/tp/issues/124)
 
 
